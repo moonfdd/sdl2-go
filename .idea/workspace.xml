@@ -20,18 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/common/common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/loaddll.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/types.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_assert.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_version.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_video.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_vulkan.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/aaastruct.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/begin_code.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/close_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_error.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_random.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_thread.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_timer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_touch.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_video.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_video.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/aaastruct.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/aaastruct.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +47,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
   <component name="ProjectId" id="1zd7BC7NlK8GtvUdxHfMjVaWgSs" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -60,9 +61,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build sdl2-go">
     <configuration name="go build sdl2-go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -72,9 +75,18 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build sdl2-go/sdl" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sdl2-go/sdl" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build sdl2-go" />
+        <item itemvalue="Go Build.go build sdl2-go/sdl" />
       </list>
     </recent_temporary>
   </component>
@@ -92,27 +104,50 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1753" height="269" key="GridCell.Tab.0.bottom" timestamp="1634472040525">
+    <state x="615" y="296" key="EditFileWatcherDialog" timestamp="1634657790114">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040525" />
-    <state width="1753" height="269" key="GridCell.Tab.0.center" timestamp="1634472040525">
+    <state x="615" y="296" key="EditFileWatcherDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634657790114" />
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1634657375287">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040525" />
-    <state width="1753" height="269" key="GridCell.Tab.0.left" timestamp="1634472040524">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634657375287" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1634657375286">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040524" />
-    <state width="1753" height="269" key="GridCell.Tab.0.right" timestamp="1634472040525">
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634657375286" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1634657375286">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040525" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634657375286" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1634657375287">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634657375287" />
+    <state x="461" y="164" key="SettingsEditor" timestamp="1634657792549">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1634657792549" />
     <state x="1007" y="317" width="596" height="594" key="find.popup" timestamp="1634466743575">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1007" y="317" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634466743575" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_timer.go</url>
+          <line>92</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
