@@ -7,7 +7,6 @@ import (
 
 /* Public functions */
 
-
 /**
  * Set the SDL error message for the current thread.
  *
@@ -31,18 +30,21 @@ import (
  * \sa SDL_GetError
  */
 //extern DECLSPEC int SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1);
-func SDL_SetError(fmt0 common.FConstCharP,a... []common.FConstCharP) (res common.FInt,err error) {
+func SDL_SetError(fmt0 common.FConstCharP, a ...interface{}) (res common.FInt, err error) {
+
+	uintptrList := make([]uintptr, 0)
+	uintptrList = append(uintptrList, uintptr(unsafe.Pointer(common.BytePtrFromString(fmt0))))
 
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetError").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(fmt0))),
-		uintptr(unsafe.Pointer(&a)),
+	//uintptrList,
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=common.FInt(t)
+	res = common.FInt(t)
 	return
 }
+
 /**
  * Retrieve a message about the last error that occurred on the current
  * thread.
@@ -77,16 +79,16 @@ func SDL_SetError(fmt0 common.FConstCharP,a... []common.FConstCharP) (res common
  * \sa SDL_SetError
  */
 //extern DECLSPEC const char *SDLCALL SDL_GetError(void);
-func SDL_GetError() (res common.FConstCharP,err error) {
+func SDL_GetError() (res common.FConstCharP, err error) {
 
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetError").Call(
-	)
-	if t==0{
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetError").Call()
+	if t == 0 {
 
 	}
-	res=common.GoAStr(t)
+	res = common.GoAStr(t)
 	return
 }
+
 /**
  * Get the last error message that was set for the current thread.
  *
@@ -101,18 +103,19 @@ func SDL_GetError() (res common.FConstCharP,err error) {
  * \sa SDL_GetError
  */
 //extern DECLSPEC char * SDLCALL SDL_GetErrorMsg(char *errstr, int maxlen);
-func SDL_GetErrorMsg(errstr common.FBuf,maxlen common.FInt) (res common.FConstCharP,err error) {
+func SDL_GetErrorMsg(errstr common.FBuf, maxlen common.FInt) (res common.FConstCharP, err error) {
 
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetErrorMsg").Call(
 		uintptr(unsafe.Pointer(errstr)),
 		uintptr(maxlen),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=common.GoAStr(t)
+	res = common.GoAStr(t)
 	return
 }
+
 /**
  * Clear any previous error message for this thread.
  *
@@ -122,13 +125,13 @@ func SDL_GetErrorMsg(errstr common.FBuf,maxlen common.FInt) (res common.FConstCh
 //extern DECLSPEC void SDLCALL SDL_ClearError(void);
 func SDL_ClearError() (err error) {
 
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ClearError").Call(
-	)
-	if t==0{
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ClearError").Call()
+	if t == 0 {
 
 	}
 	return
 }
+
 /**
  *  \name Internal error functions
  *
@@ -137,33 +140,37 @@ func SDL_ClearError() (err error) {
  */
 /* @{ */
 //#define SDL_OutOfMemory()   SDL_Error(SDL_ENOMEM)
-func SDL_OutOfMemory(){
+func SDL_OutOfMemory() {
 	SDL_Error(SDL_ENOMEM)
 }
+
 //#define SDL_Unsupported()   SDL_Error(SDL_UNSUPPORTED)
-func SDL_Unsupported(){
+func SDL_Unsupported() {
 	SDL_Error(SDL_UNSUPPORTED)
 }
+
 //#define SDL_InvalidParamError(param)    SDL_SetError("Parameter '%s' is invalid", (param))
-type SDL_errorcode=int32
-const(
-SDL_ENOMEM=0
-SDL_EFREAD
-SDL_EFWRITE
-SDL_EFSEEK
-SDL_UNSUPPORTED
-SDL_LASTERROR
+type SDL_errorcode = int32
+
+const (
+	SDL_ENOMEM = 0
+	SDL_EFREAD
+	SDL_EFWRITE
+	SDL_EFSEEK
+	SDL_UNSUPPORTED
+	SDL_LASTERROR
 )
+
 /* SDL_Error() unconditionally returns -1. */
 //extern DECLSPEC int SDLCALL SDL_Error(SDL_errorcode code);
-func SDL_Error(code SDL_errorcode) (res common.FInt,err error) {
+func SDL_Error(code SDL_errorcode) (res common.FInt, err error) {
 
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetError").Call(
 		uintptr(code),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=common.FInt(t)
+	res = common.FInt(t)
 	return
 }
