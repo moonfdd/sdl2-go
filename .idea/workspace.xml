@@ -20,14 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_revision.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_rwops.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_scancode.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_sensor.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_shape.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_stdinc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_pixels.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_platform.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_power.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_quit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_rect.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_surface.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_surface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_render.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_render.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/aaastruct.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/aaastruct.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +60,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../govcl" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RunManager" selected="Go Build.go build sdl2-go">
@@ -113,10 +112,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="615" y="296" key="EditFileWatcherDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634657790114" />
-    <state x="1174" y="412" key="FileChooserDialogImpl" timestamp="1634742041593">
+    <state x="725" y="315" key="FileChooserDialogImpl" timestamp="1634916954790">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1174" y="412" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1634742041593" />
+    <state x="725" y="315" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1634916954790" />
     <state width="1753" height="268" key="GridCell.Tab.0.bottom" timestamp="1634742147694">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -133,14 +132,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1753" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634742147694" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1634657792549">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1634912227385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1634657792549" />
-    <state x="1007" y="317" width="596" height="594" key="find.popup" timestamp="1634466743575">
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1634912227385" />
+    <state x="1007" y="317" width="596" height="594" key="find.popup" timestamp="1634917093234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1007" y="317" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634466743575" />
+    <state x="1007" y="317" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634917093234" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
