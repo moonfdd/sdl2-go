@@ -21,11 +21,12 @@ type SDL_BlitMap struct {
 //}
 type SDL_Palette struct {
 }
-type SDL_RWops struct {
-}
 type SDL_BlendMode struct {
 }
 type SDL_Rect struct {
 }
 type SDL_PixelFormat struct {
+}
+
+type File struct {
 }

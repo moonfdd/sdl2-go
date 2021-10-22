@@ -20,25 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_name.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_surface.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_system.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_syswm.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_assert.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_compare.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_crc32.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_font.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_harness.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_images.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_log.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_test_md5.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_revision.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_rwops.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_scancode.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_sensor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_shape.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_stdinc.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_error.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_error.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_memory.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_memory.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_surface.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_surface.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/aaastruct.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/aaastruct.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,6 +149,16 @@
           <url>file://$PROJECT_DIR$/sdl/SDL_timer.go</url>
           <line>92</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_revision.go</url>
+          <line>1</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_revision.go</url>
+          <line>2</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
