@@ -19,7 +19,7 @@ func SDL_LoadObject() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -54,7 +54,7 @@ func SDL_LoadFunction() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -73,6 +73,6 @@ func SDL_UnloadObject() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }

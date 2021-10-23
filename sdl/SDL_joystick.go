@@ -87,7 +87,7 @@ func SDL_LockJoysticks() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -108,7 +108,7 @@ func SDL_UnlockJoysticks() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -128,7 +128,7 @@ func SDL_NumJoysticks() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -152,7 +152,7 @@ func SDL_JoystickNameForIndex() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -167,7 +167,7 @@ func SDL_JoystickGetDevicePlayerIndex() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -192,7 +192,7 @@ func SDL_JoystickGetDeviceGUID() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -214,7 +214,7 @@ func SDL_JoystickGetDeviceVendor() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -236,7 +236,7 @@ func SDL_JoystickGetDeviceProduct() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -258,7 +258,7 @@ func SDL_JoystickGetDeviceProductVersion() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -279,7 +279,7 @@ func SDL_JoystickGetDeviceType() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -301,7 +301,7 @@ func SDL_JoystickGetDeviceInstanceID() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -330,7 +330,7 @@ func SDL_JoystickOpen() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -350,7 +350,7 @@ func SDL_JoystickFromInstanceID() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -368,7 +368,7 @@ func SDL_JoystickFromPlayerIndex() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -387,7 +387,7 @@ func SDL_JoystickAttachVirtual() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -405,7 +405,7 @@ func SDL_JoystickDetachVirtual() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -422,7 +422,7 @@ func SDL_JoystickIsVirtual() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -447,7 +447,7 @@ func SDL_JoystickSetVirtualAxis() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -472,7 +472,7 @@ func SDL_JoystickSetVirtualButton() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -497,7 +497,7 @@ func SDL_JoystickSetVirtualHat() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -520,7 +520,7 @@ func SDL_JoystickName() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -540,7 +540,7 @@ func SDL_JoystickGetPlayerIndex() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -557,7 +557,7 @@ func SDL_JoystickSetPlayerIndex() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -581,7 +581,7 @@ func SDL_JoystickGetGUID() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -600,7 +600,7 @@ func SDL_JoystickGetVendor() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -619,7 +619,7 @@ func SDL_JoystickGetProduct() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -638,7 +638,7 @@ func SDL_JoystickGetProductVersion() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -658,7 +658,7 @@ func SDL_JoystickGetSerial() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -675,7 +675,7 @@ func SDL_JoystickGetType() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -699,7 +699,7 @@ func SDL_JoystickGetGUIDString() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -722,7 +722,7 @@ func SDL_JoystickGetGUIDFromString() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -743,7 +743,7 @@ func SDL_JoystickGetAttached() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -763,7 +763,7 @@ func SDL_JoystickInstanceID() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -789,7 +789,7 @@ func SDL_JoystickNumAxes() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -814,7 +814,7 @@ func SDL_JoystickNumBalls() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -835,7 +835,7 @@ func SDL_JoystickNumHats() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -856,7 +856,7 @@ func SDL_JoystickNumButtons() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -875,7 +875,7 @@ func SDL_JoystickUpdate() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -907,7 +907,7 @@ func SDL_JoystickEventState() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -942,7 +942,7 @@ func SDL_JoystickGetAxis() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -966,7 +966,7 @@ func SDL_JoystickGetAxisInitialState() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1015,7 +1015,7 @@ func SDL_JoystickGetHat() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1044,7 +1044,7 @@ func SDL_JoystickGetBall() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1066,7 +1066,7 @@ func SDL_JoystickGetButton() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1091,7 +1091,7 @@ func SDL_JoystickRumble() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1121,7 +1121,7 @@ func SDL_JoystickRumbleTriggers() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1141,7 +1141,7 @@ func SDL_JoystickHasLED() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1164,7 +1164,7 @@ func SDL_JoystickSetLED() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1183,7 +1183,7 @@ func SDL_JoystickSendEffect() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1201,7 +1201,7 @@ func SDL_JoystickClose() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1221,6 +1221,6 @@ func SDL_JoystickCurrentPowerLevel() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }

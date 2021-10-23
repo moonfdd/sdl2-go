@@ -1695,7 +1695,7 @@ func SDL_SetHintWithPriority() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1721,7 +1721,7 @@ func SDL_SetHint() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1741,7 +1741,7 @@ func SDL_GetHint() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1765,7 +1765,7 @@ func SDL_GetHintBoolean() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1800,7 +1800,7 @@ func SDL_AddHintCallback() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1825,7 +1825,7 @@ func SDL_DelHintCallback() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1841,6 +1841,6 @@ func SDL_ClearHints() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }

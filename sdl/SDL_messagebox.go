@@ -114,7 +114,7 @@ func SDL_ShowMessageBox() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -163,6 +163,6 @@ func SDL_ShowSimpleMessageBox() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }

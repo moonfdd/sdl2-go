@@ -24,6 +24,6 @@ func SDL_GetPlatform() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }

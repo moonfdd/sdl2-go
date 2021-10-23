@@ -1215,7 +1215,7 @@ func glMapBufferOES() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1226,7 +1226,7 @@ func glUnmapBufferOES() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1237,7 +1237,7 @@ func glGetBufferPointervOES() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 

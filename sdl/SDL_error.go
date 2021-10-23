@@ -88,7 +88,7 @@ func SDL_GetError() (res common.FConstCharP, err error) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -115,7 +115,7 @@ func SDL_GetErrorMsg(errstr common.FBuf, maxlen common.FInt) (res common.FConstC
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 

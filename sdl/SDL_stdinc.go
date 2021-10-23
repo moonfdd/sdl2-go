@@ -364,7 +364,7 @@ func SDL_getenv(name common.FConstCharP) (res common.FCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -673,7 +673,7 @@ func SDL_wcsdup(wstr common.FWcharT) (res common.FWcharT) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -686,7 +686,7 @@ func SDL_wcsstr(haystack common.FWcharT, needle common.FWcharT) (res common.FWch
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -699,7 +699,7 @@ func SDL_wcscmp(str1 common.FWcharT, str2 common.FWcharT) (res common.FWcharT) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 

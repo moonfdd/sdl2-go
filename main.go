@@ -50,7 +50,7 @@ func main() {
 	}
 	if true {
 		fmt.Println("错误开始")
-		sdl.SDL_SetError("%d----%d----%d----%d", 1, 2, 3, 4)
+		sdl.SDL_SetError("%d--哈哈--%d----%d----%d", 1, 2, 3, 4)
 		fmt.Println(sdl.SDL_GetError())
 	}
 }

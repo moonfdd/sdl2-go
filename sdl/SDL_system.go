@@ -379,7 +379,7 @@ func SDL_AndroidGetInternalStoragePath() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -430,7 +430,7 @@ func SDL_AndroidGetExternalStoragePath() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -568,7 +568,7 @@ func SDL_WinRTGetFSPathUNICODE(pathType SDL_WinRT_Path) (res common.FWcharT) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -601,7 +601,7 @@ func SDL_WinRTGetFSPathUTF8(pathType SDL_WinRT_Path) (res common.FWcharT) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 

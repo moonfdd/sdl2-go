@@ -294,7 +294,7 @@ func SDL_GetVideoDriver(index common.FInt) (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -370,7 +370,7 @@ func SDL_GetCurrentVideoDriver() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -414,7 +414,7 @@ func SDL_GetDisplayName(displayIndex common.FInt) (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -1037,7 +1037,7 @@ func (window *SDL_Window) SDL_GetWindowTitle() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 

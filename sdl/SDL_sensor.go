@@ -146,7 +146,7 @@ func SDL_SensorGetDeviceName(device_index common.FInt) (res common.FConstCharP) 
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
@@ -256,7 +256,7 @@ func (sensor *SDL_Sensor) SDL_SensorGetName() (res common.FConstCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 

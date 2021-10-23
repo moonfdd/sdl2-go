@@ -81,7 +81,7 @@ func SDLTest_GenerateRunSeed(length common.FInt) (res common.FCharP) {
 	if t == 0 {
 
 	}
-	res = common.GoAStr(t)
+	res = common.StringFromPtr(t)
 	return
 }
 
