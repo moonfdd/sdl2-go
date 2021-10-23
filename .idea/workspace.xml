@@ -20,14 +20,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_pixels.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_platform.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_power.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_quit.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_rect.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_atomic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_audio.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_bits.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_blendmode.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_clipboard.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_android.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_iphoneos.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_macosx.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_minimal.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_pandora.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_psp.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_windows.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_winrt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_config_wiz.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_cpuinfo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_egl.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_endian.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_events.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_filesystem.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_gamecontroller.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_gesture.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_hints.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_joystick.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_keyboard.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_keycode.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_loadso.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_locale.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_log.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_messagebox.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_metal.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_misc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_mouse.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_mutex.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengl.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengl_glext.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengles.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengles2.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2ext.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2platform.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_khrplatform.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_render.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_render.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_error.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_error.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_pixels.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_pixels.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/aaastruct.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/aaastruct.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl2-go.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,30 +156,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="725" y="315" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1634916954790" />
-    <state width="1753" height="268" key="GridCell.Tab.0.bottom" timestamp="1634742147694">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1634978785387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634742147694" />
-    <state width="1753" height="268" key="GridCell.Tab.0.center" timestamp="1634742147694">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634978785387" />
+    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1634978785387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="268" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634742147694" />
-    <state width="1753" height="268" key="GridCell.Tab.0.left" timestamp="1634742147694">
+    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634978785387" />
+    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1634978785387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="268" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634742147694" />
-    <state width="1753" height="268" key="GridCell.Tab.0.right" timestamp="1634742147694">
+    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634978785387" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1634978785387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634742147694" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634978785387" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1634912227385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1634912227385" />
-    <state x="1007" y="317" width="596" height="594" key="find.popup" timestamp="1634917093234">
+    <state x="1007" y="317" width="596" height="594" key="find.popup" timestamp="1634976888501">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1007" y="317" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634917093234" />
+    <state x="1007" y="317" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634976888501" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -158,6 +198,31 @@
           <url>file://$PROJECT_DIR$/sdl/SDL_revision.go</url>
           <line>2</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_opengles2_gl2ext.go</url>
+          <line>1992</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_mouse.go</url>
+          <line>115</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_metal.go</url>
+          <line>65</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_loadso.go</url>
+          <line>68</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_egl.go</url>
+          <line>501</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

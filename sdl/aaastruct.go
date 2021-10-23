@@ -14,8 +14,8 @@ type SDL_BlitMap struct {
 //type SDL_Surface struct {
 //}
 
-type SDL_BlendMode struct {
-}
+//type SDL_BlendMode struct {
+//}
 
 type File struct {
 }

@@ -8,76 +8,83 @@ import "sdl2-go/common"
  *  These define alpha as the opacity of a surface.
  */
 /* @{ */
-const SDL_ALPHA_OPAQUE =255
-const SDL_ALPHA_TRANSPARENT= 0
+const SDL_ALPHA_OPAQUE = 255
+const SDL_ALPHA_TRANSPARENT = 0
+
 /* @} */
 
 /** Pixel type. */
 type SDL_PixelType int32
-const(
-SDL_PIXELTYPE_UNKNOWN=0
-SDL_PIXELTYPE_INDEX1
-SDL_PIXELTYPE_INDEX4
-SDL_PIXELTYPE_INDEX8
-SDL_PIXELTYPE_PACKED8
-SDL_PIXELTYPE_PACKED16
-SDL_PIXELTYPE_PACKED32
-SDL_PIXELTYPE_ARRAYU8
-SDL_PIXELTYPE_ARRAYU16
-SDL_PIXELTYPE_ARRAYU32
-SDL_PIXELTYPE_ARRAYF16
-SDL_PIXELTYPE_ARRAYF3
+
+const (
+	SDL_PIXELTYPE_UNKNOWN = 0
+	SDL_PIXELTYPE_INDEX1
+	SDL_PIXELTYPE_INDEX4
+	SDL_PIXELTYPE_INDEX8
+	SDL_PIXELTYPE_PACKED8
+	SDL_PIXELTYPE_PACKED16
+	SDL_PIXELTYPE_PACKED32
+	SDL_PIXELTYPE_ARRAYU8
+	SDL_PIXELTYPE_ARRAYU16
+	SDL_PIXELTYPE_ARRAYU32
+	SDL_PIXELTYPE_ARRAYF16
+	SDL_PIXELTYPE_ARRAYF3
 )
 
 /** Bitmap pixel order, high bit -> low bit. */
 type SDL_BitmapOrder int32
-const(
-SDL_BITMAPORDER_NONE=0
-SDL_BITMAPORDER_4321
-SDL_BITMAPORDER_1234
+
+const (
+	SDL_BITMAPORDER_NONE = 0
+	SDL_BITMAPORDER_4321
+	SDL_BITMAPORDER_1234
 )
 
 /** Packed component order, high bit -> low bit. */
 type SDL_PackedOrder int32
-const(
-SDL_PACKEDORDER_NONE=0
-SDL_PACKEDORDER_XRGB
-SDL_PACKEDORDER_RGBX
-SDL_PACKEDORDER_ARGB
-SDL_PACKEDORDER_RGBA
-SDL_PACKEDORDER_XBGR
-SDL_PACKEDORDER_BGRX
-SDL_PACKEDORDER_ABGR
-SDL_PACKEDORDER_BGRA
+
+const (
+	SDL_PACKEDORDER_NONE = 0
+	SDL_PACKEDORDER_XRGB
+	SDL_PACKEDORDER_RGBX
+	SDL_PACKEDORDER_ARGB
+	SDL_PACKEDORDER_RGBA
+	SDL_PACKEDORDER_XBGR
+	SDL_PACKEDORDER_BGRX
+	SDL_PACKEDORDER_ABGR
+	SDL_PACKEDORDER_BGRA
 )
 
 /** Array component order, low byte -> high byte. */
 /* !!! FIXME: in 2.1, make these not overlap differently with
    !!! FIXME:  SDL_PACKEDORDER_*, so we can simplify SDL_ISPIXELFORMAT_ALPHA */
 type SDL_ArrayOrder = int32
-const(
-SDL_ARRAYORDER_NONE=0
-SDL_ARRAYORDER_RGB
-SDL_ARRAYORDER_RGBA
-SDL_ARRAYORDER_ARGB
-SDL_ARRAYORDER_BGR
-SDL_ARRAYORDER_BGRA
-SDL_ARRAYORDER_ABGR
+
+const (
+	SDL_ARRAYORDER_NONE = 0
+	SDL_ARRAYORDER_RGB
+	SDL_ARRAYORDER_RGBA
+	SDL_ARRAYORDER_ARGB
+	SDL_ARRAYORDER_BGR
+	SDL_ARRAYORDER_BGRA
+	SDL_ARRAYORDER_ABGR
 )
 
 /** Packed component layout. */
 type SDL_PackedLayout = int32
-const(
-SDL_PACKEDLAYOUT_NONE=0
-SDL_PACKEDLAYOUT_332
-SDL_PACKEDLAYOUT_4444
-SDL_PACKEDLAYOUT_1555
-SDL_PACKEDLAYOUT_5551
-SDL_PACKEDLAYOUT_565
-SDL_PACKEDLAYOUT_8888
-SDL_PACKEDLAYOUT_2101010
-SDL_PACKEDLAYOUT_1010102
+
+const (
+	SDL_PACKEDLAYOUT_NONE = 0
+	SDL_PACKEDLAYOUT_332
+	SDL_PACKEDLAYOUT_4444
+	SDL_PACKEDLAYOUT_1555
+	SDL_PACKEDLAYOUT_5551
+	SDL_PACKEDLAYOUT_565
+	SDL_PACKEDLAYOUT_8888
+	SDL_PACKEDLAYOUT_2101010
+	SDL_PACKEDLAYOUT_1010102
 )
+
 //
 //#define SDL_DEFINE_PIXELFOURCC(A, B, C, D) SDL_FOURCC(A, B, C, D)
 //
@@ -266,46 +273,45 @@ SDL_PACKEDLAYOUT_1010102
 //SDL_DEFINE_PIXELFOURCC('O', 'E', 'S', ' ')
 //} SDL_PixelFormatEnum;
 
-type  SDL_Color struct {
-
- r common.FUint8T
- g common.FUint8T
- b common.FUint8T
- a common.FUint8T
+type SDL_Color struct {
+	r common.FUint8T
+	g common.FUint8T
+	b common.FUint8T
+	a common.FUint8T
 }
-type SDL_Colour= SDL_Color
+type SDL_Colour = SDL_Color
 
-type  SDL_Palette struct {
+type SDL_Palette struct {
 
-//int ncolors;
-//SDL_Color *colors;
-//Uint32 version;
-//int refcount;
+	//int ncolors;
+	//SDL_Color *colors;
+	//Uint32 version;
+	//int refcount;
 }
 
 /**
  *  \note Everything in the pixel format structure is read-only.
  */
-type  SDL_PixelFormat struct{
-//Uint32 format;
-//SDL_Palette *palette;
-//Uint8 BitsPerPixel;
-//Uint8 BytesPerPixel;
-//Uint8 padding[2];
-//Uint32 Rmask;
-//Uint32 Gmask;
-//Uint32 Bmask;
-//Uint32 Amask;
-//Uint8 Rloss;
-//Uint8 Gloss;
-//Uint8 Bloss;
-//Uint8 Aloss;
-//Uint8 Rshift;
-//Uint8 Gshift;
-//Uint8 Bshift;
-//Uint8 Ashift;
-//int refcount;
-//struct SDL_PixelFormat *next;
+type SDL_PixelFormat struct {
+	//Uint32 format;
+	//SDL_Palette *palette;
+	//Uint8 BitsPerPixel;
+	//Uint8 BytesPerPixel;
+	//Uint8 padding[2];
+	//Uint32 Rmask;
+	//Uint32 Gmask;
+	//Uint32 Bmask;
+	//Uint32 Amask;
+	//Uint8 Rloss;
+	//Uint8 Gloss;
+	//Uint8 Bloss;
+	//Uint8 Aloss;
+	//Uint8 Rshift;
+	//Uint8 Gshift;
+	//Uint8 Bshift;
+	//Uint8 Ashift;
+	//int refcount;
+	//struct SDL_PixelFormat *next;
 }
 
 /**
@@ -317,7 +323,16 @@ type  SDL_PixelFormat struct{
  *
  * \since This function is available since SDL 2.0.0.
  */
-extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
+//extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
+//todo
+func SDL_GetPixelFormatName() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetPixelFormatName").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Convert one of the enumerated pixel formats to a bpp value and RGBA masks.
@@ -333,12 +348,21 @@ extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
  *
  * \sa SDL_MasksToPixelFormatEnum
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_PixelFormatEnumToMasks(Uint32 format,
-int *bpp,
-Uint32 * Rmask,
-Uint32 * Gmask,
-Uint32 * Bmask,
-Uint32 * Amask);
+//extern DECLSPEC SDL_bool SDLCALL SDL_PixelFormatEnumToMasks(Uint32 format,
+//int *bpp,
+//Uint32 * Rmask,
+//Uint32 * Gmask,
+//Uint32 * Bmask,
+//Uint32 * Amask);
+//todo
+func SDL_PixelFormatEnumToMasks() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_PixelFormatEnumToMasks").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Convert a bpp value and RGBA masks to an enumerated pixel format.
@@ -355,11 +379,20 @@ Uint32 * Amask);
  *
  * \sa SDL_PixelFormatEnumToMasks
  */
-extern DECLSPEC Uint32 SDLCALL SDL_MasksToPixelFormatEnum(int bpp,
-Uint32 Rmask,
-Uint32 Gmask,
-Uint32 Bmask,
-Uint32 Amask);
+//extern DECLSPEC Uint32 SDLCALL SDL_MasksToPixelFormatEnum(int bpp,
+//Uint32 Rmask,
+//Uint32 Gmask,
+//Uint32 Bmask,
+//Uint32 Amask);
+//todo
+func SDL_MasksToPixelFormatEnum() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_MasksToPixelFormatEnum").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Create an SDL_PixelFormat structure corresponding to a pixel format.
@@ -374,7 +407,16 @@ Uint32 Amask);
  *
  * \sa SDL_FreeFormat
  */
-extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_AllocFormat(Uint32 pixel_format);
+//extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_AllocFormat(Uint32 pixel_format);
+//todo
+func SDL_AllocFormat() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AllocFormat").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Free an SDL_PixelFormat structure allocated by SDL_AllocFormat().
@@ -383,7 +425,16 @@ extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_AllocFormat(Uint32 pixel_format);
  *
  * \sa SDL_AllocFormat
  */
-extern DECLSPEC void SDLCALL SDL_FreeFormat(SDL_PixelFormat *format);
+//extern DECLSPEC void SDLCALL SDL_FreeFormat(SDL_PixelFormat *format);
+//todo
+func SDL_FreeFormat() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_FreeFormat").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Create a palette structure with the specified number of color entries.
@@ -397,7 +448,16 @@ extern DECLSPEC void SDLCALL SDL_FreeFormat(SDL_PixelFormat *format);
  *
  * \sa SDL_FreePalette
  */
-extern DECLSPEC SDL_Palette *SDLCALL SDL_AllocPalette(int ncolors);
+//extern DECLSPEC SDL_Palette *SDLCALL SDL_AllocPalette(int ncolors);
+//todo
+func SDL_AllocPalette() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AllocPalette").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Set the palette for a pixel format structure.
@@ -410,8 +470,17 @@ extern DECLSPEC SDL_Palette *SDLCALL SDL_AllocPalette(int ncolors);
  * \sa SDL_AllocPalette
  * \sa SDL_FreePalette
  */
-extern DECLSPEC int SDLCALL SDL_SetPixelFormatPalette(SDL_PixelFormat * format,
-SDL_Palette *palette);
+//extern DECLSPEC int SDLCALL SDL_SetPixelFormatPalette(SDL_PixelFormat * format,
+//SDL_Palette *palette);
+//todo
+func SDL_SetPixelFormatPalette() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetPixelFormatPalette").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Set a range of colors in a palette.
@@ -426,9 +495,18 @@ SDL_Palette *palette);
  * \sa SDL_AllocPalette
  * \sa SDL_CreateRGBSurface
  */
-extern DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette,
-const SDL_Color * colors,
-int firstcolor, int ncolors);
+//extern DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette,
+//const SDL_Color * colors,
+//int firstcolor, int ncolors);
+//todo
+func SDL_SetPaletteColors() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetPaletteColors").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Free a palette created with SDL_AllocPalette().
@@ -437,7 +515,16 @@ int firstcolor, int ncolors);
  *
  * \sa SDL_AllocPalette
  */
-extern DECLSPEC void SDLCALL SDL_FreePalette(SDL_Palette * palette);
+//extern DECLSPEC void SDLCALL SDL_FreePalette(SDL_Palette * palette);
+//todo
+func SDL_FreePalette() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_FreePalette").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Map an RGB triple to an opaque pixel value for a given pixel format.
@@ -467,8 +554,17 @@ extern DECLSPEC void SDLCALL SDL_FreePalette(SDL_Palette * palette);
  * \sa SDL_GetRGBA
  * \sa SDL_MapRGBA
  */
-extern DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format,
-Uint8 r, Uint8 g, Uint8 b);
+//extern DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format,
+//Uint8 r, Uint8 g, Uint8 b);
+//todo
+func SDL_MapRGB() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_MapRGB").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Map an RGBA quadruple to a pixel value for a given pixel format.
@@ -500,9 +596,18 @@ Uint8 r, Uint8 g, Uint8 b);
  * \sa SDL_GetRGBA
  * \sa SDL_MapRGB
  */
-extern DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format,
-Uint8 r, Uint8 g, Uint8 b,
-Uint8 a);
+//extern DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format,
+//Uint8 r, Uint8 g, Uint8 b,
+//Uint8 a);
+//todo
+func SDL_MapRGBA() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_MapRGBA").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Get RGB values from a pixel in the specified format.
@@ -523,9 +628,18 @@ Uint8 a);
  * \sa SDL_MapRGB
  * \sa SDL_MapRGBA
  */
-extern DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel,
-const SDL_PixelFormat * format,
-Uint8 * r, Uint8 * g, Uint8 * b);
+//extern DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel,
+//const SDL_PixelFormat * format,
+//Uint8 * r, Uint8 * g, Uint8 * b);
+//todo
+func SDL_GetRGB() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRGB").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Get RGBA values from a pixel in the specified format.
@@ -550,10 +664,19 @@ Uint8 * r, Uint8 * g, Uint8 * b);
  * \sa SDL_MapRGB
  * \sa SDL_MapRGBA
  */
-extern DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixel,
-const SDL_PixelFormat * format,
-Uint8 * r, Uint8 * g, Uint8 * b,
-Uint8 * a);
+//extern DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixel,
+//const SDL_PixelFormat * format,
+//Uint8 * r, Uint8 * g, Uint8 * b,
+//Uint8 * a);
+//todo
+func SDL_GetRGBA() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRGBA").Call()
+	if t == 0 {
+
+	}
+	res = common.GoAStr(t)
+	return
+}
 
 /**
  * Calculate a 256 entry gamma ramp for a gamma value.
@@ -563,15 +686,13 @@ Uint8 * a);
  *
  * \sa SDL_SetWindowGammaRamp
  */
-extern DECLSPEC void SDLCALL SDL_CalculateGammaRamp(float gamma, Uint16 * ramp);
+//extern DECLSPEC void SDLCALL SDL_CalculateGammaRamp(float gamma, Uint16 * ramp);
+//todo
+func SDL_CalculateGammaRamp() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CalculateGammaRamp").Call()
+	if t == 0 {
 
-
-/* Ends C function definitions when using C++ */
-#ifdef __cplusplus
+	}
+	res = common.GoAStr(t)
+	return
 }
-#endif
-#include "close_code.h"
-
-#endif /* SDL_pixels_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */
