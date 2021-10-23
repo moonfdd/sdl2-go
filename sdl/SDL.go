@@ -13,16 +13,17 @@ import (
  *  specify the subsystems which you will be using in your application.
  */
 /* @{ */
-const SDL_INIT_TIMER    =      0x00000001
-const SDL_INIT_AUDIO    =      0x00000010
-const SDL_INIT_VIDEO     =     0x00000020  /**< SDL_INIT_VIDEO implies SDL_INIT_EVENTS */
-const SDL_INIT_JOYSTICK   =    0x00000200  /**< SDL_INIT_JOYSTICK implies SDL_INIT_EVENTS */
-const SDL_INIT_HAPTIC     =    0x00001000
-const SDL_INIT_GAMECONTROLLER= 0x00002000  /**< SDL_INIT_GAMECONTROLLER implies SDL_INIT_JOYSTICK */
-const SDL_INIT_EVENTS      =   0x00004000
-const SDL_INIT_SENSOR      =   0x00008000
-const SDL_INIT_NOPARACHUTE  =  0x00100000  /**< compatibility; this flag is ignored. */
-const SDL_INIT_EVERYTHING=SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS |SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER | SDL_INIT_SENSOR
+const SDL_INIT_TIMER = 0x00000001
+const SDL_INIT_AUDIO = 0x00000010
+const SDL_INIT_VIDEO = 0x00000020    /**< SDL_INIT_VIDEO implies SDL_INIT_EVENTS */
+const SDL_INIT_JOYSTICK = 0x00000200 /**< SDL_INIT_JOYSTICK implies SDL_INIT_EVENTS */
+const SDL_INIT_HAPTIC = 0x00001000
+const SDL_INIT_GAMECONTROLLER = 0x00002000 /**< SDL_INIT_GAMECONTROLLER implies SDL_INIT_JOYSTICK */
+const SDL_INIT_EVENTS = 0x00004000
+const SDL_INIT_SENSOR = 0x00008000
+const SDL_INIT_NOPARACHUTE = 0x00100000 /**< compatibility; this flag is ignored. */
+const SDL_INIT_EVERYTHING = SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER | SDL_INIT_SENSOR
+
 /* @} */
 
 /**
@@ -71,13 +72,14 @@ const SDL_INIT_EVERYTHING=SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL
  * \sa SDL_WasInit
  */
 //extern DECLSPEC int SDLCALL SDL_Init(Uint32 flags);
-func SDL_Init(flags common.FUint32T) (res common.FInt, err error) {
+func SDL_Init(flags common.FUint32T) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Init").Call(
 		uintptr(flags),
-		)
+	)
 	res = common.FInt(t)
 	return
 }
+
 /**
  * Compatibility function to initialize the SDL library.
  *
@@ -92,13 +94,14 @@ func SDL_Init(flags common.FUint32T) (res common.FInt, err error) {
  * \sa SDL_QuitSubSystem
  */
 //extern DECLSPEC int SDLCALL SDL_InitSubSystem(Uint32 flags);
-func SDL_InitSubSystem(flags common.FUint32T) (res common.FInt, err error) {
+func SDL_InitSubSystem(flags common.FUint32T) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_InitSubSystem").Call(
 		uintptr(flags),
-		)
+	)
 	res = common.FInt(t)
 	return
 }
+
 /**
  * Shut down specific SDL subsystems.
  *
@@ -132,13 +135,14 @@ func SDL_InitSubSystem(flags common.FUint32T) (res common.FInt, err error) {
  * \sa SDL_InitSubSystem
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_WasInit(Uint32 flags);
-func SDL_WasInit(flags common.FUint32T) (res common.FUint32T, err error) {
+func SDL_WasInit(flags common.FUint32T) (res common.FUint32T) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WasInit").Call(
 		uintptr(flags),
-		)
+	)
 	res = common.FUint32T(t)
 	return
 }
+
 /**
  * Clean up all initialized subsystems.
  *
@@ -160,7 +164,7 @@ func SDL_WasInit(flags common.FUint32T) (res common.FUint32T, err error) {
  * \sa SDL_QuitSubSystem
  */
 //extern DECLSPEC void SDLCALL SDL_Quit(void);
-func SDL_Quit() ( err error) {
+func SDL_Quit() {
 	common.GetSDL2Dll().NewProc("SDL_Quit").Call()
 	return
 }

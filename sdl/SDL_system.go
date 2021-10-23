@@ -15,7 +15,7 @@ type SDL_WindowsMessageHook = func(userdata common.FVoidP, hWnd common.FVoidP, m
  * \param userdata a pointer to pass to every iteration of `callback`
  */
 //extern DECLSPEC void SDLCALL SDL_SetWindowsMessageHook(SDL_WindowsMessageHook callback, void *userdata);
-func SDL_SetWindowsMessageHook(callback SDL_WindowsMessageHook, userdata common.FVoidP) (err error) {
+func SDL_SetWindowsMessageHook(callback SDL_WindowsMessageHook, userdata common.FVoidP) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetWindowsMessageHook").Call(
 		uintptr(unsafe.Pointer(&callback)),
 		userdata,
@@ -40,7 +40,7 @@ func SDL_SetWindowsMessageHook(callback SDL_WindowsMessageHook, userdata common.
  * \since This function is available since SDL 2.0.1.
  */
 //extern DECLSPEC int SDLCALL SDL_Direct3D9GetAdapterIndex( int displayIndex );
-func SDL_Direct3D9GetAdapterIndex(displayIndex common.FInt) (res common.FInt, err error) {
+func SDL_Direct3D9GetAdapterIndex(displayIndex common.FInt) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Direct3D9GetAdapterIndex").Call(
 		uintptr(displayIndex),
 	)
@@ -67,7 +67,7 @@ type IDirect3DDevice9 struct {
  * \since This function is available since SDL 2.0.1.
  */
 //extern DECLSPEC IDirect3DDevice9* SDLCALL SDL_RenderGetD3D9Device(SDL_Renderer * renderer);
-func (renderer *SDL_Renderer) SDL_RenderGetD3D9Device(displayIndex common.FInt) (res *IDirect3DDevice9, err error) {
+func (renderer *SDL_Renderer) SDL_RenderGetD3D9Device(displayIndex common.FInt) (res *IDirect3DDevice9) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RenderGetD3D9Device").Call(
 		uintptr(displayIndex),
 	)
@@ -93,7 +93,7 @@ type ID3D11Device struct {
  *          not a D3D11 renderer; call SDL_GetError() for more information.
  */
 //extern DECLSPEC ID3D11Device* SDLCALL SDL_RenderGetD3D11Device(SDL_Renderer * renderer);
-func (renderer *SDL_Renderer) SDL_RenderGetD3D11Device(displayIndex common.FInt) (res *ID3D11Device, err error) {
+func (renderer *SDL_Renderer) SDL_RenderGetD3D11Device(displayIndex common.FInt) (res *ID3D11Device) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RenderGetD3D11Device").Call(
 		uintptr(displayIndex),
 	)
@@ -123,7 +123,7 @@ func (renderer *SDL_Renderer) SDL_RenderGetD3D11Device(displayIndex common.FInt)
  * \since This function is available since SDL 2.0.2.
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_DXGIGetOutputInfo( int displayIndex, int *adapterIndex, int *outputIndex );
-func SDL_DXGIGetOutputInfo(displayIndex common.FInt, adapterIndex *common.FInt, outputIndex *common.FInt) (res bool, err error) {
+func SDL_DXGIGetOutputInfo(displayIndex common.FInt, adapterIndex *common.FInt, outputIndex *common.FInt) (res bool) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_DXGIGetOutputInfo").Call(
 		uintptr(displayIndex),
 		uintptr(unsafe.Pointer(adapterIndex)),
@@ -149,7 +149,7 @@ func SDL_DXGIGetOutputInfo(displayIndex common.FInt, adapterIndex *common.FInt, 
  * \returns 0 on success, or -1 on error.
  */
 //extern DECLSPEC int SDLCALL SDL_LinuxSetThreadPriority(Sint64 threadID, int priority);
-func SDL_LinuxSetThreadPriority(threadID common.FInt64T, priority common.FInt) (res common.FInt, err error) {
+func SDL_LinuxSetThreadPriority(threadID common.FInt64T, priority common.FInt) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LinuxSetThreadPriority").Call(
 		uintptr(threadID),
 		uintptr(priority),
@@ -168,7 +168,7 @@ func SDL_LinuxSetThreadPriority(threadID common.FInt64T, priority common.FInt) (
 
 //#define SDL_iOSSetAnimationCallback(window, interval, callback, callbackParam) SDL_iPhoneSetAnimationCallback(window, interval, callback, callbackParam)
 //extern DECLSPEC int SDLCALL SDL_iPhoneSetAnimationCallback(SDL_Window * window, int interval, void (*callback)(void*), void *callbackParam);
-func (window *SDL_Window) SDL_iPhoneSetAnimationCallback(interval common.FInt, callback *func(p common.FVoidP), callbackParam common.FVoidP) (res common.FInt, err error) {
+func (window *SDL_Window) SDL_iPhoneSetAnimationCallback(interval common.FInt, callback *func(p common.FVoidP), callbackParam common.FVoidP) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LinuxSetThreadPriority").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(interval),
@@ -184,7 +184,7 @@ func (window *SDL_Window) SDL_iPhoneSetAnimationCallback(interval common.FInt, c
 
 //#define SDL_iOSSetEventPump(enabled) SDL_iPhoneSetEventPump(enabled)
 //extern DECLSPEC void SDLCALL SDL_iPhoneSetEventPump(SDL_bool enabled);
-func SDL_iPhoneSetEventPump(enabled bool) (err error) {
+func SDL_iPhoneSetEventPump(enabled bool) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_iPhoneSetEventPump").Call(
 		uintptr(common.CBool(enabled)),
 	)
@@ -217,7 +217,7 @@ func SDL_iPhoneSetEventPump(enabled bool) (err error) {
  * \sa SDL_AndroidGetActivity
  */
 //extern DECLSPEC void * SDLCALL SDL_AndroidGetJNIEnv(void);
-func SDL_AndroidGetJNIEnv() (res common.FVoidP, err error) {
+func SDL_AndroidGetJNIEnv() (res common.FVoidP) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidGetJNIEnv").Call()
 	if t == 0 {
 
@@ -247,7 +247,7 @@ func SDL_AndroidGetJNIEnv() (res common.FVoidP, err error) {
  * \sa SDL_AndroidGetJNIEnv
  */
 //extern DECLSPEC void * SDLCALL SDL_AndroidGetActivity(void);
-func SDL_AndroidGetActivity() (res common.FVoidP, err error) {
+func SDL_AndroidGetActivity() (res common.FVoidP) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidGetActivity").Call()
 	if t == 0 {
 
@@ -284,7 +284,7 @@ func SDL_AndroidGetActivity() (res common.FVoidP, err error) {
  * \returns the Android API level.
  */
 //extern DECLSPEC int SDLCALL SDL_GetAndroidSDKVersion(void);
-func SDL_GetAndroidSDKVersion() (res common.FInt, err error) {
+func SDL_GetAndroidSDKVersion() (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetAndroidSDKVersion").Call()
 	if t == 0 {
 

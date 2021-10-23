@@ -74,7 +74,7 @@ type SDLTest_TestSuiteReference struct {
  * \returns the generated seed string
  */
 //char *SDLTest_GenerateRunSeed(const int length);
-func SDLTest_GenerateRunSeed(length common.FInt) (res common.FCharP, err error) {
+func SDLTest_GenerateRunSeed(length common.FInt) (res common.FCharP) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_GenerateRunSeed").Call(
 		uintptr(length),
 	)
@@ -97,7 +97,7 @@ func SDLTest_GenerateRunSeed(length common.FInt) (res common.FCharP, err error) 
  * \returns the test run result: 0 when all tests passed, 1 if any tests failed.
  */
 //int SDLTest_RunSuites(SDLTest_TestSuiteReference *testSuites[], const char *userRunSeed, Uint64 userExecKey, const char *filter, int testIterations);
-func SDLTest_RunSuites(testSuites *[]SDLTest_TestSuiteReference, userRunSeed common.FConstCharP, userExecKey common.FUint64T, filter common.FConstCharP, testIterations common.FInt) (res common.FInt, err error) {
+func SDLTest_RunSuites(testSuites *[]SDLTest_TestSuiteReference, userRunSeed common.FConstCharP, userExecKey common.FUint64T, filter common.FConstCharP, testIterations common.FInt) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_RunSuites").Call(
 		uintptr(unsafe.Pointer(testSuites)),
 		uintptr(unsafe.Pointer(common.BytePtrFromString(userRunSeed))),

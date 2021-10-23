@@ -5,22 +5,23 @@ import (
 	"unsafe"
 )
 
-type  SDL_TouchID= int64
-type  SDL_FingerID=int64
+type SDL_TouchID = int64
+type SDL_FingerID = int64
 
-type SDL_TouchDeviceType =int32
-const(
-SDL_TOUCH_DEVICE_INVALID = -1
-SDL_TOUCH_DEVICE_DIRECT            /* touch screen with window-relative coordinates */
-SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE /* trackpad with absolute device coordinates */
-SDL_TOUCH_DEVICE_INDIRECT_RELATIVE  /* trackpad with screen cursor-relative coordinates */
+type SDL_TouchDeviceType = int32
+
+const (
+	SDL_TOUCH_DEVICE_INVALID           = -1
+	SDL_TOUCH_DEVICE_DIRECT            /* touch screen with window-relative coordinates */
+	SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE /* trackpad with absolute device coordinates */
+	SDL_TOUCH_DEVICE_INDIRECT_RELATIVE /* trackpad with screen cursor-relative coordinates */
 )
 
 type SDL_Finger struct {
- id SDL_FingerID
- x common.FFloat
- y common.FFloat
- pressure common.FFloat
+	id       SDL_FingerID
+	x        common.FFloat
+	y        common.FFloat
+	pressure common.FFloat
 }
 
 /* Used as the device ID for mouse events simulated with touch input */
@@ -28,7 +29,6 @@ type SDL_Finger struct {
 
 /* Used as the SDL_TouchID for touch events simulated with mouse input */
 //#define SDL_MOUSE_TOUCHID ((Sint64)-1)
-
 
 /**
  * Get the number of registered touch devices.
@@ -47,15 +47,15 @@ type SDL_Finger struct {
  * \sa SDL_GetTouchDevice
  */
 //extern DECLSPEC int SDLCALL SDL_GetNumTouchDevices(void);
-func SDL_GetNumTouchDevices() (res common.FInt,err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetNumTouchDevices").Call(
-	)
-	if t==0{
+func SDL_GetNumTouchDevices() (res common.FInt) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetNumTouchDevices").Call()
+	if t == 0 {
 
 	}
-	res=common.FInt(t)
+	res = common.FInt(t)
 	return
 }
+
 /**
  * Get the touch ID with the given index.
  *
@@ -68,30 +68,32 @@ func SDL_GetNumTouchDevices() (res common.FInt,err error) {
  * \sa SDL_GetNumTouchDevices
  */
 //extern DECLSPEC SDL_TouchID SDLCALL SDL_GetTouchDevice(int index);
-func SDL_GetTouchDevice(index common.FInt) (res SDL_TouchID,err error) {
+func SDL_GetTouchDevice(index common.FInt) (res SDL_TouchID) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetTouchDevice").Call(
 		uintptr(index),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=SDL_TouchID(t)
+	res = SDL_TouchID(t)
 	return
 }
+
 /**
  * Get the type of the given touch device.
  */
 //extern DECLSPEC SDL_TouchDeviceType SDLCALL SDL_GetTouchDeviceType(SDL_TouchID touchID);
-func SDL_GetTouchDeviceType(touchID SDL_TouchID) (res SDL_TouchDeviceType,err error) {
+func SDL_GetTouchDeviceType(touchID SDL_TouchID) (res SDL_TouchDeviceType) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetTouchDeviceType").Call(
 		uintptr(touchID),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=SDL_TouchDeviceType(t)
+	res = SDL_TouchDeviceType(t)
 	return
 }
+
 /**
  * Get the number of active fingers for a given touch device.
  *
@@ -104,16 +106,17 @@ func SDL_GetTouchDeviceType(touchID SDL_TouchID) (res SDL_TouchDeviceType,err er
  * \sa SDL_GetTouchFinger
  */
 //extern DECLSPEC int SDLCALL SDL_GetNumTouchFingers(SDL_TouchID touchID);
-func SDL_GetNumTouchFingers(touchID SDL_TouchID) (res common.FInt,err error) {
+func SDL_GetNumTouchFingers(touchID SDL_TouchID) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetNumTouchFingers").Call(
 		uintptr(touchID),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=common.FInt(t)
+	res = common.FInt(t)
 	return
 }
+
 /**
  * Get the finger object for specified touch device ID and finger index.
  *
@@ -127,15 +130,14 @@ func SDL_GetNumTouchFingers(touchID SDL_TouchID) (res common.FInt,err error) {
  * \sa SDL_RecordGesture
  */
 //extern DECLSPEC SDL_Finger * SDLCALL SDL_GetTouchFinger(SDL_TouchID touchID, int index);
-func SDL_GetTouchFinger(touchID SDL_TouchID,index common.FInt) (res *SDL_Finger,err error) {
+func SDL_GetTouchFinger(touchID SDL_TouchID, index common.FInt) (res *SDL_Finger) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetTouchFinger").Call(
 		uintptr(touchID),
 		uintptr(index),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=(*SDL_Finger)(unsafe.Pointer(t))
+	res = (*SDL_Finger)(unsafe.Pointer(t))
 	return
 }
-

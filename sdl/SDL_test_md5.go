@@ -31,7 +31,7 @@ type SDLTest_Md5Context struct {
  *       all fields are set to zero.
  */
 //void SDLTest_Md5Init(SDLTest_Md5Context * mdContext);
-func (mdContext *SDLTest_Md5Context) SDLTest_Md5Init() (err error) {
+func (mdContext *SDLTest_Md5Context) SDLTest_Md5Init() {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Md5Init").Call(
 		uintptr(unsafe.Pointer(mdContext)),
 	)
@@ -55,7 +55,7 @@ func (mdContext *SDLTest_Md5Context) SDLTest_Md5Init() (err error) {
 
 //void SDLTest_Md5Update(SDLTest_Md5Context * mdContext, unsigned char *inBuf,
 //unsigned int inLen);
-func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf common.FBuf, inLen common.FInt) (err error) {
+func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf common.FBuf, inLen common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Md5Update").Call(
 		uintptr(unsafe.Pointer(mdContext)),
 		uintptr(unsafe.Pointer(inBuf)),
@@ -78,7 +78,7 @@ func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf common.FBuf, inLen 
  */
 
 //void SDLTest_Md5Final(SDLTest_Md5Context * mdContext);
-func (mdContext *SDLTest_Md5Context) SDLTest_Md5Final() (err error) {
+func (mdContext *SDLTest_Md5Context) SDLTest_Md5Final() {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Md5Final").Call(
 		uintptr(unsafe.Pointer(mdContext)),
 	)

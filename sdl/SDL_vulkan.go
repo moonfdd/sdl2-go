@@ -55,13 +55,14 @@ import (
  * \sa SDL_Vulkan_UnloadLibrary
  */
 //extern DECLSPEC int SDLCALL SDL_Vulkan_LoadLibrary(const char *path);
-func SDL_Vulkan_LoadLibrary(path0 common.FConstCharP) (res common.FInt, err error) {
+func SDL_Vulkan_LoadLibrary(path0 common.FConstCharP) (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_LoadLibrary").Call(
 		uintptr(unsafe.Pointer(common.BytePtrFromString(path0))),
 	)
 	res = common.FInt(t)
 	return
 }
+
 /**
  * Get the address of the `vkGetInstanceProcAddr` function.
  *
@@ -71,12 +72,12 @@ func SDL_Vulkan_LoadLibrary(path0 common.FConstCharP) (res common.FInt, err erro
  * \returns the function pointer for `vkGetInstanceProcAddr` or NULL on error.
  */
 //extern DECLSPEC void *SDLCALL SDL_Vulkan_GetVkGetInstanceProcAddr(void);
-func SDL_Vulkan_GetVkGetInstanceProcAddr() (res common.FVoidP, err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_GetVkGetInstanceProcAddr").Call(
-	)
+func SDL_Vulkan_GetVkGetInstanceProcAddr() (res common.FVoidP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_GetVkGetInstanceProcAddr").Call()
 	res = t
 	return
 }
+
 /**
  * Unload the Vulkan library previously loaded by SDL_Vulkan_LoadLibrary()
  *
@@ -85,14 +86,14 @@ func SDL_Vulkan_GetVkGetInstanceProcAddr() (res common.FVoidP, err error) {
  * \sa SDL_Vulkan_LoadLibrary
  */
 //extern DECLSPEC void SDLCALL SDL_Vulkan_UnloadLibrary(void);
-func SDL_Vulkan_UnloadLibrary() (err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_UnloadLibrary").Call(
-	)
-	if t==0{
+func SDL_Vulkan_UnloadLibrary() {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_UnloadLibrary").Call()
+	if t == 0 {
 
 	}
 	return
 }
+
 /**
  * Get the names of the Vulkan instance extensions needed to create a surface
  * with SDL_Vulkan_CreateSurface.
@@ -124,19 +125,20 @@ func SDL_Vulkan_UnloadLibrary() (err error) {
 //extern DECLSPEC SDL_bool SDLCALL SDL_Vulkan_GetInstanceExtensions(SDL_Window *window,
 //unsigned int *pCount,
 //const char **pNames);
-func (window *SDL_Window)SDL_Vulkan_GetInstanceExtensions( pCount *common.FUnsignedInt,
-pNames *common.FBuf) (res bool,err error) {
+func (window *SDL_Window) SDL_Vulkan_GetInstanceExtensions(pCount *common.FUnsignedInt,
+	pNames *common.FBuf) (res bool) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_GetInstanceExtensions").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(pCount)),
 		uintptr(unsafe.Pointer(pNames)),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=common.BoolFromUintptr(t)
+	res = common.BoolFromUintptr(t)
 	return
 }
+
 /**
  * Create a Vulkan rendering surface for a window.
  *
@@ -158,19 +160,20 @@ pNames *common.FBuf) (res bool,err error) {
 //extern DECLSPEC SDL_bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window,
 //VkInstance instance,
 //VkSurfaceKHR* surface);
-func (window *SDL_Window)SDL_Vulkan_CreateSurface( instance VkInstance,
-	surface *VkSurfaceKHR) (res bool,err error) {
+func (window *SDL_Window) SDL_Vulkan_CreateSurface(instance VkInstance,
+	surface *VkSurfaceKHR) (res bool) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_CreateSurface").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(&instance)),
 		uintptr(unsafe.Pointer(surface)),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=common.BoolFromUintptr(t)
+	res = common.BoolFromUintptr(t)
 	return
 }
+
 /**
  * Get the size of the window's underlying drawable dimensions in pixels.
  *
@@ -191,13 +194,13 @@ func (window *SDL_Window)SDL_Vulkan_CreateSurface( instance VkInstance,
  */
 //extern DECLSPEC void SDLCALL SDL_Vulkan_GetDrawableSize(SDL_Window * window,
 //int *w, int *h);
-func (window *SDL_Window)SDL_Vulkan_GetDrawableSize( w *common.FInt, h *common.FInt) (err error) {
+func (window *SDL_Window) SDL_Vulkan_GetDrawableSize(w *common.FInt, h *common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Vulkan_GetDrawableSize").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(w)),
 		uintptr(unsafe.Pointer(h)),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
 	return

@@ -18,18 +18,17 @@ import (
  * \sa SDL_VERSION
  * \sa SDL_GetVersion
  */
-type  SDL_version struct {
- Major common.FUint8T        /**< major version */
- Minor common.FUint8T        /**< minor version */
- Patch common.FUint8T         /**< update version */
+type SDL_version struct {
+	Major common.FUint8T /**< major version */
+	Minor common.FUint8T /**< minor version */
+	Patch common.FUint8T /**< update version */
 }
 
 /* Printable format: "%d.%d.%d", MAJOR, MINOR, PATCHLEVEL
  */
-const SDL_MAJOR_VERSION =  2
-const SDL_MINOR_VERSION  = 0
-const SDL_PATCHLEVEL    =  16
-
+const SDL_MAJOR_VERSION = 2
+const SDL_MINOR_VERSION = 0
+const SDL_PATCHLEVEL = 16
 
 /**
  * Get the version of SDL that is linked against your program.
@@ -46,15 +45,16 @@ const SDL_PATCHLEVEL    =  16
  * \sa SDL_GetRevision
  */
 //extern DECLSPEC void SDLCALL SDL_GetVersion(SDL_version * ver);
-func (ver *SDL_version)SDL_GetVersion( ) (err error) {
+func (ver *SDL_version) SDL_GetVersion() {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetVersion").Call(
 		uintptr(unsafe.Pointer(ver)),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
 	return
 }
+
 /**
  * Get the code revision of SDL that is linked against your program.
  *
@@ -81,15 +81,15 @@ func (ver *SDL_version)SDL_GetVersion( ) (err error) {
  * \sa SDL_GetVersion
  */
 //extern DECLSPEC const char *SDLCALL SDL_GetRevision(void);
-func SDL_GetRevision( ) (res common.FConstCharP,err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRevision").Call(
-	)
-	if t==0{
+func SDL_GetRevision() (res common.FConstCharP) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRevision").Call()
+	if t == 0 {
 
 	}
-	res=common.GoAStr(t)
+	res = common.GoAStr(t)
 	return
 }
+
 /**
  * Obsolete function, do not use.
  *
@@ -100,12 +100,11 @@ func SDL_GetRevision( ) (res common.FConstCharP,err error) {
  * all, only hashes. This function only ever returns zero now. Don't use it.
  */
 //extern SDL_DEPRECATED DECLSPEC int SDLCALL SDL_GetRevisionNumber(void);
-func SDL_GetRevisionNumber( ) (res common.FInt,err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRevisionNumber").Call(
-	)
-	if t==0{
+func SDL_GetRevisionNumber() (res common.FInt) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRevisionNumber").Call()
+	if t == 0 {
 
 	}
-	res=common.FInt(t)
+	res = common.FInt(t)
 	return
 }

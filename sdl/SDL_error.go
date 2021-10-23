@@ -30,12 +30,12 @@ import (
  * \sa SDL_GetError
  */
 //extern DECLSPEC int SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1);
-func SDL_SetError(fmt0 common.FConstCharP, aList ...interface{}) (res common.FInt, err error) {
+func SDL_SetError(fmt0 common.FConstCharP, aList ...common.FInt) (res common.FInt, err error) {
 
 	uintptrList := make([]uintptr, 0)
 	uintptrList = append(uintptrList, uintptr(unsafe.Pointer(common.BytePtrFromString(fmt0))))
 	for _, a := range aList {
-		uintptrList = append(uintptrList, uintptr(unsafe.Pointer(&a)))
+		uintptrList = append(uintptrList, uintptr(a))
 	}
 
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetError").Call(

@@ -2,51 +2,40 @@ package sdl
 
 import (
 	"sdl2-go/common"
-	"syscall"
 	"unsafe"
 )
 
 type SDL_AssertState int32
-const(
-SDL_ASSERTION_RETRY=0  /**< Retry the assert immediately. */
-SDL_ASSERTION_BREAK  /**< Make the debugger trigger a breakpoint. */
-SDL_ASSERTION_ABORT  /**< Terminate the program. */
-SDL_ASSERTION_IGNORE  /**< Ignore the assert. */
-SDL_ASSERTION_ALWAYS_IGNORE  /**< Ignore the assert from now on. */
+
+const (
+	SDL_ASSERTION_RETRY         = 0 /**< Retry the assert immediately. */
+	SDL_ASSERTION_BREAK             /**< Make the debugger trigger a breakpoint. */
+	SDL_ASSERTION_ABORT             /**< Terminate the program. */
+	SDL_ASSERTION_IGNORE            /**< Ignore the assert. */
+	SDL_ASSERTION_ALWAYS_IGNORE     /**< Ignore the assert from now on. */
 )
 
-type  SDL_AssertData struct {
-//int always_ignore;
-//unsigned int trigger_count;
-//const char *condition;
-//const char *filename;
-//int linenum;
-//const char *function;
-//const struct SDL_AssertData *next;
+type SDL_AssertData struct {
+	//int always_ignore;
+	//unsigned int trigger_count;
+	//const char *condition;
+	//const char *filename;
+	//int linenum;
+	//const char *function;
+	//const struct SDL_AssertData *next;
 }
-
 
 /* Never call this directly. Use the SDL_assert* macros. */
 //extern DECLSPEC SDL_AssertState SDLCALL SDL_ReportAssertion(SDL_AssertData *,
 //const char *,
 //const char *, int)
-func (d *SDL_AssertData)SDL_AssertState(
-s1 common.FConstCharP,
-s2	common.FConstCharP, i common.FInt) (res SDL_AssertState, err error) {
-	var s1p *byte
-	s1p,err=syscall.BytePtrFromString(s1)
-	if err!=nil{
-		return
-	}
-	var s2p *byte
-	s2p,err=syscall.BytePtrFromString(s2)
-	if err!=nil{
-		return
-	}
+func (d *SDL_AssertData) SDL_AssertState(
+	s1 common.FConstCharP,
+	s2 common.FConstCharP, i common.FInt) (res SDL_AssertState) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AssertState").Call(
 		uintptr(unsafe.Pointer(d)),
-		uintptr(unsafe.Pointer(s1p)),
-		uintptr(unsafe.Pointer(s2p)),
+		uintptr(unsafe.Pointer(common.BytePtrFromString(s1))),
+		uintptr(unsafe.Pointer(common.BytePtrFromString(s2))),
 		uintptr(i),
 	)
 	res = SDL_AssertState(t)
@@ -60,10 +49,11 @@ s2	common.FConstCharP, i common.FInt) (res SDL_AssertState, err error) {
 *             current assertion
 * \param userdata what was passed as `userdata` to SDL_SetAssertionHandler()
 * \returns an SDL_AssertState value indicating how to handle the failure.
-*/
+ */
 //typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)(
 //const SDL_AssertData* data, void* userdata);
-type SDL_AssertionHandler=func (data *SDL_AssertData,  userdata common.FVoidP)SDL_AssertState
+type SDL_AssertionHandler = func(data *SDL_AssertData, userdata common.FVoidP) SDL_AssertState
+
 /**
 * Set an application-defined assertion handler.
 *
@@ -82,22 +72,21 @@ type SDL_AssertionHandler=func (data *SDL_AssertData,  userdata common.FVoidP)SD
 * \param userdata a pointer that is passed to `handler`
 *
 * \sa SDL_GetAssertionHandler
-*/
+ */
 //extern DECLSPEC void SDLCALL SDL_SetAssertionHandler(
 //SDL_AssertionHandler handler,
 //void *userdata);
-func SDL_SetAssertionHandler( handler SDL_AssertionHandler,
-userdata common.FVoidP) ( err error) {
+func SDL_SetAssertionHandler(handler SDL_AssertionHandler,
+	userdata common.FVoidP) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetAssertionHandler").Call(
 		uintptr(unsafe.Pointer(&handler)),
 		userdata,
 	)
-	if t==0{
+	if t == 0 {
 
 	}
 	return
 }
-
 
 /**
 * Get the default assertion handler.
@@ -113,15 +102,14 @@ userdata common.FVoidP) ( err error) {
 * \since This function is available since SDL 2.0.2.
 *
 * \sa SDL_GetAssertionHandler
-*/
+ */
 //extern DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetDefaultAssertionHandler(void);
-func SDL_GetDefaultAssertionHandler( ) (res SDL_AssertionHandler, err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetDefaultAssertionHandler").Call(
-	)
-	if t==0{
+func SDL_GetDefaultAssertionHandler() (res SDL_AssertionHandler) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetDefaultAssertionHandler").Call()
+	if t == 0 {
 
 	}
-	res=*(*SDL_AssertionHandler)(unsafe.Pointer(t))
+	res = *(*SDL_AssertionHandler)(unsafe.Pointer(t))
 	return
 }
 
@@ -145,16 +133,16 @@ func SDL_GetDefaultAssertionHandler( ) (res SDL_AssertionHandler, err error) {
 * \since This function is available since SDL 2.0.2.
 *
 * \sa SDL_SetAssertionHandler
-*/
+ */
 //extern DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetAssertionHandler(void **puserdata);
-func SDL_GetAssertionHandler(puserdata *common.FVoidP ) (res SDL_AssertionHandler, err error) {
+func SDL_GetAssertionHandler(puserdata *common.FVoidP) (res SDL_AssertionHandler) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetAssertionHandler").Call(
 		uintptr(unsafe.Pointer(puserdata)),
 	)
-	if t==0{
+	if t == 0 {
 
 	}
-	res=*(*SDL_AssertionHandler)(unsafe.Pointer(t))
+	res = *(*SDL_AssertionHandler)(unsafe.Pointer(t))
 	return
 }
 
@@ -181,15 +169,14 @@ func SDL_GetAssertionHandler(puserdata *common.FVoidP ) (res SDL_AssertionHandle
 *          memory should not be modified or freed by the application.
 *
 * \sa SDL_ResetAssertionReport
-*/
+ */
 //extern DECLSPEC const SDL_AssertData * SDLCALL SDL_GetAssertionReport(void);
-func SDL_GetAssertionReport() (res *SDL_AssertData, err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetAssertionReport").Call(
-	)
-	if t==0{
+func SDL_GetAssertionReport() (res *SDL_AssertData) {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetAssertionReport").Call()
+	if t == 0 {
 
 	}
-	res=(*SDL_AssertData)(unsafe.Pointer(t))
+	res = (*SDL_AssertData)(unsafe.Pointer(t))
 	return
 }
 
@@ -202,14 +189,12 @@ func SDL_GetAssertionReport() (res *SDL_AssertData, err error) {
 * a trigger_count of zero, and their always_ignore state will be false.
 *
 * \sa SDL_GetAssertionReport
-*/
+ */
 //extern DECLSPEC void SDLCALL SDL_ResetAssertionReport(void);
-func SDL_ResetAssertionReport() (err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ResetAssertionReport").Call(
-	)
-	if t==0{
+func SDL_ResetAssertionReport() {
+	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ResetAssertionReport").Call()
+	if t == 0 {
 
 	}
 	return
 }
-

@@ -38,7 +38,7 @@ type SDLTest_RandomContext struct {
  */
 //void SDLTest_RandomInit(SDLTest_RandomContext * rndContext, unsigned int xi,
 //unsigned int ci);
-func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi common.FInt, ci common.FUnsignedInt) (err error) {
+func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi common.FInt, ci common.FUnsignedInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_RandomInit").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 		uintptr(xi),
@@ -57,7 +57,7 @@ func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi common.FInt, ci c
  *
  */
 //void SDLTest_RandomInitTime(SDLTest_RandomContext *rndContext);
-func (rndContext *SDLTest_RandomContext) SDLTest_RandomInitTime() (err error) {
+func (rndContext *SDLTest_RandomContext) SDLTest_RandomInitTime() {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_RandomInitTime").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 	)
@@ -79,7 +79,7 @@ func (rndContext *SDLTest_RandomContext) SDLTest_RandomInitTime() (err error) {
  *
  */
 //nsigned int SDLTest_Random(SDLTest_RandomContext *rndContext);
-func (rndContext *SDLTest_RandomContext) SDLTest_Random() (res common.FInt, err error) {
+func (rndContext *SDLTest_RandomContext) SDLTest_Random() (res common.FInt) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Random").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 	)

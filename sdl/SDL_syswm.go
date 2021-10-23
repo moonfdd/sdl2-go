@@ -122,7 +122,7 @@ type SDL_SysWMmsg struct {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowWMInfo(SDL_Window * window,
 //SDL_SysWMinfo * info);
-func (window *SDL_Window) SDL_GetWindowWMInfo(info *SDL_SysWMinfo) (res bool, err error) {
+func (window *SDL_Window) SDL_GetWindowWMInfo(info *SDL_SysWMinfo) (res bool) {
 	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetWindowWMInfo").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(info)),
