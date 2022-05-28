@@ -36,4 +36,12 @@ type FTimeT = int64
 type FVaList = *byte
 
 type FFTSample = float32
-type SDL_GLContext=uintptr
+type SDL_GLContext = uintptr
+type FWcharT = string
+
+type FConstCharPStruct = *byte
+
+type FSint64 = int64
+type FSint32 = int32
+type FSint16 = int16
+type FCharPStruct = *byte

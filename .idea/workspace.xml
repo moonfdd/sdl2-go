@@ -20,18 +20,109 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/common/common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/loaddll.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/types.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_assert.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_version.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_video.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/SDL_vulkan.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/aaastruct.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/begin_code.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdl/close_code.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/loaddll.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/loaddll.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_assert.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_assert.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_assert.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_assert.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_atomic.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_atomic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_audio.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_audio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_bits.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_bits.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_blendmode.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_blendmode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_clipboard.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_clipboard.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config.h.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config.h.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config.h.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_android.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_android.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_iphoneos.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_iphoneos.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_macosx.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_macosx.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_macosx.h.orig" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_macosx.h.orig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_minimal.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_minimal.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_pandora.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_pandora.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_psp.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_psp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_windows.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_windows.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_winrt.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_winrt.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_config_wiz.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_config_wiz.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_copying.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_copying.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_cpuinfo.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_cpuinfo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_egl.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_egl.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_endian.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_endian.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_error.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_error.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_events.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_events.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_filesystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_filesystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_gamecontroller.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_gamecontroller.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_gesture.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_gesture.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_haptic.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_haptic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_hints.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_hints.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_joystick.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_joystick.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_keyboard.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_keyboard.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_keycode.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_keycode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_loadso.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_loadso.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_locale.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_locale.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_log.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_log.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_messagebox.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_messagebox.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_metal.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_metal.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_misc.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_misc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_mouse.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_mouse.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_mutex.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_mutex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_name.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_name.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengl.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengl.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengl_glext.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengl_glext.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengles.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengles.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengles2.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengles2.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2ext.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2ext.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2platform.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_gl2platform.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_opengles2_khrplatform.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_opengles2_khrplatform.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_pixels.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_pixels.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_platform.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_platform.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_power.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_power.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_quit.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_quit.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_rect.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_rect.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_render.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_render.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_revision.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_revision.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_rwops.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_rwops.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_scancode.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_scancode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_sensor.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_sensor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_shape.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_shape.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_stdinc.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_stdinc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_surface.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_surface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_system.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_system.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_syswm.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_syswm.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_assert.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_assert.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_compare.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_compare.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_crc32.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_crc32.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_font.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_font.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_fuzzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_fuzzer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_harness.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_harness.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_images.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_images.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_log.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_log.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_md5.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_md5.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_memory.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_memory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_test_random.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_test_random.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_thread.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_thread.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_timer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_touch.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_touch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_types.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_types.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_version.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_version.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_version.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_version.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_video.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_video.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_video.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_video.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_vulkan.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_vulkan.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_vulkan.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_vulkan.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/aaastruct.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/aaastruct.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/begin_code.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/begin_code.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/begin_code.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/begin_code.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/close_code.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/close_code.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/close_code.h" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/close_code.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +136,12 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="$PROJECT_DIR$/../../../../Program Files/Go" />
+  <component name="GOROOT" path="D:\Program Files\Go\go1.16.15" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1zd7BC7NlK8GtvUdxHfMjVaWgSs" />
   <component name="ProjectViewState">
@@ -58,11 +152,24 @@
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sdcdemo" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/timertest">
+    <configuration name="go build github.com/moonfdd/sdl2-go/examples/timertest" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/moonfdd/sdl2-go/examples/timertest" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build sdl2-go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -72,9 +179,37 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build sdl2-go/common" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sdl2-go/common" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build sdl2-go/examples/timertest" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sdl2-go/examples/timertest" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build sdl2-go/sdl" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sdl2-go/sdl" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/timertest" />
+        <item itemvalue="Go Build.go build sdl2-go/examples/timertest" />
         <item itemvalue="Go Build.go build sdl2-go" />
+        <item itemvalue="Go Build.go build sdl2-go/common" />
+        <item itemvalue="Go Build.go build sdl2-go/sdl" />
       </list>
     </recent_temporary>
   </component>
@@ -92,27 +227,89 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+    <environment>
+      <map>
+        <entry key="GOPROXY" value="https://goproxy.cn,direct" />
+      </map>
+    </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1753" height="269" key="GridCell.Tab.0.bottom" timestamp="1634472040525">
+    <state x="868" y="319" key="FileChooserDialogImpl" timestamp="1653616306463">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040525" />
-    <state width="1753" height="269" key="GridCell.Tab.0.center" timestamp="1634472040525">
+    <state x="868" y="319" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1653616306463" />
+    <state width="1877" height="277" key="GridCell.Tab.0.bottom" timestamp="1653725355238">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040525" />
-    <state width="1753" height="269" key="GridCell.Tab.0.left" timestamp="1634472040524">
+    <state width="1877" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355238" />
+    <state width="1877" height="277" key="GridCell.Tab.0.center" timestamp="1653725355237">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040524" />
-    <state width="1753" height="269" key="GridCell.Tab.0.right" timestamp="1634472040525">
+    <state width="1877" height="277" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355237" />
+    <state width="1877" height="277" key="GridCell.Tab.0.left" timestamp="1653725355237">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1753" height="269" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634472040525" />
-    <state x="1007" y="317" width="596" height="594" key="find.popup" timestamp="1634466743575">
+    <state width="1877" height="277" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355237" />
+    <state width="1877" height="277" key="GridCell.Tab.0.right" timestamp="1653725355238">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1007" y="317" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634466743575" />
+    <state width="1877" height="277" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355238" />
+    <state x="589" y="209" key="SettingsEditor" timestamp="1653719327261">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="589" y="209" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1653719327261" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1653377503938">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1653377503938" />
+    <state x="383" y="167" width="1217" height="739" key="find.popup" timestamp="1653489534112">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="383" y="167" width="1217" height="739" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1653489534112" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_timer.go</url>
+          <line>91</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_opengles2_gl2ext.go</url>
+          <line>1992</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_mouse.go</url>
+          <line>119</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_loadso.go</url>
+          <line>71</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_egl.go</url>
+          <line>501</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_audio.go</url>
+          <line>151</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/sdl/SDL_egl.go</url>
+          <line>132</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
