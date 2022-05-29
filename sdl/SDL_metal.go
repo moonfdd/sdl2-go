@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -11,7 +11,7 @@ import (
  *  \note This can be cast directly to an NSView or UIView.
  */
 //typedef void *SDL_MetalView;
-type SDL_MetalView = common.FVoidP
+type SDL_MetalView = sdlcommon.FVoidP
 
 /**
  *  \name Metal support functions
@@ -33,7 +33,7 @@ type SDL_MetalView = common.FVoidP
  */
 //extern DECLSPEC SDL_MetalView SDLCALL SDL_Metal_CreateView(SDL_Window * window);
 func (window *SDL_Window) SDL_Metal_CreateView() (res SDL_MetalView) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Metal_CreateView").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Metal_CreateView").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
 	if t == 0 {
@@ -53,7 +53,7 @@ func (window *SDL_Window) SDL_Metal_CreateView() (res SDL_MetalView) {
  */
 //extern DECLSPEC void SDLCALL SDL_Metal_DestroyView(SDL_MetalView view);
 func SDL_Metal_DestroyView(view SDL_MetalView) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Metal_DestroyView").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Metal_DestroyView").Call(
 		view,
 	)
 	if t == 0 {
@@ -68,8 +68,8 @@ func SDL_Metal_DestroyView(view SDL_MetalView) {
  * \sa SDL_MetalCreateView
  */
 //extern DECLSPEC void *SDLCALL SDL_Metal_GetLayer(SDL_MetalView view);
-func SDL_Metal_GetLayer(view SDL_MetalView) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Metal_GetLayer").Call(
+func SDL_Metal_GetLayer(view SDL_MetalView) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Metal_GetLayer").Call(
 		view,
 	)
 	if t == 0 {
@@ -91,8 +91,8 @@ func SDL_Metal_GetLayer(view SDL_MetalView) (res common.FVoidP) {
  */
 //extern DECLSPEC void SDLCALL SDL_Metal_GetDrawableSize(SDL_Window* window, int *w,
 //int *h);
-func (window *SDL_Window) SDL_Metal_GetDrawableSize(w *common.FInt, h *common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Metal_GetDrawableSize").Call(
+func (window *SDL_Window) SDL_Metal_GetDrawableSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Metal_GetDrawableSize").Call(
 		uintptr(unsafe.Pointer(w)),
 		uintptr(unsafe.Pointer(h)),
 	)

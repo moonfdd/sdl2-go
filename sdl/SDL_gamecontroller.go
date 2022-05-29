@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -53,7 +53,7 @@ const (
  */
 type SDL_GameControllerButtonBind struct {
 	bindType SDL_GameControllerBindType
-	_        common.FInt64T
+	_        sdlcommon.FInt64T
 	//union
 	//{
 	//int button;
@@ -126,15 +126,15 @@ type SDL_GameControllerButtonBind struct {
  * \sa SDL_GameControllerMappingForGUID
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerAddMappingsFromRW(SDL_RWops * rw, int freerw);
-func (rw *SDL_RWops) SDL_GameControllerAddMappingsFromRW(freerw common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerAddMappingsFromRW").Call(
+func (rw *SDL_RWops) SDL_GameControllerAddMappingsFromRW(freerw sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerAddMappingsFromRW").Call(
 		uintptr(unsafe.Pointer(rw)),
 		uintptr(freerw),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -144,7 +144,7 @@ func (rw *SDL_RWops) SDL_GameControllerAddMappingsFromRW(freerw common.FInt) (re
  *  Convenience macro.
  */
 //#define SDL_GameControllerAddMappingsFromFile(file)   SDL_GameControllerAddMappingsFromRW(SDL_RWFromFile(file, "rb"), 1)
-func SDL_GameControllerAddMappingsFromFile(file common.FConstCharP) (res common.FInt) {
+func SDL_GameControllerAddMappingsFromFile(file sdlcommon.FConstCharP) (res sdlcommon.FInt) {
 	res = SDL_RWFromFile(file, "rb").SDL_GameControllerAddMappingsFromRW(1)
 	return
 }
@@ -175,14 +175,14 @@ func SDL_GameControllerAddMappingsFromFile(file common.FConstCharP) (res common.
  * \sa SDL_GameControllerMappingForGUID
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerAddMapping(const char* mappingString);
-func SDL_GameControllerAddMapping(mappingString common.FConstCharP) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerAddMapping").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(mappingString))),
+func SDL_GameControllerAddMapping(mappingString sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerAddMapping").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(mappingString))),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -192,12 +192,12 @@ func SDL_GameControllerAddMapping(mappingString common.FConstCharP) (res common.
  * \returns the number of mappings.
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerNumMappings(void);
-func SDL_GameControllerNumMappings() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerNumMappings").Call()
+func SDL_GameControllerNumMappings() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerNumMappings").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -208,12 +208,12 @@ func SDL_GameControllerNumMappings() (res common.FInt) {
  *          the index is out of range.
  */
 //extern DECLSPEC char * SDLCALL SDL_GameControllerMappingForIndex(int mapping_index);
-func SDL_GameControllerMappingForIndex(mapping_index common.FInt) (res common.FCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerMappingForIndex").Call()
+func SDL_GameControllerMappingForIndex(mapping_index sdlcommon.FInt) (res sdlcommon.FCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerMappingForIndex").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -231,14 +231,14 @@ func SDL_GameControllerMappingForIndex(mapping_index common.FInt) (res common.FC
  */
 //extern DECLSPEC char * SDLCALL SDL_GameControllerMappingForGUID(SDL_JoystickGUID guid);
 
-func SDL_GameControllerMappingForGUID(guid SDL_JoystickGUID) (res common.FCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerMappingForGUID").Call(
+func SDL_GameControllerMappingForGUID(guid SDL_JoystickGUID) (res sdlcommon.FCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerMappingForGUID").Call(
 		uintptr(unsafe.Pointer(&guid)),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -260,14 +260,14 @@ func SDL_GameControllerMappingForGUID(guid SDL_JoystickGUID) (res common.FCharP)
  * \sa SDL_GameControllerMappingForGUID
  */
 //extern DECLSPEC char * SDLCALL SDL_GameControllerMapping(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerMapping() (res common.FCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerMapping").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerMapping() (res sdlcommon.FCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerMapping").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -288,14 +288,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerMapping() (res commo
  * \sa SDL_GameControllerOpen
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_IsGameController(int joystick_index);
-func SDL_IsGameController(joystick_index common.FInt) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IsGameController").Call(
+func SDL_IsGameController(joystick_index sdlcommon.FInt) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsGameController").Call(
 		uintptr(joystick_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -319,14 +319,14 @@ func SDL_IsGameController(joystick_index common.FInt) (res bool) {
  * \sa SDL_IsGameController
  */
 //extern DECLSPEC const char *SDLCALL SDL_GameControllerNameForIndex(int joystick_index);
-func SDL_GameControllerNameForIndex(joystick_index common.FInt) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerNameForIndex").Call(
+func SDL_GameControllerNameForIndex(joystick_index sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerNameForIndex").Call(
 		uintptr(joystick_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -340,8 +340,8 @@ func SDL_GameControllerNameForIndex(joystick_index common.FInt) (res common.FCon
  * \returns the controller type.
  */
 //extern DECLSPEC SDL_GameControllerType SDLCALL SDL_GameControllerTypeForIndex(int joystick_index);
-func SDL_GameControllerTypeForIndex(joystick_index common.FInt) (res SDL_GameControllerType) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerTypeForIndex").Call(
+func SDL_GameControllerTypeForIndex(joystick_index sdlcommon.FInt) (res SDL_GameControllerType) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerTypeForIndex").Call(
 		uintptr(joystick_index),
 	)
 	if t == 0 {
@@ -362,14 +362,14 @@ func SDL_GameControllerTypeForIndex(joystick_index common.FInt) (res SDL_GameCon
  *          no mapping is available.
  */
 //extern DECLSPEC char *SDLCALL SDL_GameControllerMappingForDeviceIndex(int joystick_index);
-func SDL_GameControllerMappingForDeviceIndex(joystick_index common.FInt) (res common.FCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerMappingForDeviceIndex").Call(
+func SDL_GameControllerMappingForDeviceIndex(joystick_index sdlcommon.FInt) (res sdlcommon.FCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerMappingForDeviceIndex").Call(
 		uintptr(joystick_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -396,8 +396,8 @@ func SDL_GameControllerMappingForDeviceIndex(joystick_index common.FInt) (res co
  * \sa SDL_IsGameController
  */
 //extern DECLSPEC SDL_GameController *SDLCALL SDL_GameControllerOpen(int joystick_index);
-func SDL_GameControllerOpen(joystick_index common.FInt) (res *SDL_GameController) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerOpen").Call(
+func SDL_GameControllerOpen(joystick_index sdlcommon.FInt) (res *SDL_GameController) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerOpen").Call(
 		uintptr(joystick_index),
 	)
 	if t == 0 {
@@ -418,7 +418,7 @@ func SDL_GameControllerOpen(joystick_index common.FInt) (res *SDL_GameController
  */
 //extern DECLSPEC SDL_GameController *SDLCALL SDL_GameControllerFromInstanceID(SDL_JoystickID joyid);
 func SDL_GameControllerFromInstanceID(joyid SDL_JoystickID) (res *SDL_GameController) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerFromInstanceID").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerFromInstanceID").Call(
 		uintptr(joyid),
 	)
 	if t == 0 {
@@ -442,8 +442,8 @@ func SDL_GameControllerFromInstanceID(joyid SDL_JoystickID) (res *SDL_GameContro
  * \sa SDL_GameControllerSetPlayerIndex
  */
 //extern DECLSPEC SDL_GameController *SDLCALL SDL_GameControllerFromPlayerIndex(int player_index);
-func SDL_GameControllerFromPlayerIndex(player_index common.FInt) (res *SDL_GameController) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerFromPlayerIndex").Call(
+func SDL_GameControllerFromPlayerIndex(player_index sdlcommon.FInt) (res *SDL_GameController) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerFromPlayerIndex").Call(
 		uintptr(player_index),
 	)
 	if t == 0 {
@@ -470,14 +470,14 @@ func SDL_GameControllerFromPlayerIndex(player_index common.FInt) (res *SDL_GameC
  * \sa SDL_GameControllerOpen
  */
 //extern DECLSPEC const char *SDLCALL SDL_GameControllerName(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerName() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerName").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerName() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerName").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -492,7 +492,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerName() (res common.F
  */
 //extern DECLSPEC SDL_GameControllerType SDLCALL SDL_GameControllerGetType(SDL_GameController *gamecontroller);
 func (gamecontroller *SDL_GameController) SDL_GameControllerGetType() (res SDL_GameControllerType) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetType").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetType").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
@@ -511,14 +511,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetType() (res SDL_G
  * \returns the player index for controller, or -1 if it's not available.
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerGetPlayerIndex(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetPlayerIndex() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetPlayerIndex").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetPlayerIndex() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetPlayerIndex").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -529,8 +529,8 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetPlayerIndex() (re
  * \param player_index Player index to assign to this controller.
  */
 //extern DECLSPEC void SDLCALL SDL_GameControllerSetPlayerIndex(SDL_GameController *gamecontroller, int player_index);
-func (gamecontroller *SDL_GameController) SDL_GameControllerSetPlayerIndex(player_index common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerSetPlayerIndex").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerSetPlayerIndex(player_index sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerSetPlayerIndex").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(player_index),
 	)
@@ -549,14 +549,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerSetPlayerIndex(playe
  * \return the USB vendor ID, or zero if unavailable.
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_GameControllerGetVendor(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetVendor() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetVendor").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetVendor() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetVendor").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -569,14 +569,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetVendor() (res com
  * \return the USB product ID, or zero if unavailable.
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_GameControllerGetProduct(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetProduct() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetProduct").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetProduct() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetProduct").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -589,14 +589,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetProduct() (res co
  * \return the USB product version, or zero if unavailable.
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_GameControllerGetProductVersion(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetProductVersion() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetProductVersion").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetProductVersion() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetProductVersion").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -610,14 +610,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetProductVersion() 
  * \return the serial number, or NULL if unavailable.
  */
 //extern DECLSPEC const char * SDLCALL SDL_GameControllerGetSerial(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetSerial() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetSerial").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetSerial() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetSerial").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -634,13 +634,13 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetSerial() (res com
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GameControllerGetAttached(SDL_GameController *gamecontroller);
 func (gamecontroller *SDL_GameController) SDL_GameControllerGetAttached() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetAttached").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetAttached").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -663,7 +663,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetAttached() (res b
  */
 //extern DECLSPEC SDL_Joystick *SDLCALL SDL_GameControllerGetJoystick(SDL_GameController *gamecontroller);
 func (gamecontroller *SDL_GameController) SDL_GameControllerGetJoystick() (res *SDL_Joystick) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetJoystick").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetJoystick").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
@@ -692,14 +692,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetJoystick() (res *
  * \sa SDL_JoystickEventState
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerEventState(int state);
-func SDL_GameControllerEventState(state common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerEventState").Call(
+func SDL_GameControllerEventState(state sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerEventState").Call(
 		uintptr(state),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -712,7 +712,7 @@ func SDL_GameControllerEventState(state common.FInt) (res common.FInt) {
  */
 //extern DECLSPEC void SDLCALL SDL_GameControllerUpdate(void);
 func SDL_GameControllerUpdate() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerUpdate").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerUpdate").Call()
 	if t == 0 {
 
 	}
@@ -760,9 +760,9 @@ const (
  * \sa SDL_GameControllerGetStringForAxis
  */
 //extern DECLSPEC SDL_GameControllerAxis SDLCALL SDL_GameControllerGetAxisFromString(const char *str);
-func SDL_GameControllerGetAxisFromString(str common.FConstCharP) (res SDL_GameControllerAxis) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetAxisFromString").Call(
-		common.UintPtrFromString(str),
+func SDL_GameControllerGetAxisFromString(str sdlcommon.FConstCharP) (res SDL_GameControllerAxis) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetAxisFromString").Call(
+		sdlcommon.UintPtrFromString(str),
 	)
 	if t == 0 {
 
@@ -784,14 +784,14 @@ func SDL_GameControllerGetAxisFromString(str common.FConstCharP) (res SDL_GameCo
  * \sa SDL_GameControllerGetAxisFromString
  */
 //extern DECLSPEC const char* SDLCALL SDL_GameControllerGetStringForAxis(SDL_GameControllerAxis axis);
-func SDL_GameControllerGetStringForAxis(axis SDL_GameControllerAxis) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetStringForAxis").Call(
+func SDL_GameControllerGetStringForAxis(axis SDL_GameControllerAxis) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetStringForAxis").Call(
 		uintptr(axis),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -812,7 +812,7 @@ func SDL_GameControllerGetStringForAxis(axis SDL_GameControllerAxis) (res common
 //SDL_GameControllerGetBindForAxis(SDL_GameController *gamecontroller,
 //SDL_GameControllerAxis axis);
 func (gamecontroller *SDL_GameController) SDL_GameControllerGetBindForAxis(axis SDL_GameControllerAxis) (res SDL_GameControllerButtonBind) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetBindForAxis").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetBindForAxis").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(axis),
 	)
@@ -836,14 +836,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetBindForAxis(axis 
 //extern DECLSPEC SDL_bool SDLCALL
 //SDL_GameControllerHasAxis(SDL_GameController *gamecontroller, SDL_GameControllerAxis axis);
 func (gamecontroller *SDL_GameController) SDL_GameControllerHasAxis(axis SDL_GameControllerAxis) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerHasAxis").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerHasAxis").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(axis),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -866,15 +866,15 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerHasAxis(axis SDL_Gam
  */
 //extern DECLSPEC Sint16 SDLCALL
 //SDL_GameControllerGetAxis(SDL_GameController *gamecontroller, SDL_GameControllerAxis axis);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetAxis(axis SDL_GameControllerAxis) (res common.FSint16) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetAxis").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetAxis(axis SDL_GameControllerAxis) (res sdlcommon.FSint16) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetAxis").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(axis),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSint16(t)
+	res = sdlcommon.FSint16(t)
 	return
 }
 
@@ -922,9 +922,9 @@ const (
  *          string, or `SDL_CONTROLLER_AXIS_INVALID` if no match was found.
  */
 //extern DECLSPEC SDL_GameControllerButton SDLCALL SDL_GameControllerGetButtonFromString(const char *str);
-func SDL_GameControllerGetButtonFromString(str common.FConstCharP) (res SDL_GameControllerButton) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetButtonFromString").Call(
-		common.UintPtrFromString(str),
+func SDL_GameControllerGetButtonFromString(str sdlcommon.FConstCharP) (res SDL_GameControllerButton) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetButtonFromString").Call(
+		sdlcommon.UintPtrFromString(str),
 	)
 	if t == 0 {
 
@@ -948,14 +948,14 @@ func SDL_GameControllerGetButtonFromString(str common.FConstCharP) (res SDL_Game
  * \sa SDL_GameControllerGetButtonFromString
  */
 //extern DECLSPEC const char* SDLCALL SDL_GameControllerGetStringForButton(SDL_GameControllerButton button);
-func SDL_GameControllerGetStringForButton(button SDL_GameControllerButton) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetStringForButton").Call(
+func SDL_GameControllerGetStringForButton(button SDL_GameControllerButton) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetStringForButton").Call(
 		uintptr(button),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -976,7 +976,7 @@ func SDL_GameControllerGetStringForButton(button SDL_GameControllerButton) (res 
 //SDL_GameControllerGetBindForButton(SDL_GameController *gamecontroller,
 //SDL_GameControllerButton button);
 func (gamecontroller *SDL_GameController) SDL_GameControllerGetBindForButton(button SDL_GameControllerButton) (res SDL_GameControllerButtonBind) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetBindForButton").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetBindForButton").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(button),
 	)
@@ -1000,14 +1000,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetBindForButton(but
 //extern DECLSPEC SDL_bool SDLCALL SDL_GameControllerHasButton(SDL_GameController *gamecontroller,
 //SDL_GameControllerButton button);
 func (gamecontroller *SDL_GameController) SDL_GameControllerHasButton(button SDL_GameControllerButton) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerHasButton").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerHasButton").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(button),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1025,15 +1025,15 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerHasButton(button SDL
  */
 //extern DECLSPEC Uint8 SDLCALL SDL_GameControllerGetButton(SDL_GameController *gamecontroller,
 //SDL_GameControllerButton button);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetButton(button SDL_GameControllerButton) (res common.FUint8T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetButton").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetButton(button SDL_GameControllerButton) (res sdlcommon.FUint8T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetButton").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(button),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint8T(t)
+	res = sdlcommon.FUint8T(t)
 	return
 }
 
@@ -1041,14 +1041,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetButton(button SDL
  * Get the number of touchpads on a game controller.
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerGetNumTouchpads(SDL_GameController *gamecontroller);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetNumTouchpads() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetNumTouchpads").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetNumTouchpads() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetNumTouchpads").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1057,15 +1057,15 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetNumTouchpads() (r
  * controller.
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerGetNumTouchpadFingers(SDL_GameController *gamecontroller, int touchpad);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetNumTouchpadFingers(touchpad common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetNumTouchpadFingers").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetNumTouchpadFingers(touchpad sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetNumTouchpadFingers").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(touchpad),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1073,8 +1073,8 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetNumTouchpadFinger
  * Get the current state of a finger on a touchpad on a game controller.
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerGetTouchpadFinger(SDL_GameController *gamecontroller, int touchpad, int finger, Uint8 *state, float *x, float *y, float *pressure);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetTouchpadFinger(touchpad common.FInt, finger common.FInt, state *common.FUint8T, x *common.FFloat, y, pressure *common.FFloat) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetTouchpadFinger").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetTouchpadFinger(touchpad sdlcommon.FInt, finger sdlcommon.FInt, state *sdlcommon.FUint8T, x *sdlcommon.FFloat, y, pressure *sdlcommon.FFloat) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetTouchpadFinger").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(touchpad),
 		uintptr(finger),
@@ -1086,7 +1086,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetTouchpadFinger(to
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1099,14 +1099,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetTouchpadFinger(to
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GameControllerHasSensor(SDL_GameController *gamecontroller, SDL_SensorType type);
 func (gamecontroller *SDL_GameController) SDL_GameControllerHasSensor(type0 SDL_SensorType) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerHasSensor").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerHasSensor").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(type0),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1119,16 +1119,16 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerHasSensor(type0 SDL_
  * \returns 0 or -1 if an error occurred.
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerSetSensorEnabled(SDL_GameController *gamecontroller, SDL_SensorType type, SDL_bool enabled);
-func (gamecontroller *SDL_GameController) SDL_GameControllerSetSensorEnabled(type0 SDL_SensorType, enabled bool) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerSetSensorEnabled").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerSetSensorEnabled(type0 SDL_SensorType, enabled bool) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerSetSensorEnabled").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(type0),
-		common.CBool(enabled),
+		sdlcommon.CBool(enabled),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1141,14 +1141,14 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerSetSensorEnabled(typ
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GameControllerIsSensorEnabled(SDL_GameController *gamecontroller, SDL_SensorType type);
 func (gamecontroller *SDL_GameController) SDL_GameControllerIsSensorEnabled(type0 SDL_SensorType) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerIsSensorEnabled").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerIsSensorEnabled").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(type0),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1161,15 +1161,15 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerIsSensorEnabled(type
  * \return the data rate, or 0.0f if the data rate is not available.
  */
 //extern DECLSPEC float SDLCALL SDL_GameControllerGetSensorDataRate(SDL_GameController *gamecontroller, SDL_SensorType type);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorDataRate(type0 SDL_SensorType) (res common.FFloat) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetSensorDataRate").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorDataRate(type0 SDL_SensorType) (res sdlcommon.FFloat) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetSensorDataRate").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(type0),
 	)
 	if t == 0 {
 
 	}
-	res = common.FFloat(t)
+	res = sdlcommon.FFloat(t)
 	return
 }
 
@@ -1186,8 +1186,8 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorDataRate(ty
  * \return 0 or -1 if an error occurred.
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerGetSensorData(SDL_GameController *gamecontroller, SDL_SensorType type, float *data, int num_values);
-func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorData(type0 SDL_SensorType, data *common.FFloat, num_values common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerGetSensorData").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorData(type0 SDL_SensorType, data *sdlcommon.FFloat, num_values sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerGetSensorData").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(type0),
 		uintptr(unsafe.Pointer(data)),
@@ -1196,7 +1196,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorData(type0 
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1215,8 +1215,8 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorData(type0 
  * \returns 0, or -1 if rumble isn't supported on this controller
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerRumble(SDL_GameController *gamecontroller, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms);
-func (gamecontroller *SDL_GameController) SDL_GameControllerRumble(low_frequency_rumble common.FUint16T, high_frequency_rumble common.FUint16T, duration_ms common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerRumble").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerRumble(low_frequency_rumble sdlcommon.FUint16T, high_frequency_rumble sdlcommon.FUint16T, duration_ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerRumble").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(low_frequency_rumble),
 		uintptr(high_frequency_rumble),
@@ -1225,7 +1225,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerRumble(low_frequency
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1248,8 +1248,8 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerRumble(low_frequency
  * \returns 0, or -1 if trigger rumble isn't supported on this controller
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerRumbleTriggers(SDL_GameController *gamecontroller, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms);
-func (gamecontroller *SDL_GameController) SDL_GameControllerRumbleTriggers(left_rumble, right_rumble common.FUint16T, duration_ms common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerRumbleTriggers").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerRumbleTriggers(left_rumble, right_rumble sdlcommon.FUint16T, duration_ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerRumbleTriggers").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(left_rumble),
 		uintptr(right_rumble),
@@ -1258,7 +1258,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerRumbleTriggers(left_
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1271,13 +1271,13 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerRumbleTriggers(left_
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GameControllerHasLED(SDL_GameController *gamecontroller);
 func (gamecontroller *SDL_GameController) SDL_GameControllerHasLED() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerHasLED").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerHasLED").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1291,8 +1291,8 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerHasLED() (res bool) 
  * \returns 0, or -1 if this controller does not have a modifiable LED
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerSetLED(SDL_GameController *gamecontroller, Uint8 red, Uint8 green, Uint8 blue);
-func (gamecontroller *SDL_GameController) SDL_GameControllerSetLED(red, green, blue common.FUint8T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerSetLED").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerSetLED(red, green, blue sdlcommon.FUint8T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerSetLED").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(red),
 		uintptr(green),
@@ -1301,7 +1301,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerSetLED(red, green, b
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1315,8 +1315,8 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerSetLED(red, green, b
  *          packets
  */
 //extern DECLSPEC int SDLCALL SDL_GameControllerSendEffect(SDL_GameController *gamecontroller, const void *data, int size);
-func (gamecontroller *SDL_GameController) SDL_GameControllerSendEffect(data common.FConstVoidP, size common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerSendEffect").Call(
+func (gamecontroller *SDL_GameController) SDL_GameControllerSendEffect(data sdlcommon.FConstVoidP, size sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerSendEffect").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 		uintptr(unsafe.Pointer(data)),
 		uintptr(size),
@@ -1324,7 +1324,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerSendEffect(data comm
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1338,7 +1338,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerSendEffect(data comm
  */
 //extern DECLSPEC void SDLCALL SDL_GameControllerClose(SDL_GameController *gamecontroller);
 func (gamecontroller *SDL_GameController) SDL_GameControllerClose() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GameControllerClose").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GameControllerClose").Call(
 		uintptr(unsafe.Pointer(gamecontroller)),
 	)
 	if t == 0 {

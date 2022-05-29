@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -50,7 +50,7 @@ const (
  */
 //extern DECLSPEC SDL_Window * SDLCALL SDL_GetMouseFocus(void);
 func SDL_GetMouseFocus() (res *SDL_Window) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetMouseFocus").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetMouseFocus").Call()
 	if t == 0 {
 
 	}
@@ -78,15 +78,15 @@ func SDL_GetMouseFocus() (res *SDL_Window) {
  * \sa SDL_PumpEvents
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_GetMouseState(int *x, int *y);
-func SDL_GetMouseState(x, y *common.FInt) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetMouseState").Call(
+func SDL_GetMouseState(x, y *sdlcommon.FInt) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetMouseState").Call(
 		uintptr(unsafe.Pointer(x)),
 		uintptr(unsafe.Pointer(y)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -118,15 +118,15 @@ func SDL_GetMouseState(x, y *common.FInt) (res common.FUint32T) {
  * \sa SDL_CaptureMouse
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_GetGlobalMouseState(int *x, int *y);
-func SDL_GetGlobalMouseState(x, y *common.FInt) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetGlobalMouseState").Call(
+func SDL_GetGlobalMouseState(x, y *sdlcommon.FInt) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGlobalMouseState").Call(
 		uintptr(unsafe.Pointer(x)),
 		uintptr(unsafe.Pointer(y)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -146,15 +146,15 @@ func SDL_GetGlobalMouseState(x, y *common.FInt) (res common.FUint32T) {
  * \sa SDL_GetMouseState
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_GetRelativeMouseState(int *x, int *y);
-func SDL_GetRelativeMouseState(x, y *common.FInt) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRelativeMouseState").Call(
+func SDL_GetRelativeMouseState(x, y *sdlcommon.FInt) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRelativeMouseState").Call(
 		uintptr(unsafe.Pointer(x)),
 		uintptr(unsafe.Pointer(y)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -175,8 +175,8 @@ func SDL_GetRelativeMouseState(x, y *common.FInt) (res common.FUint32T) {
  */
 //extern DECLSPEC void SDLCALL SDL_WarpMouseInWindow(SDL_Window * window,
 //int x, int y);
-func (window *SDL_Window) SDL_WarpMouseInWindow(x, y common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WarpMouseInWindow").Call(
+func (window *SDL_Window) SDL_WarpMouseInWindow(x, y sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WarpMouseInWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(x),
 		uintptr(y),
@@ -208,15 +208,15 @@ func (window *SDL_Window) SDL_WarpMouseInWindow(x, y common.FInt) {
  * \sa SDL_WarpMouseInWindow
  */
 //extern DECLSPEC int SDLCALL SDL_WarpMouseGlobal(int x, int y);
-func SDL_WarpMouseGlobal(x, y common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WarpMouseGlobal").Call(
+func SDL_WarpMouseGlobal(x, y sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WarpMouseGlobal").Call(
 		uintptr(x),
 		uintptr(y),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -242,14 +242,14 @@ func SDL_WarpMouseGlobal(x, y common.FInt) (res common.FInt) {
  * \sa SDL_GetRelativeMouseMode
  */
 //extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled);
-func SDL_SetRelativeMouseMode(enabled bool) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetRelativeMouseMode").Call(
-		common.CBool(enabled),
+func SDL_SetRelativeMouseMode(enabled bool) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetRelativeMouseMode").Call(
+		sdlcommon.CBool(enabled),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -289,14 +289,14 @@ func SDL_SetRelativeMouseMode(enabled bool) (res common.FInt) {
  * \sa SDL_GetGlobalMouseState
  */
 //extern DECLSPEC int SDLCALL SDL_CaptureMouse(SDL_bool enabled);
-func SDL_CaptureMouse(enabled bool) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CaptureMouse").Call(
-		common.CBool(enabled),
+func SDL_CaptureMouse(enabled bool) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CaptureMouse").Call(
+		sdlcommon.CBool(enabled),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -309,11 +309,11 @@ func SDL_CaptureMouse(enabled bool) (res common.FInt) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GetRelativeMouseMode(void);
 func SDL_GetRelativeMouseMode() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRelativeMouseMode").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRelativeMouseMode").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -360,11 +360,11 @@ func SDL_GetRelativeMouseMode() (res bool) {
 //const Uint8 * mask,
 //int w, int h, int hot_x,
 //int hot_y);
-func SDL_CreateCursor(data *common.FUint8T,
-	mask *common.FUint8T,
+func SDL_CreateCursor(data *sdlcommon.FUint8T,
+	mask *sdlcommon.FUint8T,
 	w, h, hot_x,
-	hot_y common.FInt) (res *SDL_Cursor) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateCursor").Call(
+	hot_y sdlcommon.FInt) (res *SDL_Cursor) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateCursor").Call(
 		uintptr(unsafe.Pointer(data)),
 		uintptr(unsafe.Pointer(mask)),
 		uintptr(w),
@@ -396,8 +396,8 @@ func SDL_CreateCursor(data *common.FUint8T,
 //extern DECLSPEC SDL_Cursor *SDLCALL SDL_CreateColorCursor(SDL_Surface *surface,
 //int hot_x,
 //int hot_y);
-func (surface *SDL_Surface) SDL_CreateColorCursor(hot_x, hot_y common.FInt) (res *SDL_Cursor) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateColorCursor").Call(
+func (surface *SDL_Surface) SDL_CreateColorCursor(hot_x, hot_y sdlcommon.FInt) (res *SDL_Cursor) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateColorCursor").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(hot_x),
 		uintptr(hot_y),
@@ -422,7 +422,7 @@ func (surface *SDL_Surface) SDL_CreateColorCursor(hot_x, hot_y common.FInt) (res
  */
 //extern DECLSPEC SDL_Cursor *SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id);
 func SDL_CreateSystemCursor(id SDL_SystemCursor) (res *SDL_Cursor) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateSystemCursor").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateSystemCursor").Call(
 		uintptr(id),
 	)
 	if t == 0 {
@@ -448,7 +448,7 @@ func SDL_CreateSystemCursor(id SDL_SystemCursor) (res *SDL_Cursor) {
  */
 //extern DECLSPEC void SDLCALL SDL_SetCursor(SDL_Cursor * cursor);
 func (surface *SDL_Surface) SDL_SetCursor() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetCursor").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetCursor").Call(
 		uintptr(unsafe.Pointer(surface)),
 	)
 	if t == 0 {
@@ -469,7 +469,7 @@ func (surface *SDL_Surface) SDL_SetCursor() {
  */
 //extern DECLSPEC SDL_Cursor *SDLCALL SDL_GetCursor(void);
 func SDL_GetCursor() (res *SDL_Cursor) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetCursor").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetCursor").Call()
 	if t == 0 {
 
 	}
@@ -488,7 +488,7 @@ func SDL_GetCursor() (res *SDL_Cursor) {
  */
 //extern DECLSPEC SDL_Cursor *SDLCALL SDL_GetDefaultCursor(void);
 func SDL_GetDefaultCursor() (res *SDL_Cursor) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetDefaultCursor").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDefaultCursor").Call()
 	if t == 0 {
 
 	}
@@ -510,7 +510,7 @@ func SDL_GetDefaultCursor() (res *SDL_Cursor) {
  */
 //extern DECLSPEC void SDLCALL SDL_FreeCursor(SDL_Cursor * cursor);
 func (surface *SDL_Surface) SDL_FreeCursor() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_FreeCursor").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FreeCursor").Call(
 		uintptr(unsafe.Pointer(surface)),
 	)
 	if t == 0 {
@@ -538,14 +538,14 @@ func (surface *SDL_Surface) SDL_FreeCursor() {
  * \sa SDL_SetCursor
  */
 //extern DECLSPEC int SDLCALL SDL_ShowCursor(int toggle);
-func SDL_ShowCursor(toggle common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ShowCursor").Call(
+func SDL_ShowCursor(toggle sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ShowCursor").Call(
 		uintptr(toggle),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 

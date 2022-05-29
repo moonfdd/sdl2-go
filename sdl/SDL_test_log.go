@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -11,9 +11,9 @@ import (
  * \param fmt Message to be logged
  */
 //void SDLTest_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1);
-func SDLTest_Log(fmt0 common.FConstCharP, a ...[]uintptr) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Log").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(fmt0))),
+func SDLTest_Log(fmt0 sdlcommon.FConstCharP, a ...[]uintptr) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Log").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(fmt0))),
 		uintptr(unsafe.Pointer(&a)),
 	)
 	if t == 0 {
@@ -28,9 +28,9 @@ func SDLTest_Log(fmt0 common.FConstCharP, a ...[]uintptr) {
  * \param fmt Message to be logged
  */
 //void SDLTest_LogError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1);
-func SDLTest_LogError(fmt0 common.FConstCharP, a ...[]uintptr) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_LogError").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(fmt0))),
+func SDLTest_LogError(fmt0 sdlcommon.FConstCharP, a ...[]uintptr) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_LogError").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(fmt0))),
 		uintptr(unsafe.Pointer(&a)),
 	)
 	if t == 0 {

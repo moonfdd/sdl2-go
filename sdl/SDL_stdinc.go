@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -236,8 +236,8 @@ const (
 //#endif
 
 //extern DECLSPEC void *SDLCALL SDL_malloc(size_t size);
-func SDL_malloc(size common.FSizeT) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_malloc").Call(
+func SDL_malloc(size sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_malloc").Call(
 		uintptr(size),
 	)
 	if t == 0 {
@@ -248,8 +248,8 @@ func SDL_malloc(size common.FSizeT) (res common.FVoidP) {
 }
 
 //extern DECLSPEC void *SDLCALL SDL_calloc(size_t nmemb, size_t size);
-func SDL_calloc(nmemb common.FSizeT, size common.FSizeT) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_calloc").Call(
+func SDL_calloc(nmemb sdlcommon.FSizeT, size sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_calloc").Call(
 		uintptr(nmemb),
 		uintptr(size),
 	)
@@ -261,8 +261,8 @@ func SDL_calloc(nmemb common.FSizeT, size common.FSizeT) (res common.FVoidP) {
 }
 
 //extern DECLSPEC void *SDLCALL SDL_realloc(void *mem, size_t size);
-func SDL_realloc(mem common.FVoidP, size common.FSizeT) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_realloc").Call(
+func SDL_realloc(mem sdlcommon.FVoidP, size sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_realloc").Call(
 		mem,
 		uintptr(size),
 	)
@@ -274,8 +274,8 @@ func SDL_realloc(mem common.FVoidP, size common.FSizeT) (res common.FVoidP) {
 }
 
 //extern DECLSPEC void SDLCALL SDL_free(void *mem);
-func SDL_free(mem common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_free").Call(
+func SDL_free(mem sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_free").Call(
 		mem,
 	)
 	if t == 0 {
@@ -285,16 +285,16 @@ func SDL_free(mem common.FVoidP) {
 }
 
 //typedef void *(SDLCALL *SDL_malloc_func)(size_t size);
-type SDL_malloc_func = func(size common.FSizeT) common.FVoidP
+type SDL_malloc_func = func(size sdlcommon.FSizeT) sdlcommon.FVoidP
 
 //typedef void *(SDLCALL *SDL_calloc_func)(size_t nmemb, size_t size);
-type SDL_calloc_func = func(nmemb, size common.FSizeT) common.FVoidP
+type SDL_calloc_func = func(nmemb, size sdlcommon.FSizeT) sdlcommon.FVoidP
 
 //typedef void *(SDLCALL *SDL_realloc_func)(void *mem, size_t size);
-type SDL_realloc_func = func(mem common.FVoidP, size common.FSizeT) common.FVoidP
+type SDL_realloc_func = func(mem sdlcommon.FVoidP, size sdlcommon.FSizeT) sdlcommon.FVoidP
 
 //typedef void (SDLCALL *SDL_free_func)(void *mem);
-type SDL_free_func = func(mem common.FVoidP) uintptr
+type SDL_free_func = func(mem sdlcommon.FVoidP) uintptr
 
 /**
  * Get the current set of SDL memory functions
@@ -307,11 +307,11 @@ func SDL_GetMemoryFunctions(malloc_func SDL_malloc_func,
 	calloc_func SDL_calloc_func,
 	realloc_func SDL_realloc_func,
 	free_func SDL_free_func) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetMemoryFunctions").Call(
-		common.NewCallback(malloc_func),
-		common.NewCallback(calloc_func),
-		common.NewCallback(realloc_func),
-		common.NewCallback(free_func),
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetMemoryFunctions").Call(
+		sdlcommon.NewCallback(malloc_func),
+		sdlcommon.NewCallback(calloc_func),
+		sdlcommon.NewCallback(realloc_func),
+		sdlcommon.NewCallback(free_func),
 	)
 	if t == 0 {
 
@@ -329,17 +329,17 @@ func SDL_GetMemoryFunctions(malloc_func SDL_malloc_func,
 func SDL_SetMemoryFunctions(malloc_func SDL_malloc_func,
 	calloc_func SDL_calloc_func,
 	realloc_func SDL_realloc_func,
-	free_func SDL_free_func) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetMemoryFunctions").Call(
-		common.NewCallback(malloc_func),
-		common.NewCallback(calloc_func),
-		common.NewCallback(realloc_func),
-		common.NewCallback(free_func),
+	free_func SDL_free_func) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetMemoryFunctions").Call(
+		sdlcommon.NewCallback(malloc_func),
+		sdlcommon.NewCallback(calloc_func),
+		sdlcommon.NewCallback(realloc_func),
+		sdlcommon.NewCallback(free_func),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -347,48 +347,48 @@ func SDL_SetMemoryFunctions(malloc_func SDL_malloc_func,
  * Get the number of outstanding (unfreed) allocations
  */
 //extern DECLSPEC int SDLCALL SDL_GetNumAllocations(void);
-func SDL_GetNumAllocations() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetNumAllocations").Call()
+func SDL_GetNumAllocations() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumAllocations").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC char *SDLCALL SDL_getenv(const char *name);
-func SDL_getenv(name common.FConstCharP) (res common.FCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_getenv").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(name))),
+func SDL_getenv(name sdlcommon.FConstCharP) (res sdlcommon.FCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_getenv").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_setenv(const char *name, const char *value, int overwrite);
-func SDL_setenv(name common.FConstCharP, value common.FConstCharP, overwrite common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_getenv").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(name))),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(value))),
+func SDL_setenv(name sdlcommon.FConstCharP, value sdlcommon.FConstCharP, overwrite sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_getenv").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(value))),
 		uintptr(overwrite),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC void SDLCALL SDL_qsort(void *base, size_t nmemb, size_t size, int (*compare) (const void *, const void *));
-func SDL_qsort(base common.FVoidP, nmemb common.FSizeT, size common.FSizeT, compare func(common.FConstVoidP, common.FConstVoidP) uintptr) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_qsort").Call(
+func SDL_qsort(base sdlcommon.FVoidP, nmemb sdlcommon.FSizeT, size sdlcommon.FSizeT, compare func(sdlcommon.FConstVoidP, sdlcommon.FConstVoidP) uintptr) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_qsort").Call(
 		base,
 		uintptr(nmemb),
 		uintptr(size),
-		common.NewCallback(compare),
+		sdlcommon.NewCallback(compare),
 	)
 	if t == 0 {
 
@@ -397,14 +397,14 @@ func SDL_qsort(base common.FVoidP, nmemb common.FSizeT, size common.FSizeT, comp
 }
 
 //extern DECLSPEC int SDLCALL SDL_abs(int x);
-func SDL_abs(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_abs").Call(
+func SDL_abs(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_abs").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -414,176 +414,176 @@ func SDL_abs(x common.FInt) (res common.FInt) {
 //#define SDL_max(x, y) (((x) > (y)) ? (x) : (y))
 
 //extern DECLSPEC int SDLCALL SDL_isalpha(int x);
-func SDL_isalpha(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isalpha").Call(
+func SDL_isalpha(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isalpha").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isalnum(int x);
-func SDL_isalnum(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isalnum").Call(
+func SDL_isalnum(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isalnum").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isblank(int x);
-func SDL_isblank(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isblank").Call(
+func SDL_isblank(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isblank").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_iscntrl(int x);
-func SDL_iscntrl(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_iscntrl").Call(
+func SDL_iscntrl(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_iscntrl").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isdigit(int x);
-func SDL_isdigit(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isdigit").Call(
+func SDL_isdigit(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isdigit").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isxdigit(int x);
-func SDL_isxdigit(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isxdigit").Call(
+func SDL_isxdigit(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isxdigit").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_ispunct(int x);
-func SDL_ispunct(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ispunct").Call(
+func SDL_ispunct(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ispunct").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isspace(int x);
-func SDL_isspace(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isspace").Call(
+func SDL_isspace(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isspace").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isupper(int x);
-func SDL_isupper(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isupper").Call(
+func SDL_isupper(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isupper").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_islower(int x);
-func SDL_islower(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_islower").Call(
+func SDL_islower(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_islower").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isprint(int x);
-func SDL_isprint(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isprint").Call(
+func SDL_isprint(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isprint").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isgraph(int x);
-func SDL_isgraph(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_isgraph").Call(
+func SDL_isgraph(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isgraph").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_toupper(int x);
-func SDL_toupper(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_toupper").Call(
+func SDL_toupper(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_toupper").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_tolower(int x);
-func SDL_tolower(x common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_tolower").Call(
+func SDL_tolower(x sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_tolower").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC Uint32 SDLCALL SDL_crc32(Uint32 crc, const void *data, size_t len);
-func SDL_crc32(crc common.FUint32T, data common.FVoidP, len0 common.FSizeT) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_crc32").Call(
+func SDL_crc32(crc sdlcommon.FUint32T, data sdlcommon.FVoidP, len0 sdlcommon.FSizeT) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_crc32").Call(
 		uintptr(crc),
 		data,
 		uintptr(len0),
@@ -591,7 +591,7 @@ func SDL_crc32(crc common.FUint32T, data common.FVoidP, len0 common.FSizeT) (res
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -652,54 +652,54 @@ func SDL_crc32(crc common.FUint32T, data common.FVoidP, len0 common.FSizeT) (res
 //extern DECLSPEC int SDLCALL SDL_memcmp(const void *s1, const void *s2, size_t len);
 
 //extern DECLSPEC size_t SDLCALL SDL_wcslen(const wchar_t *wstr);
-func SDL_wcslen(wstr common.FWcharT) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_crc32").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(wstr))),
+func SDL_wcslen(wstr sdlcommon.FWcharT) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_crc32").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(wstr))),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
 //extern DECLSPEC size_t SDLCALL SDL_wcslcpy(SDL_OUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen);
 //extern DECLSPEC size_t SDLCALL SDL_wcslcat(SDL_INOUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen);
 //extern DECLSPEC wchar_t *SDLCALL SDL_wcsdup(const wchar_t *wstr);
-func SDL_wcsdup(wstr common.FWcharT) (res common.FWcharT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_wcsdup").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(wstr))),
+func SDL_wcsdup(wstr sdlcommon.FWcharT) (res sdlcommon.FWcharT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcsdup").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(wstr))),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
 //extern DECLSPEC wchar_t *SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle);
-func SDL_wcsstr(haystack common.FWcharT, needle common.FWcharT) (res common.FWcharT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_wcsstr").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(haystack))),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(needle))),
+func SDL_wcsstr(haystack sdlcommon.FWcharT, needle sdlcommon.FWcharT) (res sdlcommon.FWcharT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcsstr").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(haystack))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(needle))),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_wcscmp(const wchar_t *str1, const wchar_t *str2);
-func SDL_wcscmp(str1 common.FWcharT, str2 common.FWcharT) (res common.FWcharT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_wcscmp").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(str1))),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(str2))),
+func SDL_wcscmp(str1 sdlcommon.FWcharT, str2 sdlcommon.FWcharT) (res sdlcommon.FWcharT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcscmp").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(str1))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(str2))),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 

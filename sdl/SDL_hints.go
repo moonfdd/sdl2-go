@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /**
@@ -892,7 +892,7 @@ const SDL_HINT_ORIENTATIONS = "SDL_IOS_ORIENTATIONS"
  *  your own event, if you want).
  *
  *  The format of this hint is a comma-separated list of language and locale,
- *  combined with an underscore, as is a common format: "en_GB". Locale is
+ *  combined with an underscore, as is a sdlcommon format: "en_GB". Locale is
  *  optional: "en". So you might have a list like this: "en_GB,jp,es_PT"
  */
 const SDL_HINT_PREFERRED_LOCALES = "SDL_PREFERRED_LOCALES"
@@ -1691,16 +1691,16 @@ const (
 //extern DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name,
 //const char *value,
 //SDL_HintPriority priority);
-func SDL_SetHintWithPriority(name, value common.FConstCharP, priority SDL_HintPriority) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetHintWithPriority").Call(
-		common.UintPtrFromString(name),
-		common.UintPtrFromString(value),
+func SDL_SetHintWithPriority(name, value sdlcommon.FConstCharP, priority SDL_HintPriority) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetHintWithPriority").Call(
+		sdlcommon.UintPtrFromString(name),
+		sdlcommon.UintPtrFromString(value),
 		uintptr(priority),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1720,15 +1720,15 @@ func SDL_SetHintWithPriority(name, value common.FConstCharP, priority SDL_HintPr
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name,
 //const char *value);
-func SDL_SetHint(name, value common.FConstCharP) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetHint").Call(
-		common.UintPtrFromString(name),
-		common.UintPtrFromString(value),
+func SDL_SetHint(name, value sdlcommon.FConstCharP) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetHint").Call(
+		sdlcommon.UintPtrFromString(name),
+		sdlcommon.UintPtrFromString(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1742,14 +1742,14 @@ func SDL_SetHint(name, value common.FConstCharP) (res bool) {
  * \sa SDL_SetHintWithPriority
  */
 //extern DECLSPEC const char * SDLCALL SDL_GetHint(const char *name);
-func SDL_GetHint(name common.FConstCharP) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetHint").Call(
-		common.UintPtrFromString(name),
+func SDL_GetHint(name sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetHint").Call(
+		sdlcommon.UintPtrFromString(name),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -1768,15 +1768,15 @@ func SDL_GetHint(name common.FConstCharP) (res common.FConstCharP) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GetHintBoolean(const char *name, SDL_bool default_value);
 
-func SDL_GetHintBoolean(name common.FConstCharP, default_value bool) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetHintBoolean").Call(
-		common.UintPtrFromString(name),
-		common.CBool(default_value),
+func SDL_GetHintBoolean(name sdlcommon.FConstCharP, default_value bool) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetHintBoolean").Call(
+		sdlcommon.UintPtrFromString(name),
+		sdlcommon.CBool(default_value),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1789,7 +1789,7 @@ func SDL_GetHintBoolean(name common.FConstCharP, default_value bool) (res bool) 
  * \param newValue the new value hint is to be set to
  */
 //typedef void (SDLCALL *SDL_HintCallback)(void *userdata, const char *name, const char *oldValue, const char *newValue);
-type SDL_HintCallback = func(userdata common.FVoidP, name common.FConstCharP, oldValue common.FConstCharP, newValue common.FConstCharP) uintptr
+type SDL_HintCallback = func(userdata sdlcommon.FVoidP, name sdlcommon.FConstCharP, oldValue sdlcommon.FConstCharP, newValue sdlcommon.FConstCharP) uintptr
 
 /**
  * Add a function to watch a particular hint.
@@ -1806,10 +1806,10 @@ type SDL_HintCallback = func(userdata common.FVoidP, name common.FConstCharP, ol
 //extern DECLSPEC void SDLCALL SDL_AddHintCallback(const char *name,
 //SDL_HintCallback callback,
 //void *userdata);
-func SDL_AddHintCallback(name common.FConstCharP, callback SDL_HintCallback, userdata common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AddHintCallback").Call(
-		common.UintPtrFromString(name),
-		common.NewCallback(callback),
+func SDL_AddHintCallback(name sdlcommon.FConstCharP, callback SDL_HintCallback, userdata sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AddHintCallback").Call(
+		sdlcommon.UintPtrFromString(name),
+		sdlcommon.NewCallback(callback),
 		userdata,
 	)
 	if t == 0 {
@@ -1833,10 +1833,10 @@ func SDL_AddHintCallback(name common.FConstCharP, callback SDL_HintCallback, use
 //extern DECLSPEC void SDLCALL SDL_DelHintCallback(const char *name,
 //SDL_HintCallback callback,
 //void *userdata);
-func SDL_DelHintCallback(name common.FConstCharP, callback SDL_HintCallback, userdata common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_DelHintCallback").Call(
-		common.UintPtrFromString(name),
-		common.NewCallback(callback),
+func SDL_DelHintCallback(name sdlcommon.FConstCharP, callback SDL_HintCallback, userdata sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DelHintCallback").Call(
+		sdlcommon.UintPtrFromString(name),
+		sdlcommon.NewCallback(callback),
 		userdata,
 	)
 	if t == 0 {
@@ -1852,7 +1852,7 @@ func SDL_DelHintCallback(name common.FConstCharP, callback SDL_HintCallback, use
  */
 //extern DECLSPEC void SDLCALL SDL_ClearHints(void);
 func SDL_ClearHints() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ClearHints").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ClearHints").Call()
 	if t == 0 {
 
 	}

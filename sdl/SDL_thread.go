@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -11,11 +11,11 @@ type SDL_Thread struct {
 
 /* The SDL thread ID */
 //typedef unsigned long SDL_threadID;
-type SDL_threadID = common.FUnsignedLong
+type SDL_threadID = sdlcommon.FUnsignedLong
 
 /* Thread local storage ID, 0 is the invalid ID */
 //typedef unsigned int SDL_TLSID;
-type SDL_TLSID = common.FUnsignedInt
+type SDL_TLSID = sdlcommon.FUnsignedInt
 
 /**
  *  The SDL thread priority.
@@ -43,7 +43,7 @@ const (
  * \returns a value that can be reported through SDL_WaitThread().
  */
 //typedef int (SDLCALL * SDL_ThreadFunction) (void *data);
-type SDL_ThreadFunction = func(data common.FVoidP) uintptr
+type SDL_ThreadFunction = func(data sdlcommon.FVoidP) uintptr
 
 /**
  * Create a new thread with a default stack size.
@@ -66,10 +66,10 @@ type SDL_ThreadFunction = func(data common.FVoidP) uintptr
  */
 //extern DECLSPEC SDL_Thread *SDLCALL
 //SDL_CreateThread(SDL_ThreadFunction fn, const char *name, void *data);
-func SDL_CreateThread(fn SDL_ThreadFunction, name common.FConstCharP, data common.FVoidP) (res *SDL_Thread) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateThread").Call(
-		common.NewCallback(fn),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(name))),
+func SDL_CreateThread(fn SDL_ThreadFunction, name sdlcommon.FConstCharP, data sdlcommon.FVoidP) (res *SDL_Thread) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateThread").Call(
+		sdlcommon.NewCallback(fn),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
 		data,
 	)
 	if t == 0 {
@@ -122,10 +122,10 @@ func SDL_CreateThread(fn SDL_ThreadFunction, name common.FConstCharP, data commo
  */
 //extern DECLSPEC SDL_Thread *SDLCALL
 //SDL_CreateThreadWithStackSize(SDL_ThreadFunction fn, const char *name, const size_t stacksize, void *data);
-func SDL_CreateThreadWithStackSize(fn SDL_ThreadFunction, name common.FConstCharP, stacksize common.FSizeT, data common.FVoidP) (res *SDL_Thread) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateThreadWithStackSize").Call(
-		common.NewCallback(fn),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(name))),
+func SDL_CreateThreadWithStackSize(fn SDL_ThreadFunction, name sdlcommon.FConstCharP, stacksize sdlcommon.FSizeT, data sdlcommon.FVoidP) (res *SDL_Thread) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateThreadWithStackSize").Call(
+		sdlcommon.NewCallback(fn),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
 		uintptr(stacksize),
 		data,
 	)
@@ -149,14 +149,14 @@ func SDL_CreateThreadWithStackSize(fn SDL_ThreadFunction, name common.FConstChar
  * \sa SDL_CreateThread
  */
 //extern DECLSPEC const char *SDLCALL SDL_GetThreadName(SDL_Thread *thread);
-func (thread *SDL_Thread) SDL_GetThreadName() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetThreadName").Call(
+func (thread *SDL_Thread) SDL_GetThreadName() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetThreadName").Call(
 		uintptr(unsafe.Pointer(thread)),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -176,7 +176,7 @@ func (thread *SDL_Thread) SDL_GetThreadName() (res common.FConstCharP) {
  */
 //extern DECLSPEC SDL_threadID SDLCALL SDL_ThreadID(void);
 func SDL_ThreadID() (res SDL_threadID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ThreadID").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ThreadID").Call()
 	if t == 0 {
 
 	}
@@ -199,7 +199,7 @@ func SDL_ThreadID() (res SDL_threadID) {
  */
 //extern DECLSPEC SDL_threadID SDLCALL SDL_GetThreadID(SDL_Thread * thread);
 func (thread *SDL_Thread) SDL_GetThreadID() (res SDL_threadID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetThreadID").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetThreadID").Call(
 		uintptr(unsafe.Pointer(thread)),
 	)
 	if t == 0 {
@@ -221,14 +221,14 @@ func (thread *SDL_Thread) SDL_GetThreadID() (res SDL_threadID) {
  *          SDL_GetError() for more information.
  */
 //extern DECLSPEC int SDLCALL SDL_SetThreadPriority(SDL_ThreadPriority priority);
-func (thread *SDL_Thread) SDL_SetThreadPriority(priority SDL_ThreadPriority) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetThreadPriority").Call(
+func (thread *SDL_Thread) SDL_SetThreadPriority(priority SDL_ThreadPriority) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetThreadPriority").Call(
 		uintptr(priority),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -264,8 +264,8 @@ func (thread *SDL_Thread) SDL_SetThreadPriority(priority SDL_ThreadPriority) (re
  * \sa SDL_DetachThread
  */
 //extern DECLSPEC void SDLCALL SDL_WaitThread(SDL_Thread * thread, int *status);
-func (thread *SDL_Thread) SDL_WaitThread(status *common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WaitThread").Call(
+func (thread *SDL_Thread) SDL_WaitThread(status *sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WaitThread").Call(
 		uintptr(unsafe.Pointer(thread)),
 		uintptr(unsafe.Pointer(status)),
 	)
@@ -311,7 +311,7 @@ func (thread *SDL_Thread) SDL_WaitThread(status *common.FInt) {
  */
 //extern DECLSPEC void SDLCALL SDL_DetachThread(SDL_Thread * thread);
 func (thread *SDL_Thread) SDL_DetachThread() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_DetachThread").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DetachThread").Call(
 		uintptr(unsafe.Pointer(thread)),
 	)
 	if t == 0 {
@@ -335,7 +335,7 @@ func (thread *SDL_Thread) SDL_DetachThread() {
  */
 //extern DECLSPEC SDL_TLSID SDLCALL SDL_TLSCreate(void);
 func SDL_TLSCreate() (res SDL_TLSID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_TLSCreate").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_TLSCreate").Call()
 	if t == 0 {
 
 	}
@@ -356,8 +356,8 @@ func SDL_TLSCreate() (res SDL_TLSID) {
  * \sa SDL_TLSSet
  */
 //extern DECLSPEC void * SDLCALL SDL_TLSGet(SDL_TLSID id);
-func SDL_TLSGet(id SDL_TLSID) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_TLSGet").Call(
+func SDL_TLSGet(id SDL_TLSID) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_TLSGet").Call(
 		uintptr(id),
 	)
 	if t == 0 {
@@ -391,8 +391,8 @@ func SDL_TLSGet(id SDL_TLSID) (res common.FVoidP) {
  * \sa SDL_TLSGet
  */
 //extern DECLSPEC int SDLCALL SDL_TLSSet(SDL_TLSID id, const void *value, void (SDLCALL *destructor)(void*));
-func SDL_TLSSet(id SDL_TLSID, value common.FConstVoidP, destructor func(p common.FVoidP)) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_TLSSet").Call(
+func SDL_TLSSet(id SDL_TLSID, value sdlcommon.FConstVoidP, destructor func(p sdlcommon.FVoidP)) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_TLSSet").Call(
 		uintptr(id),
 		value,
 		uintptr(unsafe.Pointer(&destructor)),
@@ -400,7 +400,7 @@ func SDL_TLSSet(id SDL_TLSID, value common.FConstVoidP, destructor func(p common
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -409,7 +409,7 @@ func SDL_TLSSet(id SDL_TLSID, value common.FConstVoidP, destructor func(p common
  */
 //extern DECLSPEC void SDLCALL SDL_TLSCleanup(void);
 func SDL_TLSCleanup() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_TLSCleanup").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_TLSCleanup").Call()
 	if t == 0 {
 
 	}

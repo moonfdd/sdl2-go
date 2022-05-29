@@ -1,4 +1,4 @@
-package common
+package sdlcommon
 
 type FInt = int32
 type FUint = uint32

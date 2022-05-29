@@ -1,6 +1,6 @@
 package sdl
 
-import "github.com/moonfdd/sdl2-go/common"
+import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 /**
  *  \brief The SDL virtual key representation.
@@ -14,7 +14,7 @@ import "github.com/moonfdd/sdl2-go/common"
  *  always map to SDLK_0...SDLK_9, regardless of layout.
  */
 //typedef Sint32 SDL_Keycode;
-type SDL_Keycode = common.FSint32
+type SDL_Keycode = sdlcommon.FSint32
 
 const SDLK_SCANCODE_MASK = 1 << 30
 

@@ -1,6 +1,6 @@
 package sdl
 
-import "github.com/moonfdd/sdl2-go/common"
+import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 //#ifndef __gl2ext_h_
 //#define __gl2ext_h_
@@ -76,7 +76,7 @@ const GL_DEPTH_COMPONENT24_OES = 0x81A6
 ///* GL_OES_EGL_image */
 //#ifndef GL_OES_EGL_image
 //typedef void* GLeglImageOES;
-type GLeglImageOES = common.FVoidP
+type GLeglImageOES = sdlcommon.FVoidP
 
 //#endif
 
@@ -1210,34 +1210,34 @@ const GL_OES_mapbuffer = 1
 //#ifdef GL_GLEXT_PROTOTYPES
 //GL_APICALL void* GL_APIENTRY glMapBufferOES (GLenum target, GLenum access);
 //todo
-func glMapBufferOES() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("glMapBufferOES").Call()
+func glMapBufferOES() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("glMapBufferOES").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
 //GL_APICALL GLboolean GL_APIENTRY glUnmapBufferOES (GLenum target);
 //todo
-func glUnmapBufferOES() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("glUnmapBufferOES").Call()
+func glUnmapBufferOES() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("glUnmapBufferOES").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
 //GL_APICALL void GL_APIENTRY glGetBufferPointervOES (GLenum target, GLenum pname, GLvoid **params);
 //todo
-func glGetBufferPointervOES() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("glGetBufferPointervOES").Call()
+func glGetBufferPointervOES() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("glGetBufferPointervOES").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 

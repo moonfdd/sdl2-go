@@ -935,7 +935,7 @@ extern "C" {
  *  your own event, if you want).
  *
  *  The format of this hint is a comma-separated list of language and locale,
- *  combined with an underscore, as is a common format: "en_GB". Locale is
+ *  combined with an underscore, as is a sdlcommon format: "en_GB". Locale is
  *  optional: "en". So you might have a list like this: "en_GB,jp,es_PT"
  */
 #define SDL_HINT_PREFERRED_LOCALES "SDL_PREFERRED_LOCALES"

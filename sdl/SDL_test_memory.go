@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /**
@@ -10,12 +10,12 @@ import (
  * \note This should be called before any other SDL functions for complete tracking coverage
  */
 //int SDLTest_TrackAllocations(void);
-func SDLTest_TrackAllocations() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_TrackAllocations").Call()
+func SDLTest_TrackAllocations() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_TrackAllocations").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -26,7 +26,7 @@ func SDLTest_TrackAllocations() (res common.FInt) {
  */
 //void SDLTest_LogAllocations(void);
 func SDLTest_LogAllocations() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_LogAllocations").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_LogAllocations").Call()
 	if t == 0 {
 
 	}

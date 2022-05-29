@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -18,9 +18,9 @@ import (
  * \sa SDL_HasClipboardText
  */
 //extern DECLSPEC int SDLCALL SDL_SetClipboardText(const char *text);
-func SDL_SetClipboardText(text common.FConstCharP) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetClipboardText").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(text))),
+func SDL_SetClipboardText(text sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetClipboardText").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(text))),
 	)
 	if t == 0 {
 
@@ -43,12 +43,12 @@ func SDL_SetClipboardText(text common.FConstCharP) (res common.FInt) {
  * \sa SDL_SetClipboardText
  */
 //extern DECLSPEC char * SDLCALL SDL_GetClipboardText(void);
-func SDL_GetClipboardText() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetClipboardText").Call()
+func SDL_GetClipboardText() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetClipboardText").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -64,10 +64,10 @@ func SDL_GetClipboardText() (res common.FConstCharP) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasClipboardText(void);
 func SDL_HasClipboardText() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasClipboardText").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasClipboardText").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }

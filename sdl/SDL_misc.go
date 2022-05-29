@@ -1,6 +1,6 @@
 package sdl
 
-import "github.com/moonfdd/sdl2-go/common"
+import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 /**
  * Open a URL/URI in the browser or other appropriate external application.
@@ -32,13 +32,13 @@ import "github.com/moonfdd/sdl2-go/common"
  * \since This function is available in SDL 2.0.14 and newer
  */
 //extern DECLSPEC int SDLCALL SDL_OpenURL(const char *url);
-func SDL_OpenURL(url common.FConstCharP) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OpenURL").Call(
-		common.UintPtrFromString(url),
+func SDL_OpenURL(url sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OpenURL").Call(
+		sdlcommon.UintPtrFromString(url),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -345,42 +345,42 @@ const (
 )
 
 type SDL_Color struct {
-	r common.FUint8T
-	g common.FUint8T
-	b common.FUint8T
-	a common.FUint8T
+	r sdlcommon.FUint8T
+	g sdlcommon.FUint8T
+	b sdlcommon.FUint8T
+	a sdlcommon.FUint8T
 }
 type SDL_Colour = SDL_Color
 
 type SDL_Palette struct {
-	Ncolors  common.FInt
+	Ncolors  sdlcommon.FInt
 	Colors   SDL_Color
-	Version  common.FUint32T
-	Refcount common.FInt
+	Version  sdlcommon.FUint32T
+	Refcount sdlcommon.FInt
 }
 
 /**
  *  \note Everything in the pixel format structure is read-only.
  */
 type SDL_PixelFormat struct {
-	Format        common.FUint32T
+	Format        sdlcommon.FUint32T
 	Palette       SDL_Palette
-	BitsPerPixel  common.FUint8T
-	BytesPerPixel common.FUint8T
-	Padding       [2]common.FUint8T
-	Rmask         common.FUint32T
-	Gmask         common.FUint32T
-	Bmask         common.FUint32T
-	Amask         common.FUint32T
-	Rloss         common.FUint8T
-	Gloss         common.FUint8T
-	Bloss         common.FUint8T
-	Aloss         common.FUint8T
-	Rshift        common.FUint8T
-	Gshift        common.FUint8T
-	Bshift        common.FUint8T
-	Ashift        common.FUint8T
-	Refcount      common.FInt
+	BitsPerPixel  sdlcommon.FUint8T
+	BytesPerPixel sdlcommon.FUint8T
+	Padding       [2]sdlcommon.FUint8T
+	Rmask         sdlcommon.FUint32T
+	Gmask         sdlcommon.FUint32T
+	Bmask         sdlcommon.FUint32T
+	Amask         sdlcommon.FUint32T
+	Rloss         sdlcommon.FUint8T
+	Gloss         sdlcommon.FUint8T
+	Bloss         sdlcommon.FUint8T
+	Aloss         sdlcommon.FUint8T
+	Rshift        sdlcommon.FUint8T
+	Gshift        sdlcommon.FUint8T
+	Bshift        sdlcommon.FUint8T
+	Ashift        sdlcommon.FUint8T
+	Refcount      sdlcommon.FInt
 	Next          *SDL_PixelFormat
 }
 
@@ -394,14 +394,14 @@ type SDL_PixelFormat struct {
  * \since This function is available since SDL 2.0.0.
  */
 //extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
-func SDL_GetPixelFormatName(format common.FUint32T) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetPixelFormatName").Call(
+func SDL_GetPixelFormatName(format sdlcommon.FUint32T) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPixelFormatName").Call(
 		uintptr(format),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -425,13 +425,13 @@ func SDL_GetPixelFormatName(format common.FUint32T) (res common.FConstCharP) {
 //Uint32 * Gmask,
 //Uint32 * Bmask,
 //Uint32 * Amask);
-func SDL_PixelFormatEnumToMasks(format common.FUint32T,
-	bpp *common.FInt,
-	Rmask *common.FUint32T,
+func SDL_PixelFormatEnumToMasks(format sdlcommon.FUint32T,
+	bpp *sdlcommon.FInt,
+	Rmask *sdlcommon.FUint32T,
 	Gmask,
 	Bmask,
-	Amask *common.FUint32T) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_PixelFormatEnumToMasks").Call(
+	Amask *sdlcommon.FUint32T) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_PixelFormatEnumToMasks").Call(
 		uintptr(format),
 		uintptr(unsafe.Pointer(bpp)),
 		uintptr(unsafe.Pointer(Rmask)),
@@ -442,7 +442,7 @@ func SDL_PixelFormatEnumToMasks(format common.FUint32T,
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -466,12 +466,12 @@ func SDL_PixelFormatEnumToMasks(format common.FUint32T,
 //Uint32 Gmask,
 //Uint32 Bmask,
 //Uint32 Amask);
-func SDL_MasksToPixelFormatEnum(bpp common.FInt,
+func SDL_MasksToPixelFormatEnum(bpp sdlcommon.FInt,
 	Rmask,
 	Gmask,
 	Bmask,
-	Amask common.FUint32T) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_MasksToPixelFormatEnum").Call(
+	Amask sdlcommon.FUint32T) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MasksToPixelFormatEnum").Call(
 		uintptr(bpp),
 		uintptr(Rmask),
 		uintptr(Gmask),
@@ -481,7 +481,7 @@ func SDL_MasksToPixelFormatEnum(bpp common.FInt,
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -499,8 +499,8 @@ func SDL_MasksToPixelFormatEnum(bpp common.FInt,
  * \sa SDL_FreeFormat
  */
 //extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_AllocFormat(Uint32 pixel_format);
-func SDL_AllocFormat(pixel_format common.FUint32T) (res *SDL_PixelFormat) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AllocFormat").Call()
+func SDL_AllocFormat(pixel_format sdlcommon.FUint32T) (res *SDL_PixelFormat) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AllocFormat").Call()
 	if t == 0 {
 
 	}
@@ -517,7 +517,7 @@ func SDL_AllocFormat(pixel_format common.FUint32T) (res *SDL_PixelFormat) {
  */
 //extern DECLSPEC void SDLCALL SDL_FreeFormat(SDL_PixelFormat *format);
 func (format *SDL_PixelFormat) SDL_FreeFormat() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_FreeFormat").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FreeFormat").Call(
 		uintptr(unsafe.Pointer(format)),
 	)
 	if t == 0 {
@@ -539,8 +539,8 @@ func (format *SDL_PixelFormat) SDL_FreeFormat() {
  * \sa SDL_FreePalette
  */
 //extern DECLSPEC SDL_Palette *SDLCALL SDL_AllocPalette(int ncolors);
-func SDL_AllocPalette(ncolors common.FInt) (res *SDL_Palette) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AllocPalette").Call(
+func SDL_AllocPalette(ncolors sdlcommon.FInt) (res *SDL_Palette) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AllocPalette").Call(
 		uintptr(ncolors),
 	)
 	if t == 0 {
@@ -563,15 +563,15 @@ func SDL_AllocPalette(ncolors common.FInt) (res *SDL_Palette) {
  */
 //extern DECLSPEC int SDLCALL SDL_SetPixelFormatPalette(SDL_PixelFormat * format,
 //SDL_Palette *palette);
-func (format *SDL_PixelFormat) SDL_SetPixelFormatPalette(palette *SDL_Palette) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetPixelFormatPalette").Call(
+func (format *SDL_PixelFormat) SDL_SetPixelFormatPalette(palette *SDL_Palette) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetPixelFormatPalette").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(unsafe.Pointer(palette)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -592,8 +592,8 @@ func (format *SDL_PixelFormat) SDL_SetPixelFormatPalette(palette *SDL_Palette) (
 //const SDL_Color * colors,
 //int firstcolor, int ncolors);
 func (format *SDL_PixelFormat) SDL_SetPaletteColors(palette *SDL_Palette,
-	firstcolor, ncolors common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetPaletteColors").Call(
+	firstcolor, ncolors sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetPaletteColors").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(unsafe.Pointer(palette)),
 		uintptr(firstcolor),
@@ -602,7 +602,7 @@ func (format *SDL_PixelFormat) SDL_SetPaletteColors(palette *SDL_Palette,
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -615,7 +615,7 @@ func (format *SDL_PixelFormat) SDL_SetPaletteColors(palette *SDL_Palette,
  */
 //extern DECLSPEC void SDLCALL SDL_FreePalette(SDL_Palette * palette);
 func (palette *SDL_Palette) SDL_FreePalette() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_FreePalette").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FreePalette").Call(
 		uintptr(unsafe.Pointer(palette)),
 	)
 	if t == 0 {
@@ -654,8 +654,8 @@ func (palette *SDL_Palette) SDL_FreePalette() {
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format,
 //Uint8 r, Uint8 g, Uint8 b);
-func (format *SDL_PixelFormat) SDL_MapRGB(r, g, b common.FUint8T) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_MapRGB").Call(
+func (format *SDL_PixelFormat) SDL_MapRGB(r, g, b sdlcommon.FUint8T) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MapRGB").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(r),
 		uintptr(g),
@@ -664,7 +664,7 @@ func (format *SDL_PixelFormat) SDL_MapRGB(r, g, b common.FUint8T) (res common.FU
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -701,8 +701,8 @@ func (format *SDL_PixelFormat) SDL_MapRGB(r, g, b common.FUint8T) (res common.FU
 //extern DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format,
 //Uint8 r, Uint8 g, Uint8 b,
 //Uint8 a);
-func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a common.FUint8T) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_MapRGBA").Call(
+func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a sdlcommon.FUint8T) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MapRGBA").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(r),
 		uintptr(g),
@@ -712,7 +712,7 @@ func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a common.FUint8T) (res commo
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -738,10 +738,10 @@ func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a common.FUint8T) (res commo
 //extern DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel,
 //const SDL_PixelFormat * format,
 //Uint8 * r, Uint8 * g, Uint8 * b);
-func SDL_GetRGB(pixel common.FUint32T,
+func SDL_GetRGB(pixel sdlcommon.FUint32T,
 	format *SDL_PixelFormat,
-	r, g, b *common.FUint8T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRGB").Call(
+	r, g, b *sdlcommon.FUint8T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRGB").Call(
 		uintptr(pixel),
 		uintptr(unsafe.Pointer(format)),
 		uintptr(unsafe.Pointer(r)),
@@ -781,10 +781,10 @@ func SDL_GetRGB(pixel common.FUint32T,
 //const SDL_PixelFormat * format,
 //Uint8 * r, Uint8 * g, Uint8 * b,
 //Uint8 * a);
-func SDL_GetRGBA(pixel common.FUint32T,
+func SDL_GetRGBA(pixel sdlcommon.FUint32T,
 	format *SDL_PixelFormat,
-	r, g, b, a *common.FUint8T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRGBA").Call(
+	r, g, b, a *sdlcommon.FUint8T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRGBA").Call(
 		uintptr(pixel),
 		uintptr(unsafe.Pointer(format)),
 		uintptr(unsafe.Pointer(r)),
@@ -807,8 +807,8 @@ func SDL_GetRGBA(pixel common.FUint32T,
  * \sa SDL_SetWindowGammaRamp
  */
 //extern DECLSPEC void SDLCALL SDL_CalculateGammaRamp(float gamma, Uint16 * ramp);
-func SDL_CalculateGammaRamp(gamma common.FFloat, ramp *common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CalculateGammaRamp").Call(
+func SDL_CalculateGammaRamp(gamma sdlcommon.FFloat, ramp *sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CalculateGammaRamp").Call(
 		uintptr(gamma),
 		uintptr(unsafe.Pointer(ramp)),
 	)

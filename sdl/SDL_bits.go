@@ -1,6 +1,6 @@
 package sdl
 
-import "github.com/moonfdd/sdl2-go/common"
+import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 /*
   Simple DirectMedia Layer
@@ -23,7 +23,7 @@ import "github.com/moonfdd/sdl2-go/common"
   3. This notice may not be removed or altered from any source distribution.
 */
 
-func SDL_HasExactlyOneBitSet32(x common.FUint32T) bool {
+func SDL_HasExactlyOneBitSet32(x sdlcommon.FUint32T) bool {
 	if x != 0 && (x&(x-1)) == 0 {
 		return true
 	}

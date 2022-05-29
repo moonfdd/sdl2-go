@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -66,12 +66,12 @@ type SDL_MessageBoxColorScheme struct {
  * MessageBox structure containing title, text, window, etc.
  */
 type SDL_MessageBoxData struct {
-	Flags   common.FUint32T          /**< ::SDL_MessageBoxFlags */
-	Window  *SDL_Window              /**< Parent window, can be NULL */
-	Title   common.FConstCharPStruct /**< UTF-8 title */
-	Message common.FConstCharPStruct /**< UTF-8 message text */
+	Flags   sdlcommon.FUint32T          /**< ::SDL_MessageBoxFlags */
+	Window  *SDL_Window                 /**< Parent window, can be NULL */
+	Title   sdlcommon.FConstCharPStruct /**< UTF-8 title */
+	Message sdlcommon.FConstCharPStruct /**< UTF-8 message text */
 
-	Numbuttons common.FInt
+	Numbuttons sdlcommon.FInt
 	Buttons    *SDL_MessageBoxButtonData
 
 	ColorScheme *SDL_MessageBoxColorScheme /**< ::SDL_MessageBoxColorScheme, can be NULL to use system settings */
@@ -111,15 +111,15 @@ type SDL_MessageBoxData struct {
  * \sa SDL_ShowSimpleMessageBox
  */
 //extern DECLSPEC int SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid);
-func SDL_ShowMessageBox(messageboxdata *SDL_MessageBoxData, buttonid *common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ShowMessageBox").Call(
+func SDL_ShowMessageBox(messageboxdata *SDL_MessageBoxData, buttonid *sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ShowMessageBox").Call(
 		uintptr(unsafe.Pointer(messageboxdata)),
 		uintptr(unsafe.Pointer(buttonid)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -162,16 +162,16 @@ func SDL_ShowMessageBox(messageboxdata *SDL_MessageBoxData, buttonid *common.FIn
  * \sa SDL_ShowMessageBox
  */
 //extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(Uint32 flags, const char *title, const char *message, SDL_Window *window);
-func SDL_ShowSimpleMessageBox(flags common.FUint32T, title common.FConstCharP, message common.FConstCharP, window *SDL_Window) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ShowSimpleMessageBox").Call(
+func SDL_ShowSimpleMessageBox(flags sdlcommon.FUint32T, title sdlcommon.FConstCharP, message sdlcommon.FConstCharP, window *SDL_Window) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ShowSimpleMessageBox").Call(
 		uintptr(flags),
-		common.UintPtrFromString(title),
-		common.UintPtrFromString(message),
+		sdlcommon.UintPtrFromString(title),
+		sdlcommon.UintPtrFromString(message),
 		uintptr(unsafe.Pointer(window)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

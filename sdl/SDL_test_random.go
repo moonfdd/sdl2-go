@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -16,11 +16,11 @@ import (
  * Context structure for the random number generator state.
  */
 type SDLTest_RandomContext struct {
-	A  common.FUint
-	X  common.FUint
-	C  common.FUint
-	Ah common.FUint
-	Al common.FUint
+	A  sdlcommon.FUint
+	X  sdlcommon.FUint
+	C  sdlcommon.FUint
+	Ah sdlcommon.FUint
+	Al sdlcommon.FUint
 }
 
 /* --- Function prototypes */
@@ -38,8 +38,8 @@ type SDLTest_RandomContext struct {
  */
 //void SDLTest_RandomInit(SDLTest_RandomContext * rndContext, unsigned int xi,
 //unsigned int ci);
-func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi common.FInt, ci common.FUnsignedInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_RandomInit").Call(
+func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi sdlcommon.FInt, ci sdlcommon.FUnsignedInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_RandomInit").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 		uintptr(xi),
 		uintptr(ci),
@@ -58,7 +58,7 @@ func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi common.FInt, ci c
  */
 //void SDLTest_RandomInitTime(SDLTest_RandomContext *rndContext);
 func (rndContext *SDLTest_RandomContext) SDLTest_RandomInitTime() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_RandomInitTime").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_RandomInitTime").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 	)
 	if t == 0 {
@@ -79,13 +79,13 @@ func (rndContext *SDLTest_RandomContext) SDLTest_RandomInitTime() {
  *
  */
 //nsigned int SDLTest_Random(SDLTest_RandomContext *rndContext);
-func (rndContext *SDLTest_RandomContext) SDLTest_Random() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Random").Call(
+func (rndContext *SDLTest_RandomContext) SDLTest_Random() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Random").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

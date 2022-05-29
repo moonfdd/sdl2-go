@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -24,7 +24,7 @@ type SDL_RWops struct {
 	 *  Return the size of the file in this rwops, or -1 if unknown
 	 */
 	//Sint64 (SDLCALL * size) (struct SDL_RWops * context);
-	Size *func(context *SDL_RWops) common.FSint64
+	Size *func(context *SDL_RWops) sdlcommon.FSint64
 
 	/**
 	 *  Seek to \c offset relative to \c whence, one of stdio's whence values:
@@ -34,7 +34,7 @@ type SDL_RWops struct {
 	 */
 	//Sint64 (SDLCALL * seek) (struct SDL_RWops * context, Sint64 offset,
 	//int whence);
-	seek *func(context *SDL_RWops, offset common.FSint64, whence common.FInt) common.FSint64
+	seek *func(context *SDL_RWops, offset sdlcommon.FSint64, whence sdlcommon.FInt) sdlcommon.FSint64
 	/**
 	 *  Read up to \c maxnum objects each of size \c size from the data
 	 *  stream to the area pointed at by \c ptr.
@@ -43,7 +43,7 @@ type SDL_RWops struct {
 	 */
 	//size_t (SDLCALL * read) (struct SDL_RWops * context, void *ptr,
 	//size_t size, size_t maxnum);
-	read *func(context *SDL_RWops, ptr common.FVoidP, size common.FSizeT, maxnum common.FSizeT) common.FSizeT
+	read *func(context *SDL_RWops, ptr sdlcommon.FVoidP, size sdlcommon.FSizeT, maxnum sdlcommon.FSizeT) sdlcommon.FSizeT
 
 	/**
 	 *  Write exactly \c num objects each of size \c size from the area
@@ -51,15 +51,15 @@ type SDL_RWops struct {
 	 *
 	 *  \return the number of objects written, or 0 at error or end of file.
 	 */
-	write *func(context SDL_RWops, ptr common.FConstVoidP, size, num common.FSizeT) common.FSizeT
+	write *func(context SDL_RWops, ptr sdlcommon.FConstVoidP, size, num sdlcommon.FSizeT) sdlcommon.FSizeT
 
 	/**
 	 *  Close and free an allocated SDL_RWops structure.
 	 *
 	 *  \return 0 if successful or -1 on write error when flushing data.
 	 */
-	close  *func(context *SDL_RWops) common.FInt
-	Type   common.FUint32T
+	close  *func(context *SDL_RWops) sdlcommon.FInt
+	Type   sdlcommon.FUint32T
 	Hidden struct {
 		//	union
 		//{
@@ -95,13 +95,13 @@ type SDL_RWops struct {
 		//} stdio;
 		//	#endif
 
-		//MemBase *common.FUint8T//共用体，作废
-		//MemHere *common.FUint8T//共用体，作废
-		//MemStop *common.FUint8T//共用体，作废
+		//MemBase *sdlcommon.FUint8T//共用体，作废
+		//MemHere *sdlcommon.FUint8T//共用体，作废
+		//MemStop *sdlcommon.FUint8T//共用体，作废
 
 		//struct {
-		UnknownData1 common.FVoidP
-		UnknownData2 common.FVoidP
+		UnknownData1 sdlcommon.FVoidP
+		UnknownData2 sdlcommon.FVoidP
 		//} unknown;
 	}
 }
@@ -115,10 +115,10 @@ type SDL_RWops struct {
 
 //extern DECLSPEC SDL_RWops *SDLCALL SDL_RWFromFile(const char *file,
 //const char *mode);
-func SDL_RWFromFile(file common.FConstCharP, mode common.FConstCharP) (res *SDL_RWops) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWFromFile").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(file))),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(mode))),
+func SDL_RWFromFile(file sdlcommon.FConstCharP, mode sdlcommon.FConstCharP) (res *SDL_RWops) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWFromFile").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(file))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(mode))),
 	)
 	if t == 0 {
 
@@ -131,7 +131,7 @@ func SDL_RWFromFile(file common.FConstCharP, mode common.FConstCharP) (res *SDL_
 //extern DECLSPEC SDL_RWops *SDLCALL SDL_RWFromFP(FILE * fp,
 //SDL_bool autoclose);
 //func SDL_RWFromFP(fp *File,autoclose SDL_bool)(res *SDL_RWops) {
-//	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWFromFP").Call(
+//	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWFromFP").Call(
 //		uintptr(unsafe.Pointer(fp)),
 //		uintptr(autoclose),
 //	)
@@ -145,9 +145,9 @@ func SDL_RWFromFile(file common.FConstCharP, mode common.FConstCharP) (res *SDL_
 //extern DECLSPEC SDL_RWops *SDLCALL SDL_RWFromFP(void * fp,
 //SDL_bool autoclose);
 func SDL_RWFromFP(fp *File, autoclose bool) (res *SDL_RWops) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWFromFP").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWFromFP").Call(
 		uintptr(unsafe.Pointer(fp)),
-		common.CBool(autoclose),
+		sdlcommon.CBool(autoclose),
 	)
 	if t == 0 {
 
@@ -159,8 +159,8 @@ func SDL_RWFromFP(fp *File, autoclose bool) (res *SDL_RWops) {
 //#endif
 
 //extern DECLSPEC SDL_RWops *SDLCALL SDL_RWFromMem(void *mem, int size);
-func SDL_RWFromMem(mem common.FVoidP, size common.FInt) (res *SDL_RWops) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWFromMem").Call(
+func SDL_RWFromMem(mem sdlcommon.FVoidP, size sdlcommon.FInt) (res *SDL_RWops) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWFromMem").Call(
 		mem,
 		uintptr(size),
 	)
@@ -173,8 +173,8 @@ func SDL_RWFromMem(mem common.FVoidP, size common.FInt) (res *SDL_RWops) {
 
 //extern DECLSPEC SDL_RWops *SDLCALL SDL_RWFromConstMem(const void *mem,
 //int size);
-func SDL_RWFromConstMem(mem common.FVoidP, size common.FInt) (res *SDL_RWops) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWFromConstMem").Call(
+func SDL_RWFromConstMem(mem sdlcommon.FVoidP, size sdlcommon.FInt) (res *SDL_RWops) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWFromConstMem").Call(
 		mem,
 		uintptr(size),
 	)
@@ -189,7 +189,7 @@ func SDL_RWFromConstMem(mem common.FVoidP, size common.FInt) (res *SDL_RWops) {
 
 //extern DECLSPEC SDL_RWops *SDLCALL SDL_AllocRW(void);
 func SDL_AllocRW() (res *SDL_RWops) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AllocRW").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AllocRW").Call()
 	if t == 0 {
 
 	}
@@ -199,7 +199,7 @@ func SDL_AllocRW() (res *SDL_RWops) {
 
 //extern DECLSPEC void SDLCALL SDL_FreeRW(SDL_RWops * area);
 func SDL_FreeRW(area *SDL_RWops) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_FreeRW").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FreeRW").Call(
 		uintptr(unsafe.Pointer(area)),
 	)
 	if t == 0 {
@@ -223,14 +223,14 @@ const RW_SEEK_END = 2 /**< Seek relative to the end of data */
  * \since This function is available since SDL 2.0.0.
  */
 //extern DECLSPEC Sint64 SDLCALL SDL_RWsize(SDL_RWops *context);
-func (context *SDL_RWops) SDL_RWsize() (res common.FSint64) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWsize").Call(
+func (context *SDL_RWops) SDL_RWsize() (res sdlcommon.FSint64) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWsize").Call(
 		uintptr(unsafe.Pointer(context)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSint64(t)
+	res = sdlcommon.FSint64(t)
 	return
 }
 
@@ -267,8 +267,8 @@ func (context *SDL_RWops) SDL_RWsize() (res common.FSint64) {
  */
 //extern DECLSPEC Sint64 SDLCALL SDL_RWseek(SDL_RWops *context,
 //Sint64 offset, int whence);
-func (context *SDL_RWops) SDL_RWseek(offset common.FInt64T, whence common.FInt) (res common.FSint64) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWseek").Call(
+func (context *SDL_RWops) SDL_RWseek(offset sdlcommon.FInt64T, whence sdlcommon.FInt) (res sdlcommon.FSint64) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWseek").Call(
 		uintptr(unsafe.Pointer(context)),
 		uintptr(offset),
 		uintptr(whence),
@@ -276,7 +276,7 @@ func (context *SDL_RWops) SDL_RWseek(offset common.FInt64T, whence common.FInt) 
 	if t == 0 {
 
 	}
-	res = common.FSint64(t)
+	res = sdlcommon.FSint64(t)
 	return
 }
 
@@ -302,14 +302,14 @@ func (context *SDL_RWops) SDL_RWseek(offset common.FInt64T, whence common.FInt) 
  * \sa SDL_RWwrite
  */
 //extern DECLSPEC Sint64 SDLCALL SDL_RWtell(SDL_RWops *context);
-func (context *SDL_RWops) SDL_RWtell() (res common.FSint64) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWtell").Call(
+func (context *SDL_RWops) SDL_RWtell() (res sdlcommon.FSint64) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWtell").Call(
 		uintptr(unsafe.Pointer(context)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSint64(t)
+	res = sdlcommon.FSint64(t)
 	return
 }
 
@@ -342,9 +342,9 @@ func (context *SDL_RWops) SDL_RWtell() (res common.FSint64) {
 //extern DECLSPEC size_t SDLCALL SDL_RWread(SDL_RWops *context,
 //void *ptr, size_t size,
 //size_t maxnum);
-func (context *SDL_RWops) SDL_RWread(ptr common.FVoidP, size common.FSizeT,
-	maxnum common.FSizeT) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWread").Call(
+func (context *SDL_RWops) SDL_RWread(ptr sdlcommon.FVoidP, size sdlcommon.FSizeT,
+	maxnum sdlcommon.FSizeT) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWread").Call(
 		ptr,
 		uintptr(size),
 		uintptr(maxnum),
@@ -352,7 +352,7 @@ func (context *SDL_RWops) SDL_RWread(ptr common.FVoidP, size common.FSizeT,
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
@@ -385,9 +385,9 @@ func (context *SDL_RWops) SDL_RWread(ptr common.FVoidP, size common.FSizeT,
 //extern DECLSPEC size_t SDLCALL SDL_RWwrite(SDL_RWops *context,
 //const void *ptr, size_t size,
 //size_t num);
-func (context *SDL_RWops) SDL_RWwrite(ptr common.FVoidP, size common.FSizeT,
-	num common.FSizeT) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWwrite").Call(
+func (context *SDL_RWops) SDL_RWwrite(ptr sdlcommon.FVoidP, size sdlcommon.FSizeT,
+	num sdlcommon.FSizeT) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWwrite").Call(
 		uintptr(unsafe.Pointer(context)),
 		ptr,
 		uintptr(size),
@@ -396,7 +396,7 @@ func (context *SDL_RWops) SDL_RWwrite(ptr common.FVoidP, size common.FSizeT,
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
@@ -427,14 +427,14 @@ func (context *SDL_RWops) SDL_RWwrite(ptr common.FVoidP, size common.FSizeT,
  * \sa SDL_RWwrite
  */
 //extern DECLSPEC int SDLCALL SDL_RWclose(SDL_RWops *context);
-func (context *SDL_RWops) SDL_RWclose() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RWclose").Call(
+func (context *SDL_RWops) SDL_RWclose() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RWclose").Call(
 		uintptr(unsafe.Pointer(context)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -455,8 +455,8 @@ func (context *SDL_RWops) SDL_RWclose() (res common.FInt) {
 //extern DECLSPEC void *SDLCALL SDL_LoadFile_RW(SDL_RWops *src,
 //size_t *datasize,
 //int freesrc);
-func (src *SDL_RWops) SDL_LoadFile_RW(datasize *common.FSizeT, freesrc common.FInt) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LoadFile_RW").Call(
+func (src *SDL_RWops) SDL_LoadFile_RW(datasize *sdlcommon.FSizeT, freesrc sdlcommon.FInt) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadFile_RW").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(datasize)),
 		uintptr(freesrc),
@@ -482,9 +482,9 @@ func (src *SDL_RWops) SDL_LoadFile_RW(datasize *common.FSizeT, freesrc common.FI
  * \returns the data, or NULL if there was an error.
  */
 //extern DECLSPEC void *SDLCALL SDL_LoadFile(const char *file, size_t *datasize);
-func SDL_LoadFile(file common.FConstCharP, datasize common.FInt) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LoadFile").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(file))),
+func SDL_LoadFile(file sdlcommon.FConstCharP, datasize sdlcommon.FInt) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadFile").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(file))),
 		uintptr(datasize),
 	)
 	if t == 0 {
@@ -501,86 +501,86 @@ func SDL_LoadFile(file common.FConstCharP, datasize common.FInt) (res common.FVo
  */
 /* @{ */
 //extern DECLSPEC Uint8 SDLCALL SDL_ReadU8(SDL_RWops * src);
-func (src *SDL_RWops) SDL_ReadU8() (res common.FUint8T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ReadU8").Call(
+func (src *SDL_RWops) SDL_ReadU8() (res sdlcommon.FUint8T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReadU8").Call(
 		uintptr(unsafe.Pointer(src)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint8T(t)
+	res = sdlcommon.FUint8T(t)
 	return
 }
 
 //extern DECLSPEC Uint16 SDLCALL SDL_ReadLE16(SDL_RWops * src);
-func (src *SDL_RWops) SDL_ReadLE16() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ReadLE16").Call(
+func (src *SDL_RWops) SDL_ReadLE16() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReadLE16").Call(
 		uintptr(unsafe.Pointer(src)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
 //extern DECLSPEC Uint16 SDLCALL SDL_ReadBE16(SDL_RWops * src);
-func (src *SDL_RWops) SDL_ReadBE16() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ReadBE16").Call(
+func (src *SDL_RWops) SDL_ReadBE16() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReadBE16").Call(
 		uintptr(unsafe.Pointer(src)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
 //extern DECLSPEC Uint32 SDLCALL SDL_ReadLE32(SDL_RWops * src);
-func (src *SDL_RWops) SDL_ReadLE32() (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ReadLE32").Call(
+func (src *SDL_RWops) SDL_ReadLE32() (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReadLE32").Call(
 		uintptr(unsafe.Pointer(src)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
 //extern DECLSPEC Uint32 SDLCALL SDL_ReadBE32(SDL_RWops * src);
-func (src *SDL_RWops) SDL_ReadBE32() (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ReadBE32").Call(
+func (src *SDL_RWops) SDL_ReadBE32() (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReadBE32").Call(
 		uintptr(unsafe.Pointer(src)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
 //extern DECLSPEC Uint64 SDLCALL SDL_ReadLE64(SDL_RWops * src);
-func (src *SDL_RWops) SDL_ReadLE64() (res common.FUint64T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ReadLE64").Call(
+func (src *SDL_RWops) SDL_ReadLE64() (res sdlcommon.FUint64T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReadLE64").Call(
 		uintptr(unsafe.Pointer(src)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint64T(t)
+	res = sdlcommon.FUint64T(t)
 	return
 }
 
 //extern DECLSPEC Uint64 SDLCALL SDL_ReadBE64(SDL_RWops * src);
-func (src *SDL_RWops) SDL_ReadBE64() (res common.FUint64T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ReadBE64").Call(
+func (src *SDL_RWops) SDL_ReadBE64() (res sdlcommon.FUint64T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReadBE64").Call(
 		uintptr(unsafe.Pointer(src)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint64T(t)
+	res = sdlcommon.FUint64T(t)
 	return
 }
 
@@ -593,92 +593,92 @@ func (src *SDL_RWops) SDL_ReadBE64() (res common.FUint64T) {
  */
 /* @{ */
 //extern DECLSPEC size_t SDLCALL SDL_WriteU8(SDL_RWops * dst, Uint8 value);
-func (dst *SDL_RWops) SDL_WriteU8(value common.FUint8T) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WriteU8").Call(
+func (dst *SDL_RWops) SDL_WriteU8(value sdlcommon.FUint8T) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WriteU8").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
 //extern DECLSPEC size_t SDLCALL SDL_WriteLE16(SDL_RWops * dst, Uint16 value);
-func (dst *SDL_RWops) SDL_WriteLE16(value common.FUint16T) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WriteLE16").Call(
+func (dst *SDL_RWops) SDL_WriteLE16(value sdlcommon.FUint16T) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WriteLE16").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
 //extern DECLSPEC size_t SDLCALL SDL_WriteBE16(SDL_RWops * dst, Uint16 value);
-func (dst *SDL_RWops) SDL_WriteBE16(value common.FUint16T) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WriteBE16").Call(
+func (dst *SDL_RWops) SDL_WriteBE16(value sdlcommon.FUint16T) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WriteBE16").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
 //extern DECLSPEC size_t SDLCALL SDL_WriteLE32(SDL_RWops * dst, Uint32 value);
-func (dst *SDL_RWops) SDL_WriteLE32(value common.FUint32T) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WriteLE32").Call(
+func (dst *SDL_RWops) SDL_WriteLE32(value sdlcommon.FUint32T) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WriteLE32").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
 //extern DECLSPEC size_t SDLCALL SDL_WriteBE32(SDL_RWops * dst, Uint32 value);
-func (dst *SDL_RWops) SDL_WriteBE32(value common.FUint32T) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WriteLE32").Call(
+func (dst *SDL_RWops) SDL_WriteBE32(value sdlcommon.FUint32T) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WriteLE32").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
 //extern DECLSPEC size_t SDLCALL SDL_WriteLE64(SDL_RWops * dst, Uint64 value);
-func (dst *SDL_RWops) SDL_WriteLE64(value common.FUint64T) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WriteLE64").Call(
+func (dst *SDL_RWops) SDL_WriteLE64(value sdlcommon.FUint64T) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WriteLE64").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
 //extern DECLSPEC size_t SDLCALL SDL_WriteBE64(SDL_RWops * dst, Uint64 value);
-func (dst *SDL_RWops) SDL_WriteBE64(value common.FUint64T) (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WriteBE64").Call(
+func (dst *SDL_RWops) SDL_WriteBE64(value sdlcommon.FUint64T) (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WriteBE64").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(value),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }

@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -44,12 +44,12 @@ import (
  * \sa SDL_GetPrefPath
  */
 //extern DECLSPEC char *SDLCALL SDL_GetBasePath(void);
-func SDL_GetBasePath() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetBasePath").Call()
+func SDL_GetBasePath() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetBasePath").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -109,14 +109,14 @@ func SDL_GetBasePath() (res common.FConstCharP) {
  * \sa SDL_GetBasePath
  */
 //extern DECLSPEC char *SDLCALL SDL_GetPrefPath(const char *org, const char *app);
-func SDL_GetPrefPath(org common.FConstCharP, app common.FConstCharP) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetPrefPath").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(org))),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(app))),
+func SDL_GetPrefPath(org sdlcommon.FConstCharP, app sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPrefPath").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(org))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(app))),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }

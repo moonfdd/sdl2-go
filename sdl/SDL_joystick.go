@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -27,7 +27,7 @@ type SDL_Joystick struct {
 
 /* A structure that encodes the stable unique id for a joystick device */
 type SDL_JoystickGUID struct {
-	data [16]common.FUint16T
+	data [16]sdlcommon.FUint16T
 }
 
 /**
@@ -85,7 +85,7 @@ const SDL_IPHONE_MAX_GFORCE = 5.0
  */
 //extern DECLSPEC void SDLCALL SDL_LockJoysticks(void);
 func SDL_LockJoysticks() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LockJoysticks").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LockJoysticks").Call()
 	if t == 0 {
 
 	}
@@ -104,7 +104,7 @@ func SDL_LockJoysticks() {
  */
 //extern DECLSPEC void SDLCALL SDL_UnlockJoysticks(void);
 func SDL_UnlockJoysticks() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_UnlockJoysticks").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UnlockJoysticks").Call()
 	if t == 0 {
 
 	}
@@ -121,12 +121,12 @@ func SDL_UnlockJoysticks() {
  * \sa SDL_JoystickOpen
  */
 //extern DECLSPEC int SDLCALL SDL_NumJoysticks(void);
-func SDL_NumJoysticks() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_NumJoysticks").Call()
+func SDL_NumJoysticks() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_NumJoysticks").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -144,14 +144,14 @@ func SDL_NumJoysticks() (res common.FInt) {
  * \sa SDL_JoystickOpen
  */
 //extern DECLSPEC const char *SDLCALL SDL_JoystickNameForIndex(int device_index);
-func SDL_JoystickNameForIndex(device_index common.FInt) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickNameForIndex").Call(
+func SDL_JoystickNameForIndex(device_index sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickNameForIndex").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -160,14 +160,14 @@ func SDL_JoystickNameForIndex(device_index common.FInt) (res common.FConstCharP)
  * called before any joysticks are opened.
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickGetDevicePlayerIndex(int device_index);
-func SDL_JoystickGetDevicePlayerIndex(device_index common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetDevicePlayerIndex").Call(
+func SDL_JoystickGetDevicePlayerIndex(device_index sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetDevicePlayerIndex").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -186,8 +186,8 @@ func SDL_JoystickGetDevicePlayerIndex(device_index common.FInt) (res common.FInt
  * \sa SDL_JoystickGetGUIDString
  */
 //extern DECLSPEC SDL_JoystickGUID SDLCALL SDL_JoystickGetDeviceGUID(int device_index);
-func SDL_JoystickGetDeviceGUID(device_index common.FInt) (res SDL_JoystickGUID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceGUID").Call(
+func SDL_JoystickGetDeviceGUID(device_index sdlcommon.FInt) (res SDL_JoystickGUID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceGUID").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
@@ -209,14 +209,14 @@ func SDL_JoystickGetDeviceGUID(device_index common.FInt) (res SDL_JoystickGUID) 
  *          invalid index, this function returns zero
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_JoystickGetDeviceVendor(int device_index);
-func SDL_JoystickGetDeviceVendor(device_index common.FInt) (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceVendor").Call(
+func SDL_JoystickGetDeviceVendor(device_index sdlcommon.FInt) (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceVendor").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -232,14 +232,14 @@ func SDL_JoystickGetDeviceVendor(device_index common.FInt) (res common.FUint16T)
  *          invalid index, this function returns zero
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_JoystickGetDeviceProduct(int device_index);
-func SDL_JoystickGetDeviceProduct(device_index common.FInt) (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceProduct").Call(
+func SDL_JoystickGetDeviceProduct(device_index sdlcommon.FInt) (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceProduct").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -255,14 +255,14 @@ func SDL_JoystickGetDeviceProduct(device_index common.FInt) (res common.FUint16T
  *          invalid index, this function returns zero
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_JoystickGetDeviceProductVersion(int device_index);
-func SDL_JoystickGetDeviceProductVersion(device_index common.FInt) (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceProductVersion").Call(
+func SDL_JoystickGetDeviceProductVersion(device_index sdlcommon.FInt) (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceProductVersion").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -277,8 +277,8 @@ func SDL_JoystickGetDeviceProductVersion(device_index common.FInt) (res common.F
  *          invalid index, this function returns `SDL_JOYSTICK_TYPE_UNKNOWN`
  */
 //extern DECLSPEC SDL_JoystickType SDLCALL SDL_JoystickGetDeviceType(int device_index);
-func SDL_JoystickGetDeviceType(device_index common.FInt) (res SDL_JoystickType) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceType").Call(
+func SDL_JoystickGetDeviceType(device_index sdlcommon.FInt) (res SDL_JoystickType) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceType").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
@@ -300,8 +300,8 @@ func SDL_JoystickGetDeviceType(device_index common.FInt) (res SDL_JoystickType) 
  *          index, this function returns zero
  */
 //extern DECLSPEC SDL_JoystickID SDLCALL SDL_JoystickGetDeviceInstanceID(int device_index);
-func SDL_JoystickGetDeviceInstanceID(device_index common.FInt) (res SDL_JoystickID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceInstanceID").Call(
+func SDL_JoystickGetDeviceInstanceID(device_index sdlcommon.FInt) (res SDL_JoystickID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetDeviceInstanceID").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
@@ -330,8 +330,8 @@ func SDL_JoystickGetDeviceInstanceID(device_index common.FInt) (res SDL_Joystick
  * \sa SDL_JoystickInstanceID
  */
 //extern DECLSPEC SDL_Joystick *SDLCALL SDL_JoystickOpen(int device_index);
-func SDL_JoystickOpen(device_index common.FInt) (res *SDL_Joystick) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickOpen").Call(
+func SDL_JoystickOpen(device_index sdlcommon.FInt) (res *SDL_Joystick) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickOpen").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
@@ -352,7 +352,7 @@ func SDL_JoystickOpen(device_index common.FInt) (res *SDL_Joystick) {
  */
 //extern DECLSPEC SDL_Joystick *SDLCALL SDL_JoystickFromInstanceID(SDL_JoystickID instance_id);
 func SDL_JoystickFromInstanceID(instance_id SDL_JoystickID) (res *SDL_Joystick) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickFromInstanceID").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickFromInstanceID").Call(
 		uintptr(instance_id),
 	)
 	if t == 0 {
@@ -370,8 +370,8 @@ func SDL_JoystickFromInstanceID(instance_id SDL_JoystickID) (res *SDL_Joystick) 
  *          for more information.
  */
 //extern DECLSPEC SDL_Joystick *SDLCALL SDL_JoystickFromPlayerIndex(int player_index);
-func SDL_JoystickFromPlayerIndex(player_index common.FInt) (res *SDL_Joystick) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickFromPlayerIndex").Call(
+func SDL_JoystickFromPlayerIndex(player_index sdlcommon.FInt) (res *SDL_Joystick) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickFromPlayerIndex").Call(
 		uintptr(player_index),
 	)
 	if t == 0 {
@@ -392,10 +392,10 @@ func SDL_JoystickFromPlayerIndex(player_index common.FInt) (res *SDL_Joystick) {
 //int nhats);
 func SDL_JoystickAttachVirtual(
 	type0 SDL_JoystickType,
-	naxes common.FInt,
-	nbuttons common.FInt,
-	nhats common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickAttachVirtual").Call(
+	naxes sdlcommon.FInt,
+	nbuttons sdlcommon.FInt,
+	nhats sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickAttachVirtual").Call(
 		uintptr(type0),
 		uintptr(naxes),
 		uintptr(nbuttons),
@@ -404,7 +404,7 @@ func SDL_JoystickAttachVirtual(
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -416,14 +416,14 @@ func SDL_JoystickAttachVirtual(
  * \returns 0 on success, or -1 if an error occurred.
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickDetachVirtual(int device_index);
-func SDL_JoystickDetachVirtual(device_index common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickDetachVirtual").Call(
+func SDL_JoystickDetachVirtual(device_index sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickDetachVirtual").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -434,14 +434,14 @@ func SDL_JoystickDetachVirtual(device_index common.FInt) (res common.FInt) {
  * \returns SDL_TRUE if the joystick is virtual, SDL_FALSE otherwise.
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_JoystickIsVirtual(int device_index);
-func SDL_JoystickIsVirtual(device_index common.FInt) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickIsVirtual").Call(
+func SDL_JoystickIsVirtual(device_index sdlcommon.FInt) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickIsVirtual").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -460,8 +460,8 @@ func SDL_JoystickIsVirtual(device_index common.FInt) (res bool) {
  * \returns 0 on success, -1 on error.
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickSetVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value);
-func (joystick *SDL_Joystick) SDL_JoystickSetVirtualAxis(axis common.FInt, value common.FSint16) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickSetVirtualAxis").Call(
+func (joystick *SDL_Joystick) SDL_JoystickSetVirtualAxis(axis sdlcommon.FInt, value sdlcommon.FSint16) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickSetVirtualAxis").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(axis),
 		uintptr(value),
@@ -469,7 +469,7 @@ func (joystick *SDL_Joystick) SDL_JoystickSetVirtualAxis(axis common.FInt, value
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -488,8 +488,8 @@ func (joystick *SDL_Joystick) SDL_JoystickSetVirtualAxis(axis common.FInt, value
  * \returns 0 on success, -1 on error.
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickSetVirtualButton(SDL_Joystick *joystick, int button, Uint8 value);
-func (joystick *SDL_Joystick) SDL_JoystickSetVirtualButton(button common.FInt, value common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickSetVirtualButton").Call(
+func (joystick *SDL_Joystick) SDL_JoystickSetVirtualButton(button sdlcommon.FInt, value sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickSetVirtualButton").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(button),
 		uintptr(value),
@@ -497,7 +497,7 @@ func (joystick *SDL_Joystick) SDL_JoystickSetVirtualButton(button common.FInt, v
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -516,8 +516,8 @@ func (joystick *SDL_Joystick) SDL_JoystickSetVirtualButton(button common.FInt, v
  * \returns 0 on success, -1 on error.
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickSetVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value);
-func (joystick *SDL_Joystick) SDL_JoystickSetVirtualHat(hat common.FInt, value common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickSetVirtualHat").Call(
+func (joystick *SDL_Joystick) SDL_JoystickSetVirtualHat(hat sdlcommon.FInt, value sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickSetVirtualHat").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(hat),
 		uintptr(value),
@@ -525,7 +525,7 @@ func (joystick *SDL_Joystick) SDL_JoystickSetVirtualHat(hat common.FInt, value c
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -542,14 +542,14 @@ func (joystick *SDL_Joystick) SDL_JoystickSetVirtualHat(hat common.FInt, value c
  * \sa SDL_JoystickOpen
  */
 //extern DECLSPEC const char *SDLCALL SDL_JoystickName(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickName() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickName").Call(
+func (joystick *SDL_Joystick) SDL_JoystickName() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickName").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -563,14 +563,14 @@ func (joystick *SDL_Joystick) SDL_JoystickName() (res common.FConstCharP) {
  * \returns the player index, or -1 if it's not available.
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickGetPlayerIndex(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickGetPlayerIndex() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetPlayerIndex").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetPlayerIndex() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetPlayerIndex").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -581,8 +581,8 @@ func (joystick *SDL_Joystick) SDL_JoystickGetPlayerIndex() (res common.FInt) {
  * \param player_index the player index to set.
  */
 //extern DECLSPEC void SDLCALL SDL_JoystickSetPlayerIndex(SDL_Joystick *joystick, int player_index);
-func (joystick *SDL_Joystick) SDL_JoystickSetPlayerIndex(player_index common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickSetPlayerIndex").Call(
+func (joystick *SDL_Joystick) SDL_JoystickSetPlayerIndex(player_index sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickSetPlayerIndex").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(player_index),
 	)
@@ -607,7 +607,7 @@ func (joystick *SDL_Joystick) SDL_JoystickSetPlayerIndex(player_index common.FIn
  */
 //extern DECLSPEC SDL_JoystickGUID SDLCALL SDL_JoystickGetGUID(SDL_Joystick *joystick);
 func (joystick *SDL_Joystick) SDL_JoystickGetGUID() (res SDL_JoystickGUID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetGUID").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetGUID").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
@@ -626,14 +626,14 @@ func (joystick *SDL_Joystick) SDL_JoystickGetGUID() (res SDL_JoystickGUID) {
  * \returns the USB vendor ID of the selected joystick, or 0 if unavailable.
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_JoystickGetVendor(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickGetVendor() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetVendor").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetVendor() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetVendor").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -646,14 +646,14 @@ func (joystick *SDL_Joystick) SDL_JoystickGetVendor() (res common.FUint16T) {
  * \returns the USB product ID of the selected joystick, or 0 if unavailable.
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_JoystickGetProduct(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickGetProduct() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetProduct").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetProduct() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetProduct").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -666,14 +666,14 @@ func (joystick *SDL_Joystick) SDL_JoystickGetProduct() (res common.FUint16T) {
  * \returns the product version of the selected joystick, or 0 if unavailable.
  */
 //extern DECLSPEC Uint16 SDLCALL SDL_JoystickGetProductVersion(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickGetProductVersion() (res common.FUint16T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetProductVersion").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetProductVersion() (res sdlcommon.FUint16T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetProductVersion").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint16T(t)
+	res = sdlcommon.FUint16T(t)
 	return
 }
 
@@ -687,14 +687,14 @@ func (joystick *SDL_Joystick) SDL_JoystickGetProductVersion() (res common.FUint1
  *          unavailable.
  */
 //extern DECLSPEC const char * SDLCALL SDL_JoystickGetSerial(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickGetSerial() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetSerial").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetSerial() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetSerial").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -706,7 +706,7 @@ func (joystick *SDL_Joystick) SDL_JoystickGetSerial() (res common.FConstCharP) {
  */
 //extern DECLSPEC SDL_JoystickType SDLCALL SDL_JoystickGetType(SDL_Joystick *joystick);
 func (joystick *SDL_Joystick) SDL_JoystickGetType() (res SDL_JoystickType) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetType").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetType").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
@@ -730,10 +730,10 @@ func (joystick *SDL_Joystick) SDL_JoystickGetType() (res SDL_JoystickType) {
  * \sa SDL_JoystickGetGUIDFromString
  */
 //extern DECLSPEC void SDLCALL SDL_JoystickGetGUIDString(SDL_JoystickGUID guid, char *pszGUID, int cbGUID);
-func SDL_JoystickGetGUIDString(guid SDL_JoystickGUID, pszGUID common.FCharP, cbGUID common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetGUIDString").Call(
+func SDL_JoystickGetGUIDString(guid SDL_JoystickGUID, pszGUID sdlcommon.FCharP, cbGUID sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetGUIDString").Call(
 		uintptr(unsafe.Pointer(&guid)),
-		common.UintPtrFromString(pszGUID),
+		sdlcommon.UintPtrFromString(pszGUID),
 		uintptr(cbGUID),
 	)
 	if t == 0 {
@@ -755,9 +755,9 @@ func SDL_JoystickGetGUIDString(guid SDL_JoystickGUID, pszGUID common.FCharP, cbG
  * \sa SDL_JoystickGetGUIDString
  */
 //extern DECLSPEC SDL_JoystickGUID SDLCALL SDL_JoystickGetGUIDFromString(const char *pchGUID);
-func SDL_JoystickGetGUIDFromString(pchGUID common.FCharP) (res SDL_JoystickGUID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetGUIDFromString").Call(
-		common.UintPtrFromString(pchGUID),
+func SDL_JoystickGetGUIDFromString(pchGUID sdlcommon.FCharP) (res SDL_JoystickGUID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetGUIDFromString").Call(
+		sdlcommon.UintPtrFromString(pchGUID),
 	)
 	if t == 0 {
 
@@ -778,13 +778,13 @@ func SDL_JoystickGetGUIDFromString(pchGUID common.FCharP) (res SDL_JoystickGUID)
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAttached(SDL_Joystick *joystick);
 func (joystick *SDL_Joystick) SDL_JoystickGetAttached() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetAttached").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetAttached").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -799,7 +799,7 @@ func (joystick *SDL_Joystick) SDL_JoystickGetAttached() (res bool) {
  */
 //extern DECLSPEC SDL_JoystickID SDLCALL SDL_JoystickInstanceID(SDL_Joystick *joystick);
 func (joystick *SDL_Joystick) SDL_JoystickInstanceID() (res SDL_JoystickID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickInstanceID").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickInstanceID").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
@@ -825,14 +825,14 @@ func (joystick *SDL_Joystick) SDL_JoystickInstanceID() (res SDL_JoystickID) {
  * \sa SDL_JoystickOpen
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickNumAxes(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickNumAxes() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickNumAxes").Call(
+func (joystick *SDL_Joystick) SDL_JoystickNumAxes() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickNumAxes").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -851,14 +851,14 @@ func (joystick *SDL_Joystick) SDL_JoystickNumAxes() (res common.FInt) {
  * \sa SDL_JoystickGetBall
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickNumBalls(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickNumBalls() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickNumBalls").Call(
+func (joystick *SDL_Joystick) SDL_JoystickNumBalls() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickNumBalls").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -873,14 +873,14 @@ func (joystick *SDL_Joystick) SDL_JoystickNumBalls() (res common.FInt) {
  * \sa SDL_JoystickOpen
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickNumHats(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickNumHats() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickNumHats").Call(
+func (joystick *SDL_Joystick) SDL_JoystickNumHats() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickNumHats").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -895,14 +895,14 @@ func (joystick *SDL_Joystick) SDL_JoystickNumHats() (res common.FInt) {
  * \sa SDL_JoystickOpen
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickNumButtons(SDL_Joystick *joystick);
-func (joystick *SDL_Joystick) SDL_JoystickNumButtons() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickNumButtons").Call(
+func (joystick *SDL_Joystick) SDL_JoystickNumButtons() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickNumButtons").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -916,7 +916,7 @@ func (joystick *SDL_Joystick) SDL_JoystickNumButtons() (res common.FInt) {
  */
 //extern DECLSPEC void SDLCALL SDL_JoystickUpdate(void);
 func SDL_JoystickUpdate() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickUpdate").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickUpdate").Call()
 	if t == 0 {
 
 	}
@@ -945,14 +945,14 @@ func SDL_JoystickUpdate() {
  * \sa SDL_GameControllerEventState
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickEventState(int state);
-func SDL_JoystickEventState(state common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickEventState").Call(
+func SDL_JoystickEventState(state sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickEventState").Call(
 		uintptr(state),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -981,15 +981,15 @@ const SDL_JOYSTICK_AXIS_MIN = -32768
  */
 //extern DECLSPEC Sint16 SDLCALL SDL_JoystickGetAxis(SDL_Joystick *joystick,
 //int axis);
-func (joystick *SDL_Joystick) SDL_JoystickGetAxis(axis common.FInt) (res common.FSint16) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetAxis").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetAxis(axis sdlcommon.FInt) (res sdlcommon.FSint16) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetAxis").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(axis),
 	)
 	if t == 0 {
 
 	}
-	res = common.FSint16(t)
+	res = sdlcommon.FSint16(t)
 	return
 }
 
@@ -1007,8 +1007,8 @@ func (joystick *SDL_Joystick) SDL_JoystickGetAxis(axis common.FInt) (res common.
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAxisInitialState(SDL_Joystick *joystick,
 //int axis, Sint16 *state);
-func (joystick *SDL_Joystick) SDL_JoystickGetAxisInitialState(axis common.FInt, state *common.FSint16) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetAxisInitialState").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetAxisInitialState(axis sdlcommon.FInt, state *sdlcommon.FSint16) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetAxisInitialState").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(axis),
 		uintptr(unsafe.Pointer(state)),
@@ -1016,7 +1016,7 @@ func (joystick *SDL_Joystick) SDL_JoystickGetAxisInitialState(axis common.FInt, 
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1059,15 +1059,15 @@ const SDL_HAT_LEFTDOWN = (SDL_HAT_LEFT | SDL_HAT_DOWN)
  */
 //extern DECLSPEC Uint8 SDLCALL SDL_JoystickGetHat(SDL_Joystick *joystick,
 //int hat);
-func (joystick *SDL_Joystick) SDL_JoystickGetHat(hat common.FInt) (res common.FUint8T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetHat").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetHat(hat sdlcommon.FInt) (res sdlcommon.FUint8T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetHat").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(hat),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint8T(t)
+	res = sdlcommon.FUint8T(t)
 	return
 }
 
@@ -1090,8 +1090,8 @@ func (joystick *SDL_Joystick) SDL_JoystickGetHat(hat common.FInt) (res common.FU
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickGetBall(SDL_Joystick *joystick,
 //int ball, int *dx, int *dy);
-func (joystick *SDL_Joystick) SDL_JoystickGetBall(ball common.FInt, dx, dy *common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetBall").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetBall(ball sdlcommon.FInt, dx, dy *sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetBall").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(ball),
 		uintptr(unsafe.Pointer(dx)),
@@ -1100,7 +1100,7 @@ func (joystick *SDL_Joystick) SDL_JoystickGetBall(ball common.FInt, dx, dy *comm
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1116,15 +1116,15 @@ func (joystick *SDL_Joystick) SDL_JoystickGetBall(ball common.FInt, dx, dy *comm
  */
 //extern DECLSPEC Uint8 SDLCALL SDL_JoystickGetButton(SDL_Joystick *joystick,
 //int button);
-func (joystick *SDL_Joystick) SDL_JoystickGetButton(button common.FInt) (res common.FUint8T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickGetButton").Call(
+func (joystick *SDL_Joystick) SDL_JoystickGetButton(button sdlcommon.FInt) (res sdlcommon.FUint8T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickGetButton").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(button),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint8T(t)
+	res = sdlcommon.FUint8T(t)
 	return
 }
 
@@ -1143,8 +1143,8 @@ func (joystick *SDL_Joystick) SDL_JoystickGetButton(button common.FInt) (res com
  * \returns 0, or -1 if rumble isn't supported on this joystick
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickRumble(SDL_Joystick *joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms);
-func (joystick *SDL_Joystick) SDL_JoystickRumble(low_frequency_rumble common.FUint16T, high_frequency_rumble common.FUint16T, duration_ms common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickRumble").Call(
+func (joystick *SDL_Joystick) SDL_JoystickRumble(low_frequency_rumble sdlcommon.FUint16T, high_frequency_rumble sdlcommon.FUint16T, duration_ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickRumble").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(low_frequency_rumble),
 		uintptr(high_frequency_rumble),
@@ -1153,7 +1153,7 @@ func (joystick *SDL_Joystick) SDL_JoystickRumble(low_frequency_rumble common.FUi
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1165,7 +1165,7 @@ func (joystick *SDL_Joystick) SDL_JoystickRumble(low_frequency_rumble common.FUi
  *
  * Note that this function is for _trigger_ rumble; the first joystick to
  * support this was the PlayStation 5's DualShock 5 controller. If you want
- * the (more common) whole-controller rumble, use SDL_JoystickRumble()
+ * the (more sdlcommon) whole-controller rumble, use SDL_JoystickRumble()
  * instead.
  *
  * \param joystick The joystick to vibrate
@@ -1177,8 +1177,8 @@ func (joystick *SDL_Joystick) SDL_JoystickRumble(low_frequency_rumble common.FUi
  * \returns 0, or -1 if trigger rumble isn't supported on this joystick
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickRumbleTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms);
-func (joystick *SDL_Joystick) SDL_JoystickRumbleTriggers(left_rumble common.FUint16T, right_rumble common.FUint16T, duration_ms common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickRumbleTriggers").Call(
+func (joystick *SDL_Joystick) SDL_JoystickRumbleTriggers(left_rumble sdlcommon.FUint16T, right_rumble sdlcommon.FUint16T, duration_ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickRumbleTriggers").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(left_rumble),
 		uintptr(right_rumble),
@@ -1187,7 +1187,7 @@ func (joystick *SDL_Joystick) SDL_JoystickRumbleTriggers(left_rumble common.FUin
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1202,13 +1202,13 @@ func (joystick *SDL_Joystick) SDL_JoystickRumbleTriggers(left_rumble common.FUin
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_JoystickHasLED(SDL_Joystick *joystick);
 func (joystick *SDL_Joystick) SDL_JoystickHasLED() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickHasLED").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickHasLED").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -1225,8 +1225,8 @@ func (joystick *SDL_Joystick) SDL_JoystickHasLED() (res bool) {
  * \returns 0 on success, -1 if this joystick does not have a modifiable LED
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickSetLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8 blue);
-func (joystick *SDL_Joystick) SDL_JoystickSetLED(red, green, blue common.FUint8T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickSetLED").Call(
+func (joystick *SDL_Joystick) SDL_JoystickSetLED(red, green, blue sdlcommon.FUint8T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickSetLED").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		uintptr(red),
 		uintptr(green),
@@ -1235,7 +1235,7 @@ func (joystick *SDL_Joystick) SDL_JoystickSetLED(red, green, blue common.FUint8T
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1248,8 +1248,8 @@ func (joystick *SDL_Joystick) SDL_JoystickSetLED(red, green, blue common.FUint8T
  * \returns 0, or -1 if this joystick or driver doesn't support effect packets
  */
 //extern DECLSPEC int SDLCALL SDL_JoystickSendEffect(SDL_Joystick *joystick, const void *data, int size);
-func (joystick *SDL_Joystick) SDL_JoystickSendEffect(data common.FConstVoidP, size common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickSendEffect").Call(
+func (joystick *SDL_Joystick) SDL_JoystickSendEffect(data sdlcommon.FConstVoidP, size sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickSendEffect").Call(
 		uintptr(unsafe.Pointer(joystick)),
 		data,
 		uintptr(size),
@@ -1257,7 +1257,7 @@ func (joystick *SDL_Joystick) SDL_JoystickSendEffect(data common.FConstVoidP, si
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1270,7 +1270,7 @@ func (joystick *SDL_Joystick) SDL_JoystickSendEffect(data common.FConstVoidP, si
  */
 //extern DECLSPEC void SDLCALL SDL_JoystickClose(SDL_Joystick *joystick);
 func (joystick *SDL_Joystick) SDL_JoystickClose() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickClose").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickClose").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {
@@ -1290,7 +1290,7 @@ func (joystick *SDL_Joystick) SDL_JoystickClose() {
  */
 //extern DECLSPEC SDL_JoystickPowerLevel SDLCALL SDL_JoystickCurrentPowerLevel(SDL_Joystick *joystick);
 func (joystick *SDL_Joystick) SDL_JoystickCurrentPowerLevel() (res SDL_JoystickPowerLevel) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_JoystickCurrentPowerLevel").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickCurrentPowerLevel").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
 	if t == 0 {

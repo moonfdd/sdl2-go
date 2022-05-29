@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -12,8 +12,8 @@ import (
  * \sa SDL_PointInRect
  */
 type SDL_Point struct {
-	X common.FInt
-	Y common.FInt
+	X sdlcommon.FInt
+	Y sdlcommon.FInt
 }
 
 /**
@@ -23,8 +23,8 @@ type SDL_Point struct {
  * \sa SDL_PointInRect
  */
 type SDL_FPoint struct {
-	X common.FFloat
-	Y common.FFloat
+	X sdlcommon.FFloat
+	Y sdlcommon.FFloat
 }
 
 /**
@@ -38,18 +38,18 @@ type SDL_FPoint struct {
  * \sa SDL_EnclosePoints
  */
 type SDL_Rect struct {
-	X, Y common.FInt
-	W, H common.FInt
+	X, Y sdlcommon.FInt
+	W, H sdlcommon.FInt
 }
 
 /**
  * A rectangle, with the origin at the upper left (floating point).
  */
 type SDL_FRect struct {
-	X common.FFloat
-	Y common.FFloat
-	W common.FFloat
-	H common.FFloat
+	X sdlcommon.FFloat
+	Y sdlcommon.FFloat
+	W sdlcommon.FFloat
+	H sdlcommon.FFloat
 }
 
 ///**
@@ -94,14 +94,14 @@ type SDL_FRect struct {
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasIntersection(const SDL_Rect * A,
 //const SDL_Rect * B);
 func SDL_HasIntersection(A, B *SDL_Rect) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasIntersection").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasIntersection").Call(
 		uintptr(unsafe.Pointer(A)),
 		uintptr(unsafe.Pointer(B)),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -124,7 +124,7 @@ func SDL_HasIntersection(A, B *SDL_Rect) (res bool) {
 //const SDL_Rect * B,
 //SDL_Rect * result);
 func SDL_IntersectRect(A, B, result *SDL_Rect) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IntersectRect").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IntersectRect").Call(
 		uintptr(unsafe.Pointer(A)),
 		uintptr(unsafe.Pointer(B)),
 		uintptr(unsafe.Pointer(result)),
@@ -132,7 +132,7 @@ func SDL_IntersectRect(A, B, result *SDL_Rect) (res bool) {
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -148,7 +148,7 @@ func SDL_IntersectRect(A, B, result *SDL_Rect) (res bool) {
 //const SDL_Rect * B,
 //SDL_Rect * result);
 func SDL_UnionRect(A, B, result *SDL_Rect) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_UnionRect").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UnionRect").Call(
 		uintptr(unsafe.Pointer(A)),
 		uintptr(unsafe.Pointer(B)),
 		uintptr(unsafe.Pointer(result)),
@@ -178,10 +178,10 @@ func SDL_UnionRect(A, B, result *SDL_Rect) {
 //int count,
 //const SDL_Rect * clip,
 //SDL_Rect * result);
-func (points *SDL_Point) SDL_EnclosePoints(count common.FInt,
+func (points *SDL_Point) SDL_EnclosePoints(count sdlcommon.FInt,
 	clip *SDL_Rect,
 	result *SDL_Rect) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_EnclosePoints").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EnclosePoints").Call(
 		uintptr(unsafe.Pointer(points)),
 		uintptr(count),
 		uintptr(unsafe.Pointer(clip)),
@@ -190,7 +190,7 @@ func (points *SDL_Point) SDL_EnclosePoints(count common.FInt,
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -214,10 +214,10 @@ func (points *SDL_Point) SDL_EnclosePoints(count common.FInt,
 //rect, int *X1,
 //int *Y1, int *X2,
 //int *Y2);
-func (rect *SDL_Rect) SDL_IntersectRectAndLine(X1 *common.FInt,
-	Y1 *common.FInt, X2 *common.FInt,
-	Y2 *common.FInt) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IntersectRectAndLine").Call(
+func (rect *SDL_Rect) SDL_IntersectRectAndLine(X1 *sdlcommon.FInt,
+	Y1 *sdlcommon.FInt, X2 *sdlcommon.FInt,
+	Y2 *sdlcommon.FInt) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IntersectRectAndLine").Call(
 		uintptr(unsafe.Pointer(rect)),
 		uintptr(unsafe.Pointer(X1)),
 		uintptr(unsafe.Pointer(Y1)),
@@ -227,6 +227,6 @@ func (rect *SDL_Rect) SDL_IntersectRectAndLine(X1 *common.FInt,
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }

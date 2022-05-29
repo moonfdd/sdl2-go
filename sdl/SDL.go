@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /* As of version 0.5, SDL is loaded dynamically into the application */
@@ -72,11 +72,11 @@ const SDL_INIT_EVERYTHING = SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | S
  * \sa SDL_WasInit
  */
 //extern DECLSPEC int SDLCALL SDL_Init(Uint32 flags);
-func SDL_Init(flags common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Init").Call(
+func SDL_Init(flags sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Init").Call(
 		uintptr(flags),
 	)
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -94,11 +94,11 @@ func SDL_Init(flags common.FUint32T) (res common.FInt) {
  * \sa SDL_QuitSubSystem
  */
 //extern DECLSPEC int SDLCALL SDL_InitSubSystem(Uint32 flags);
-func SDL_InitSubSystem(flags common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_InitSubSystem").Call(
+func SDL_InitSubSystem(flags sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_InitSubSystem").Call(
 		uintptr(flags),
 	)
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -135,11 +135,11 @@ func SDL_InitSubSystem(flags common.FUint32T) (res common.FInt) {
  * \sa SDL_InitSubSystem
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_WasInit(Uint32 flags);
-func SDL_WasInit(flags common.FUint32T) (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WasInit").Call(
+func SDL_WasInit(flags sdlcommon.FUint32T) (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WasInit").Call(
 		uintptr(flags),
 	)
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -165,6 +165,6 @@ func SDL_WasInit(flags common.FUint32T) (res common.FUint32T) {
  */
 //extern DECLSPEC void SDLCALL SDL_Quit(void);
 func SDL_Quit() {
-	common.GetSDL2Dll().NewProc("SDL_Quit").Call()
+	sdlcommon.GetSDL2Dll().NewProc("SDL_Quit").Call()
 	return
 }

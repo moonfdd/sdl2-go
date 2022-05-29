@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -36,9 +36,9 @@ const SDL_WINDOW_LACKS_SHAPE = -3
  * \sa SDL_DestroyWindow
  */
 //extern DECLSPEC SDL_Window * SDLCALL SDL_CreateShapedWindow(const char *title,unsigned int x,unsigned int y,unsigned int w,unsigned int h,Uint32 flags);
-func SDL_CreateShapedWindow(title common.FConstCharP, x common.FUint, y common.FUint, w common.FUint, h common.FUint, flags common.FUint32T) (res *SDL_Window) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateShapedWindow").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(title))),
+func SDL_CreateShapedWindow(title sdlcommon.FConstCharP, x sdlcommon.FUint, y sdlcommon.FUint, w sdlcommon.FUint, h sdlcommon.FUint, flags sdlcommon.FUint32T) (res *SDL_Window) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateShapedWindow").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(title))),
 		uintptr(x),
 		uintptr(y),
 		uintptr(w),
@@ -63,13 +63,13 @@ func SDL_CreateShapedWindow(title common.FConstCharP, x common.FUint, y common.F
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_IsShapedWindow(const SDL_Window *window);
 func (window *SDL_Window) SDL_IsShapedWindow() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IsShapedWindow").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsShapedWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -90,7 +90,7 @@ const (
 //#define SDL_SHAPEMODEALPHA(mode) (mode == ShapeModeDefault || mode == ShapeModeBinarizeAlpha || mode == ShapeModeReverseBinarizeAlpha)
 
 /** \brief A union containing parameters for shaped windows. */
-type SDL_WindowShapeParams = common.FUint8T
+type SDL_WindowShapeParams = sdlcommon.FUint8T
 
 //typedef union {
 ///** \brief A cutoff alpha value for binarization of the window shape's alpha channel. */
@@ -121,8 +121,8 @@ type SDL_WindowShapeMode struct {
  * \sa SDL_GetShapedWindowMode
  */
 //extern DECLSPEC int SDLCALL SDL_SetWindowShape(SDL_Window *window,SDL_Surface *shape,SDL_WindowShapeMode *shape_mode);
-func (window *SDL_Window) SDL_SetWindowShape(shape *SDL_Surface, shape_mode *SDL_WindowShapeMode) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetWindowShape").Call(
+func (window *SDL_Window) SDL_SetWindowShape(shape *SDL_Surface, shape_mode *SDL_WindowShapeMode) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowShape").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(shape)),
 		uintptr(unsafe.Pointer(shape_mode)),
@@ -130,7 +130,7 @@ func (window *SDL_Window) SDL_SetWindowShape(shape *SDL_Surface, shape_mode *SDL
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -150,14 +150,14 @@ func (window *SDL_Window) SDL_SetWindowShape(shape *SDL_Surface, shape_mode *SDL
  * \sa SDL_SetWindowShape
  */
 //extern DECLSPEC int SDLCALL SDL_GetShapedWindowMode(SDL_Window *window,SDL_WindowShapeMode *shape_mode);
-func (window *SDL_Window) SDL_GetShapedWindowMode(shape_mode *SDL_WindowShapeMode) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetShapedWindowMode").Call(
+func (window *SDL_Window) SDL_GetShapedWindowMode(shape_mode *SDL_WindowShapeMode) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetShapedWindowMode").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(shape_mode)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

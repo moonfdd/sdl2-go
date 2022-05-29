@@ -1,6 +1,6 @@
 package sdl
 
-import "github.com/moonfdd/sdl2-go/common"
+import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 /**
  *  \brief The blend mode used in SDL_RenderCopy() and drawing operations.
@@ -163,7 +163,7 @@ func SDL_ComposeCustomBlendMode(srcColorFactor SDL_BlendFactor,
 	srcAlphaFactor SDL_BlendFactor,
 	dstAlphaFactor SDL_BlendFactor,
 	alphaOperation SDL_BlendOperation) (res SDL_BlendMode) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ComposeCustomBlendMode").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ComposeCustomBlendMode").Call(
 		uintptr(srcColorFactor),
 		uintptr(dstColorFactor),
 		uintptr(colorOperation),

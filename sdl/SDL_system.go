@@ -1,12 +1,12 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
 //typedef void (SDLCALL * SDL_WindowsMessageHook)(void *userdata, void *hWnd, unsigned int message, Uint64 wParam, Sint64 lParam);
-type SDL_WindowsMessageHook = func(userdata common.FVoidP, hWnd common.FVoidP, message common.FUint, wParam common.FUint64T, lParam common.FSint64) uintptr
+type SDL_WindowsMessageHook = func(userdata sdlcommon.FVoidP, hWnd sdlcommon.FVoidP, message sdlcommon.FUint, wParam sdlcommon.FUint64T, lParam sdlcommon.FSint64) uintptr
 
 /**
  * Set a callback for every Windows message, run before TranslateMessage().
@@ -15,9 +15,9 @@ type SDL_WindowsMessageHook = func(userdata common.FVoidP, hWnd common.FVoidP, m
  * \param userdata a pointer to pass to every iteration of `callback`
  */
 //extern DECLSPEC void SDLCALL SDL_SetWindowsMessageHook(SDL_WindowsMessageHook callback, void *userdata);
-func SDL_SetWindowsMessageHook(callback SDL_WindowsMessageHook, userdata common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetWindowsMessageHook").Call(
-		common.NewCallback(callback),
+func SDL_SetWindowsMessageHook(callback SDL_WindowsMessageHook, userdata sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowsMessageHook").Call(
+		sdlcommon.NewCallback(callback),
 		userdata,
 	)
 	if t == 0 {
@@ -40,14 +40,14 @@ func SDL_SetWindowsMessageHook(callback SDL_WindowsMessageHook, userdata common.
  * \since This function is available since SDL 2.0.1.
  */
 //extern DECLSPEC int SDLCALL SDL_Direct3D9GetAdapterIndex( int displayIndex );
-func SDL_Direct3D9GetAdapterIndex(displayIndex common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Direct3D9GetAdapterIndex").Call(
+func SDL_Direct3D9GetAdapterIndex(displayIndex sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Direct3D9GetAdapterIndex").Call(
 		uintptr(displayIndex),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -67,8 +67,8 @@ type IDirect3DDevice9 struct {
  * \since This function is available since SDL 2.0.1.
  */
 //extern DECLSPEC IDirect3DDevice9* SDLCALL SDL_RenderGetD3D9Device(SDL_Renderer * renderer);
-func (renderer *SDL_Renderer) SDL_RenderGetD3D9Device(displayIndex common.FInt) (res *IDirect3DDevice9) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RenderGetD3D9Device").Call(
+func (renderer *SDL_Renderer) SDL_RenderGetD3D9Device(displayIndex sdlcommon.FInt) (res *IDirect3DDevice9) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderGetD3D9Device").Call(
 		uintptr(displayIndex),
 	)
 	if t == 0 {
@@ -93,8 +93,8 @@ type ID3D11Device struct {
  *          not a D3D11 renderer; call SDL_GetError() for more information.
  */
 //extern DECLSPEC ID3D11Device* SDLCALL SDL_RenderGetD3D11Device(SDL_Renderer * renderer);
-func (renderer *SDL_Renderer) SDL_RenderGetD3D11Device(displayIndex common.FInt) (res *ID3D11Device) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RenderGetD3D11Device").Call(
+func (renderer *SDL_Renderer) SDL_RenderGetD3D11Device(displayIndex sdlcommon.FInt) (res *ID3D11Device) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderGetD3D11Device").Call(
 		uintptr(displayIndex),
 	)
 	if t == 0 {
@@ -123,8 +123,8 @@ func (renderer *SDL_Renderer) SDL_RenderGetD3D11Device(displayIndex common.FInt)
  * \since This function is available since SDL 2.0.2.
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_DXGIGetOutputInfo( int displayIndex, int *adapterIndex, int *outputIndex );
-func SDL_DXGIGetOutputInfo(displayIndex common.FInt, adapterIndex *common.FInt, outputIndex *common.FInt) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_DXGIGetOutputInfo").Call(
+func SDL_DXGIGetOutputInfo(displayIndex sdlcommon.FInt, adapterIndex *sdlcommon.FInt, outputIndex *sdlcommon.FInt) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DXGIGetOutputInfo").Call(
 		uintptr(displayIndex),
 		uintptr(unsafe.Pointer(adapterIndex)),
 		uintptr(unsafe.Pointer(outputIndex)),
@@ -132,7 +132,7 @@ func SDL_DXGIGetOutputInfo(displayIndex common.FInt, adapterIndex *common.FInt, 
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -149,15 +149,15 @@ func SDL_DXGIGetOutputInfo(displayIndex common.FInt, adapterIndex *common.FInt, 
  * \returns 0 on success, or -1 on error.
  */
 //extern DECLSPEC int SDLCALL SDL_LinuxSetThreadPriority(Sint64 threadID, int priority);
-func SDL_LinuxSetThreadPriority(threadID common.FSint64, priority common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LinuxSetThreadPriority").Call(
+func SDL_LinuxSetThreadPriority(threadID sdlcommon.FSint64, priority sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LinuxSetThreadPriority").Call(
 		uintptr(threadID),
 		uintptr(priority),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -168,8 +168,8 @@ func SDL_LinuxSetThreadPriority(threadID common.FSint64, priority common.FInt) (
 
 //#define SDL_iOSSetAnimationCallback(window, interval, callback, callbackParam) SDL_iPhoneSetAnimationCallback(window, interval, callback, callbackParam)
 //extern DECLSPEC int SDLCALL SDL_iPhoneSetAnimationCallback(SDL_Window * window, int interval, void (*callback)(void*), void *callbackParam);
-func (window *SDL_Window) SDL_iPhoneSetAnimationCallback(interval common.FInt, callback *func(p common.FVoidP), callbackParam common.FVoidP) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LinuxSetThreadPriority").Call(
+func (window *SDL_Window) SDL_iPhoneSetAnimationCallback(interval sdlcommon.FInt, callback *func(p sdlcommon.FVoidP), callbackParam sdlcommon.FVoidP) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LinuxSetThreadPriority").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(interval),
 		uintptr(unsafe.Pointer(callback)),
@@ -178,15 +178,15 @@ func (window *SDL_Window) SDL_iPhoneSetAnimationCallback(interval common.FInt, c
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //#define SDL_iOSSetEventPump(enabled) SDL_iPhoneSetEventPump(enabled)
 //extern DECLSPEC void SDLCALL SDL_iPhoneSetEventPump(SDL_bool enabled);
 func SDL_iPhoneSetEventPump(enabled bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_iPhoneSetEventPump").Call(
-		uintptr(common.CBool(enabled)),
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_iPhoneSetEventPump").Call(
+		uintptr(sdlcommon.CBool(enabled)),
 	)
 	if t == 0 {
 
@@ -217,8 +217,8 @@ func SDL_iPhoneSetEventPump(enabled bool) {
  * \sa SDL_AndroidGetActivity
  */
 //extern DECLSPEC void * SDLCALL SDL_AndroidGetJNIEnv(void);
-func SDL_AndroidGetJNIEnv() (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidGetJNIEnv").Call()
+func SDL_AndroidGetJNIEnv() (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidGetJNIEnv").Call()
 	if t == 0 {
 
 	}
@@ -247,8 +247,8 @@ func SDL_AndroidGetJNIEnv() (res common.FVoidP) {
  * \sa SDL_AndroidGetJNIEnv
  */
 //extern DECLSPEC void * SDLCALL SDL_AndroidGetActivity(void);
-func SDL_AndroidGetActivity() (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidGetActivity").Call()
+func SDL_AndroidGetActivity() (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidGetActivity").Call()
 	if t == 0 {
 
 	}
@@ -284,12 +284,12 @@ func SDL_AndroidGetActivity() (res common.FVoidP) {
  * \returns the Android API level.
  */
 //extern DECLSPEC int SDLCALL SDL_GetAndroidSDKVersion(void);
-func SDL_GetAndroidSDKVersion() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetAndroidSDKVersion").Call()
+func SDL_GetAndroidSDKVersion() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetAndroidSDKVersion").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -300,11 +300,11 @@ func SDL_GetAndroidSDKVersion() (res common.FInt) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_IsAndroidTV(void);
 func SDL_IsAndroidTV() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IsAndroidTV").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsAndroidTV").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -315,11 +315,11 @@ func SDL_IsAndroidTV() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_IsChromebook(void);
 func SDL_IsChromebook() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IsChromebook").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsChromebook").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -330,11 +330,11 @@ func SDL_IsChromebook() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_IsDeXMode(void);
 func SDL_IsDeXMode() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IsDeXMode").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsDeXMode").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -343,7 +343,7 @@ func SDL_IsDeXMode() (res bool) {
  */
 //extern DECLSPEC void SDLCALL SDL_AndroidBackButton(void);
 func SDL_AndroidBackButton() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidBackButton").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidBackButton").Call()
 	if t == 0 {
 
 	}
@@ -374,12 +374,12 @@ const SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02
  * \sa SDL_AndroidGetExternalStorageState
  */
 //extern DECLSPEC const char * SDLCALL SDL_AndroidGetInternalStoragePath(void);
-func SDL_AndroidGetInternalStoragePath() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidGetInternalStoragePath").Call()
+func SDL_AndroidGetInternalStoragePath() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidGetInternalStoragePath").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -399,12 +399,12 @@ func SDL_AndroidGetInternalStoragePath() (res common.FConstCharP) {
  * \sa SDL_AndroidGetExternalStoragePath
  */
 //extern DECLSPEC int SDLCALL SDL_AndroidGetExternalStorageState(void);
-func SDL_AndroidGetExternalStorageState() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidGetExternalStorageState").Call()
+func SDL_AndroidGetExternalStorageState() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidGetExternalStorageState").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -425,12 +425,12 @@ func SDL_AndroidGetExternalStorageState() (res common.FInt) {
  * \sa SDL_AndroidGetExternalStorageState
  */
 //extern DECLSPEC const char * SDLCALL SDL_AndroidGetExternalStoragePath(void);
-func SDL_AndroidGetExternalStoragePath() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidGetExternalStoragePath").Call()
+func SDL_AndroidGetExternalStoragePath() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidGetExternalStoragePath").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -443,14 +443,14 @@ func SDL_AndroidGetExternalStoragePath() (res common.FConstCharP) {
  * \returns SDL_TRUE if the permission was granted, SDL_FALSE otherwise.
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_AndroidRequestPermission(const char *permission);
-func SDL_AndroidRequestPermission(permission common.FConstCharP) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidRequestPermission").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(permission))),
+func SDL_AndroidRequestPermission(permission sdlcommon.FConstCharP) (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidRequestPermission").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(permission))),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -476,9 +476,9 @@ func SDL_AndroidRequestPermission(permission common.FConstCharP) (res bool) {
  * \returns 0 if success, -1 if any error occurs.
  */
 //extern DECLSPEC int SDLCALL SDL_AndroidShowToast(const char* message, int duration, int gravity, int xoffset, int yoffset);
-func SDL_AndroidShowToast(message common.FConstCharP, duration, gravity, xoffset, yoffset common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AndroidShowToast").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(message))),
+func SDL_AndroidShowToast(message sdlcommon.FConstCharP, duration, gravity, xoffset, yoffset sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AndroidShowToast").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(message))),
 		uintptr(duration),
 		uintptr(gravity),
 		uintptr(xoffset),
@@ -487,7 +487,7 @@ func SDL_AndroidShowToast(message common.FConstCharP, duration, gravity, xoffset
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -561,14 +561,14 @@ const (
  * \sa SDL_WinRTGetFSPathUTF8
  */
 //extern DECLSPEC const wchar_t * SDLCALL SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType);
-func SDL_WinRTGetFSPathUNICODE(pathType SDL_WinRT_Path) (res common.FWcharT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WinRTGetFSPathUNICODE").Call(
+func SDL_WinRTGetFSPathUNICODE(pathType SDL_WinRT_Path) (res sdlcommon.FWcharT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WinRTGetFSPathUNICODE").Call(
 		uintptr(pathType),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -594,14 +594,14 @@ func SDL_WinRTGetFSPathUNICODE(pathType SDL_WinRT_Path) (res common.FWcharT) {
  * \sa SDL_WinRTGetFSPathUNICODE
  */
 //extern DECLSPEC const char * SDLCALL SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType);
-func SDL_WinRTGetFSPathUTF8(pathType SDL_WinRT_Path) (res common.FWcharT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WinRTGetFSPathUTF8").Call(
+func SDL_WinRTGetFSPathUTF8(pathType SDL_WinRT_Path) (res sdlcommon.FWcharT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WinRTGetFSPathUTF8").Call(
 		uintptr(pathType),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -612,7 +612,7 @@ func SDL_WinRTGetFSPathUTF8(pathType SDL_WinRT_Path) (res common.FWcharT) {
  */
 //extern DECLSPEC SDL_WinRT_DeviceFamily SDLCALL SDL_WinRTGetDeviceFamily();
 func SDL_WinRTGetDeviceFamily() (res SDL_WinRT_DeviceFamily) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WinRTGetDeviceFamily").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WinRTGetDeviceFamily").Call()
 	if t == 0 {
 
 	}
@@ -631,18 +631,18 @@ func SDL_WinRTGetDeviceFamily() (res SDL_WinRT_DeviceFamily) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_IsTablet(void);
 func SDL_IsTablet() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_IsTablet").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsTablet").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
 /* Functions used by iOS application delegates to notify SDL about state changes */
 //extern DECLSPEC void SDLCALL SDL_OnApplicationWillTerminate(void);
 func SDL_OnApplicationWillTerminate() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OnApplicationWillTerminate").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OnApplicationWillTerminate").Call()
 	if t == 0 {
 
 	}
@@ -651,7 +651,7 @@ func SDL_OnApplicationWillTerminate() {
 
 //extern DECLSPEC void SDLCALL SDL_OnApplicationDidReceiveMemoryWarning(void);
 func SDL_OnApplicationDidReceiveMemoryWarning() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OnApplicationDidReceiveMemoryWarning").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OnApplicationDidReceiveMemoryWarning").Call()
 	if t == 0 {
 
 	}
@@ -660,7 +660,7 @@ func SDL_OnApplicationDidReceiveMemoryWarning() {
 
 //extern DECLSPEC void SDLCALL SDL_OnApplicationWillResignActive(void);
 func SDL_OnApplicationWillResignActive() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OnApplicationWillResignActive").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OnApplicationWillResignActive").Call()
 	if t == 0 {
 
 	}
@@ -669,7 +669,7 @@ func SDL_OnApplicationWillResignActive() {
 
 //extern DECLSPEC void SDLCALL SDL_OnApplicationDidEnterBackground(void);
 func SDL_OnApplicationDidEnterBackground() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OnApplicationDidEnterBackground").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OnApplicationDidEnterBackground").Call()
 	if t == 0 {
 
 	}
@@ -678,7 +678,7 @@ func SDL_OnApplicationDidEnterBackground() {
 
 //extern DECLSPEC void SDLCALL SDL_OnApplicationWillEnterForeground(void);
 func SDL_OnApplicationWillEnterForeground() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OnApplicationWillEnterForeground").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OnApplicationWillEnterForeground").Call()
 	if t == 0 {
 
 	}
@@ -687,7 +687,7 @@ func SDL_OnApplicationWillEnterForeground() {
 
 //extern DECLSPEC void SDLCALL SDL_OnApplicationDidBecomeActive(void);
 func SDL_OnApplicationDidBecomeActive() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OnApplicationDidBecomeActive").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OnApplicationDidBecomeActive").Call()
 	if t == 0 {
 
 	}
@@ -697,7 +697,7 @@ func SDL_OnApplicationDidBecomeActive() {
 //#ifdef __IPHONEOS__
 //extern DECLSPEC void SDLCALL SDL_OnApplicationDidChangeStatusBarOrientation(void);
 func SDL_OnApplicationDidChangeStatusBarOrientation() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_OnApplicationDidChangeStatusBarOrientation").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OnApplicationDidChangeStatusBarOrientation").Call()
 	if t == 0 {
 
 	}

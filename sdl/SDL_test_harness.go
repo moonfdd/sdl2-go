@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -24,15 +24,15 @@ const TEST_RESULT_SETUP_FAILURE = 4
 
 /* !< Function pointer to a test case setup function (run before every test) */
 //typedef void (*SDLTest_TestCaseSetUpFp)(void *arg);
-type SDLTest_TestCaseSetUpFp = func(arg common.FVoidP)
+type SDLTest_TestCaseSetUpFp = func(arg sdlcommon.FVoidP)
 
 /* !< Function pointer to a test case function */
 //typedef int (*SDLTest_TestCaseFp)(void *arg);
-type SDLTest_TestCaseFp = func(arg common.FVoidP) common.FInt
+type SDLTest_TestCaseFp = func(arg sdlcommon.FVoidP) sdlcommon.FInt
 
 /* !< Function pointer to a test case teardown function (run after every test) */
 //typedef void  (*SDLTest_TestCaseTearDownFp)(void *arg);
-type SDLTest_TestCaseTearDownFp = func(arg common.FVoidP)
+type SDLTest_TestCaseTearDownFp = func(arg sdlcommon.FVoidP)
 
 /**
  * Holds information about a single test case.
@@ -42,11 +42,11 @@ type SDLTest_TestCaseReference struct {
 	/* !< Func2Stress */
 	TestCase SDLTest_TestCaseFp
 	/* !< Short name (or function name) "Func2Stress" */
-	Name common.FBuf
+	Name sdlcommon.FBuf
 	/* !< Long name or full description "This test pushes func2() to the limit." */
-	Description common.FBuf
+	Description sdlcommon.FBuf
 	/* !< Set to TEST_ENABLED or TEST_DISABLED (test won't be run) */
-	Enabled common.FInt
+	Enabled sdlcommon.FInt
 }
 
 /**
@@ -55,7 +55,7 @@ type SDLTest_TestCaseReference struct {
 type SDLTest_TestSuiteReference struct {
 
 	/* !< "PlatformSuite" */
-	name common.FBuf
+	name sdlcommon.FBuf
 	/* !< The function that is run before each test. NULL skips. */
 	testSetUp SDLTest_TestCaseSetUpFp
 	/* !< The test cases that are run as part of the suite. Last item should be NULL. */
@@ -74,14 +74,14 @@ type SDLTest_TestSuiteReference struct {
  * \returns the generated seed string
  */
 //char *SDLTest_GenerateRunSeed(const int length);
-func SDLTest_GenerateRunSeed(length common.FInt) (res common.FCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_GenerateRunSeed").Call(
+func SDLTest_GenerateRunSeed(length sdlcommon.FInt) (res sdlcommon.FCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_GenerateRunSeed").Call(
 		uintptr(length),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -97,17 +97,17 @@ func SDLTest_GenerateRunSeed(length common.FInt) (res common.FCharP) {
  * \returns the test run result: 0 when all tests passed, 1 if any tests failed.
  */
 //int SDLTest_RunSuites(SDLTest_TestSuiteReference *testSuites[], const char *userRunSeed, Uint64 userExecKey, const char *filter, int testIterations);
-func SDLTest_RunSuites(testSuites *[]SDLTest_TestSuiteReference, userRunSeed common.FConstCharP, userExecKey common.FUint64T, filter common.FConstCharP, testIterations common.FInt) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_RunSuites").Call(
+func SDLTest_RunSuites(testSuites *[]SDLTest_TestSuiteReference, userRunSeed sdlcommon.FConstCharP, userExecKey sdlcommon.FUint64T, filter sdlcommon.FConstCharP, testIterations sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_RunSuites").Call(
 		uintptr(unsafe.Pointer(testSuites)),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(userRunSeed))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(userRunSeed))),
 		uintptr(userExecKey),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(filter))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(filter))),
 		uintptr(testIterations),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

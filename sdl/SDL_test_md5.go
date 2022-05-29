@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -13,10 +13,10 @@ type MD5UINT4 = uint32
 
 /* Data structure for MD5 (Message-Digest) computation */
 type SDLTest_Md5Context struct {
-	I      [2]MD5UINT4     /* number of _bits_ handled mod 2^64 */
-	Buf    [4]MD5UINT4     /* scratch buffer */
-	In     [64]common.FBuf /* input buffer */
-	Digest [16]common.FBuf /* actual digest after Md5Final call */
+	I      [2]MD5UINT4        /* number of _bits_ handled mod 2^64 */
+	Buf    [4]MD5UINT4        /* scratch buffer */
+	In     [64]sdlcommon.FBuf /* input buffer */
+	Digest [16]sdlcommon.FBuf /* actual digest after Md5Final call */
 }
 
 /* ---------- Function Prototypes ------------- */
@@ -32,7 +32,7 @@ type SDLTest_Md5Context struct {
  */
 //void SDLTest_Md5Init(SDLTest_Md5Context * mdContext);
 func (mdContext *SDLTest_Md5Context) SDLTest_Md5Init() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Md5Init").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Md5Init").Call(
 		uintptr(unsafe.Pointer(mdContext)),
 	)
 	if t == 0 {
@@ -55,8 +55,8 @@ func (mdContext *SDLTest_Md5Context) SDLTest_Md5Init() {
 
 //void SDLTest_Md5Update(SDLTest_Md5Context * mdContext, unsigned char *inBuf,
 //unsigned int inLen);
-func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf common.FBuf, inLen common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Md5Update").Call(
+func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf sdlcommon.FBuf, inLen sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Md5Update").Call(
 		uintptr(unsafe.Pointer(mdContext)),
 		uintptr(unsafe.Pointer(inBuf)),
 		uintptr(inLen),
@@ -79,7 +79,7 @@ func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf common.FBuf, inLen 
 
 //void SDLTest_Md5Final(SDLTest_Md5Context * mdContext);
 func (mdContext *SDLTest_Md5Context) SDLTest_Md5Final() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_Md5Final").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Md5Final").Call(
 		uintptr(unsafe.Pointer(mdContext)),
 	)
 	if t == 0 {

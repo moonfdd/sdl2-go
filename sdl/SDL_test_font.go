@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -20,8 +20,8 @@ const FONT_CHARACTER_SIZE = 8
  *  \returns 0 on success, -1 on failure.
  */
 //int SDLTest_DrawCharacter(SDL_Renderer *renderer, int x, int y, char c);
-func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x common.FInt, y common.FInt, c byte) (res common.FInt, err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_DrawCharacter").Call(
+func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x sdlcommon.FInt, y sdlcommon.FInt, c byte) (res sdlcommon.FInt, err error) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_DrawCharacter").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(x),
 		uintptr(y),
@@ -30,7 +30,7 @@ func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x common.FInt, y common.FInt
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -45,17 +45,17 @@ func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x common.FInt, y common.FInt
  *  \returns 0 on success, -1 on failure.
  */
 //int SDLTest_DrawString(SDL_Renderer *renderer, int x, int y, const char *s);
-func (renderer *SDL_Renderer) SDLTest_DrawString(x common.FInt, y common.FInt, s common.FConstCharP) (res common.FInt, err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_DrawString").Call(
+func (renderer *SDL_Renderer) SDLTest_DrawString(x sdlcommon.FInt, y sdlcommon.FInt, s sdlcommon.FConstCharP) (res sdlcommon.FInt, err error) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_DrawString").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(x),
 		uintptr(y),
-		uintptr(unsafe.Pointer(common.BytePtrFromString(s))),
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(s))),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -64,7 +64,7 @@ func (renderer *SDL_Renderer) SDLTest_DrawString(x common.FInt, y common.FInt, s
  */
 //void SDLTest_CleanupTextDrawing(void);
 func SDLTest_CleanupTextDrawing() (err error) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_CleanupTextDrawing").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_CleanupTextDrawing").Call()
 	if t == 0 {
 
 	}

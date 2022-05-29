@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -22,12 +22,12 @@ const SDL_CACHELINE_SIZE = 128
  * \since This function is available since SDL 2.0.0.
  */
 //extern DECLSPEC int SDLCALL SDL_GetCPUCount(void);
-func SDL_GetCPUCount() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetCPUCount").Call()
+func SDL_GetCPUCount() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetCPUCount").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -42,12 +42,12 @@ func SDL_GetCPUCount() (res common.FInt) {
  * \since This function is available since SDL 2.0.0.
  */
 //extern DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void);
-func SDL_GetCPUCacheLineSize() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetCPUCacheLineSize").Call()
+func SDL_GetCPUCacheLineSize() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetCPUCacheLineSize").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -71,11 +71,11 @@ func SDL_GetCPUCacheLineSize() (res common.FInt) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasRDTSC(void);
 func SDL_HasRDTSC() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasRDTSC").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasRDTSC").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -100,11 +100,11 @@ func SDL_HasRDTSC() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasAltiVec(void);
 func SDL_HasAltiVec() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasAltiVec").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasAltiVec").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -128,11 +128,11 @@ func SDL_HasAltiVec() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasMMX(void);
 func SDL_HasMMX() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasMMX").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasMMX").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -156,11 +156,11 @@ func SDL_HasMMX() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_Has3DNow(void);
 func SDL_Has3DNow() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Has3DNow").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Has3DNow").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -184,11 +184,11 @@ func SDL_Has3DNow() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE(void);
 func SDL_HasSSE() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasSSE").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasSSE").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -212,11 +212,11 @@ func SDL_HasSSE() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE2(void);
 func SDL_HasSSE2() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasSSE2").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasSSE2").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -240,11 +240,11 @@ func SDL_HasSSE2() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE3(void);
 func SDL_HasSSE3() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasSSE3").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasSSE3").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -268,11 +268,11 @@ func SDL_HasSSE3() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE41(void);
 func SDL_HasSSE41() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasSSE41").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasSSE41").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -296,11 +296,11 @@ func SDL_HasSSE41() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE42(void);
 func SDL_HasSSE42() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasSSE42").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasSSE42").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -326,11 +326,11 @@ func SDL_HasSSE42() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX(void);
 func SDL_HasAVX() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasAVX").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasAVX").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -356,11 +356,11 @@ func SDL_HasAVX() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX2(void);
 func SDL_HasAVX2() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasAVX2").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasAVX2").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -375,11 +375,11 @@ func SDL_HasAVX2() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX512F(void);
 func SDL_HasAVX512F() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasAVX512F").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasAVX512F").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -396,11 +396,11 @@ func SDL_HasAVX512F() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasARMSIMD(void);
 func SDL_HasARMSIMD() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasARMSIMD").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasARMSIMD").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -413,11 +413,11 @@ func SDL_HasARMSIMD() (res bool) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasNEON(void);
 func SDL_HasNEON() (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_HasNEON").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasNEON").Call()
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }
 
@@ -429,12 +429,12 @@ func SDL_HasNEON() (res bool) {
  * \since This function is available since SDL 2.0.1.
  */
 //extern DECLSPEC int SDLCALL SDL_GetSystemRAM(void);
-func SDL_GetSystemRAM() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetSystemRAM").Call()
+func SDL_GetSystemRAM() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSystemRAM").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -454,12 +454,12 @@ func SDL_GetSystemRAM() (res common.FInt) {
  *          instructions.
  */
 //extern DECLSPEC size_t SDLCALL SDL_SIMDGetAlignment(void);
-func SDL_SIMDGetAlignment() (res common.FSizeT) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SIMDGetAlignment").Call()
+func SDL_SIMDGetAlignment() (res sdlcommon.FSizeT) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SIMDGetAlignment").Call()
 	if t == 0 {
 
 	}
-	res = common.FSizeT(t)
+	res = sdlcommon.FSizeT(t)
 	return
 }
 
@@ -500,8 +500,8 @@ func SDL_SIMDGetAlignment() (res common.FSizeT) {
  */
 //extern DECLSPEC void * SDLCALL SDL_SIMDAlloc(const size_t len);
 
-func SDL_SIMDAlloc(len0 common.FSizeT) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SIMDAlloc").Call(
+func SDL_SIMDAlloc(len0 sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SIMDAlloc").Call(
 		uintptr(len0),
 	)
 	if t == 0 {
@@ -532,8 +532,8 @@ func SDL_SIMDAlloc(len0 common.FSizeT) (res common.FVoidP) {
  * \sa SDL_SIMDFree
  */
 //extern DECLSPEC void * SDLCALL SDL_SIMDRealloc(void *mem, const size_t len);
-func SDL_SIMDRealloc(mem common.FVoidP, len0 common.FSizeT) (res common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SIMDRealloc").Call(
+func SDL_SIMDRealloc(mem sdlcommon.FVoidP, len0 sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SIMDRealloc").Call(
 		uintptr(unsafe.Pointer(mem)),
 		uintptr(len0),
 	)
@@ -565,8 +565,8 @@ func SDL_SIMDRealloc(mem common.FVoidP, len0 common.FSizeT) (res common.FVoidP) 
  * \sa SDL_SIMDRealloc
  */
 //extern DECLSPEC void SDLCALL SDL_SIMDFree(void *ptr);
-func SDL_SIMDFree(ptr common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SIMDFree").Call(
+func SDL_SIMDFree(ptr sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SIMDFree").Call(
 		ptr,
 	)
 	if t == 0 {

@@ -1,6 +1,6 @@
 package sdl
 
-import "github.com/moonfdd/sdl2-go/common"
+import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 /**
  * Dynamically load a shared object.
@@ -13,14 +13,14 @@ import "github.com/moonfdd/sdl2-go/common"
  * \sa SDL_UnloadObject
  */
 //extern DECLSPEC void *SDLCALL SDL_LoadObject(const char *sofile);
-func SDL_LoadObject(sofile common.FConstCharP) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LoadObject").Call(
-		common.UintPtrFromString(sofile),
+func SDL_LoadObject(sofile sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadObject").Call(
+		sdlcommon.UintPtrFromString(sofile),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -49,15 +49,15 @@ func SDL_LoadObject(sofile common.FConstCharP) (res common.FConstCharP) {
  */
 //extern DECLSPEC void *SDLCALL SDL_LoadFunction(void *handle,
 //const char *name);
-func SDL_LoadFunction(handle common.FVoidP, name common.FConstCharP) (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_LoadFunction").Call(
+func SDL_LoadFunction(handle sdlcommon.FVoidP, name sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadFunction").Call(
 		handle,
-		common.UintPtrFromString(name),
+		sdlcommon.UintPtrFromString(name),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -70,8 +70,8 @@ func SDL_LoadFunction(handle common.FVoidP, name common.FConstCharP) (res common
  * \sa SDL_LoadObject
  */
 //extern DECLSPEC void SDLCALL SDL_UnloadObject(void *handle);
-func SDL_UnloadObject(p common.FVoidP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_UnloadObject").Call(
+func SDL_UnloadObject(p sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UnloadObject").Call(
 		p,
 	)
 	if t == 0 {

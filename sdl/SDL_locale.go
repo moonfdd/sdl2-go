@@ -1,13 +1,13 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
 type SDL_Locale struct {
-	language common.FConstCharPStruct /**< A language name, like "en" for English. */
-	country  common.FConstCharPStruct /**< A country, like "US" for America. Can be NULL. */
+	language sdlcommon.FConstCharPStruct /**< A language name, like "en" for English. */
+	country  sdlcommon.FConstCharPStruct /**< A country, like "US" for America. Can be NULL. */
 }
 
 /**
@@ -52,7 +52,7 @@ type SDL_Locale struct {
  */
 //extern DECLSPEC SDL_Locale * SDLCALL SDL_GetPreferredLocales(void);
 func SDL_GetPreferredLocales() (res *SDL_Locale) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetPreferredLocales").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPreferredLocales").Call()
 	if t == 0 {
 
 	}

@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -14,7 +14,7 @@ const SDL_MUTEX_TIMEDOUT = 1
 /**
  *  This is the timeout value which corresponds to never time out.
  */
-const SDL_MUTEX_MAXWAIT = (^common.FUint32T(0))
+const SDL_MUTEX_MAXWAIT = (^sdlcommon.FUint32T(0))
 
 /**
  *  \name Mutex functions
@@ -48,7 +48,7 @@ type SDL_mutex struct {
  */
 //extern DECLSPEC SDL_mutex *SDLCALL SDL_CreateMutex(void);
 func SDL_CreateMutex() (res *SDL_mutex) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateMutex").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateMutex").Call()
 	if t == 0 {
 
 	}
@@ -72,14 +72,14 @@ func SDL_CreateMutex() (res *SDL_mutex) {
  */
 //extern DECLSPEC int SDLCALL SDL_LockMutex(SDL_mutex * mutex);
 //const SDL_mutexP(m)   SDL_LockMutex(m)
-func (mutex *SDL_mutex) SDL_LockMutex() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateMutex").Call(
+func (mutex *SDL_mutex) SDL_LockMutex() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateMutex").Call(
 		uintptr(unsafe.Pointer(mutex)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -102,14 +102,14 @@ func (mutex *SDL_mutex) SDL_LockMutex() (res common.FInt) {
  * \sa SDL_UnlockMutex
  */
 //extern DECLSPEC int SDLCALL SDL_TryLockMutex(SDL_mutex * mutex);
-func (mutex *SDL_mutex) SDL_TryLockMutex() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_TryLockMutex").Call(
+func (mutex *SDL_mutex) SDL_TryLockMutex() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_TryLockMutex").Call(
 		uintptr(unsafe.Pointer(mutex)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -130,14 +130,14 @@ func (mutex *SDL_mutex) SDL_TryLockMutex() (res common.FInt) {
  */
 //extern DECLSPEC int SDLCALL SDL_UnlockMutex(SDL_mutex * mutex);
 //const SDL_mutexV(m)   SDL_UnlockMutex(m)
-func (mutex *SDL_mutex) SDL_UnlockMutex() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_UnlockMutex").Call(
+func (mutex *SDL_mutex) SDL_UnlockMutex() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UnlockMutex").Call(
 		uintptr(unsafe.Pointer(mutex)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -159,7 +159,7 @@ func (mutex *SDL_mutex) SDL_UnlockMutex() (res common.FInt) {
  */
 //extern DECLSPEC void SDLCALL SDL_DestroyMutex(SDL_mutex * mutex);
 func (mutex *SDL_mutex) SDL_DestroyMutex() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_DestroyMutex").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DestroyMutex").Call(
 		uintptr(unsafe.Pointer(mutex)),
 	)
 	if t == 0 {
@@ -203,8 +203,8 @@ type SDL_sem = SDL_semaphore
  * \sa SDL_SemWaitTimeout
  */
 //extern DECLSPEC SDL_sem *SDLCALL SDL_CreateSemaphore(Uint32 initial_value);
-func SDL_CreateSemaphore(initial_value common.FUint32T) (res *SDL_sem) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateSemaphore").Call(
+func SDL_CreateSemaphore(initial_value sdlcommon.FUint32T) (res *SDL_sem) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateSemaphore").Call(
 		uintptr(initial_value),
 	)
 	if t == 0 {
@@ -231,7 +231,7 @@ func SDL_CreateSemaphore(initial_value common.FUint32T) (res *SDL_sem) {
  */
 //extern DECLSPEC void SDLCALL SDL_DestroySemaphore(SDL_sem * sem);
 func (sem *SDL_sem) SDL_DestroySemaphore() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_DestroySemaphore").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DestroySemaphore").Call(
 		uintptr(unsafe.Pointer(sem)),
 	)
 	if t == 0 {
@@ -264,14 +264,14 @@ func (sem *SDL_sem) SDL_DestroySemaphore() {
  * \sa SDL_SemWaitTimeout
  */
 //extern DECLSPEC int SDLCALL SDL_SemWait(SDL_sem * sem);
-func (sem *SDL_sem) SDL_SemWait() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SemWait").Call(
+func (sem *SDL_sem) SDL_SemWait() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SemWait").Call(
 		uintptr(unsafe.Pointer(sem)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -296,14 +296,14 @@ func (sem *SDL_sem) SDL_SemWait() (res common.FInt) {
  * \sa SDL_SemWaitTimeout
  */
 //extern DECLSPEC int SDLCALL SDL_SemTryWait(SDL_sem * sem);
-func (sem *SDL_sem) SDL_SemTryWait() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SemTryWait").Call(
+func (sem *SDL_sem) SDL_SemTryWait() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SemTryWait").Call(
 		uintptr(unsafe.Pointer(sem)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -329,15 +329,15 @@ func (sem *SDL_sem) SDL_SemTryWait() (res common.FInt) {
  * \sa SDL_SemWait
  */
 //extern DECLSPEC int SDLCALL SDL_SemWaitTimeout(SDL_sem * sem, Uint32 ms);
-func (sem *SDL_sem) SDL_SemWaitTimeout(ms common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SemWaitTimeout").Call(
+func (sem *SDL_sem) SDL_SemWaitTimeout(ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SemWaitTimeout").Call(
 		uintptr(unsafe.Pointer(sem)),
 		uintptr(ms),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -356,14 +356,14 @@ func (sem *SDL_sem) SDL_SemWaitTimeout(ms common.FUint32T) (res common.FInt) {
  * \sa SDL_SemWaitTimeout
  */
 //extern DECLSPEC int SDLCALL SDL_SemPost(SDL_sem * sem);
-func (sem *SDL_sem) SDL_SemPost() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SemPost").Call(
+func (sem *SDL_sem) SDL_SemPost() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SemPost").Call(
 		uintptr(unsafe.Pointer(sem)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -376,14 +376,14 @@ func (sem *SDL_sem) SDL_SemPost() (res common.FInt) {
  * \sa SDL_CreateSemaphore
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_SemValue(SDL_sem * sem);
-func (sem *SDL_sem) SDL_SemValue() (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SemValue").Call(
+func (sem *SDL_sem) SDL_SemValue() (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SemValue").Call(
 		uintptr(unsafe.Pointer(sem)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -414,7 +414,7 @@ type SDL_cond struct {
  */
 //extern DECLSPEC SDL_cond *SDLCALL SDL_CreateCond(void);
 func SDL_CreateCond() (res *SDL_cond) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CreateCond").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateCond").Call()
 	if t == 0 {
 
 	}
@@ -435,7 +435,7 @@ func SDL_CreateCond() (res *SDL_cond) {
  */
 //extern DECLSPEC void SDLCALL SDL_DestroyCond(SDL_cond * cond);
 func (cond *SDL_cond) SDL_DestroyCond() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_DestroyCond").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DestroyCond").Call(
 		uintptr(unsafe.Pointer(cond)),
 	)
 	if t == 0 {
@@ -458,14 +458,14 @@ func (cond *SDL_cond) SDL_DestroyCond() {
  * \sa SDL_DestroyCond
  */
 //extern DECLSPEC int SDLCALL SDL_CondSignal(SDL_cond * cond);
-func (cond *SDL_cond) SDL_CondSignal() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CondSignal").Call(
+func (cond *SDL_cond) SDL_CondSignal() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CondSignal").Call(
 		uintptr(unsafe.Pointer(cond)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -483,14 +483,14 @@ func (cond *SDL_cond) SDL_CondSignal() (res common.FInt) {
  * \sa SDL_DestroyCond
  */
 //extern DECLSPEC int SDLCALL SDL_CondBroadcast(SDL_cond * cond);
-func (cond *SDL_cond) SDL_CondBroadcast() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CondBroadcast").Call(
+func (cond *SDL_cond) SDL_CondBroadcast() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CondBroadcast").Call(
 		uintptr(unsafe.Pointer(cond)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -519,15 +519,15 @@ func (cond *SDL_cond) SDL_CondBroadcast() (res common.FInt) {
  * \sa SDL_DestroyCond
  */
 //extern DECLSPEC int SDLCALL SDL_CondWait(SDL_cond * cond, SDL_mutex * mutex);
-func (cond *SDL_cond) SDL_CondWait(mutex *SDL_mutex) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CondWait").Call(
+func (cond *SDL_cond) SDL_CondWait(mutex *SDL_mutex) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CondWait").Call(
 		uintptr(unsafe.Pointer(cond)),
 		uintptr(unsafe.Pointer(mutex)),
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -558,8 +558,8 @@ func (cond *SDL_cond) SDL_CondWait(mutex *SDL_mutex) (res common.FInt) {
  */
 //extern DECLSPEC int SDLCALL SDL_CondWaitTimeout(SDL_cond * cond,
 //SDL_mutex * mutex, Uint32 ms);
-func (cond *SDL_cond) SDL_CondWaitTimeout(mutex *SDL_mutex, ms common.FUint32T) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_CondWaitTimeout").Call(
+func (cond *SDL_cond) SDL_CondWaitTimeout(mutex *SDL_mutex, ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CondWaitTimeout").Call(
 		uintptr(unsafe.Pointer(cond)),
 		uintptr(unsafe.Pointer(mutex)),
 		uintptr(ms),
@@ -567,6 +567,6 @@ func (cond *SDL_cond) SDL_CondWaitTimeout(mutex *SDL_mutex, ms common.FUint32T) 
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

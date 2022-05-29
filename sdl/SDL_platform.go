@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /**
@@ -19,11 +19,11 @@ import (
  *          available, returns a string beginning with the text "Unknown".
  */
 //extern DECLSPEC const char * SDLCALL SDL_GetPlatform (void);
-func SDL_GetPlatform() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetPlatform").Call()
+func SDL_GetPlatform() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPlatform").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }

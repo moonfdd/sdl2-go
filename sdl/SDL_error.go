@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -30,21 +30,21 @@ import (
  * \sa SDL_GetError
  */
 //extern DECLSPEC int SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1);
-func SDL_SetError(fmt0 common.FConstCharP, aList ...common.FInt) (res common.FInt) {
+func SDL_SetError(fmt0 sdlcommon.FConstCharP, aList ...sdlcommon.FInt) (res sdlcommon.FInt) {
 
 	uintptrList := make([]uintptr, 0)
-	uintptrList = append(uintptrList, uintptr(unsafe.Pointer(common.BytePtrFromString(fmt0))))
+	uintptrList = append(uintptrList, uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(fmt0))))
 	for _, a := range aList {
 		uintptrList = append(uintptrList, uintptr(a))
 	}
 
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetError").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetError").Call(
 		uintptrList...,
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -82,13 +82,13 @@ func SDL_SetError(fmt0 common.FConstCharP, aList ...common.FInt) (res common.FIn
  * \sa SDL_SetError
  */
 //extern DECLSPEC const char *SDLCALL SDL_GetError(void);
-func SDL_GetError() (res common.FConstCharP) {
+func SDL_GetError() (res sdlcommon.FConstCharP) {
 
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetError").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetError").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -106,16 +106,16 @@ func SDL_GetError() (res common.FConstCharP) {
  * \sa SDL_GetError
  */
 //extern DECLSPEC char * SDLCALL SDL_GetErrorMsg(char *errstr, int maxlen);
-func SDL_GetErrorMsg(errstr common.FCharP, maxlen common.FInt) (res common.FConstCharP) {
+func SDL_GetErrorMsg(errstr sdlcommon.FCharP, maxlen sdlcommon.FInt) (res sdlcommon.FConstCharP) {
 
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetErrorMsg").Call(
-		uintptr(unsafe.Pointer(common.BytePtrFromString(errstr))),
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetErrorMsg").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(errstr))),
 		uintptr(maxlen),
 	)
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -128,7 +128,7 @@ func SDL_GetErrorMsg(errstr common.FCharP, maxlen common.FInt) (res common.FCons
 //extern DECLSPEC void SDLCALL SDL_ClearError(void);
 func SDL_ClearError() {
 
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_ClearError").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ClearError").Call()
 	if t == 0 {
 
 	}
@@ -166,9 +166,9 @@ const (
 
 /* SDL_Error() unconditionally returns -1. */
 //extern DECLSPEC int SDLCALL SDL_Error(SDL_errorcode code);
-func SDL_Error(code SDL_errorcode) (res common.FInt) {
+func SDL_Error(code SDL_errorcode) (res sdlcommon.FInt) {
 
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetError").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetError").Call(
 		uintptr(code),
 	)
 	if t == 0 {

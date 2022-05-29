@@ -32,7 +32,7 @@
 
 #include "SDL.h"
 #include "SDL_test_assert.h"
-#include "SDL_test_common.h"
+#include "SDL_test_sdlcommon.h"
 #include "SDL_test_compare.h"
 #include "SDL_test_crc32.h"
 #include "SDL_test_font.h"

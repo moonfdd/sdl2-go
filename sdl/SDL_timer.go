@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /**
@@ -15,12 +15,12 @@ import (
  * \sa SDL_TICKS_PASSED
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_GetTicks(void);
-func SDL_GetTicks() (res common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetTicks").Call()
+func SDL_GetTicks() (res sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTicks").Call()
 	if t == 0 {
 
 	}
-	res = common.FUint32T(t)
+	res = sdlcommon.FUint32T(t)
 	return
 }
 
@@ -52,12 +52,12 @@ func SDL_GetTicks() (res common.FUint32T) {
  * \sa SDL_GetPerformanceFrequency
  */
 //extern DECLSPEC Uint64 SDLCALL SDL_GetPerformanceCounter(void);
-func SDL_GetPerformanceCounter() (res common.FUint64T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetPerformanceCounter").Call()
+func SDL_GetPerformanceCounter() (res sdlcommon.FUint64T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPerformanceCounter").Call()
 	if t == 0 {
 
 	}
-	res = common.FUint64T(t)
+	res = sdlcommon.FUint64T(t)
 	return
 }
 
@@ -71,12 +71,12 @@ func SDL_GetPerformanceCounter() (res common.FUint64T) {
  * \sa SDL_GetPerformanceCounter
  */
 //extern DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void);
-func SDL_GetPerformanceFrequency() (res common.FUint64T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetPerformanceFrequency").Call()
+func SDL_GetPerformanceFrequency() (res sdlcommon.FUint64T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPerformanceFrequency").Call()
 	if t == 0 {
 
 	}
-	res = common.FUint64T(t)
+	res = sdlcommon.FUint64T(t)
 	return
 }
 
@@ -90,8 +90,8 @@ func SDL_GetPerformanceFrequency() (res common.FUint64T) {
  * \param ms the number of milliseconds to delay
  */
 //extern DECLSPEC void SDLCALL SDL_Delay(Uint32 ms);
-func SDL_Delay(ms common.FUint32T) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_Delay").Call(
+func SDL_Delay(ms sdlcommon.FUint32T) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Delay").Call(
 		uintptr(ms),
 	)
 	if t == 0 {
@@ -109,13 +109,13 @@ func SDL_Delay(ms common.FUint32T) {
  * scheduled. If the callback returns 0, the periodic alarm is cancelled.
  */
 //typedef Uint32 (SDLCALL * SDL_TimerCallback) (Uint32 interval, void *param);
-type SDL_TimerCallback = func(interval common.FUint32T, param common.FVoidP) uintptr // common.FUint32T
+type SDL_TimerCallback = func(interval sdlcommon.FUint32T, param sdlcommon.FVoidP) uintptr // sdlcommon.FUint32T
 
 /**
  * Definition of the timer ID type.
  */
 //typedef int SDL_TimerID;
-type SDL_TimerID = common.FInt
+type SDL_TimerID = sdlcommon.FInt
 
 /**
  * Call a callback function at a future time.
@@ -150,10 +150,10 @@ type SDL_TimerID = common.FInt
 //extern DECLSPEC SDL_TimerID SDLCALL SDL_AddTimer(Uint32 interval,
 //SDL_TimerCallback callback,
 //void *param);
-func SDL_AddTimer(interval common.FUint32T, callback SDL_TimerCallback, param common.FVoidP) (res SDL_TimerID) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_AddTimer").Call(
+func SDL_AddTimer(interval sdlcommon.FUint32T, callback SDL_TimerCallback, param sdlcommon.FVoidP) (res SDL_TimerID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AddTimer").Call(
 		uintptr(interval),
-		common.NewCallback(callback),
+		sdlcommon.NewCallback(callback),
 		//uintptr(unsafe.Pointer(callback)),
 		param,
 	)
@@ -175,12 +175,12 @@ func SDL_AddTimer(interval common.FUint32T, callback SDL_TimerCallback, param co
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_RemoveTimer(SDL_TimerID id);
 func SDL_RemoveTimer(id SDL_TimerID) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RemoveTimer").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RemoveTimer").Call(
 		uintptr(id),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }

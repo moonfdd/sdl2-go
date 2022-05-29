@@ -2,7 +2,7 @@ package sdl
 
 import "C"
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -19,9 +19,9 @@ import (
  * \sa SDL_GetVersion
  */
 type SDL_version struct {
-	Major common.FUint8T /**< major version */
-	Minor common.FUint8T /**< minor version */
-	Patch common.FUint8T /**< update version */
+	Major sdlcommon.FUint8T /**< major version */
+	Minor sdlcommon.FUint8T /**< minor version */
+	Patch sdlcommon.FUint8T /**< update version */
 }
 
 /* Printable format: "%d.%d.%d", MAJOR, MINOR, PATCHLEVEL
@@ -46,7 +46,7 @@ const SDL_PATCHLEVEL = 16
  */
 //extern DECLSPEC void SDLCALL SDL_GetVersion(SDL_version * ver);
 func (ver *SDL_version) SDL_GetVersion() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetVersion").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetVersion").Call(
 		uintptr(unsafe.Pointer(ver)),
 	)
 	if t == 0 {
@@ -81,12 +81,12 @@ func (ver *SDL_version) SDL_GetVersion() {
  * \sa SDL_GetVersion
  */
 //extern DECLSPEC const char *SDLCALL SDL_GetRevision(void);
-func SDL_GetRevision() (res common.FConstCharP) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRevision").Call()
+func SDL_GetRevision() (res sdlcommon.FConstCharP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRevision").Call()
 	if t == 0 {
 
 	}
-	res = common.StringFromPtr(t)
+	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
@@ -100,11 +100,11 @@ func SDL_GetRevision() (res common.FConstCharP) {
  * all, only hashes. This function only ever returns zero now. Don't use it.
  */
 //extern SDL_DEPRECATED DECLSPEC int SDLCALL SDL_GetRevisionNumber(void);
-func SDL_GetRevisionNumber() (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetRevisionNumber").Call()
+func SDL_GetRevisionNumber() (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRevisionNumber").Call()
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -9,17 +9,17 @@ import (
  *Type for test images.
  */
 type SDLTest_SurfaceImage_s struct {
-	Width         common.FInt
-	Height        common.FInt
-	BytesPerPixel common.FUint /* 3:RGB, 4:RGBA */
-	PixelData     common.FBuf
+	Width         sdlcommon.FInt
+	Height        sdlcommon.FInt
+	BytesPerPixel sdlcommon.FUint /* 3:RGB, 4:RGBA */
+	PixelData     sdlcommon.FBuf
 }
 type SDLTest_SurfaceImage_t = SDLTest_SurfaceImage_s
 
 /* Test images */
 //SDL_Surface *SDLTest_ImageBlit(void);
 func SDLTest_ImageBlit() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlit").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlit").Call()
 	if t == 0 {
 
 	}
@@ -29,7 +29,7 @@ func SDLTest_ImageBlit() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageBlitColor(void);
 func SDLTest_ImageBlitColor() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlitColor").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlitColor").Call()
 	if t == 0 {
 
 	}
@@ -39,7 +39,7 @@ func SDLTest_ImageBlitColor() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageBlitAlpha(void);
 func SDLTest_ImageBlitAlpha() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlitAlpha").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlitAlpha").Call()
 	if t == 0 {
 
 	}
@@ -49,7 +49,7 @@ func SDLTest_ImageBlitAlpha() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageBlitBlendAdd(void);
 func SDLTest_ImageBlitBlendAdd() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendAdd").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendAdd").Call()
 	if t == 0 {
 
 	}
@@ -59,7 +59,7 @@ func SDLTest_ImageBlitBlendAdd() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageBlitBlend(void);
 func SDLTest_ImageBlitBlend() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlend").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlend").Call()
 	if t == 0 {
 
 	}
@@ -69,7 +69,7 @@ func SDLTest_ImageBlitBlend() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageBlitBlendMod(void);
 func SDLTest_ImageBlitBlendMod() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendMod").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendMod").Call()
 	if t == 0 {
 
 	}
@@ -79,7 +79,7 @@ func SDLTest_ImageBlitBlendMod() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageBlitBlendNone(void);
 func SDLTest_ImageBlitBlendNone() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendNone").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendNone").Call()
 	if t == 0 {
 
 	}
@@ -89,7 +89,7 @@ func SDLTest_ImageBlitBlendNone() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageBlitBlendAll(void);
 func SDLTest_ImageBlitBlendAll() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendAll").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageBlitBlendAll").Call()
 	if t == 0 {
 
 	}
@@ -99,7 +99,7 @@ func SDLTest_ImageBlitBlendAll() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImageFace(void);
 func SDLTest_ImageFace() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImageFace").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImageFace").Call()
 	if t == 0 {
 
 	}
@@ -109,7 +109,7 @@ func SDLTest_ImageFace() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImagePrimitives(void);
 func SDLTest_ImagePrimitives() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImagePrimitives").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImagePrimitives").Call()
 	if t == 0 {
 
 	}
@@ -119,7 +119,7 @@ func SDLTest_ImagePrimitives() (res *SDL_Surface) {
 
 //SDL_Surface *SDLTest_ImagePrimitivesBlend(void);
 func SDLTest_ImagePrimitivesBlend() (res *SDL_Surface) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDLTest_ImagePrimitivesBlend").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_ImagePrimitivesBlend").Call()
 	if t == 0 {
 
 	}

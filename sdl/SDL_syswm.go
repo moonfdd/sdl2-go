@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
 
@@ -123,13 +123,13 @@ type SDL_SysWMmsg struct {
 //extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowWMInfo(SDL_Window * window,
 //SDL_SysWMinfo * info);
 func (window *SDL_Window) SDL_GetWindowWMInfo(info *SDL_SysWMinfo) (res bool) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_GetWindowWMInfo").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowWMInfo").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(info)),
 	)
 	if t == 0 {
 
 	}
-	res = common.GoBool(t)
+	res = sdlcommon.GoBool(t)
 	return
 }

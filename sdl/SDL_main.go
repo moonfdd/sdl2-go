@@ -1,7 +1,7 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/common"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /*
@@ -124,22 +124,22 @@ import (
  *  The prototype for the application's main() function
  */
 //typedef int (*SDL_main_func)(int argc, char *argv[]);
-type SDL_main_func = func(argc common.FInt, argv *common.FConstCharPStruct) uintptr
+type SDL_main_func = func(argc sdlcommon.FInt, argv *sdlcommon.FConstCharPStruct) uintptr
 
 //extern SDLMAIN_DECLSPEC int SDL_main(int argc, char *argv[]);
-func SDL_main(argc common.FInt, argv []common.FConstCharP) (res common.FInt) {
+func SDL_main(argc sdlcommon.FInt, argv []sdlcommon.FConstCharP) (res sdlcommon.FInt) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(argc))
 	for i := 0; i < len(argv); i++ {
-		uintptrs = append(uintptrs, common.UintPtrFromString(argv[i]))
+		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(argv[i]))
 	}
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_main").Call(
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_main").Call(
 		uintptrs...,
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -156,7 +156,7 @@ func SDL_main(argc common.FInt, argv []common.FConstCharP) (res common.FInt) {
  */
 //extern DECLSPEC void SDLCALL SDL_SetMainReady(void);
 func SDL_SetMainReady() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_SetMainReady").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetMainReady").Call()
 	if t == 0 {
 
 	}
@@ -169,22 +169,22 @@ func SDL_SetMainReady() {
  * This can be called to set the application class at startup
  */
 //extern DECLSPEC int SDLCALL SDL_RegisterApp(char *name, Uint32 style, void *hInst);
-func SDL_RegisterApp(name common.FCharP, style common.FUint32T, hInst common.FVoidP) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_RegisterApp").Call(
-		common.UintPtrFromString(name),
+func SDL_RegisterApp(name sdlcommon.FCharP, style sdlcommon.FUint32T, hInst sdlcommon.FVoidP) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RegisterApp").Call(
+		sdlcommon.UintPtrFromString(name),
 		uintptr(style),
 		hInst,
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC void SDLCALL SDL_UnregisterApp(void);
 func SDL_UnregisterApp() {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_UnregisterApp").Call()
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UnregisterApp").Call()
 	if t == 0 {
 
 	}
@@ -207,15 +207,15 @@ func SDL_UnregisterApp() {
  * \since This function is available since SDL 2.0.3.
  */
 //extern DECLSPEC int SDLCALL SDL_WinRTRunApp(SDL_main_func mainFunction, void * reserved);
-func SDL_WinRTRunApp(mainFunction SDL_main_func, reserved common.FVoidP) (res common.FInt) {
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_WinRTRunApp").Call(
-		common.NewCallback(mainFunction),
+func SDL_WinRTRunApp(mainFunction SDL_main_func, reserved sdlcommon.FVoidP) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WinRTRunApp").Call(
+		sdlcommon.NewCallback(mainFunction),
 		reserved,
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -232,19 +232,19 @@ func SDL_WinRTRunApp(mainFunction SDL_main_func, reserved common.FVoidP) (res co
  * \return the return value from mainFunction
  */
 //extern DECLSPEC int SDLCALL SDL_UIKitRunApp(int argc, char *argv[], SDL_main_func mainFunction);
-func SDL_UIKitRunApp(argc common.FInt, argv []common.FConstCharP, mainFunction SDL_main_func) (res common.FInt) {
+func SDL_UIKitRunApp(argc sdlcommon.FInt, argv []sdlcommon.FConstCharP, mainFunction SDL_main_func) (res sdlcommon.FInt) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(argc))
 	for i := 0; i < len(argv); i++ {
-		uintptrs = append(uintptrs, common.UintPtrFromString(argv[i]))
+		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(argv[i]))
 	}
-	uintptrs = append(uintptrs, common.NewCallback(mainFunction))
-	t, _, _ := common.GetSDL2Dll().NewProc("SDL_UIKitRunApp").Call(
+	uintptrs = append(uintptrs, sdlcommon.NewCallback(mainFunction))
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UIKitRunApp").Call(
 		uintptrs...,
 	)
 	if t == 0 {
 
 	}
-	res = common.FInt(t)
+	res = sdlcommon.FInt(t)
 	return
 }

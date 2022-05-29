@@ -1,6 +1,6 @@
 package sdl
 
-import "github.com/moonfdd/sdl2-go/common"
+import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 /*
  ** Copyright (c) 2008-2009 The Khronos Group Inc.
@@ -233,10 +233,10 @@ const EGL_TEXTURE_TARGET = 0x3081
 const EGL_VERSION_1_2 = 1
 
 //typedef unsigned int EGLenum;
-type EGLenum common.FInt
+type EGLenum sdlcommon.FInt
 
 //typedef void *EGLClientBuffer;
-type EGLClientBuffer = common.FVoidP
+type EGLClientBuffer = sdlcommon.FVoidP
 
 const EGL_ALPHA_FORMAT = 0x3088
 const EGL_ALPHA_FORMAT_NONPRE = 0x308B
@@ -312,7 +312,7 @@ const EGL_SWAP_BEHAVIOR_PRESERVED_BIT = 0x0400
 const EGL_VERSION_1_5 = 1
 
 //typedef void *EGLSync;
-type EGLSync = common.FVoidP
+type EGLSync = sdlcommon.FVoidP
 
 //typedef intptr_t EGLAttrib;
 //typedef khronos_utime_nanoseconds_t EGLTime;
@@ -544,7 +544,7 @@ const EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_KHR = 0x30B8
 const EGL_KHR_image = 1
 
 //typedef void *EGLImageKHR;
-type EGLImageKHR common.FVoidP
+type EGLImageKHR sdlcommon.FVoidP
 
 const EGL_NATIVE_PIXMAP_KHR = 0x30B0
 
@@ -1292,7 +1292,7 @@ const EGL_SYNC_NEW_FRAME_NV = 0x321F
 const EGL_NV_sync = 1
 
 //typedef void *EGLSyncNV;
-type EGLSyncNV common.FVoidP
+type EGLSyncNV sdlcommon.FVoidP
 
 //typedef khronos_utime_nanoseconds_t EGLTimeNV;
 //#ifdef KHRONOS_SUPPORT_INT64
