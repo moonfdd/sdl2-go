@@ -21,9 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/common.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/loaddll.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/types.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdlcommon/loaddll.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdlcommon/loaddll.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,10 +57,18 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sdcdemo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ffmpeg-go" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/timertest">
+    <configuration name="go build github.com/moonfdd/sdl2-go/examples" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/moonfdd/sdl2-go/examples" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build github.com/moonfdd/sdl2-go/examples/timertest" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -96,21 +102,13 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build sdl2-go/sdl" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="sdl2-go" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="sdl2-go/sdl" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/timertest" />
+        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples" />
         <item itemvalue="Go Build.go build sdl2-go/examples/timertest" />
         <item itemvalue="Go Build.go build sdl2-go" />
         <item itemvalue="Go Build.go build sdl2-go/common" />
-        <item itemvalue="Go Build.go build sdl2-go/sdl" />
       </list>
     </recent_temporary>
   </component>
@@ -139,26 +137,26 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="868" y="319" key="FileChooserDialogImpl" timestamp="1653616306463">
+    <state x="868" y="319" key="FileChooserDialogImpl" timestamp="1653876560070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="868" y="319" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1653616306463" />
-    <state width="1877" height="277" key="GridCell.Tab.0.bottom" timestamp="1653725355238">
+    <state x="868" y="319" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1653876560070" />
+    <state width="1877" height="249" key="GridCell.Tab.0.bottom" timestamp="1653881905635">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355238" />
-    <state width="1877" height="277" key="GridCell.Tab.0.center" timestamp="1653725355237">
+    <state width="1877" height="249" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905635" />
+    <state width="1877" height="249" key="GridCell.Tab.0.center" timestamp="1653881905634">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="277" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355237" />
-    <state width="1877" height="277" key="GridCell.Tab.0.left" timestamp="1653725355237">
+    <state width="1877" height="249" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905634" />
+    <state width="1877" height="249" key="GridCell.Tab.0.left" timestamp="1653881905634">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="277" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355237" />
-    <state width="1877" height="277" key="GridCell.Tab.0.right" timestamp="1653725355238">
+    <state width="1877" height="249" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905634" />
+    <state width="1877" height="249" key="GridCell.Tab.0.right" timestamp="1653881905634">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="277" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1653725355238" />
+    <state width="1877" height="249" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905634" />
     <state x="589" y="209" key="SettingsEditor" timestamp="1653719327261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -167,10 +165,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1653377503938" />
-    <state x="383" y="167" width="1217" height="739" key="find.popup" timestamp="1653489534112">
+    <state x="517" y="158" width="1217" height="739" key="find.popup" timestamp="1653831169236">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="383" y="167" width="1217" height="739" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1653489534112" />
+    <state x="517" y="158" width="1217" height="739" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1653831169236" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

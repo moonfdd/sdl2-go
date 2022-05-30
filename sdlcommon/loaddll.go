@@ -1,12 +1,18 @@
 package sdlcommon
 
-import "syscall"
+import (
+	"sync"
+	"syscall"
+)
 
-var avUtilDll *syscall.LazyDLL
+var sdl2Dll *syscall.LazyDLL
+var sdl2DllOnce sync.Once
 
 func GetSDL2Dll() (ans *syscall.LazyDLL) {
-	avUtilDll = syscall.NewLazyDLL(sdl2Path)
-	ans = avUtilDll
+	sdl2DllOnce.Do(func() {
+		sdl2Dll = syscall.NewLazyDLL(sdl2Path)
+	})
+	ans = sdl2Dll
 	return
 }
 
