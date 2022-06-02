@@ -80,11 +80,11 @@ const (
 	/** \brief The default mode, a binarized alpha cutoff of 1. */
 	ShapeModeDefault = 0
 	/** \brief A binarized alpha cutoff with a given integer value. */
-	ShapeModeBinarizeAlpha
+	ShapeModeBinarizeAlpha = iota
 	/** \brief A binarized alpha cutoff with a given integer value, but with the opposite comparison. */
-	ShapeModeReverseBinarizeAlpha
+	ShapeModeReverseBinarizeAlpha = iota
 	/** \brief A color key is applied. */
-	ShapeModeColorKey
+	ShapeModeColorKey = iota
 )
 
 //#define SDL_SHAPEMODEALPHA(mode) (mode == ShapeModeDefault || mode == ShapeModeBinarizeAlpha || mode == ShapeModeReverseBinarizeAlpha)

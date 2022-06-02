@@ -21,7 +21,32 @@
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdlcommon/loaddll.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdlcommon/loaddll.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_assert.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_assert.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_atomic.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_atomic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_audio.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_audio.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_error.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_error.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_gamecontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_gamecontroller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_haptic.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_haptic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_hints.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_hints.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_joystick.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_joystick.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_locale.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_locale.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_log.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_messagebox.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_messagebox.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_mouse.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_mouse.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_pixels.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_pixels.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_power.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_power.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_render.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_render.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_rwops.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_rwops.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_sensor.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_sensor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_shape.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_shape.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_surface.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_surface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_system.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_system.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_syswm.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_syswm.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_thread.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_thread.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_touch.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_touch.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdl/SDL_video.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_video.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,15 +82,23 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ffmpeg-go" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/timertest">
+  <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/structtest">
     <configuration name="go build github.com/moonfdd/sdl2-go/examples" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
       <package value="github.com/moonfdd/sdl2-go/examples" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/moonfdd/sdl2-go/examples/structtest" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/moonfdd/sdl2-go/examples/structtest" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
@@ -86,14 +119,6 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build sdl2-go/common" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="sdl2-go" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="sdl2-go/common" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build sdl2-go/examples/timertest" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -104,11 +129,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/structtest" />
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/timertest" />
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples" />
         <item itemvalue="Go Build.go build sdl2-go/examples/timertest" />
         <item itemvalue="Go Build.go build sdl2-go" />
-        <item itemvalue="Go Build.go build sdl2-go/common" />
       </list>
     </recent_temporary>
   </component>
@@ -141,34 +166,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="868" y="319" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1653876560070" />
-    <state width="1877" height="249" key="GridCell.Tab.0.bottom" timestamp="1653881905635">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom" timestamp="1654155802330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905635" />
-    <state width="1877" height="249" key="GridCell.Tab.0.center" timestamp="1653881905634">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802330" />
+    <state width="1877" height="223" key="GridCell.Tab.0.center" timestamp="1654155802330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905634" />
-    <state width="1877" height="249" key="GridCell.Tab.0.left" timestamp="1653881905634">
+    <state width="1877" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802330" />
+    <state width="1877" height="223" key="GridCell.Tab.0.left" timestamp="1654155802329">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905634" />
-    <state width="1877" height="249" key="GridCell.Tab.0.right" timestamp="1653881905634">
+    <state width="1877" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802329" />
+    <state width="1877" height="223" key="GridCell.Tab.0.right" timestamp="1654155802330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1653881905634" />
-    <state x="589" y="209" key="SettingsEditor" timestamp="1653719327261">
+    <state width="1877" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802330" />
+    <state x="589" y="209" key="SettingsEditor" timestamp="1654149363345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="589" y="209" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1653719327261" />
+    <state x="589" y="209" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1654149363345" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1653377503938">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1653377503938" />
-    <state x="517" y="158" width="1217" height="739" key="find.popup" timestamp="1653831169236">
+    <state x="555" y="167" width="1217" height="739" key="find.popup" timestamp="1654155872767">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="517" y="158" width="1217" height="739" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1653831169236" />
+    <state x="555" y="167" width="1217" height="739" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1654155872767" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

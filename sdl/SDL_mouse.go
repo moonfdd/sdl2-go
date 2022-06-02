@@ -16,19 +16,19 @@ type SDL_Cursor struct {
 type SDL_SystemCursor = int32
 
 const (
-	SDL_SYSTEM_CURSOR_ARROW     = 0 /**< Arrow */
-	SDL_SYSTEM_CURSOR_IBEAM         /**< I-beam */
-	SDL_SYSTEM_CURSOR_WAIT          /**< Wait */
-	SDL_SYSTEM_CURSOR_CROSSHAIR     /**< Crosshair */
-	SDL_SYSTEM_CURSOR_WAITARROW     /**< Small wait cursor (or Wait if not available) */
-	SDL_SYSTEM_CURSOR_SIZENWSE      /**< Double arrow pointing northwest and southeast */
-	SDL_SYSTEM_CURSOR_SIZENESW      /**< Double arrow pointing northeast and southwest */
-	SDL_SYSTEM_CURSOR_SIZEWE        /**< Double arrow pointing west and east */
-	SDL_SYSTEM_CURSOR_SIZENS        /**< Double arrow pointing north and south */
-	SDL_SYSTEM_CURSOR_SIZEALL       /**< Four pointed arrow pointing north, south, east, and west */
-	SDL_SYSTEM_CURSOR_NO            /**< Slashed circle or crossbones */
-	SDL_SYSTEM_CURSOR_HAND          /**< Hand */
-	SDL_NUM_SYSTEM_CURSORS
+	SDL_SYSTEM_CURSOR_ARROW     = 0    /**< Arrow */
+	SDL_SYSTEM_CURSOR_IBEAM     = iota /**< I-beam */
+	SDL_SYSTEM_CURSOR_WAIT      = iota /**< Wait */
+	SDL_SYSTEM_CURSOR_CROSSHAIR = iota /**< Crosshair */
+	SDL_SYSTEM_CURSOR_WAITARROW = iota /**< Small wait cursor (or Wait if not available) */
+	SDL_SYSTEM_CURSOR_SIZENWSE  = iota /**< Double arrow pointing northwest and southeast */
+	SDL_SYSTEM_CURSOR_SIZENESW  = iota /**< Double arrow pointing northeast and southwest */
+	SDL_SYSTEM_CURSOR_SIZEWE    = iota /**< Double arrow pointing west and east */
+	SDL_SYSTEM_CURSOR_SIZENS    = iota /**< Double arrow pointing north and south */
+	SDL_SYSTEM_CURSOR_SIZEALL   = iota /**< Four pointed arrow pointing north, south, east, and west */
+	SDL_SYSTEM_CURSOR_NO        = iota /**< Slashed circle or crossbones */
+	SDL_SYSTEM_CURSOR_HAND      = iota /**< Hand */
+	SDL_NUM_SYSTEM_CURSORS      = iota
 )
 
 /**
@@ -37,8 +37,8 @@ const (
 type SDL_MouseWheelDirection = int32
 
 const (
-	SDL_MOUSEWHEEL_NORMAL  = 0 /**< The scroll direction is normal */
-	SDL_MOUSEWHEEL_FLIPPED     /**< The scroll direction is flipped / natural */
+	SDL_MOUSEWHEEL_NORMAL  = 0    /**< The scroll direction is normal */
+	SDL_MOUSEWHEEL_FLIPPED = iota /**< The scroll direction is flipped / natural */
 )
 
 /* Function prototypes */

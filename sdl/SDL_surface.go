@@ -52,7 +52,7 @@ type SDL_Surface struct {
 	ClipRect SDL_Rect /**< Read-only */
 
 	/** info for fast blit mapping to other surfaces */
-	Map SDL_BlitMap /**< Private */
+	Map *SDL_BlitMap /**< Private */
 
 	/** Reference count -- used when freeing surface */
 	Refcount sdlcommon.FInt /**< Read-mostly */
@@ -73,10 +73,10 @@ type SDL_blit = func(src *SDL_Surface, srcrect *SDL_Rect,
 type SDL_YUV_CONVERSION_MODE = int32
 
 const (
-	SDL_YUV_CONVERSION_JPEG      = 0 /**< Full range JPEG */
-	SDL_YUV_CONVERSION_BT601         /**< BT.601 (the default) */
-	SDL_YUV_CONVERSION_BT709         /**< BT.709 */
-	SDL_YUV_CONVERSION_AUTOMATIC     /**< BT.601 for SD content, BT.709 for HD content */
+	SDL_YUV_CONVERSION_JPEG      = 0    /**< Full range JPEG */
+	SDL_YUV_CONVERSION_BT601     = iota /**< BT.601 (the default) */
+	SDL_YUV_CONVERSION_BT709     = iota /**< BT.709 */
+	SDL_YUV_CONVERSION_AUTOMATIC = iota /**< BT.601 for SD content, BT.709 for HD content */
 )
 
 /**

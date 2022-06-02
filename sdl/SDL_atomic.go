@@ -217,7 +217,7 @@ func SDL_MemoryBarrierAcquireFunction() (res sdlcommon.FConstCharP) {
  */
 //typedef struct { int value; } SDL_atomic_t;
 type SDL_atomic_t struct {
-	value sdlcommon.FInt
+	Value sdlcommon.FInt
 }
 
 /**

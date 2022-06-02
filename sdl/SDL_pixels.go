@@ -20,18 +20,18 @@ const SDL_ALPHA_TRANSPARENT = 0
 type SDL_PixelType int32
 
 const (
-	SDL_PIXELTYPE_UNKNOWN = 0
-	SDL_PIXELTYPE_INDEX1
-	SDL_PIXELTYPE_INDEX4
-	SDL_PIXELTYPE_INDEX8
-	SDL_PIXELTYPE_PACKED8
-	SDL_PIXELTYPE_PACKED16
-	SDL_PIXELTYPE_PACKED32
-	SDL_PIXELTYPE_ARRAYU8
-	SDL_PIXELTYPE_ARRAYU16
-	SDL_PIXELTYPE_ARRAYU32
-	SDL_PIXELTYPE_ARRAYF16
-	SDL_PIXELTYPE_ARRAYF3
+	SDL_PIXELTYPE_UNKNOWN  = 0
+	SDL_PIXELTYPE_INDEX1   = iota
+	SDL_PIXELTYPE_INDEX4   = iota
+	SDL_PIXELTYPE_INDEX8   = iota
+	SDL_PIXELTYPE_PACKED8  = iota
+	SDL_PIXELTYPE_PACKED16 = iota
+	SDL_PIXELTYPE_PACKED32 = iota
+	SDL_PIXELTYPE_ARRAYU8  = iota
+	SDL_PIXELTYPE_ARRAYU16 = iota
+	SDL_PIXELTYPE_ARRAYU32 = iota
+	SDL_PIXELTYPE_ARRAYF16 = iota
+	SDL_PIXELTYPE_ARRAYF3  = iota
 )
 
 /** Bitmap pixel order, high bit -> low bit. */
@@ -39,8 +39,8 @@ type SDL_BitmapOrder int32
 
 const (
 	SDL_BITMAPORDER_NONE = 0
-	SDL_BITMAPORDER_4321
-	SDL_BITMAPORDER_1234
+	SDL_BITMAPORDER_4321 = iota
+	SDL_BITMAPORDER_1234 = iota
 )
 
 /** Packed component order, high bit -> low bit. */
@@ -48,14 +48,14 @@ type SDL_PackedOrder int32
 
 const (
 	SDL_PACKEDORDER_NONE = 0
-	SDL_PACKEDORDER_XRGB
-	SDL_PACKEDORDER_RGBX
-	SDL_PACKEDORDER_ARGB
-	SDL_PACKEDORDER_RGBA
-	SDL_PACKEDORDER_XBGR
-	SDL_PACKEDORDER_BGRX
-	SDL_PACKEDORDER_ABGR
-	SDL_PACKEDORDER_BGRA
+	SDL_PACKEDORDER_XRGB = iota
+	SDL_PACKEDORDER_RGBX = iota
+	SDL_PACKEDORDER_ARGB = iota
+	SDL_PACKEDORDER_RGBA = iota
+	SDL_PACKEDORDER_XBGR = iota
+	SDL_PACKEDORDER_BGRX = iota
+	SDL_PACKEDORDER_ABGR = iota
+	SDL_PACKEDORDER_BGRA = iota
 )
 
 /** Array component order, low byte -> high byte. */
@@ -65,27 +65,27 @@ type SDL_ArrayOrder = int32
 
 const (
 	SDL_ARRAYORDER_NONE = 0
-	SDL_ARRAYORDER_RGB
-	SDL_ARRAYORDER_RGBA
-	SDL_ARRAYORDER_ARGB
-	SDL_ARRAYORDER_BGR
-	SDL_ARRAYORDER_BGRA
-	SDL_ARRAYORDER_ABGR
+	SDL_ARRAYORDER_RGB  = iota
+	SDL_ARRAYORDER_RGBA = iota
+	SDL_ARRAYORDER_ARGB = iota
+	SDL_ARRAYORDER_BGR  = iota
+	SDL_ARRAYORDER_BGRA = iota
+	SDL_ARRAYORDER_ABGR = iota
 )
 
 /** Packed component layout. */
 type SDL_PackedLayout = int32
 
 const (
-	SDL_PACKEDLAYOUT_NONE = 0
-	SDL_PACKEDLAYOUT_332
-	SDL_PACKEDLAYOUT_4444
-	SDL_PACKEDLAYOUT_1555
-	SDL_PACKEDLAYOUT_5551
-	SDL_PACKEDLAYOUT_565
-	SDL_PACKEDLAYOUT_8888
-	SDL_PACKEDLAYOUT_2101010
-	SDL_PACKEDLAYOUT_1010102
+	SDL_PACKEDLAYOUT_NONE    = 0
+	SDL_PACKEDLAYOUT_332     = iota
+	SDL_PACKEDLAYOUT_4444    = iota
+	SDL_PACKEDLAYOUT_1555    = iota
+	SDL_PACKEDLAYOUT_5551    = iota
+	SDL_PACKEDLAYOUT_565     = iota
+	SDL_PACKEDLAYOUT_8888    = iota
+	SDL_PACKEDLAYOUT_2101010 = iota
+	SDL_PACKEDLAYOUT_1010102 = iota
 )
 
 //
@@ -345,16 +345,16 @@ const (
 )
 
 type SDL_Color struct {
-	r sdlcommon.FUint8T
-	g sdlcommon.FUint8T
-	b sdlcommon.FUint8T
-	a sdlcommon.FUint8T
+	R sdlcommon.FUint8T
+	G sdlcommon.FUint8T
+	B sdlcommon.FUint8T
+	A sdlcommon.FUint8T
 }
 type SDL_Colour = SDL_Color
 
 type SDL_Palette struct {
 	Ncolors  sdlcommon.FInt
-	Colors   SDL_Color
+	Colors   *SDL_Color
 	Version  sdlcommon.FUint32T
 	Refcount sdlcommon.FInt
 }
@@ -364,7 +364,7 @@ type SDL_Palette struct {
  */
 type SDL_PixelFormat struct {
 	Format        sdlcommon.FUint32T
-	Palette       SDL_Palette
+	Palette       *SDL_Palette
 	BitsPerPixel  sdlcommon.FUint8T
 	BytesPerPixel sdlcommon.FUint8T
 	Padding       [2]sdlcommon.FUint8T

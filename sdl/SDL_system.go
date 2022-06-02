@@ -507,17 +507,17 @@ const (
 	SDL_WINRT_PATH_INSTALLED_LOCATION = 0
 
 	/** \brief The app's local data store.  Files may be written here */
-	SDL_WINRT_PATH_LOCAL_FOLDER
+	SDL_WINRT_PATH_LOCAL_FOLDER = iota
 
 	/** \brief The app's roaming data store.  Unsupported on Windows Phone.
 	  Files written here may be copied to other machines via a network
 	  connection.
 	*/
-	SDL_WINRT_PATH_ROAMING_FOLDER
+	SDL_WINRT_PATH_ROAMING_FOLDER = iota
 
 	/** \brief The app's temporary data store.  Unsupported on Windows Phone.
 	  Files written here may be deleted at any time. */
-	SDL_WINRT_PATH_TEMP_FOLDER
+	SDL_WINRT_PATH_TEMP_FOLDER = iota
 )
 
 /**
@@ -530,13 +530,13 @@ const (
 	SDL_WINRT_DEVICEFAMILY_UNKNOWN = 0
 
 	/** \brief Desktop family*/
-	SDL_WINRT_DEVICEFAMILY_DESKTOP
+	SDL_WINRT_DEVICEFAMILY_DESKTOP = iota
 
 	/** \brief Mobile family (for example smartphone) */
-	SDL_WINRT_DEVICEFAMILY_MOBILE
+	SDL_WINRT_DEVICEFAMILY_MOBILE = iota
 
 	/** \brief XBox family */
-	SDL_WINRT_DEVICEFAMILY_XBOX
+	SDL_WINRT_DEVICEFAMILY_XBOX = iota
 )
 
 /**

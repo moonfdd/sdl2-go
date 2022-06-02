@@ -8,11 +8,11 @@ import (
 type SDL_AssertState int32
 
 const (
-	SDL_ASSERTION_RETRY         = 0 /**< Retry the assert immediately. */
-	SDL_ASSERTION_BREAK             /**< Make the debugger trigger a breakpoint. */
-	SDL_ASSERTION_ABORT             /**< Terminate the program. */
-	SDL_ASSERTION_IGNORE            /**< Ignore the assert. */
-	SDL_ASSERTION_ALWAYS_IGNORE     /**< Ignore the assert from now on. */
+	SDL_ASSERTION_RETRY         = 0    /**< Retry the assert immediately. */
+	SDL_ASSERTION_BREAK         = iota /**< Make the debugger trigger a breakpoint. */
+	SDL_ASSERTION_ABORT         = iota /**< Terminate the program. */
+	SDL_ASSERTION_IGNORE        = iota /**< Ignore the assert. */
+	SDL_ASSERTION_ALWAYS_IGNORE = iota /**< Ignore the assert from now on. */
 )
 
 type SDL_AssertData struct {

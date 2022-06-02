@@ -12,9 +12,9 @@ type SDL_TouchDeviceType = int32
 
 const (
 	SDL_TOUCH_DEVICE_INVALID           = -1
-	SDL_TOUCH_DEVICE_DIRECT            /* touch screen with window-relative coordinates */
-	SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE /* trackpad with absolute device coordinates */
-	SDL_TOUCH_DEVICE_INDIRECT_RELATIVE /* trackpad with screen cursor-relative coordinates */
+	SDL_TOUCH_DEVICE_DIRECT            = iota /* touch screen with window-relative coordinates */
+	SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE = iota /* trackpad with absolute device coordinates */
+	SDL_TOUCH_DEVICE_INDIRECT_RELATIVE = iota /* trackpad with screen cursor-relative coordinates */
 )
 
 type SDL_Finger struct {

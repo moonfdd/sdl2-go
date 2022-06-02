@@ -33,10 +33,10 @@ type SDL_SensorID = sdlcommon.FSint32
 type SDL_SensorType = int32
 
 const (
-	SDL_SENSOR_INVALID = -1 /**< Returned for an invalid sensor */
-	SDL_SENSOR_UNKNOWN      /**< Unknown sensor type */
-	SDL_SENSOR_ACCEL        /**< Accelerometer */
-	SDL_SENSOR_GYRO         /**< Gyroscope */
+	SDL_SENSOR_INVALID = -1   /**< Returned for an invalid sensor */
+	SDL_SENSOR_UNKNOWN = iota /**< Unknown sensor type */
+	SDL_SENSOR_ACCEL   = iota /**< Accelerometer */
+	SDL_SENSOR_GYRO    = iota /**< Gyroscope */
 )
 
 /**

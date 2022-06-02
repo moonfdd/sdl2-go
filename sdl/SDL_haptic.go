@@ -564,27 +564,27 @@ type SDL_HapticPeriodic struct {
 	Type sdlcommon.FUint16T /**< ::SDL_HAPTIC_SINE, ::SDL_HAPTIC_LEFTRIGHT,
 	  ::SDL_HAPTIC_TRIANGLE, ::SDL_HAPTIC_SAWTOOTHUP or
 	  ::SDL_HAPTIC_SAWTOOTHDOWN */
-	direction SDL_HapticDirection /**< Direction of the effect. */
+	Direction SDL_HapticDirection /**< Direction of the effect. */
 
 	/* Replay */
-	length sdlcommon.FUint32T /**< Duration of the effect. */
-	delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length sdlcommon.FUint32T /**< Duration of the effect. */
+	Delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
+	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Periodic */
-	period    sdlcommon.FUint16T /**< Period of the wave. */
-	magnitude sdlcommon.FSint16  /**< Peak value; if negative, equivalent to 180 degrees extra phase shift. */
-	offset    sdlcommon.FSint16  /**< Mean value of the wave. */
-	phase     sdlcommon.FUint16T /**< Positive phase shift given by hundredth of a degree. */
+	Period    sdlcommon.FUint16T /**< Period of the wave. */
+	Magnitude sdlcommon.FSint16  /**< Peak value; if negative, equivalent to 180 degrees extra phase shift. */
+	Offset    sdlcommon.FSint16  /**< Mean value of the wave. */
+	Phase     sdlcommon.FUint16T /**< Positive phase shift given by hundredth of a degree. */
 
 	/* Envelope */
-	attack_length sdlcommon.FUint16T /**< Duration of the attack. */
-	attack_level  sdlcommon.FUint16T /**< Level at the start of the attack. */
-	fade_length   sdlcommon.FUint16T /**< Duration of the fade. */
-	fade_level    sdlcommon.FUint16T /**< Level at the end of the fade. */
+	AttackLength sdlcommon.FUint16T /**< Duration of the attack. */
+	AttackLevel  sdlcommon.FUint16T /**< Level at the start of the attack. */
+	FadeLength   sdlcommon.FUint16T /**< Duration of the fade. */
+	FadeLevel    sdlcommon.FUint16T /**< Level at the end of the fade. */
 }
 
 /**
@@ -616,23 +616,23 @@ type SDL_HapticCondition struct {
 	/* Header */
 	Type sdlcommon.FUint16T /**< ::SDL_HAPTIC_SPRING, ::SDL_HAPTIC_DAMPER,
 	  ::SDL_HAPTIC_INERTIA or ::SDL_HAPTIC_FRICTION */
-	direction SDL_HapticDirection /**< Direction of the effect - Not used ATM. */
+	Direction SDL_HapticDirection /**< Direction of the effect - Not used ATM. */
 
 	/* Replay */
-	length sdlcommon.FUint32T /**< Duration of the effect. */
+	Length sdlcommon.FUint32T /**< Duration of the effect. */
 	delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
+	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Condition */
-	right_sat   [3]sdlcommon.FUint16T /**< Level when joystick is to the positive side; max 0xFFFF. */
-	left_sat    [3]sdlcommon.FUint16T /**< Level when joystick is to the negative side; max 0xFFFF. */
-	right_coeff [3]sdlcommon.FSint16  /**< How fast to increase the force towards the positive side. */
-	left_coeff  [3]sdlcommon.FSint16  /**< How fast to increase the force towards the negative side. */
-	deadband    [3]sdlcommon.FUint16T /**< Size of the dead zone; max 0xFFFF: whole axis-range when 0-centered. */
-	center      [3]sdlcommon.FSint16  /**< Position of the dead zone. */
+	RightSat   [3]sdlcommon.FUint16T /**< Level when joystick is to the positive side; max 0xFFFF. */
+	LeftSat    [3]sdlcommon.FUint16T /**< Level when joystick is to the negative side; max 0xFFFF. */
+	RightCoeff [3]sdlcommon.FSint16  /**< How fast to increase the force towards the positive side. */
+	LeftCoeff  [3]sdlcommon.FSint16  /**< How fast to increase the force towards the negative side. */
+	Deadband   [3]sdlcommon.FUint16T /**< Size of the dead zone; max 0xFFFF: whole axis-range when 0-centered. */
+	Center     [3]sdlcommon.FSint16  /**< Position of the dead zone. */
 }
 
 /**
@@ -651,25 +651,25 @@ type SDL_HapticCondition struct {
 type SDL_HapticRamp struct {
 	/* Header */
 	Type      sdlcommon.FUint16T  /**< ::SDL_HAPTIC_RAMP */
-	direction SDL_HapticDirection /**< Direction of the effect. */
+	Direction SDL_HapticDirection /**< Direction of the effect. */
 
 	/* Replay */
-	length sdlcommon.FUint32T /**< Duration of the effect. */
-	delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length sdlcommon.FUint32T /**< Duration of the effect. */
+	Delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
+	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Ramp */
-	start sdlcommon.FSint16 /**< Beginning strength level. */
-	end   sdlcommon.FSint16 /**< Ending strength level. */
+	Start sdlcommon.FSint16 /**< Beginning strength level. */
+	End   sdlcommon.FSint16 /**< Ending strength level. */
 
 	/* Envelope */
-	attack_length sdlcommon.FUint16T /**< Duration of the attack. */
-	attack_level  sdlcommon.FUint16T /**< Level at the start of the attack. */
-	fade_length   sdlcommon.FUint16T /**< Duration of the fade. */
-	fade_level    sdlcommon.FUint16T /**< Level at the end of the fade. */
+	AttackLength sdlcommon.FUint16T /**< Duration of the attack. */
+	AttackLevel  sdlcommon.FUint16T /**< Level at the start of the attack. */
+	FadeLength   sdlcommon.FUint16T /**< Duration of the fade. */
+	FadeLevel    sdlcommon.FUint16T /**< Level at the end of the fade. */
 }
 
 /**
@@ -690,11 +690,11 @@ type SDL_HapticLeftRight struct {
 	Type sdlcommon.FUint16T /**< ::SDL_HAPTIC_LEFTRIGHT */
 
 	/* Replay */
-	length sdlcommon.FUint32T /**< Duration of the effect in milliseconds. */
+	Length sdlcommon.FUint32T /**< Duration of the effect in milliseconds. */
 
 	/* Rumble */
-	large_magnitude sdlcommon.FUint16T /**< Control of the large controller motor. */
-	small_magnitude sdlcommon.FUint16T /**< Control of the small controller motor. */
+	LargeMagnitude sdlcommon.FUint16T /**< Control of the large controller motor. */
+	SmallMagnitude sdlcommon.FUint16T /**< Control of the small controller motor. */
 }
 
 /**
@@ -716,27 +716,27 @@ type SDL_HapticCustom struct {
 
 	/* Header */
 	Type      sdlcommon.FUint16T  /**< ::SDL_HAPTIC_CUSTOM */
-	direction SDL_HapticDirection /**< Direction of the effect. */
+	Direction SDL_HapticDirection /**< Direction of the effect. */
 
 	/* Replay */
-	length sdlcommon.FUint32T /**< Duration of the effect. */
-	delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length sdlcommon.FUint32T /**< Duration of the effect. */
+	Delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
+	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Custom */
-	channels sdlcommon.FUint8T   /**< Axes to use, minimum of one. */
-	period   sdlcommon.FUint16T  /**< Sample periods. */
-	samples  sdlcommon.FUint16T  /**< Amount of samples. */
-	data     *sdlcommon.FUint16T /**< Should contain channels*samples items. */
+	Channels sdlcommon.FUint8T   /**< Axes to use, minimum of one. */
+	Period   sdlcommon.FUint16T  /**< Sample periods. */
+	Samples  sdlcommon.FUint16T  /**< Amount of samples. */
+	Data     *sdlcommon.FUint16T /**< Should contain channels*samples items. */
 
 	/* Envelope */
-	attack_length sdlcommon.FUint16T /**< Duration of the attack. */
-	attack_level  sdlcommon.FUint16T /**< Level at the start of the attack. */
-	fade_length   sdlcommon.FUint16T /**< Duration of the fade. */
-	fade_level    sdlcommon.FUint16T /**< Level at the end of the fade. */
+	AttackLength sdlcommon.FUint16T /**< Duration of the attack. */
+	AttackLevel  sdlcommon.FUint16T /**< Level at the start of the attack. */
+	FadeLength   sdlcommon.FUint16T /**< Duration of the fade. */
+	FadeLevel    sdlcommon.FUint16T /**< Level at the end of the fade. */
 }
 
 /**
@@ -814,7 +814,7 @@ type SDL_HapticEffect struct {
 	Type sdlcommon.FUint16T /**< Effect type. */
 	//constant SDL_HapticConstant;    /**< Constant effect. */
 	//periodic SDL_HapticPeriodic;    /**< Periodic effect. */
-	//condition SDL_HapticCondition;  /**< Condition effect. */
+	Condition SDL_HapticCondition /**< Condition effect. */
 	//ramp SDL_HapticRamp;            /**< Ramp effect. */
 	//leftright SDL_HapticLeftRight;  /**< Left/Right effect. */
 	//custom SDL_HapticCustom;        /**< Custom effect. */

@@ -24,7 +24,7 @@ type SDL_RWops struct {
 	 *  Return the size of the file in this rwops, or -1 if unknown
 	 */
 	//Sint64 (SDLCALL * size) (struct SDL_RWops * context);
-	Size *func(context *SDL_RWops) sdlcommon.FSint64
+	Size uintptr
 
 	/**
 	 *  Seek to \c offset relative to \c whence, one of stdio's whence values:
@@ -34,7 +34,7 @@ type SDL_RWops struct {
 	 */
 	//Sint64 (SDLCALL * seek) (struct SDL_RWops * context, Sint64 offset,
 	//int whence);
-	seek *func(context *SDL_RWops, offset sdlcommon.FSint64, whence sdlcommon.FInt) sdlcommon.FSint64
+	Seek uintptr
 	/**
 	 *  Read up to \c maxnum objects each of size \c size from the data
 	 *  stream to the area pointed at by \c ptr.
@@ -43,7 +43,7 @@ type SDL_RWops struct {
 	 */
 	//size_t (SDLCALL * read) (struct SDL_RWops * context, void *ptr,
 	//size_t size, size_t maxnum);
-	read *func(context *SDL_RWops, ptr sdlcommon.FVoidP, size sdlcommon.FSizeT, maxnum sdlcommon.FSizeT) sdlcommon.FSizeT
+	Read uintptr
 
 	/**
 	 *  Write exactly \c num objects each of size \c size from the area
@@ -51,14 +51,13 @@ type SDL_RWops struct {
 	 *
 	 *  \return the number of objects written, or 0 at error or end of file.
 	 */
-	write *func(context SDL_RWops, ptr sdlcommon.FConstVoidP, size, num sdlcommon.FSizeT) sdlcommon.FSizeT
-
+	Write uintptr
 	/**
 	 *  Close and free an allocated SDL_RWops structure.
 	 *
 	 *  \return 0 if successful or -1 on write error when flushing data.
 	 */
-	close  *func(context *SDL_RWops) sdlcommon.FInt
+	Close  uintptr
 	Type   sdlcommon.FUint32T
 	Hidden struct {
 		//	union
@@ -69,12 +68,12 @@ type SDL_RWops struct {
 		//} androidio;
 		//	#elif defined(__WIN32__)
 		//struct {
-		//	SDL_bool append;
-		//	void *h;
+		Append bool
+		H      sdlcommon.FVoidP
 		//struct {
-		//	void *data;
-		//	size_t size;
-		//	size_t left;
+		Data sdlcommon.FVoidP
+		Size sdlcommon.FSizeT
+		Left sdlcommon.FSizeT
 		//} buffer;
 		//} windowsio;
 		//	#elif defined(__VITA__)
@@ -100,8 +99,8 @@ type SDL_RWops struct {
 		//MemStop *sdlcommon.FUint8T//共用体，作废
 
 		//struct {
-		UnknownData1 sdlcommon.FVoidP
-		UnknownData2 sdlcommon.FVoidP
+		//UnknownData1 sdlcommon.FVoidP
+		//UnknownData2 sdlcommon.FVoidP
 		//} unknown;
 	}
 }

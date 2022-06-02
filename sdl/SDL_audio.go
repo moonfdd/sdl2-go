@@ -148,15 +148,15 @@ type SDL_AudioCallback = func(userdata sdlcommon.FVoidP, stream *sdlcommon.FUint
  *  8:  FL FR FC LFE BL BR SL SR    (7.1 surround)
  */
 type SDL_AudioSpec struct {
-	freq     sdlcommon.FInt     /**< DSP frequency -- samples per second */
-	format   SDL_AudioFormat    /**< Audio data format */
-	channels sdlcommon.FUint8T  /**< Number of channels: 1 mono, 2 stereo */
-	silence  sdlcommon.FUint8T  /**< Audio buffer silence value (calculated) */
-	samples  sdlcommon.FUint16T /**< Audio buffer size in sample FRAMES (total samples divided by channel count) */
-	padding  sdlcommon.FUint16T /**< Necessary for some compile environments */
-	size     sdlcommon.FUint32T /**< Audio buffer size in bytes (calculated) */
-	callback *SDL_AudioCallback // /**< Callback that feeds the audio device (NULL to use SDL_QueueAudio()). */
-	userdata sdlcommon.FVoidP   /**< Userdata passed to callback (ignored for NULL callbacks). */
+	Freq     sdlcommon.FInt     /**< DSP frequency -- samples per second */
+	Format   SDL_AudioFormat    /**< Audio data format */
+	Channels sdlcommon.FUint8T  /**< Number of channels: 1 mono, 2 stereo */
+	Silence  sdlcommon.FUint8T  /**< Audio buffer silence value (calculated) */
+	Samples  sdlcommon.FUint16T /**< Audio buffer size in sample FRAMES (total samples divided by channel count) */
+	Padding  sdlcommon.FUint16T /**< Necessary for some compile environments */
+	Cize     sdlcommon.FUint32T /**< Audio buffer size in bytes (calculated) */
+	Callback uintptr            //*SDL_AudioCallback // /**< Callback that feeds the audio device (NULL to use SDL_QueueAudio()). */
+	Userdata sdlcommon.FVoidP   /**< Userdata passed to callback (ignored for NULL callbacks). */
 }
 
 //type SDL_AudioCVT struct {
@@ -641,8 +641,8 @@ type SDL_AudioStatus = int32
 
 const (
 	SDL_AUDIO_STOPPED = 0
-	SDL_AUDIO_PLAYING
-	SDL_AUDIO_PAUSED
+	SDL_AUDIO_PLAYING = iota
+	SDL_AUDIO_PAUSED  = iota
 )
 
 //extern DECLSPEC SDL_AudioStatus SDLCALL SDL_GetAudioStatus(void);

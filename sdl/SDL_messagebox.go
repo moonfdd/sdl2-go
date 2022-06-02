@@ -32,27 +32,27 @@ const (
  * Individual button data.
  */
 type SDL_MessageBoxButtonData struct {
-	//Uint32 flags;       /**< ::SDL_MessageBoxButtonFlags */
-	//int buttonid;       /**< User defined button id (value returned via SDL_ShowMessageBox) */
-	//const char * text;  /**< The UTF-8 button text */
+	Flags    sdlcommon.FUint32T     /**< ::SDL_MessageBoxButtonFlags */
+	Buttonid sdlcommon.FInt         /**< User defined button id (value returned via SDL_ShowMessageBox) */
+	Text     sdlcommon.FCharPStruct /**< The UTF-8 button text */
 }
 
 /**
  * RGB value used in a message box color scheme
  */
 type SDL_MessageBoxColor struct {
-	//Uint8 r, g, b;
+	R, G, B sdlcommon.FUint8T
 }
 
 type SDL_MessageBoxColorType = int32
 
 const (
-	SDL_MESSAGEBOX_COLOR_BACKGROUND = 0
-	SDL_MESSAGEBOX_COLOR_TEXT
-	SDL_MESSAGEBOX_COLOR_BUTTON_BORDER
-	SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND
-	SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED
-	SDL_MESSAGEBOX_COLOR_MAX
+	SDL_MESSAGEBOX_COLOR_BACKGROUND        = 0
+	SDL_MESSAGEBOX_COLOR_TEXT              = iota
+	SDL_MESSAGEBOX_COLOR_BUTTON_BORDER     = iota
+	SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND = iota
+	SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED   = iota
+	SDL_MESSAGEBOX_COLOR_MAX               = iota
 )
 
 /**

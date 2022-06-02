@@ -6,8 +6,8 @@ import (
 )
 
 type SDL_Locale struct {
-	language sdlcommon.FConstCharPStruct /**< A language name, like "en" for English. */
-	country  sdlcommon.FConstCharPStruct /**< A country, like "US" for America. Can be NULL. */
+	Language sdlcommon.FConstCharPStruct /**< A language name, like "en" for English. */
+	Country  sdlcommon.FConstCharPStruct /**< A country, like "US" for America. Can be NULL. */
 }
 
 /**

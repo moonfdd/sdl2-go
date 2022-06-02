@@ -156,12 +156,12 @@ func SDL_Unsupported() {
 type SDL_errorcode = int32
 
 const (
-	SDL_ENOMEM = 0
-	SDL_EFREAD
-	SDL_EFWRITE
-	SDL_EFSEEK
-	SDL_UNSUPPORTED
-	SDL_LASTERROR
+	SDL_ENOMEM      = 0
+	SDL_EFREAD      = iota
+	SDL_EFWRITE     = iota
+	SDL_EFSEEK      = iota
+	SDL_UNSUPPORTED = iota
+	SDL_LASTERROR   = iota
 )
 
 /* SDL_Error() unconditionally returns -1. */
