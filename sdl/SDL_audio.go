@@ -640,9 +640,9 @@ func SDL_OpenAudioDevice(device sdlcommon.FConstCharP, iscapture sdlcommon.FInt,
 type SDL_AudioStatus = int32
 
 const (
-	SDL_AUDIO_STOPPED = 0
-	SDL_AUDIO_PLAYING = iota
-	SDL_AUDIO_PAUSED  = iota
+	SDL_AUDIO_STOPPED = iota
+	SDL_AUDIO_PLAYING
+	SDL_AUDIO_PAUSED
 )
 
 //extern DECLSPEC SDL_AudioStatus SDLCALL SDL_GetAudioStatus(void);

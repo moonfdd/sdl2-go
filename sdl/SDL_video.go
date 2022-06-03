@@ -124,28 +124,28 @@ const SDL_WINDOWPOS_CENTERED = SDL_WINDOWPOS_CENTERED_MASK | (0) //SDL_WINDOWPOS
 type SDL_WindowEventID = int32
 
 const (
-	SDL_WINDOWEVENT_NONE    = 0    /**< Never used */
-	SDL_WINDOWEVENT_SHOWN   = iota /**< Window has been shown */
-	SDL_WINDOWEVENT_HIDDEN  = iota /**< Window has been hidden */
-	SDL_WINDOWEVENT_EXPOSED = iota /**< Window has been exposed and should be
+	SDL_WINDOWEVENT_NONE    = iota /**< Never used */
+	SDL_WINDOWEVENT_SHOWN          /**< Window has been shown */
+	SDL_WINDOWEVENT_HIDDEN         /**< Window has been hidden */
+	SDL_WINDOWEVENT_EXPOSED        /**< Window has been exposed and should be
 	  redrawn */
-	SDL_WINDOWEVENT_MOVED = iota /**< Window has been moved to data1, data2
+	SDL_WINDOWEVENT_MOVED /**< Window has been moved to data1, data2
 	 */
-	SDL_WINDOWEVENT_RESIZED      = iota /**< Window has been resized to data1xdata2 */
-	SDL_WINDOWEVENT_SIZE_CHANGED = iota /**< The window size has changed, either as
+	SDL_WINDOWEVENT_RESIZED      /**< Window has been resized to data1xdata2 */
+	SDL_WINDOWEVENT_SIZE_CHANGED /**< The window size has changed, either as
 	  a result of an API call or through the
 	  system or user changing the window size. */
-	SDL_WINDOWEVENT_MINIMIZED = iota /**< Window has been minimized */
-	SDL_WINDOWEVENT_MAXIMIZED = iota /**< Window has been maximized */
-	SDL_WINDOWEVENT_RESTORED  = iota /**< Window has been restored to normal size
+	SDL_WINDOWEVENT_MINIMIZED /**< Window has been minimized */
+	SDL_WINDOWEVENT_MAXIMIZED /**< Window has been maximized */
+	SDL_WINDOWEVENT_RESTORED  /**< Window has been restored to normal size
 	  and position */
-	SDL_WINDOWEVENT_ENTER        = iota /**< Window has gained mouse focus */
-	SDL_WINDOWEVENT_LEAVE        = iota /**< Window has lost mouse focus */
-	SDL_WINDOWEVENT_FOCUS_GAINED = iota /**< Window has gained keyboard focus */
-	SDL_WINDOWEVENT_FOCUS_LOST   = iota /**< Window has lost keyboard focus */
-	SDL_WINDOWEVENT_CLOSE        = iota /**< The window manager requests that the window be closed */
-	SDL_WINDOWEVENT_TAKE_FOCUS   = iota /**< Window is being offered a focus (should SetWindowInputFocus() on itself or a subwindow, or ignore) */
-	SDL_WINDOWEVENT_HIT_TEST     = iota /**< Window had a hit test that wasn't SDL_HITTEST_NORMAL. */
+	SDL_WINDOWEVENT_ENTER        /**< Window has gained mouse focus */
+	SDL_WINDOWEVENT_LEAVE        /**< Window has lost mouse focus */
+	SDL_WINDOWEVENT_FOCUS_GAINED /**< Window has gained keyboard focus */
+	SDL_WINDOWEVENT_FOCUS_LOST   /**< Window has lost keyboard focus */
+	SDL_WINDOWEVENT_CLOSE        /**< The window manager requests that the window be closed */
+	SDL_WINDOWEVENT_TAKE_FOCUS   /**< Window is being offered a focus (should SetWindowInputFocus() on itself or a subwindow, or ignore) */
+	SDL_WINDOWEVENT_HIT_TEST     /**< Window had a hit test that wasn't SDL_HITTEST_NORMAL. */
 )
 
 /**
@@ -154,10 +154,10 @@ const (
 type SDL_DisplayEventID = int32
 
 const (
-	SDL_DISPLAYEVENT_NONE         = 0    /**< Never used */
-	SDL_DISPLAYEVENT_ORIENTATION  = iota /**< Display orientation has changed to data1 */
-	SDL_DISPLAYEVENT_CONNECTED    = iota /**< Display has been added to the system */
-	SDL_DISPLAYEVENT_DISCONNECTED = iota /**< Display has been removed from the system */
+	SDL_DISPLAYEVENT_NONE         = iota /**< Never used */
+	SDL_DISPLAYEVENT_ORIENTATION         /**< Display orientation has changed to data1 */
+	SDL_DISPLAYEVENT_CONNECTED           /**< Display has been added to the system */
+	SDL_DISPLAYEVENT_DISCONNECTED        /**< Display has been removed from the system */
 )
 
 /**
@@ -166,11 +166,11 @@ const (
 type SDL_DisplayOrientation = int32
 
 const (
-	SDL_ORIENTATION_UNKNOWN           = 0    /**< The display orientation can't be determined */
-	SDL_ORIENTATION_LANDSCAPE         = iota /**< The display is in landscape mode, with the right side up, relative to portrait mode */
-	SDL_ORIENTATION_LANDSCAPE_FLIPPED = iota /**< The display is in landscape mode, with the left side up, relative to portrait mode */
-	SDL_ORIENTATION_PORTRAIT          = iota /**< The display is in portrait mode */
-	SDL_ORIENTATION_PORTRAIT_FLIPPED  = iota /**< The display is in portrait mode, upside down */
+	SDL_ORIENTATION_UNKNOWN           = iota /**< The display orientation can't be determined */
+	SDL_ORIENTATION_LANDSCAPE                /**< The display is in landscape mode, with the right side up, relative to portrait mode */
+	SDL_ORIENTATION_LANDSCAPE_FLIPPED        /**< The display is in landscape mode, with the left side up, relative to portrait mode */
+	SDL_ORIENTATION_PORTRAIT                 /**< The display is in portrait mode */
+	SDL_ORIENTATION_PORTRAIT_FLIPPED         /**< The display is in portrait mode, upside down */
 )
 
 /**
@@ -179,9 +179,9 @@ const (
 type SDL_FlashOperation = int32
 
 const (
-	SDL_FLASH_CANCEL        = 0    /**< Cancel any window flash state */
-	SDL_FLASH_BRIEFLY       = iota /**< Flash the window briefly to get attention */
-	SDL_FLASH_UNTIL_FOCUSED = iota /**< Flash the window until it gets focus */
+	SDL_FLASH_CANCEL        = iota /**< Cancel any window flash state */
+	SDL_FLASH_BRIEFLY              /**< Flash the window briefly to get attention */
+	SDL_FLASH_UNTIL_FOCUSED        /**< Flash the window until it gets focus */
 )
 
 /**
@@ -195,33 +195,33 @@ const (
 type SDL_GLattr = int32
 
 const (
-	SDL_GL_RED_SIZE                   = 0
-	SDL_GL_GREEN_SIZE                 = iota
-	SDL_GL_BLUE_SIZE                  = iota
-	SDL_GL_ALPHA_SIZE                 = iota
-	SDL_GL_BUFFER_SIZE                = iota
-	SDL_GL_DOUBLEBUFFER               = iota
-	SDL_GL_DEPTH_SIZE                 = iota
-	SDL_GL_STENCIL_SIZE               = iota
-	SDL_GL_ACCUM_RED_SIZE             = iota
-	SDL_GL_ACCUM_GREEN_SIZE           = iota
-	SDL_GL_ACCUM_BLUE_SIZE            = iota
-	SDL_GL_ACCUM_ALPHA_SIZE           = iota
-	SDL_GL_STEREO                     = iota
-	SDL_GL_MULTISAMPLEBUFFERS         = iota
-	SDL_GL_MULTISAMPLESAMPLES         = iota
-	SDL_GL_ACCELERATED_VISUAL         = iota
-	SDL_GL_RETAINED_BACKING           = iota
-	SDL_GL_CONTEXT_MAJOR_VERSION      = iota
-	SDL_GL_CONTEXT_MINOR_VERSION      = iota
-	SDL_GL_CONTEXT_EGL                = iota
-	SDL_GL_CONTEXT_FLAGS              = iota
-	SDL_GL_CONTEXT_PROFILE_MASK       = iota
-	SDL_GL_SHARE_WITH_CURRENT_CONTEXT = iota
-	SDL_GL_FRAMEBUFFER_SRGB_CAPABLE   = iota
-	SDL_GL_CONTEXT_RELEASE_BEHAVIOR   = iota
-	SDL_GL_CONTEXT_RESET_NOTIFICATION = iota
-	SDL_GL_CONTEXT_NO_ERROR           = iota
+	SDL_GL_RED_SIZE = iota
+	SDL_GL_GREEN_SIZE
+	SDL_GL_BLUE_SIZE
+	SDL_GL_ALPHA_SIZE
+	SDL_GL_BUFFER_SIZE
+	SDL_GL_DOUBLEBUFFER
+	SDL_GL_DEPTH_SIZE
+	SDL_GL_STENCIL_SIZE
+	SDL_GL_ACCUM_RED_SIZE
+	SDL_GL_ACCUM_GREEN_SIZE
+	SDL_GL_ACCUM_BLUE_SIZE
+	SDL_GL_ACCUM_ALPHA_SIZE
+	SDL_GL_STEREO
+	SDL_GL_MULTISAMPLEBUFFERS
+	SDL_GL_MULTISAMPLESAMPLES
+	SDL_GL_ACCELERATED_VISUAL
+	SDL_GL_RETAINED_BACKING
+	SDL_GL_CONTEXT_MAJOR_VERSION
+	SDL_GL_CONTEXT_MINOR_VERSION
+	SDL_GL_CONTEXT_EGL
+	SDL_GL_CONTEXT_FLAGS
+	SDL_GL_CONTEXT_PROFILE_MASK
+	SDL_GL_SHARE_WITH_CURRENT_CONTEXT
+	SDL_GL_FRAMEBUFFER_SRGB_CAPABLE
+	SDL_GL_CONTEXT_RELEASE_BEHAVIOR
+	SDL_GL_CONTEXT_RESET_NOTIFICATION
+	SDL_GL_CONTEXT_NO_ERROR
 )
 
 type SDL_GLprofile = int32
@@ -2131,16 +2131,16 @@ func (window *SDL_Window) SDL_GetWindowGammaRamp(red *sdlcommon.FUint64T, green 
 type SDL_HitTestResult = int32
 
 const (
-	SDL_HITTEST_NORMAL             = 0    /**< Region is normal. No special properties. */
-	SDL_HITTEST_DRAGGABLE          = iota /**< Region can drag entire window. */
-	SDL_HITTEST_RESIZE_TOPLEFT     = iota
-	SDL_HITTEST_RESIZE_TOP         = iota
-	SDL_HITTEST_RESIZE_TOPRIGHT    = iota
-	SDL_HITTEST_RESIZE_RIGHT       = iota
-	SDL_HITTEST_RESIZE_BOTTOMRIGHT = iota
-	SDL_HITTEST_RESIZE_BOTTOM      = iota
-	SDL_HITTEST_RESIZE_BOTTOMLEFT  = iota
-	SDL_HITTEST_RESIZE_LEFT        = iota
+	SDL_HITTEST_NORMAL    = iota /**< Region is normal. No special properties. */
+	SDL_HITTEST_DRAGGABLE        /**< Region can drag entire window. */
+	SDL_HITTEST_RESIZE_TOPLEFT
+	SDL_HITTEST_RESIZE_TOP
+	SDL_HITTEST_RESIZE_TOPRIGHT
+	SDL_HITTEST_RESIZE_RIGHT
+	SDL_HITTEST_RESIZE_BOTTOMRIGHT
+	SDL_HITTEST_RESIZE_BOTTOM
+	SDL_HITTEST_RESIZE_BOTTOMLEFT
+	SDL_HITTEST_RESIZE_LEFT
 )
 
 /**

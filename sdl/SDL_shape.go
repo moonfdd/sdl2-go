@@ -78,13 +78,13 @@ type WindowShapeMode = int32
 
 const (
 	/** \brief The default mode, a binarized alpha cutoff of 1. */
-	ShapeModeDefault = 0
+	ShapeModeDefault = iota
 	/** \brief A binarized alpha cutoff with a given integer value. */
-	ShapeModeBinarizeAlpha = iota
+	ShapeModeBinarizeAlpha
 	/** \brief A binarized alpha cutoff with a given integer value, but with the opposite comparison. */
-	ShapeModeReverseBinarizeAlpha = iota
+	ShapeModeReverseBinarizeAlpha
 	/** \brief A color key is applied. */
-	ShapeModeColorKey = iota
+	ShapeModeColorKey
 )
 
 //#define SDL_SHAPEMODEALPHA(mode) (mode == ShapeModeDefault || mode == ShapeModeBinarizeAlpha || mode == ShapeModeReverseBinarizeAlpha)

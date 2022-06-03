@@ -21,24 +21,20 @@
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/structtest/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/structtest/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_assert.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_assert.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_atomic.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_atomic.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_audio.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_audio.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_error.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_error.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_events.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_gamecontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_gamecontroller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_haptic.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_haptic.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_hints.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_hints.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_joystick.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_joystick.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_locale.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_locale.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_log.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_messagebox.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_messagebox.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_mouse.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_mouse.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_pixels.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_pixels.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_power.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_power.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_render.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_render.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_rwops.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_rwops.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_sensor.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_sensor.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_shape.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_shape.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_surface.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_surface.go" afterDir="false" />
@@ -166,22 +162,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="868" y="319" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1653876560070" />
-    <state width="1877" height="223" key="GridCell.Tab.0.bottom" timestamp="1654155802330">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom" timestamp="1654218216787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802330" />
-    <state width="1877" height="223" key="GridCell.Tab.0.center" timestamp="1654155802330">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1654218216787" />
+    <state width="1877" height="223" key="GridCell.Tab.0.center" timestamp="1654218216787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802330" />
-    <state width="1877" height="223" key="GridCell.Tab.0.left" timestamp="1654155802329">
+    <state width="1877" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1654218216787" />
+    <state width="1877" height="223" key="GridCell.Tab.0.left" timestamp="1654218216787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802329" />
-    <state width="1877" height="223" key="GridCell.Tab.0.right" timestamp="1654155802330">
+    <state width="1877" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1654218216787" />
+    <state width="1877" height="223" key="GridCell.Tab.0.right" timestamp="1654218216787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654155802330" />
+    <state width="1877" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654218216787" />
     <state x="589" y="209" key="SettingsEditor" timestamp="1654149363345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -190,10 +186,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1653377503938" />
-    <state x="555" y="167" width="1217" height="739" key="find.popup" timestamp="1654155872767">
+    <state x="301" y="60" width="1508" height="874" key="find.popup" timestamp="1654218216241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="555" y="167" width="1217" height="739" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1654155872767" />
+    <state x="301" y="60" width="1508" height="874" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1654218216241" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

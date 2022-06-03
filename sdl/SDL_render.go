@@ -38,9 +38,9 @@ type SDL_RendererInfo struct {
 type SDL_ScaleMode = int32
 
 const (
-	SDL_ScaleModeNearest = 0    /**< nearest pixel sampling */
-	SDL_ScaleModeLinear  = iota /**< linear filtering */
-	SDL_ScaleModeBest    = iota /**< anisotropic filtering */
+	SDL_ScaleModeNearest = iota /**< nearest pixel sampling */
+	SDL_ScaleModeLinear         /**< linear filtering */
+	SDL_ScaleModeBest           /**< anisotropic filtering */
 )
 
 /**
@@ -49,9 +49,9 @@ const (
 type SDL_TextureAccess = int32
 
 const (
-	SDL_TEXTUREACCESS_STATIC    = 0    /**< Changes rarely, not lockable */
-	SDL_TEXTUREACCESS_STREAMING = iota /**< Changes frequently, lockable */
-	SDL_TEXTUREACCESS_TARGET    = iota /**< Texture can be used as a render target */
+	SDL_TEXTUREACCESS_STATIC    = iota /**< Changes rarely, not lockable */
+	SDL_TEXTUREACCESS_STREAMING        /**< Changes frequently, lockable */
+	SDL_TEXTUREACCESS_TARGET           /**< Texture can be used as a render target */
 )
 
 /**

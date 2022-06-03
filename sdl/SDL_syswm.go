@@ -22,20 +22,20 @@ type SDL_SysWMinfo struct {
 type SDL_SYSWM_TYPE = int32
 
 const (
-	SDL_SYSWM_UNKNOWN  = 0
-	SDL_SYSWM_WINDOWS  = iota
-	SDL_SYSWM_X11      = iota
-	SDL_SYSWM_DIRECTFB = iota
-	SDL_SYSWM_COCOA    = iota
-	SDL_SYSWM_UIKIT    = iota
-	SDL_SYSWM_WAYLAND  = iota
-	SDL_SYSWM_MIR      = iota /* no longer available, left for API/ABI compatibility. Remove in 2.1! */
-	SDL_SYSWM_WINRT    = iota
-	SDL_SYSWM_ANDROID  = iota
-	SDL_SYSWM_VIVANTE  = iota
-	SDL_SYSWM_OS2      = iota
-	SDL_SYSWM_HAIKU    = iota
-	SDL_SYSWM_KMSDRM   = iota
+	SDL_SYSWM_UNKNOWN = iota
+	SDL_SYSWM_WINDOWS
+	SDL_SYSWM_X11
+	SDL_SYSWM_DIRECTFB
+	SDL_SYSWM_COCOA
+	SDL_SYSWM_UIKIT
+	SDL_SYSWM_WAYLAND
+	SDL_SYSWM_MIR /* no longer available, left for API/ABI compatibility. Remove in 2.1! */
+	SDL_SYSWM_WINRT
+	SDL_SYSWM_ANDROID
+	SDL_SYSWM_VIVANTE
+	SDL_SYSWM_OS2
+	SDL_SYSWM_HAIKU
+	SDL_SYSWM_KMSDRM
 )
 
 /**

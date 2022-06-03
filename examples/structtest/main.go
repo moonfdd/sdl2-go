@@ -8,6 +8,10 @@ import (
 
 func main() {
 	if true {
+		fmt.Println(sdl.SDL_APP_TERMINATING)
+	}
+	return
+	if true {
 		var a [2]sdl.SDL_DisplayMode
 		b := uintptr(unsafe.Pointer(&a[1])) - uintptr(unsafe.Pointer(&a[0]))
 		fmt.Println(b)
