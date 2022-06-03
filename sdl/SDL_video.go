@@ -2558,7 +2558,7 @@ func (window *SDL_Window) SDL_GL_CreateContext() (res SDL_GLContext) {
 	if t == 0 {
 
 	}
-	res = *(*SDL_GLContext)(unsafe.Pointer(t))
+	res = *(*SDL_GLContext)(unsafe.Pointer(&t))
 	return
 }
 
@@ -2622,7 +2622,7 @@ func SDL_GL_GetCurrentContext() (res SDL_GLContext) {
 	if t == 0 {
 
 	}
-	res = *(*SDL_GLContext)(unsafe.Pointer(t))
+	res = *(*SDL_GLContext)(unsafe.Pointer(&t))
 	return
 }
 

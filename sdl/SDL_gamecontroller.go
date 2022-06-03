@@ -820,7 +820,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetBindForAxis(axis 
 	if t == 0 {
 
 	}
-	res = *(*SDL_GameControllerButtonBind)(unsafe.Pointer(t))
+	res = *(*SDL_GameControllerButtonBind)(unsafe.Pointer(&t))
 	return
 }
 
@@ -984,7 +984,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetBindForButton(but
 	if t == 0 {
 
 	}
-	res = *(*SDL_GameControllerButtonBind)(unsafe.Pointer(t))
+	res = *(*SDL_GameControllerButtonBind)(unsafe.Pointer(&t))
 	return
 }
 

@@ -193,7 +193,7 @@ func SDL_JoystickGetDeviceGUID(device_index sdlcommon.FInt) (res SDL_JoystickGUI
 	if t == 0 {
 
 	}
-	res = *(*SDL_JoystickGUID)(unsafe.Pointer(t))
+	res = *(*SDL_JoystickGUID)(unsafe.Pointer(&t))
 	return
 }
 
@@ -613,7 +613,7 @@ func (joystick *SDL_Joystick) SDL_JoystickGetGUID() (res SDL_JoystickGUID) {
 	if t == 0 {
 
 	}
-	res = *(*SDL_JoystickGUID)(unsafe.Pointer(t))
+	res = *(*SDL_JoystickGUID)(unsafe.Pointer(&t))
 	return
 }
 
@@ -762,7 +762,7 @@ func SDL_JoystickGetGUIDFromString(pchGUID sdlcommon.FCharP) (res SDL_JoystickGU
 	if t == 0 {
 
 	}
-	res = *(*SDL_JoystickGUID)(unsafe.Pointer(t))
+	res = *(*SDL_JoystickGUID)(unsafe.Pointer(&t))
 	return
 }
 

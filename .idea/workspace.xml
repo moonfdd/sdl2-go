@@ -21,27 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/structtest/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/structtest/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_assert.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_assert.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_audio.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_audio.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_error.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_error.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_events.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_gamecontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_gamecontroller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_hints.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_hints.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_joystick.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_joystick.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_log.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_messagebox.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_messagebox.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_mouse.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_mouse.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_pixels.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_pixels.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_power.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_power.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_render.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_render.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_sensor.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_sensor.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_shape.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_shape.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_surface.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_surface.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_system.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_system.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_syswm.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_syswm.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_thread.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_thread.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_touch.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_touch.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sdl/SDL_video.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_video.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
