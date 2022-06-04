@@ -1260,8 +1260,8 @@ func (renderer *SDL_Renderer) SDL_RenderIsClipEnabled() (res bool) {
 func (renderer *SDL_Renderer) SDL_RenderSetScale(scaleX sdlcommon.FFloat, scaleY sdlcommon.FFloat) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderSetScale").Call(
 		uintptr(unsafe.Pointer(renderer)),
-		uintptr(scaleX),
-		uintptr(scaleY),
+		uintptr(unsafe.Pointer(&scaleX)),
+		uintptr(unsafe.Pointer(&scaleY)),
 	)
 	if t == 0 {
 
@@ -1864,7 +1864,7 @@ func (renderer *SDL_Renderer) SDL_RenderCopyEx(texture *SDL_Texture,
 		uintptr(unsafe.Pointer(srcrect)),
 		uintptr(unsafe.Pointer(dstrect)),
 
-		uintptr(angle),
+		uintptr(unsafe.Pointer(&angle)),
 		uintptr(unsafe.Pointer(center)),
 		uintptr(unsafe.Pointer(&flip)),
 	)
@@ -1888,8 +1888,8 @@ func (renderer *SDL_Renderer) SDL_RenderCopyEx(texture *SDL_Texture,
 func (renderer *SDL_Renderer) SDL_RenderDrawPointF(x, y sdlcommon.FFloat) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawPointF").Call(
 		uintptr(unsafe.Pointer(renderer)),
-		uintptr(x),
-		uintptr(y),
+		uintptr(unsafe.Pointer(&x)),
+		uintptr(unsafe.Pointer(&y)),
 	)
 	if t == 0 {
 
@@ -1937,10 +1937,10 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPointsF(points *SDL_FPoint, count sd
 func (renderer *SDL_Renderer) SDL_RenderDrawLineF(x1, y1, x2, y2 sdlcommon.FFloat) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawLineF").Call(
 		uintptr(unsafe.Pointer(renderer)),
-		uintptr(x1),
-		uintptr(y1),
-		uintptr(x2),
-		uintptr(y2),
+		uintptr(unsafe.Pointer(&x1)),
+		uintptr(unsafe.Pointer(&y1)),
+		uintptr(unsafe.Pointer(&x2)),
+		uintptr(unsafe.Pointer(&y2)),
 	)
 	if t == 0 {
 
@@ -2138,7 +2138,7 @@ func (renderer *SDL_Renderer) SDL_RenderCopyExF(texture *SDL_Texture,
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(srcrect)),
 		uintptr(unsafe.Pointer(dstrect)),
-		uintptr(angle),
+		uintptr(unsafe.Pointer(&angle)),
 		uintptr(unsafe.Pointer(center)),
 		uintptr(flip),
 	)

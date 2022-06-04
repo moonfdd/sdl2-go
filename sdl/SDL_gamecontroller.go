@@ -1170,7 +1170,7 @@ func (gamecontroller *SDL_GameController) SDL_GameControllerGetSensorDataRate(ty
 	if t == 0 {
 
 	}
-	res = sdlcommon.FFloat(t)
+	res = *(*sdlcommon.FFloat)(unsafe.Pointer(&t))
 	return
 }
 

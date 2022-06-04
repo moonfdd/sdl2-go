@@ -809,7 +809,7 @@ func SDL_GetRGBA(pixel sdlcommon.FUint32T,
 //extern DECLSPEC void SDLCALL SDL_CalculateGammaRamp(float gamma, Uint16 * ramp);
 func SDL_CalculateGammaRamp(gamma sdlcommon.FFloat, ramp *sdlcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CalculateGammaRamp").Call(
-		uintptr(gamma),
+		uintptr(unsafe.Pointer(&gamma)),
 		uintptr(unsafe.Pointer(ramp)),
 	)
 	if t == 0 {

@@ -1582,7 +1582,7 @@ func (haptic *SDL_Haptic) SDL_HapticRumbleInit() (res sdlcommon.FInt) {
 func (haptic *SDL_Haptic) SDL_HapticRumblePlay(strength sdlcommon.FFloat, length sdlcommon.FUint32T) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticRumblePlay").Call(
 		uintptr(unsafe.Pointer(haptic)),
-		uintptr(strength),
+		uintptr(unsafe.Pointer(&strength)),
 		uintptr(length),
 	)
 	if t == 0 {

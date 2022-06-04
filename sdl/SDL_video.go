@@ -1892,7 +1892,7 @@ func SDL_GetGrabbedWindow() (res *SDL_Window) {
 func (window *SDL_Window) SDL_SetWindowBrightness(brightness sdlcommon.FFloat) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowBrightness").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(brightness),
+		uintptr(unsafe.Pointer(&brightness)),
 	)
 	if t == 0 {
 
@@ -1922,7 +1922,7 @@ func (window *SDL_Window) SDL_GetWindowBrightness() (res sdlcommon.FFloat) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.FFloat(t)
+	res = *(*sdlcommon.FFloat)(unsafe.Pointer(&t))
 	return
 }
 
@@ -1947,7 +1947,7 @@ func (window *SDL_Window) SDL_GetWindowBrightness() (res sdlcommon.FFloat) {
 func (window *SDL_Window) SDL_SetWindowOpacity(brightness sdlcommon.FFloat) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowOpacity").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(brightness),
+		uintptr(unsafe.Pointer(&brightness)),
 	)
 	if t == 0 {
 
