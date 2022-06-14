@@ -1,7 +1,6 @@
 package sdl
 
 import (
-	"fmt"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
 )
@@ -104,7 +103,8 @@ const (
 const SDL_WINDOWPOS_UNDEFINED_MASK = 0x1FFF0000
 
 //const SDL_WINDOWPOS_UNDEFINED_DISPLAY(X) = (SDL_WINDOWPOS_UNDEFINED_MASK|(X))
-//const SDL_WINDOWPOS_UNDEFINED    =     SDL_WINDOWPOS_UNDEFINED_DISPLAY(0)
+const SDL_WINDOWPOS_UNDEFINED = SDL_WINDOWPOS_UNDEFINED_MASK | 0
+
 //const SDL_WINDOWPOS_ISUNDEFINED(X)    \
 //(((X)&0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK)
 
@@ -891,7 +891,6 @@ func SDL_CreateWindow(title sdlcommon.FConstCharP,
 	if t == 0 {
 
 	}
-	fmt.Println("t = ", t)
 	res = (*SDL_Window)(unsafe.Pointer(t))
 	return
 }

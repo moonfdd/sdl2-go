@@ -571,6 +571,168 @@ type SDL_Event struct {
 	//Uint8 padding[sizeof(void *) <= 8 ? 56 : sizeof(void *) == 16 ? 64 : 3 * sizeof(void *)];
 }
 
+// display SDL_DisplayEvent;               /**< Display event data */
+func (this *SDL_Event) ToSDL_DisplayEvent() (res *SDL_WindowEvent) {
+	res = (*SDL_WindowEvent)(unsafe.Pointer(this))
+	return
+}
+
+// window SDL_WindowEvent;                 /**< Window event data */
+func (this *SDL_Event) ToSDL_WindowEvent() (res *SDL_WindowEvent) {
+	res = (*SDL_WindowEvent)(unsafe.Pointer(this))
+	return
+}
+
+// key SDL_KeyboardEvent;                  /**< Keyboard event data */
+func (this *SDL_Event) ToSDL_KeyboardEvent() (res *SDL_KeyboardEvent) {
+	res = (*SDL_KeyboardEvent)(unsafe.Pointer(this))
+	return
+}
+
+// edit SDL_TextEditingEvent;              /**< Text editing event data */
+func (this *SDL_Event) ToSDL_TextEditingEvent() (res *SDL_TextEditingEvent) {
+	res = (*SDL_TextEditingEvent)(unsafe.Pointer(this))
+	return
+}
+
+// text SDL_TextInputEvent;                /**< Text input event data */
+func (this *SDL_Event) ToSDL_TextInputEvent() (res *SDL_TextInputEvent) {
+	res = (*SDL_TextInputEvent)(unsafe.Pointer(this))
+	return
+}
+
+// motion SDL_MouseMotionEvent;            /**< Mouse motion event data */
+func (this *SDL_Event) ToSDL_MouseMotionEvent() (res *SDL_MouseMotionEvent) {
+	res = (*SDL_MouseMotionEvent)(unsafe.Pointer(this))
+	return
+}
+
+// button SDL_MouseButtonEvent;            /**< Mouse button event data */
+func (this *SDL_Event) ToSDL_MouseButtonEvent() (res *SDL_MouseButtonEvent) {
+	res = (*SDL_MouseButtonEvent)(unsafe.Pointer(this))
+	return
+}
+
+// wheel SDL_MouseWheelEvent;              /**< Mouse wheel event data */
+func (this *SDL_Event) ToSDL_MouseWheelEvent() (res *SDL_MouseWheelEvent) {
+	res = (*SDL_MouseWheelEvent)(unsafe.Pointer(this))
+	return
+}
+
+// jaxis SDL_JoyAxisEvent;                 /**< Joystick axis event data */
+func (this *SDL_Event) ToSDL_JoyAxisEvent() (res *SDL_JoyAxisEvent) {
+	res = (*SDL_JoyAxisEvent)(unsafe.Pointer(this))
+	return
+}
+
+// jball SDL_JoyBallEvent;                 /**< Joystick ball event data */
+func (this *SDL_Event) ToSDL_JoyBallEvent() (res *SDL_JoyBallEvent) {
+	res = (*SDL_JoyBallEvent)(unsafe.Pointer(this))
+	return
+}
+
+// jhat SDL_JoyHatEvent;                   /**< Joystick hat event data */
+func (this *SDL_Event) ToSDL_JoyHatEvent() (res *SDL_JoyHatEvent) {
+	res = (*SDL_JoyHatEvent)(unsafe.Pointer(this))
+	return
+}
+
+// jbutton SDL_JoyButtonEvent;             /**< Joystick button event data */
+func (this *SDL_Event) ToSDL_JoyButtonEvent() (res *SDL_JoyButtonEvent) {
+	res = (*SDL_JoyButtonEvent)(unsafe.Pointer(this))
+	return
+}
+
+// jdevice SDL_JoyDeviceEvent;             /**< Joystick device change event data */
+func (this *SDL_Event) ToSDL_JoyDeviceEvent() (res *SDL_JoyDeviceEvent) {
+	res = (*SDL_JoyDeviceEvent)(unsafe.Pointer(this))
+	return
+}
+
+// caxis SDL_ControllerAxisEvent;          /**< Game Controller axis event data */
+func (this *SDL_Event) ToSDL_ControllerAxisEvent() (res *SDL_ControllerAxisEvent) {
+	res = (*SDL_ControllerAxisEvent)(unsafe.Pointer(this))
+	return
+}
+
+// cbutton SDL_ControllerButtonEvent;      /**< Game Controller button event data */
+func (this *SDL_Event) ToSDL_ControllerButtonEvent() (res *SDL_ControllerButtonEvent) {
+	res = (*SDL_ControllerButtonEvent)(unsafe.Pointer(this))
+	return
+}
+
+// cdevice SDL_ControllerDeviceEvent;      /**< Game Controller device event data */
+func (this *SDL_Event) ToSDL_ControllerDeviceEvent() (res *SDL_ControllerDeviceEvent) {
+	res = (*SDL_ControllerDeviceEvent)(unsafe.Pointer(this))
+	return
+}
+
+// ctouchpad SDL_ControllerTouchpadEvent;  /**< Game Controller touchpad event data */
+func (this *SDL_Event) ToSDL_ControllerTouchpadEvent() (res *SDL_ControllerTouchpadEvent) {
+	res = (*SDL_ControllerTouchpadEvent)(unsafe.Pointer(this))
+	return
+}
+
+// csensor SDL_ControllerSensorEvent;      /**< Game Controller sensor event data */
+func (this *SDL_Event) ToSDL_ControllerSensorEvent() (res *SDL_ControllerSensorEvent) {
+	res = (*SDL_ControllerSensorEvent)(unsafe.Pointer(this))
+	return
+}
+
+// adevice SDL_AudioDeviceEvent;           /**< Audio device event data */
+func (this *SDL_Event) ToSDL_AudioDeviceEvent() (res *SDL_AudioDeviceEvent) {
+	res = (*SDL_AudioDeviceEvent)(unsafe.Pointer(this))
+	return
+}
+
+// sensor SDL_SensorEvent;                 /**< Sensor event data */
+func (this *SDL_Event) ToSDL_SensorEvent() (res *SDL_SensorEvent) {
+	res = (*SDL_SensorEvent)(unsafe.Pointer(this))
+	return
+}
+
+// quit SDL_QuitEvent;                     /**< Quit request event data */
+func (this *SDL_Event) ToSDL_QuitEvent() (res *SDL_QuitEvent) {
+	res = (*SDL_QuitEvent)(unsafe.Pointer(this))
+	return
+}
+
+// user SDL_UserEvent;                     /**< Custom event data */
+func (this *SDL_Event) ToSDL_UserEvent() (res *SDL_UserEvent) {
+	res = (*SDL_UserEvent)(unsafe.Pointer(this))
+	return
+}
+
+// syswm SDL_SysWMEvent;                   /**< System dependent window event data */
+func (this *SDL_Event) ToSDL_SysWMEvent() (res *SDL_SysWMEvent) {
+	res = (*SDL_SysWMEvent)(unsafe.Pointer(this))
+	return
+}
+
+// tfinger SDL_TouchFingerEvent;           /**< Touch finger event data */
+func (this *SDL_Event) ToSDL_TouchFingerEvent() (res *SDL_TouchFingerEvent) {
+	res = (*SDL_TouchFingerEvent)(unsafe.Pointer(this))
+	return
+}
+
+// mgesture SDL_MultiGestureEvent;         /**< Gesture event data */
+func (this *SDL_Event) ToSDL_MultiGestureEvent() (res *SDL_MultiGestureEvent) {
+	res = (*SDL_MultiGestureEvent)(unsafe.Pointer(this))
+	return
+}
+
+// dgesture SDL_DollarGestureEvent;        /**< Gesture event data */
+func (this *SDL_Event) ToSDL_DollarGestureEvent() (res *SDL_DollarGestureEvent) {
+	res = (*SDL_DollarGestureEvent)(unsafe.Pointer(this))
+	return
+}
+
+// drop SDL_DropEvent;                     /**< Drag and drop event data */
+func (this *SDL_Event) ToSDL_DropEvent() (res *SDL_DropEvent) {
+	res = (*SDL_DropEvent)(unsafe.Pointer(this))
+	return
+}
+
 /* Make sure we haven't broken binary compatibility */
 //SDL_COMPILE_TIME_ASSERT(SDL_Event, sizeof(SDL_Event) == sizeof(((SDL_Event *)NULL)->padding));
 

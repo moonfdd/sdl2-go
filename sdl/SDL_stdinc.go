@@ -595,9 +595,20 @@ func SDL_crc32(crc sdlcommon.FUint32T, data sdlcommon.FVoidP, len0 sdlcommon.FSi
 	return
 }
 
-//
 //extern DECLSPEC void *SDLCALL SDL_memset(SDL_OUT_BYTECAP(len) void *dst, int c, size_t len);
-//
+func SDL_memset(dst sdlcommon.FVoidP, c sdlcommon.FInt, len0 sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_memset").Call(
+		dst,
+		uintptr(c),
+		uintptr(len0),
+	)
+	if t == 0 {
+
+	}
+	res = t
+	return
+}
+
 //#define SDL_zero(x) SDL_memset(&(x), 0, sizeof((x)))
 //#define SDL_zerop(x) SDL_memset((x), 0, sizeof(*(x)))
 //#define SDL_zeroa(x) SDL_memset((x), 0, sizeof((x)))
