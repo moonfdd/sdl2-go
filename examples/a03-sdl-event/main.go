@@ -7,9 +7,9 @@ import (
 )
 
 func main() {
-	sdlcommon.SetSDL2Path("F:/BaiduNetdiskDownload/SDL2-2.0.16/lib/x64/SDL2.dll")
+	sdlcommon.SetSDL2Path("SDL2.dll")
 	sdl.SDL_Init(sdl.SDL_INIT_VIDEO)
-	window := sdl.SDL_CreateWindow("哈哈33", sdl.SDL_WINDOWPOS_UNDEFINED, sdl.SDL_WINDOWPOS_UNDEFINED, 640, 480, sdl.SDL_WINDOW_OPENGL|sdl.SDL_WINDOW_RESIZABLE)
+	window := sdl.SDL_CreateWindow("微信公众号：福大大架构师每日一题", sdl.SDL_WINDOWPOS_UNDEFINED, sdl.SDL_WINDOWPOS_UNDEFINED, 640, 480, sdl.SDL_WINDOW_OPENGL|sdl.SDL_WINDOW_RESIZABLE)
 	if window == nil {
 		fmt.Printf("Can't create window, err:%s", sdl.SDL_GetError())
 		return

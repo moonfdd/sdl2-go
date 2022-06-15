@@ -20,16 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f89eff2-08b5-45ea-aee8-0cea441438db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/a01-sdl-basic/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/a02-sdl-window/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/a03-sdl-event/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/a05-sdl-yuv/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/a06-sdl-pcm/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/a06-sdl-pcm/main1.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_events.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_stdinc.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_stdinc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl/SDL_video.go" beforeDir="false" afterPath="$PROJECT_DIR$/sdl/SDL_video.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,22 +57,14 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sf2" />
-    <property name="settings.editor.selected.configurable" value="go.vgo" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/a01-sdl-basic">
+  <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/a03-sdl-event">
     <configuration name="go build github.com/moonfdd/sdl2-go/examples/a01-sdl-basic" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
       <package value="github.com/moonfdd/sdl2-go/examples/a01-sdl-basic" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build github.com/moonfdd/sdl2-go/examples/a02-sdl-window" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="sdl2-go" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/moonfdd/sdl2-go/examples/a02-sdl-window" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
@@ -109,13 +92,21 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build sdl2-go/examples/a02-sdl-window" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sdl2-go/examples/a02-sdl-window" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a03-sdl-event" />
+        <item itemvalue="Go Build.go build sdl2-go/examples/a02-sdl-window" />
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a01-sdl-basic" />
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a06-sdl-pcm" />
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a05-sdl-yuv" />
-        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a03-sdl-event" />
-        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a02-sdl-window" />
       </list>
     </recent_temporary>
   </component>
@@ -164,10 +155,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1326" height="234" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654953395315" />
-    <state x="589" y="209" key="SettingsEditor" timestamp="1654782813675">
+    <state x="589" y="209" key="SettingsEditor" timestamp="1655299538673">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="589" y="209" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1654782813675" />
+    <state x="589" y="209" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1655299538673" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1653377503938">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
