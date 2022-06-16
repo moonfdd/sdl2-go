@@ -59,7 +59,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sf2" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/a03-sdl-event">
+  <component name="RunManager" selected="Go Build.go build github.com/moonfdd/sdl2-go/examples/a05-sdl-yuv">
     <configuration name="go build github.com/moonfdd/sdl2-go/examples/a01-sdl-basic" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -84,14 +84,6 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/moonfdd/sdl2-go/examples/a06-sdl-pcm" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="sdl2-go" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/moonfdd/sdl2-go/examples/a06-sdl-pcm" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build sdl2-go/examples/a02-sdl-window" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="sdl2-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -100,13 +92,21 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build sdl2-go/examples/a05-sdl-yuv" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sdl2-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sdl2-go/examples/a05-sdl-yuv" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a05-sdl-yuv" />
+        <item itemvalue="Go Build.go build sdl2-go/examples/a05-sdl-yuv" />
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a03-sdl-event" />
         <item itemvalue="Go Build.go build sdl2-go/examples/a02-sdl-window" />
         <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a01-sdl-basic" />
-        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a06-sdl-pcm" />
-        <item itemvalue="Go Build.go build github.com/moonfdd/sdl2-go/examples/a05-sdl-yuv" />
       </list>
     </recent_temporary>
   </component>
@@ -139,22 +139,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="868" y="317" width="440" height="492" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1655082932726" />
-    <state width="1326" height="234" key="GridCell.Tab.0.bottom" timestamp="1654953395316">
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1655299964954">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1326" height="234" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1654953395316" />
-    <state width="1326" height="234" key="GridCell.Tab.0.center" timestamp="1654953395315">
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1655299964954" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1655299964953">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1326" height="234" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1654953395315" />
-    <state width="1326" height="234" key="GridCell.Tab.0.left" timestamp="1654953395315">
+    <state width="1877" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1655299964953" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1655299964953">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1326" height="234" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1654953395315" />
-    <state width="1326" height="234" key="GridCell.Tab.0.right" timestamp="1654953395315">
+    <state width="1877" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1655299964953" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1655299964954">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1326" height="234" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654953395315" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1655299964954" />
     <state x="589" y="209" key="SettingsEditor" timestamp="1655299538673">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

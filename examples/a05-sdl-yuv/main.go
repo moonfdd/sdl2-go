@@ -22,7 +22,7 @@ const YUV_FORMAT = sdl.SDL_PIXELFORMAT_IYUV
 var s_thread_exit = 0 // 退出标志 = 1则退出
 
 func main() {
-	sdlcommon.SetSDL2Path("F:/BaiduNetdiskDownload/SDL2-2.0.16/lib/x64/SDL2.dll")
+	sdlcommon.SetSDL2Path("SDL2.dll")
 	sdl.SDL_Init(sdl.SDL_INIT_VIDEO)
 	pixformat := YUV_FORMAT
 	// 分辨率
@@ -47,7 +47,7 @@ func main() {
 	texture := renderer.SDL_CreateTexture(uint32(pixformat), sdl.SDL_TEXTUREACCESS_STREAMING, video_width, video_height)
 	var event sdl.SDL_Event
 	var rect sdl.SDL_Rect
-	fileData, err := ioutil.ReadFile("D:/mysetup/qq记录/136234428/FileRecv/06-SDL音视频渲染实战/05-sdl-yuv/yuv420p_320x240.yuv")
+	fileData, err := ioutil.ReadFile("yuv420p_320x240.yuv")
 	if err != nil {
 		fmt.Println("读取文件失败", err)
 		return
