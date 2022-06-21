@@ -10,17 +10,12 @@ func BytePtrFromString(str string) (res *byte) {
 	return
 }
 
+// string → uintptr
 func UintPtrFromString(str string) uintptr {
 	return uintptr(unsafe.Pointer(BytePtrFromString(str)))
 }
 
-//func BoolFromUintptr(ptr uintptr) bool {
-//	if ptr == 0 {
-//		return false
-//	}
-//	return true
-//}
-
+// uintptr → string
 func StringFromPtr(sptr uintptr) (res string) {
 	if sptr <= 0 {
 		return
@@ -33,6 +28,7 @@ func StringFromPtr(sptr uintptr) (res string) {
 	return
 }
 
+//  uintptr → bool
 func GoBool(val uintptr) bool {
 	if val != 0 {
 		return true
@@ -40,12 +36,16 @@ func GoBool(val uintptr) bool {
 	return false
 }
 
+//  bool → uintptr
 func CBool(val bool) uintptr {
 	if val {
 		return 1
 	}
 	return 0
 }
+
+// func转uintptr
 func NewCallback(fn interface{}) uintptr {
+	syscall.NewCallbackCDecl(fn)
 	return syscall.NewCallback(fn)
 }
