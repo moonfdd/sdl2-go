@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -28,8 +28,8 @@
 #ifndef SDL_keycode_h_
 #define SDL_keycode_h_
 
-#include "SDL_stdinc.h"
-#include "SDL_scancode.h"
+#include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_scancode.h>
 
 /**
  *  \brief The SDL virtual key representation.
@@ -318,7 +318,12 @@ typedef enum
     SDLK_APP2 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_APP2),
 
     SDLK_AUDIOREWIND = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOREWIND),
-    SDLK_AUDIOFASTFORWARD = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOFASTFORWARD)
+    SDLK_AUDIOFASTFORWARD = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOFASTFORWARD),
+
+    SDLK_SOFTLEFT = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SOFTLEFT),
+    SDLK_SOFTRIGHT = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SOFTRIGHT),
+    SDLK_CALL = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CALL),
+    SDLK_ENDCALL = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_ENDCALL)
 } SDL_KeyCode;
 
 /**
@@ -326,26 +331,26 @@ typedef enum
  */
 typedef enum
 {
-    KMOD_NONE = 0x0000,
-    KMOD_LSHIFT = 0x0001,
-    KMOD_RSHIFT = 0x0002,
-    KMOD_LCTRL = 0x0040,
-    KMOD_RCTRL = 0x0080,
-    KMOD_LALT = 0x0100,
-    KMOD_RALT = 0x0200,
-    KMOD_LGUI = 0x0400,
-    KMOD_RGUI = 0x0800,
-    KMOD_NUM = 0x1000,
-    KMOD_CAPS = 0x2000,
-    KMOD_MODE = 0x4000,
-    KMOD_RESERVED = 0x8000,
+    SDL_KMOD_NONE = 0x0000,
+    SDL_KMOD_LSHIFT = 0x0001,
+    SDL_KMOD_RSHIFT = 0x0002,
+    SDL_KMOD_LCTRL = 0x0040,
+    SDL_KMOD_RCTRL = 0x0080,
+    SDL_KMOD_LALT = 0x0100,
+    SDL_KMOD_RALT = 0x0200,
+    SDL_KMOD_LGUI = 0x0400,
+    SDL_KMOD_RGUI = 0x0800,
+    SDL_KMOD_NUM = 0x1000,
+    SDL_KMOD_CAPS = 0x2000,
+    SDL_KMOD_MODE = 0x4000,
+    SDL_KMOD_SCROLL = 0x8000,
 
-    KMOD_CTRL = KMOD_LCTRL | KMOD_RCTRL,
-    KMOD_SHIFT = KMOD_LSHIFT | KMOD_RSHIFT,
-    KMOD_ALT = KMOD_LALT | KMOD_RALT,
-    KMOD_GUI = KMOD_LGUI | KMOD_RGUI
+    SDL_KMOD_CTRL = SDL_KMOD_LCTRL | SDL_KMOD_RCTRL,
+    SDL_KMOD_SHIFT = SDL_KMOD_LSHIFT | SDL_KMOD_RSHIFT,
+    SDL_KMOD_ALT = SDL_KMOD_LALT | SDL_KMOD_RALT,
+    SDL_KMOD_GUI = SDL_KMOD_LGUI | SDL_KMOD_RGUI,
+
+    SDL_KMOD_RESERVED = SDL_KMOD_SCROLL /* This is for source-level compatibility with SDL 2.0.0. */
 } SDL_Keymod;
 
 #endif /* SDL_keycode_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */

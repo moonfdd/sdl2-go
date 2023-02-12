@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -24,7 +24,7 @@
  *
  *  Include file for SDL test framework.
  *
- *  This code is a part of the SDL2_test library, not the main SDL library.
+ *  This code is a part of the SDL test library, not the main SDL library.
  */
 
 /*
@@ -36,7 +36,7 @@
 #ifndef SDL_test_h_arness_h
 #define SDL_test_h_arness_h
 
-#include "begin_code.h"
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -76,9 +76,9 @@ typedef struct SDLTest_TestCaseReference {
     /* !< Func2Stress */
     SDLTest_TestCaseFp testCase;
     /* !< Short name (or function name) "Func2Stress" */
-    char *name;
+    const char *name;
     /* !< Long name or full description "This test pushes func2() to the limit." */
-    char *description;
+    const char *description;
     /* !< Set to TEST_ENABLED or TEST_DISABLED (test won't be run) */
     int enabled;
 } SDLTest_TestCaseReference;
@@ -88,7 +88,7 @@ typedef struct SDLTest_TestCaseReference {
  */
 typedef struct SDLTest_TestSuiteReference {
     /* !< "PlatformSuite" */
-    char *name;
+    const char *name;
     /* !< The function that is run before each test. NULL skips. */
     SDLTest_TestCaseSetUpFp testSetUp;
     /* !< The test cases that are run as part of the suite. Last item should be NULL. */
@@ -127,8 +127,6 @@ int SDLTest_RunSuites(SDLTest_TestSuiteReference *testSuites[], const char *user
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
 #endif /* SDL_test_h_arness_h */
-
-/* vi: set ts=4 sw=4 expandtab: */

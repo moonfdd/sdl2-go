@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -41,10 +41,10 @@
 #ifndef SDL_loadso_h_
 #define SDL_loadso_h_
 
-#include "SDL_stdinc.h"
-#include "SDL_error.h"
+#include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_error.h>
 
-#include "begin_code.h"
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -56,6 +56,8 @@ extern "C" {
  * \param sofile a system-dependent name of the object file
  * \returns an opaque pointer to the object handle or NULL if there was an
  *          error; call SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_LoadFunction
  * \sa SDL_UnloadObject
@@ -82,16 +84,19 @@ extern DECLSPEC void *SDLCALL SDL_LoadObject(const char *sofile);
  * \returns a pointer to the function or NULL if there was an error; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_LoadObject
  * \sa SDL_UnloadObject
  */
-extern DECLSPEC void *SDLCALL SDL_LoadFunction(void *handle,
-                                               const char *name);
+extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(void *handle, const char *name);
 
 /**
  * Unload a shared object from memory.
  *
  * \param handle a valid shared object handle returned by SDL_LoadObject()
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_LoadFunction
  * \sa SDL_LoadObject
@@ -102,8 +107,6 @@ extern DECLSPEC void SDLCALL SDL_UnloadObject(void *handle);
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
 #endif /* SDL_loadso_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */

@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -35,9 +35,9 @@
 #ifndef SDL_opengl_h_
 #define SDL_opengl_h_
 
-#include "SDL_config.h"
+#include <SDL3/SDL_platform.h>
 
-#ifndef __IPHONEOS__  /* No OpenGL on iOS. */
+#ifndef __IOS__  /* No OpenGL on iOS. */
 
 /*
  * Mesa 3-D graphics library
@@ -69,7 +69,7 @@
 #define __gl_h_
 
 #if defined(USE_MGL_NAMESPACE)
-#include "gl_mangle.h"
+#include <SDL3/gl_mangle.h>
 #endif
 
 
@@ -97,13 +97,6 @@
 #elif defined(__CYGWIN__) && defined(USE_OPENGL32) /* use native windows opengl32 */
 #  define GLAPI extern
 #  define GLAPIENTRY __stdcall
-#elif defined(__OS2__) || defined(__EMX__) /* native os/2 opengl */
-#  define GLAPI extern
-#  define GLAPIENTRY _System
-#  define APIENTRY _System
-#  if defined(__GNUC__) && !defined(_System)
-#    define _System
-#  endif
 #elif (defined(__GNUC__) && __GNUC__ >= 4) || (defined(__SUNPRO_C) && (__SUNPRO_C >= 0x590))
 #  define GLAPI __attribute__((visibility("default")))
 #  define GLAPIENTRY
@@ -2102,59 +2095,8 @@ typedef void (APIENTRYP PFNGLMULTITEXCOORD4SVARBPROC) (GLenum target, const GLsh
  * defined in gl.h).  Otherwise, extensions will be included from glext.h.
  */
 #if !defined(NO_SDL_GLEXT) && !defined(GL_GLEXT_LEGACY)
-#include "SDL_opengl_glext.h"
+#include <SDL3/SDL_opengl_glext.h>
 #endif  /* GL_GLEXT_LEGACY */
-
-
-
-/*
- * ???. GL_MESA_packed_depth_stencil
- * XXX obsolete
- */
-#ifndef GL_MESA_packed_depth_stencil
-#define GL_MESA_packed_depth_stencil 1
-
-#define GL_DEPTH_STENCIL_MESA			0x8750
-#define GL_UNSIGNED_INT_24_8_MESA		0x8751
-#define GL_UNSIGNED_INT_8_24_REV_MESA		0x8752
-#define GL_UNSIGNED_SHORT_15_1_MESA		0x8753
-#define GL_UNSIGNED_SHORT_1_15_REV_MESA		0x8754
-
-#endif /* GL_MESA_packed_depth_stencil */
-
-
-#ifndef GL_ATI_blend_equation_separate
-#define GL_ATI_blend_equation_separate 1
-
-#define GL_ALPHA_BLEND_EQUATION_ATI	        0x883D
-
-GLAPI void GLAPIENTRY glBlendEquationSeparateATI( GLenum modeRGB, GLenum modeA );
-typedef void (APIENTRYP PFNGLBLENDEQUATIONSEPARATEATIPROC) (GLenum modeRGB, GLenum modeA);
-
-#endif /* GL_ATI_blend_equation_separate */
-
-
-/* GL_OES_EGL_image */
-#ifndef GL_OES_EGL_image
-typedef void* GLeglImageOES;
-#endif
-
-#ifndef GL_OES_EGL_image
-#define GL_OES_EGL_image 1
-#ifdef GL_GLEXT_PROTOTYPES
-GLAPI void APIENTRY glEGLImageTargetTexture2DOES (GLenum target, GLeglImageOES image);
-GLAPI void APIENTRY glEGLImageTargetRenderbufferStorageOES (GLenum target, GLeglImageOES image);
-#endif
-typedef void (APIENTRYP PFNGLEGLIMAGETARGETTEXTURE2DOESPROC) (GLenum target, GLeglImageOES image);
-typedef void (APIENTRYP PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOESPROC) (GLenum target, GLeglImageOES image);
-#endif
-
-
-/**
- ** NOTE!!!!!  If you add new functions to this file, or update
- ** glext.h be sure to regenerate the gl_mangle.h file.  See comments
- ** in that file for details.
- **/
 
 
 
@@ -2176,8 +2118,6 @@ typedef void (APIENTRYP PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOESPROC) (GLenum t
 
 #endif /* __gl_h_ */
 
-#endif /* !__IPHONEOS__ */
+#endif /* !__IOS__ */
 
 #endif /* SDL_opengl_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */

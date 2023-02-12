@@ -74,6 +74,9 @@ func main() {
 				break
 			}
 			video_buf := fileData[0:yuv_frame_len]
+			for i := y_frame_len; i < yuv_frame_len; i++ {
+				video_buf[i] = 128 //彩色变黑白
+			}
 			fileData = fileData[yuv_frame_len:]
 			// 设置纹理的数据 video_width = 320， plane
 			texture.SDL_UpdateTexture(nil, uintptr(unsafe.Pointer(&video_buf[0])), video_width)

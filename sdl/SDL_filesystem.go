@@ -2,8 +2,46 @@ package sdl
 
 import (
 	"github.com/moonfdd/sdl2-go/sdlcommon"
-	"unsafe"
 )
+
+/*
+  Simple DirectMedia Layer
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
+
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
+*/
+
+/**
+ *  \file SDL_filesystem.h
+ *
+ *  \brief Include file for filesystem SDL API functions
+ */
+
+// #ifndef SDL_filesystem_h_
+// #define SDL_filesystem_h_
+
+// #include <SDL3/SDL_stdinc.h>
+
+// #include <SDL3/SDL_begin_code.h>
+
+// /* Set up for C function definitions, even when using C++ */
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
 
 /**
  * Get the directory where the application was run from.
@@ -11,8 +49,8 @@ import (
  * This is not necessarily a fast call, so you should call this once near
  * startup and save the string if you need it.
  *
- * **Mac OS X and iOS Specific Functionality**: If the application is in a
- * ".app" bundle, this function returns the Resource directory (e.g.
+ * **macOS and iOS Specific Functionality**: If the application is in a ".app"
+ * bundle, this function returns the Resource directory (e.g.
  * MyApp.app/Contents/Resources/). This behaviour can be overridden by adding
  * a property to the Info.plist file. Adding a string key with the name
  * SDL_FILESYSTEM_BASE_DIR_TYPE with a supported value will change the
@@ -23,10 +61,14 @@ import (
  *
  * - `resource`: bundle resource directory (the default). For example:
  *   `/Applications/SDLApp/MyApp.app/Contents/Resources`
- * - `bundle`: the Bundle directory. Fpr example:
+ * - `bundle`: the Bundle directory. For example:
  *   `/Applications/SDLApp/MyApp.app/`
  * - `parent`: the containing directory of the bundle. For example:
  *   `/Applications/SDLApp/`
+ *
+ * **Nintendo 3DS Specific Functionality**: This function returns "romfs"
+ * directory of the application as it is uncommon to store resources outside
+ * the executable. As such it is not a writable directory.
  *
  * The returned path is guaranteed to end with a path separator ('\' on
  * Windows, '/' on most other platforms).
@@ -39,16 +81,13 @@ import (
  *          doesn't implement this functionality, call SDL_GetError() for more
  *          information.
  *
- * \since This function is available since SDL 2.0.1.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetPrefPath
  */
-//extern DECLSPEC char *SDLCALL SDL_GetBasePath(void);
+// extern DECLSPEC char *SDLCALL SDL_GetBasePath(void);
 func SDL_GetBasePath() (res sdlcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetBasePath").Call()
-	if t == 0 {
-
-	}
 	res = sdlcommon.StringFromPtr(t)
 	return
 }
@@ -68,11 +107,11 @@ func SDL_GetBasePath() (res sdlcommon.FConstCharP) {
  *
  * `C:\\Users\\bob\\AppData\\Roaming\\My Company\\My Program Name\\`
  *
- * On Linux, the string might look like"
+ * On Linux, the string might look like:
  *
  * `/home/bob/.local/share/My Program Name/`
  *
- * On Mac OS X, the string might look like:
+ * On macOS, the string might look like:
  *
  * `/Users/bob/Library/Application Support/My Program Name/`
  *
@@ -104,19 +143,24 @@ func SDL_GetBasePath() (res sdlcommon.FConstCharP) {
  *          notation. NULL if there's a problem (creating directory failed,
  *          etc.).
  *
- * \since This function is available since SDL 2.0.1.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetBasePath
  */
-//extern DECLSPEC char *SDLCALL SDL_GetPrefPath(const char *org, const char *app);
+// extern DECLSPEC char *SDLCALL SDL_GetPrefPath(const char *org, const char *app);
 func SDL_GetPrefPath(org sdlcommon.FConstCharP, app sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPrefPath").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(org))),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(app))),
+		sdlcommon.UintPtrFromString(org),
+		sdlcommon.UintPtrFromString(app),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.StringFromPtr(t)
 	return
 }
+
+// /* Ends C function definitions when using C++ */
+// #ifdef __cplusplus
+// }
+// #endif
+// #include <SDL3/SDL_close_code.h>
+
+// #endif /* SDL_filesystem_h_ */

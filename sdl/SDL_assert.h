@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -22,9 +22,9 @@
 #ifndef SDL_assert_h_
 #define SDL_assert_h_
 
-#include "SDL_config.h"
+#include <SDL3/SDL_stdinc.h>
 
-#include "begin_code.h"
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -51,7 +51,12 @@ assert can have unique static variables associated with it.
 /* Don't include intrin.h here because it contains C++ code */
     extern void __cdecl __debugbreak(void);
     #define SDL_TriggerBreakpoint() __debugbreak()
-#elif ( (!defined(__NACL__)) && ((defined(__GNUC__) || defined(__clang__)) && (defined(__i386__) || defined(__x86_64__))) )
+#elif defined(ANDROID)
+    #include <assert.h>
+    #define SDL_TriggerBreakpoint() assert(0)
+#elif SDL_HAS_BUILTIN(__builtin_debugtrap)
+    #define SDL_TriggerBreakpoint() __builtin_debugtrap()
+#elif (defined(__GNUC__) || defined(__clang__)) && (defined(__i386__) || defined(__x86_64__))
     #define SDL_TriggerBreakpoint() __asm__ __volatile__ ( "int $3\n\t" )
 #elif ( defined(__APPLE__) && (defined(__arm64__) || defined(__aarch64__)) )  /* this might work on other ARM targets, but this is a known quantity... */
     #define SDL_TriggerBreakpoint() __asm__ __volatile__ ( "brk #22\n\t" )
@@ -69,7 +74,7 @@ assert can have unique static variables associated with it.
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L) /* C99 supports __func__ as a standard. */
 #   define SDL_FUNCTION __func__
-#elif ((__GNUC__ >= 2) || defined(_MSC_VER) || defined (__WATCOMC__))
+#elif ((defined(__GNUC__) && (__GNUC__ >= 2)) || defined(_MSC_VER) || defined (__WATCOMC__))
 #   define SDL_FUNCTION __FUNCTION__
 #else
 #   define SDL_FUNCTION "???"
@@ -217,6 +222,8 @@ typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)(
  *                fails or NULL for the default handler
  * \param userdata a pointer that is passed to `handler`
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetAssertionHandler
  */
 extern DECLSPEC void SDLCALL SDL_SetAssertionHandler(
@@ -234,7 +241,7 @@ extern DECLSPEC void SDLCALL SDL_SetAssertionHandler(
  * \returns the default SDL_AssertionHandler that is called when an assert
  *          triggers.
  *
- * \since This function is available since SDL 2.0.2.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetAssertionHandler
  */
@@ -257,7 +264,7 @@ extern DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetDefaultAssertionHandler(void
  *                  was passed to SDL_SetAssertionHandler()
  * \returns the SDL_AssertionHandler that is called when an assert triggers.
  *
- * \since This function is available since SDL 2.0.2.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_SetAssertionHandler
  */
@@ -285,6 +292,8 @@ extern DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetAssertionHandler(void **puse
  * \returns a list of all failed assertions or NULL if the list is empty. This
  *          memory should not be modified or freed by the application.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_ResetAssertionReport
  */
 extern DECLSPEC const SDL_AssertData * SDLCALL SDL_GetAssertionReport(void);
@@ -297,22 +306,16 @@ extern DECLSPEC const SDL_AssertData * SDLCALL SDL_GetAssertionReport(void);
  * no items. In addition, any previously-triggered assertions will be reset to
  * a trigger_count of zero, and their always_ignore state will be false.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetAssertionReport
  */
 extern DECLSPEC void SDLCALL SDL_ResetAssertionReport(void);
-
-
-/* these had wrong naming conventions until 2.0.4. Please update your app! */
-#define SDL_assert_state SDL_AssertState
-#define SDL_assert_data SDL_AssertData
-
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
 #endif /* SDL_assert_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */

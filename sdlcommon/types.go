@@ -7,6 +7,7 @@ type FUint32T = uint32
 type FInt32T = int32
 type FConstCharP = string
 type FCharP = string
+type FChar = byte
 type FBuf = *byte
 type FConstIntP = *int32
 type FConstDoubleP = *float64
@@ -39,9 +40,11 @@ type FFTSample = float32
 type SDL_GLContext = uintptr
 type FWcharT = string
 
-type FConstCharPStruct = *byte
+type FConstCharPStruct = uintptr
 
 type FSint64 = int64
 type FSint32 = int32
 type FSint16 = int16
-type FCharPStruct = *byte
+type FCharPStruct = uintptr
+
+type SDL_bool = bool

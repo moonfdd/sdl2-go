@@ -46,6 +46,6 @@ func CBool(val bool) uintptr {
 
 // func转uintptr
 func NewCallback(fn interface{}) uintptr {
-	syscall.NewCallbackCDecl(fn)
+	//syscall.NewCallbackCDecl(fn)
 	return syscall.NewCallback(fn)
 }

@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -28,9 +28,9 @@
 #ifndef SDL_metal_h_
 #define SDL_metal_h_
 
-#include "SDL_video.h"
+#include <SDL3/SDL_video.h>
 
-#include "begin_code.h"
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -58,6 +58,8 @@ typedef void *SDL_MetalView;
  * The returned handle can be casted directly to a NSView or UIView. To access
  * the backing CAMetalLayer, call SDL_Metal_GetLayer().
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_Metal_DestroyView
  * \sa SDL_Metal_GetLayer
  */
@@ -69,6 +71,8 @@ extern DECLSPEC SDL_MetalView SDLCALL SDL_Metal_CreateView(SDL_Window * window);
  * This should be called before SDL_DestroyWindow, if SDL_Metal_CreateView was
  * called after SDL_CreateWindow.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_Metal_CreateView
  */
 extern DECLSPEC void SDLCALL SDL_Metal_DestroyView(SDL_MetalView view);
@@ -76,22 +80,11 @@ extern DECLSPEC void SDLCALL SDL_Metal_DestroyView(SDL_MetalView view);
 /**
  * Get a pointer to the backing CAMetalLayer for the given view.
  *
- * \sa SDL_MetalCreateView
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_Metal_CreateView
  */
 extern DECLSPEC void *SDLCALL SDL_Metal_GetLayer(SDL_MetalView view);
-
-/**
- * Get the size of a window's underlying drawable in pixels (for use with
- * setting viewport, scissor & etc).
- *
- * \param window SDL_Window from which the drawable size should be queried
- * \param w Pointer to variable for storing the width in pixels, may be NULL
- *
- * \sa SDL_GetWindowSize
- * \sa SDL_CreateWindow
- */
-extern DECLSPEC void SDLCALL SDL_Metal_GetDrawableSize(SDL_Window* window, int *w,
-                                                       int *h);
 
 /* @} *//* Metal support functions */
 
@@ -99,6 +92,6 @@ extern DECLSPEC void SDLCALL SDL_Metal_GetDrawableSize(SDL_Window* window, int *
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
 #endif /* SDL_metal_h_ */

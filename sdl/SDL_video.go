@@ -1,27 +1,74 @@
 package sdl
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
+
+/*
+  Simple DirectMedia Layer
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
+
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
+*/
+
+/**
+ *  \file SDL_video.h
+ *
+ *  Header file for SDL video functions.
+ */
+
+// #ifndef SDL_video_h_
+// #define SDL_video_h_
+
+// #include <SDL3/SDL_stdinc.h>
+// #include <SDL3/SDL_pixels.h>
+// #include <SDL3/SDL_rect.h>
+// #include <SDL3/SDL_surface.h>
+
+// #include <SDL3/SDL_begin_code.h>
+// /* Set up for C function definitions, even when using C++ */
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
+
+type SDL_DisplayID sdlcommon.FUint32T
+type SDL_WindowID sdlcommon.FUint32T
 
 /**
  *  \brief  The structure that defines a display mode
  *
- *  \sa SDL_GetNumDisplayModes()
- *  \sa SDL_GetDisplayMode()
+ *  \sa SDL_GetFullscreenDisplayModes()
  *  \sa SDL_GetDesktopDisplayMode()
  *  \sa SDL_GetCurrentDisplayMode()
- *  \sa SDL_GetClosestDisplayMode()
- *  \sa SDL_SetWindowDisplayMode()
- *  \sa SDL_GetWindowDisplayMode()
+ *  \sa SDL_SetWindowFullscreenMode()
+ *  \sa SDL_GetWindowFullscreenMode()
  */
 type SDL_DisplayMode struct {
-	Format      sdlcommon.FUint32T /**< pixel format */
-	W           sdlcommon.FInt     /**< width, in screen coordinates */
-	H           sdlcommon.FInt     /**< height, in screen coordinates */
-	RefreshRate sdlcommon.FInt     /**< refresh rate (or zero for unspecified) */
-	Driverdata  sdlcommon.FVoidP   /**< driver-specific data, initialize to 0 */
+	DisplayID    SDL_DisplayID      /**< the display this mode is associated with */
+	Format       sdlcommon.FUint32T /**< pixel format */
+	PixelW       sdlcommon.FInt     /**< width in pixels (used for creating back buffers) */
+	PixelH       sdlcommon.FInt     /**< height in pixels (used for creating back buffers) */
+	ScreenW      sdlcommon.FInt     /**< width in screen coordinates (used for creating windows) */
+	ScreenH      sdlcommon.FInt     /**< height in screen coordinates (used for creating windows) */
+	DisplayScale sdlcommon.FFloat   /**< scale converting screen coordinates to pixels (e.g. a 2560x1440 screen size mode with 1.5 scale would have 3840x2160 pixels) */
+	RefreshRate  sdlcommon.FFloat   /**< refresh rate (or zero for unspecified) */
+	Driverdata   sdlcommon.FVoidP   /**< driver-specific data, initialize to 0 */
 }
 
 /**
@@ -57,33 +104,30 @@ type SDL_DisplayMode struct {
  *  \sa SDL_SetWindowTitle()
  *  \sa SDL_ShowWindow()
  */
-type SDL_Window struct {
-}
+// typedef struct SDL_Window SDL_Window;
 
 /**
  *  \brief The flags on a window
  *
  *  \sa SDL_GetWindowFlags()
  */
-type SDL_WindowFlags = int32
+type SDL_WindowFlags int32
 
 const (
-	SDL_WINDOW_FULLSCREEN         = 0x00000001 /**< fullscreen window */
-	SDL_WINDOW_OPENGL             = 0x00000002 /**< window usable with OpenGL context */
-	SDL_WINDOW_SHOWN              = 0x00000004 /**< window is visible */
-	SDL_WINDOW_HIDDEN             = 0x00000008 /**< window is not visible */
-	SDL_WINDOW_BORDERLESS         = 0x00000010 /**< no window decoration */
-	SDL_WINDOW_RESIZABLE          = 0x00000020 /**< window can be resized */
-	SDL_WINDOW_MINIMIZED          = 0x00000040 /**< window is minimized */
-	SDL_WINDOW_MAXIMIZED          = 0x00000080 /**< window is maximized */
-	SDL_WINDOW_MOUSE_GRABBED      = 0x00000100 /**< window has grabbed mouse input */
-	SDL_WINDOW_INPUT_FOCUS        = 0x00000200 /**< window has input focus */
-	SDL_WINDOW_MOUSE_FOCUS        = 0x00000400 /**< window has mouse focus */
-	SDL_WINDOW_FULLSCREEN_DESKTOP = (SDL_WINDOW_FULLSCREEN | 0x00001000)
-	SDL_WINDOW_FOREIGN            = 0x00000800 /**< window not created by SDL */
-	SDL_WINDOW_ALLOW_HIGHDPI      = 0x00002000 /**< window should be created in high-DPI mode if supported.
-	  On macOS NSHighResolutionCapable must be set true in the
-	  application's Info.plist for this to have any effect. */
+	SDL_WINDOW_FULLSCREEN = 0x00000001 /**< window is in fullscreen mode */
+	SDL_WINDOW_OPENGL     = 0x00000002 /**< window usable with OpenGL context */
+	/* 0x00000004 was SDL_WINDOW_SHOWN in SDL2, please reserve this bit for sdl2-compat. */
+	SDL_WINDOW_HIDDEN        = 0x00000008 /**< window is not visible */
+	SDL_WINDOW_BORDERLESS    = 0x00000010 /**< no window decoration */
+	SDL_WINDOW_RESIZABLE     = 0x00000020 /**< window can be resized */
+	SDL_WINDOW_MINIMIZED     = 0x00000040 /**< window is minimized */
+	SDL_WINDOW_MAXIMIZED     = 0x00000080 /**< window is maximized */
+	SDL_WINDOW_MOUSE_GRABBED = 0x00000100 /**< window has grabbed mouse input */
+	SDL_WINDOW_INPUT_FOCUS   = 0x00000200 /**< window has input focus */
+	SDL_WINDOW_MOUSE_FOCUS   = 0x00000400 /**< window has mouse focus */
+	/* 0x00001000 was SDL_WINDOW_FULLSCREEN_DESKTOP in SDL2, please reserve this bit for sdl2-compat. */
+	SDL_WINDOW_FOREIGN = 0x00000800 /**< window not created by SDL */
+	/* 0x00002000 was SDL_WINDOW_ALLOW_HIGHDPI in SDL2, please reserve this bit for sdl2-compat. */
 	SDL_WINDOW_MOUSE_CAPTURE    = 0x00004000 /**< window has mouse captured (unrelated to MOUSE_GRABBED) */
 	SDL_WINDOW_ALWAYS_ON_TOP    = 0x00008000 /**< window should always be above others */
 	SDL_WINDOW_SKIP_TASKBAR     = 0x00010000 /**< window should not be added to the taskbar */
@@ -94,76 +138,30 @@ const (
 	SDL_WINDOW_VULKAN           = 0x10000000 /**< window usable for Vulkan surface */
 	SDL_WINDOW_METAL            = 0x20000000 /**< window usable for Metal view */
 
-	SDL_WINDOW_INPUT_GRABBED = SDL_WINDOW_MOUSE_GRABBED /**< equivalent to SDL_WINDOW_MOUSE_GRABBED for compatibility */
 )
 
-/**
- *  \brief Used to indicate that you don't care what the window position is.
- */
-const SDL_WINDOWPOS_UNDEFINED_MASK = 0x1FFF0000
+// /**
+//  *  \brief Used to indicate that you don't care what the window position is.
+//  */
+// #define SDL_WINDOWPOS_UNDEFINED_MASK    0x1FFF0000u
+// #define SDL_WINDOWPOS_UNDEFINED_DISPLAY(X)  (SDL_WINDOWPOS_UNDEFINED_MASK|(X))
+// #define SDL_WINDOWPOS_UNDEFINED         SDL_WINDOWPOS_UNDEFINED_DISPLAY(0)
+// #define SDL_WINDOWPOS_ISUNDEFINED(X)    \
+//             (((X)&0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK)
 
-//const SDL_WINDOWPOS_UNDEFINED_DISPLAY(X) = (SDL_WINDOWPOS_UNDEFINED_MASK|(X))
-const SDL_WINDOWPOS_UNDEFINED = SDL_WINDOWPOS_UNDEFINED_MASK | 0
-
-//const SDL_WINDOWPOS_ISUNDEFINED(X)    \
-//(((X)&0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK)
-
-/**
- *  \brief Used to indicate that the window position should be centered.
- */
-const SDL_WINDOWPOS_CENTERED_MASK = 0x2FFF0000
-
-//const SDL_WINDOWPOS_CENTERED_DISPLAY(X)  (SDL_WINDOWPOS_CENTERED_MASK|(X))
-const SDL_WINDOWPOS_CENTERED = SDL_WINDOWPOS_CENTERED_MASK | (0) //SDL_WINDOWPOS_CENTERED_DISPLAY(0)
-//const SDL_WINDOWPOS_ISCENTERED(X)    \
-//(((X)&0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK)
-
-/**
- *  \brief Event subtype for window events
- */
-type SDL_WindowEventID = int32
-
-const (
-	SDL_WINDOWEVENT_NONE    = iota /**< Never used */
-	SDL_WINDOWEVENT_SHOWN          /**< Window has been shown */
-	SDL_WINDOWEVENT_HIDDEN         /**< Window has been hidden */
-	SDL_WINDOWEVENT_EXPOSED        /**< Window has been exposed and should be
-	  redrawn */
-	SDL_WINDOWEVENT_MOVED /**< Window has been moved to data1, data2
-	 */
-	SDL_WINDOWEVENT_RESIZED      /**< Window has been resized to data1xdata2 */
-	SDL_WINDOWEVENT_SIZE_CHANGED /**< The window size has changed, either as
-	  a result of an API call or through the
-	  system or user changing the window size. */
-	SDL_WINDOWEVENT_MINIMIZED /**< Window has been minimized */
-	SDL_WINDOWEVENT_MAXIMIZED /**< Window has been maximized */
-	SDL_WINDOWEVENT_RESTORED  /**< Window has been restored to normal size
-	  and position */
-	SDL_WINDOWEVENT_ENTER        /**< Window has gained mouse focus */
-	SDL_WINDOWEVENT_LEAVE        /**< Window has lost mouse focus */
-	SDL_WINDOWEVENT_FOCUS_GAINED /**< Window has gained keyboard focus */
-	SDL_WINDOWEVENT_FOCUS_LOST   /**< Window has lost keyboard focus */
-	SDL_WINDOWEVENT_CLOSE        /**< The window manager requests that the window be closed */
-	SDL_WINDOWEVENT_TAKE_FOCUS   /**< Window is being offered a focus (should SetWindowInputFocus() on itself or a subwindow, or ignore) */
-	SDL_WINDOWEVENT_HIT_TEST     /**< Window had a hit test that wasn't SDL_HITTEST_NORMAL. */
-)
-
-/**
- *  \brief Event subtype for display events
- */
-type SDL_DisplayEventID = int32
-
-const (
-	SDL_DISPLAYEVENT_NONE         = iota /**< Never used */
-	SDL_DISPLAYEVENT_ORIENTATION         /**< Display orientation has changed to data1 */
-	SDL_DISPLAYEVENT_CONNECTED           /**< Display has been added to the system */
-	SDL_DISPLAYEVENT_DISCONNECTED        /**< Display has been removed from the system */
-)
+// /**
+//  *  \brief Used to indicate that the window position should be centered.
+//  */
+// #define SDL_WINDOWPOS_CENTERED_MASK    0x2FFF0000u
+// #define SDL_WINDOWPOS_CENTERED_DISPLAY(X)  (SDL_WINDOWPOS_CENTERED_MASK|(X))
+// #define SDL_WINDOWPOS_CENTERED         SDL_WINDOWPOS_CENTERED_DISPLAY(0)
+// #define SDL_WINDOWPOS_ISCENTERED(X)    \
+//             (((X)&0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK)
 
 /**
  *  \brief Display orientation
  */
-type SDL_DisplayOrientation = int32
+type SDL_DisplayOrientation int32
 
 const (
 	SDL_ORIENTATION_UNKNOWN           = iota /**< The display orientation can't be determined */
@@ -176,7 +174,7 @@ const (
 /**
  *  \brief Window flash operation
  */
-type SDL_FlashOperation = int32
+type SDL_FlashOperation int32
 
 const (
 	SDL_FLASH_CANCEL        = iota /**< Cancel any window flash state */
@@ -187,12 +185,30 @@ const (
 /**
  *  \brief An opaque handle to an OpenGL context.
  */
-//typedef void *SDL_GLContext;
+type SDL_GLContext sdlcommon.FVoidP
+
+/**
+ *  \brief Opaque EGL types.
+ */
+type SDL_EGLDisplay sdlcommon.FVoidP
+type SDL_EGLConfig sdlcommon.FVoidP
+type SDL_EGLSurface sdlcommon.FVoidP
+type SDL_EGLAttrib int
+type SDL_EGLint sdlcommon.FInt
+
+/**
+ *  \brief EGL attribute initialization callback types.
+ */
+// typedef SDL_EGLAttrib *(SDLCALL *SDL_EGLAttribArrayCallback)(void);
+type SDL_EGLAttribArrayCallback func() uintptr
+
+// typedef SDL_EGLint *(SDLCALL *SDL_EGLIntArrayCallback)(void);
+type SDL_EGLIntArrayCallback func() uintptr
 
 /**
  *  \brief OpenGL configuration attributes
  */
-type SDL_GLattr = int32
+type SDL_GLattr int32
 
 const (
 	SDL_GL_RED_SIZE = iota
@@ -214,7 +230,6 @@ const (
 	SDL_GL_RETAINED_BACKING
 	SDL_GL_CONTEXT_MAJOR_VERSION
 	SDL_GL_CONTEXT_MINOR_VERSION
-	SDL_GL_CONTEXT_EGL
 	SDL_GL_CONTEXT_FLAGS
 	SDL_GL_CONTEXT_PROFILE_MASK
 	SDL_GL_SHARE_WITH_CURRENT_CONTEXT
@@ -222,9 +237,11 @@ const (
 	SDL_GL_CONTEXT_RELEASE_BEHAVIOR
 	SDL_GL_CONTEXT_RESET_NOTIFICATION
 	SDL_GL_CONTEXT_NO_ERROR
+	SDL_GL_FLOATBUFFERS
+	SDL_GL_EGL_PLATFORM
 )
 
-type SDL_GLprofile = int32
+type SDL_GLprofile int32
 
 const (
 	SDL_GL_CONTEXT_PROFILE_CORE          = 0x0001
@@ -263,14 +280,13 @@ const (
  * \returns a number >= 1 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetVideoDriver
  */
-//extern DECLSPEC int SDLCALL SDL_GetNumVideoDrivers(void);
+// extern DECLSPEC int SDLCALL SDL_GetNumVideoDrivers(void);
 func SDL_GetNumVideoDrivers() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumVideoDrivers").Call()
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -284,72 +300,16 @@ func SDL_GetNumVideoDrivers() (res sdlcommon.FInt) {
  * \param index the index of a video driver
  * \returns the name of the video driver with the given **index**.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetNumVideoDrivers
  */
-//extern DECLSPEC const char *SDLCALL SDL_GetVideoDriver(int index);
+// extern DECLSPEC const char *SDLCALL SDL_GetVideoDriver(int index);
 func SDL_GetVideoDriver(index sdlcommon.FInt) (res sdlcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetVideoDriver").Call(
 		uintptr(index),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.StringFromPtr(t)
-	return
-}
-
-/**
- * Initialize the video subsystem, optionally specifying a video driver.
- *
- * This function initializes the video subsystem, setting up a connection to
- * the window manager, etc, and determines the available display modes and
- * pixel formats, but does not initialize a window or graphics mode.
- *
- * If you use this function and you haven't used the SDL_INIT_VIDEO flag with
- * either SDL_Init() or SDL_InitSubSystem(), you should call SDL_VideoQuit()
- * before calling SDL_Quit().
- *
- * It is safe to call this function multiple times. SDL_VideoInit() will call
- * SDL_VideoQuit() itself if the video subsystem has already been initialized.
- *
- * You can use SDL_GetNumVideoDrivers() and SDL_GetVideoDriver() to find a
- * specific `driver_name`.
- *
- * \param driver_name the name of a video driver to initialize, or NULL for
- *                    the default driver
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
- *
- * \sa SDL_GetNumVideoDrivers
- * \sa SDL_GetVideoDriver
- * \sa SDL_InitSubSystem
- * \sa SDL_VideoQuit
- */
-//extern DECLSPEC int SDLCALL SDL_VideoInit(const char *driver_name);
-func SDL_VideoInit(driver_name sdlcommon.FConstCharP) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_VideoInit").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(driver_name))),
-	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
-	return
-}
-
-/**
- * Shut down the video subsystem, if initialized with SDL_VideoInit().
- *
- * This function closes all windows, and restores the original video mode.
- *
- * \sa SDL_VideoInit
- */
-//extern DECLSPEC void SDLCALL SDL_VideoQuit(void);
-func SDL_VideoQuit() {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_VideoQuit").Call()
-	if t == 0 {
-
-	}
 	return
 }
 
@@ -359,94 +319,102 @@ func SDL_VideoQuit() {
  * \returns the name of the current video driver or NULL if no driver has been
  *          initialized.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetNumVideoDrivers
  * \sa SDL_GetVideoDriver
  */
-//extern DECLSPEC const char *SDLCALL SDL_GetCurrentVideoDriver(void);
+// extern DECLSPEC const char *SDLCALL SDL_GetCurrentVideoDriver(void);
 func SDL_GetCurrentVideoDriver() (res sdlcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetCurrentVideoDriver").Call()
-	if t == 0 {
-
-	}
 	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
 /**
- * Get the number of available video displays.
+ * Get a list of currently connected displays.
  *
- * \returns a number >= 1 or a negative error code on failure; call
- *          SDL_GetError() for more information.
+ * \param count a pointer filled in with the number of displays returned
+ * \returns a 0 terminated array of display instance IDs which should be freed
+ *          with SDL_free(), or NULL on error; call SDL_GetError() for more
+ *          details.
  *
- * \since This function is available since SDL 2.0.0.
- *
- * \sa SDL_GetDisplayBounds
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC int SDLCALL SDL_GetNumVideoDisplays(void);
-func SDL_GetNumVideoDisplays() (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumVideoDisplays").Call()
-	if t == 0 {
+// extern DECLSPEC SDL_DisplayID *SDLCALL SDL_GetDisplays(int *count);
+func SDL_GetDisplays(count *sdlcommon.FInt) (res *SDL_DisplayID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplays").Call(
+		uintptr(unsafe.Pointer(count)),
+	)
+	res = (*SDL_DisplayID)(unsafe.Pointer(t))
+	return
+}
 
-	}
-	res = sdlcommon.FInt(t)
+/**
+ * Return the primary display.
+ *
+ * \returns the instance ID of the primary display on success or 0 on failure;
+ *          call SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplays
+ */
+// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetPrimaryDisplay(void);
+func SDL_GetPrimaryDisplay() (res SDL_DisplayID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPrimaryDisplay").Call()
+	res = SDL_DisplayID(t)
 	return
 }
 
 /**
  * Get the name of a display in UTF-8 encoding.
  *
- * \param displayIndex the index of display from which the name should be
- *                     queried
- * \returns the name of a display or NULL for an invalid display index or
- *          failure; call SDL_GetError() for more information.
+ * \param displayID the instance ID of the display to query
+ * \returns the name of a display or NULL on failure; call SDL_GetError() for
+ *          more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
- * \sa SDL_GetNumVideoDisplays
+ * \sa SDL_GetDisplays
  */
-//extern DECLSPEC const char * SDLCALL SDL_GetDisplayName(int displayIndex);
-func SDL_GetDisplayName(displayIndex sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+// extern DECLSPEC const char *SDLCALL SDL_GetDisplayName(SDL_DisplayID displayID);
+func SDL_GetDisplayName(displayID SDL_DisplayID) (res sdlcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayName").Call(
-		uintptr(displayIndex),
+		uintptr(displayID),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.StringFromPtr(t)
 	return
 }
 
 /**
- * Get the desktop area represented by a display.
+ * Get the desktop area represented by a display, in screen coordinates.
  *
- * The primary display (`displayIndex` zero) is always located at 0,0.
+ * The primary display is always located at (0,0).
  *
- * \param displayIndex the index of the display to query
+ * \param displayID the instance ID of the display to query
  * \param rect the SDL_Rect structure filled in with the display bounds
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \sa SDL_GetNumVideoDisplays
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplayUsableBounds
+ * \sa SDL_GetDisplays
  */
-//extern DECLSPEC int SDLCALL SDL_GetDisplayBounds(int displayIndex, SDL_Rect * rect);
-func SDL_GetDisplayBounds(displayIndex sdlcommon.FInt, rect *SDL_Rect) (res sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect);
+func SDL_GetDisplayBounds(displayID SDL_DisplayID, rect *SDL_Rect) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayBounds").Call(
-		uintptr(displayIndex),
+		uintptr(displayID),
 		uintptr(unsafe.Pointer(rect)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Get the usable desktop area represented by a display.
- *
- * The primary display (`displayIndex` zero) is always located at 0,0.
+ * Get the usable desktop area represented by a display, in screen
+ * coordinates.
  *
  * This is the same area as SDL_GetDisplayBounds() reports, but with portions
  * reserved by the system removed. For example, on Apple's macOS, this
@@ -456,70 +424,22 @@ func SDL_GetDisplayBounds(displayIndex sdlcommon.FInt, rect *SDL_Rect) (res sdlc
  * so these are good guidelines for the maximum space available to a
  * non-fullscreen window.
  *
- * The parameter `rect` is ignored if it is NULL.
- *
- * This function also returns -1 if the parameter `displayIndex` is out of
- * range.
- *
- * \param displayIndex the index of the display to query the usable bounds
- *                     from
+ * \param displayID the instance ID of the display to query
  * \param rect the SDL_Rect structure filled in with the display bounds
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.5.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetDisplayBounds
- * \sa SDL_GetNumVideoDisplays
+ * \sa SDL_GetDisplays
  */
-//extern DECLSPEC int SDLCALL SDL_GetDisplayUsableBounds(int displayIndex, SDL_Rect * rect);
-func SDL_GetDisplayUsableBounds(displayIndex sdlcommon.FInt, rect *SDL_Rect) (res sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect);
+func SDL_GetDisplayUsableBounds(displayID SDL_DisplayID, rect *SDL_Rect) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayUsableBounds").Call(
-		uintptr(displayIndex),
+		uintptr(displayID),
 		uintptr(unsafe.Pointer(rect)),
 	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
-	return
-}
-
-/**
- * Get the dots/pixels-per-inch for a display.
- *
- * Diagonal, horizontal and vertical DPI can all be optionally returned if the
- * appropriate parameter is non-NULL.
- *
- * A failure of this function usually means that either no DPI information is
- * available or the `displayIndex` is out of range.
- *
- * \param displayIndex the index of the display from which DPI information
- *                     should be queried
- * \param ddpi a pointer filled in with the diagonal DPI of the display; may
- *             be NULL
- * \param hdpi a pointer filled in with the horizontal DPI of the display; may
- *             be NULL
- * \param vdpi a pointer filled in with the vertical DPI of the display; may
- *             be NULL
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
- *
- * \since This function is available since SDL 2.0.4.
- *
- * \sa SDL_GetNumVideoDisplays
- */
-//extern DECLSPEC int SDLCALL SDL_GetDisplayDPI(int displayIndex, float * ddpi, float * hdpi, float * vdpi);
-func SDL_GetDisplayDPI(displayIndex sdlcommon.FInt, ddpi *sdlcommon.FFloat, hdpi *sdlcommon.FFloat, vdpi *sdlcommon.FFloat) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayDPI").Call(
-		uintptr(displayIndex),
-		uintptr(unsafe.Pointer(ddpi)),
-		uintptr(unsafe.Pointer(hdpi)),
-		uintptr(unsafe.Pointer(vdpi)),
-	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -527,16 +447,18 @@ func SDL_GetDisplayDPI(displayIndex sdlcommon.FInt, ddpi *sdlcommon.FFloat, hdpi
 /**
  * Get the orientation of a display.
  *
- * \param displayIndex the index of the display to query
+ * \param displayID the instance ID of the display to query
  * \returns The SDL_DisplayOrientation enum value of the display, or
  *          `SDL_ORIENTATION_UNKNOWN` if it isn't available.
  *
- * \sa SDL_GetNumVideoDisplays
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplays
  */
-//extern DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetDisplayOrientation(int displayIndex);
-func SDL_GetDisplayOrientation(displayIndex sdlcommon.FInt) (res SDL_DisplayOrientation) {
+// extern DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetDisplayOrientation(SDL_DisplayID displayID);
+func SDL_GetDisplayOrientation(displayID SDL_DisplayID) (res SDL_DisplayOrientation) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayOrientation").Call(
-		uintptr(displayIndex),
+		uintptr(displayID),
 	)
 	if t == 0 {
 
@@ -546,128 +468,34 @@ func SDL_GetDisplayOrientation(displayIndex sdlcommon.FInt) (res SDL_DisplayOrie
 }
 
 /**
- * Get the number of available display modes.
- *
- * The `displayIndex` needs to be in the range from 0 to
- * SDL_GetNumVideoDisplays() - 1.
- *
- * \param displayIndex the index of the display to query
- * \returns a number >= 1 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
- *
- * \since This function is available since SDL 2.0.0.
- *
- * \sa SDL_GetDisplayMode
- * \sa SDL_GetNumVideoDisplays
- */
-//extern DECLSPEC int SDLCALL SDL_GetNumDisplayModes(int displayIndex);
-func SDL_GetNumDisplayModes(displayIndex sdlcommon.FInt) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumDisplayModes").Call(
-		uintptr(displayIndex),
-	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
-	return
-}
-
-/**
- * Get information about a specific display mode.
+ * Get a list of fullscreen display modes available on a display.
  *
  * The display modes are sorted in this priority:
- *
- * - width -> largest to smallest
- * - height -> largest to smallest
+ * - screen_w -> largest to smallest
+ * - screen_h -> largest to smallest
+ * - pixel_w -> largest to smallest
+ * - pixel_h -> largest to smallest
  * - bits per pixel -> more colors to fewer colors
  * - packed pixel layout -> largest to smallest
  * - refresh rate -> highest to lowest
  *
- * \param displayIndex the index of the display to query
- * \param modeIndex the index of the display mode to query
- * \param mode an SDL_DisplayMode structure filled in with the mode at
- *             `modeIndex`
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
+ * \param displayID the instance ID of the display to query
+ * \param count a pointer filled in with the number of displays returned
+ * \returns a NULL terminated array of display mode pointers which should be freed
+ *          with SDL_free(), or NULL on error; call SDL_GetError() for more
+ *          details.
  *
- * \sa SDL_GetNumDisplayModes
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplays
  */
-//extern DECLSPEC int SDLCALL SDL_GetDisplayMode(int displayIndex, int modeIndex,
-//SDL_DisplayMode * mode);
-func SDL_GetDisplayMode(displayIndex sdlcommon.FInt, modeIndex sdlcommon.FInt,
-	mode *SDL_DisplayMode) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayMode").Call(
-		uintptr(displayIndex),
-		uintptr(modeIndex),
-		uintptr(unsafe.Pointer(mode)),
+// extern DECLSPEC const SDL_DisplayMode **SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count);
+func SDL_GetFullscreenDisplayModes(displayID SDL_DisplayID, count *sdlcommon.FInt) (res **SDL_DisplayMode) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetFullscreenDisplayModes").Call(
+		uintptr(displayID),
+		uintptr(unsafe.Pointer(count)),
 	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
-	return
-}
-
-/**
- * Get information about the desktop's display mode.
- *
- * There's a difference between this function and SDL_GetCurrentDisplayMode()
- * when SDL runs fullscreen and has changed the resolution. In that case this
- * function will return the previous native display mode, and not the current
- * display mode.
- *
- * \param displayIndex the index of the display to query
- * \param mode an SDL_DisplayMode structure filled in with the current display
- *             mode
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
- *
- * \sa SDL_GetCurrentDisplayMode
- * \sa SDL_GetDisplayMode
- * \sa SDL_SetWindowDisplayMode
- */
-//extern DECLSPEC int SDLCALL SDL_GetDesktopDisplayMode(int displayIndex, SDL_DisplayMode * mode);
-func SDL_GetDesktopDisplayMode(displayIndex sdlcommon.FInt, mode *SDL_DisplayMode) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDesktopDisplayMode").Call(
-		uintptr(displayIndex),
-		uintptr(unsafe.Pointer(mode)),
-	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
-	return
-}
-
-/**
- * Get information about the current display mode.
- *
- * There's a difference between this function and SDL_GetDesktopDisplayMode()
- * when SDL runs fullscreen and has changed the resolution. In that case this
- * function will return the current display mode, and not the previous native
- * display mode.
- *
- * \param displayIndex the index of the display to query
- * \param mode an SDL_DisplayMode structure filled in with the current display
- *             mode
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
- *
- * \sa SDL_GetDesktopDisplayMode
- * \sa SDL_GetDisplayMode
- * \sa SDL_GetNumVideoDisplays
- * \sa SDL_SetWindowDisplayMode
- */
-//extern DECLSPEC int SDLCALL SDL_GetCurrentDisplayMode(int displayIndex, SDL_DisplayMode * mode);
-func SDL_GetCurrentDisplayMode(displayIndex sdlcommon.FInt, mode *SDL_DisplayMode) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetCurrentDisplayMode").Call(
-		uintptr(displayIndex),
-		uintptr(unsafe.Pointer(mode)),
-	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
+	res = (**SDL_DisplayMode)(unsafe.Pointer(t))
 	return
 }
 
@@ -681,81 +509,171 @@ func SDL_GetCurrentDisplayMode(displayIndex sdlcommon.FInt, mode *SDL_DisplayMod
  * and finally checking the refresh rate. If all the available modes are too
  * small, then NULL is returned.
  *
- * \param displayIndex the index of the display to query
- * \param mode an SDL_DisplayMode structure containing the desired display
- *             mode
- * \param closest an SDL_DisplayMode structure filled in with the closest
- *                match of the available display modes
+ * \param displayID the instance ID of the display to query
+ * \param w the width in pixels of the desired display mode
+ * \param h the height in pixels of the desired display mode
+ * \param refresh_rate the refresh rate of the desired display mode, or 0.0f for the desktop refresh rate
+ * \returns a pointer to the closest display mode equal to or larger than the desired mode, or NULL on error; call SDL_GetError() for more information.
  * \returns the passed in value `closest` or NULL if no matching video mode
  *          was available; call SDL_GetError() for more information.
  *
- * \sa SDL_GetDisplayMode
- * \sa SDL_GetNumDisplayModes
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplays
+ * \sa SDL_GetFullscreenDisplayModes
  */
-//extern DECLSPEC SDL_DisplayMode * SDLCALL SDL_GetClosestDisplayMode(int displayIndex, const SDL_DisplayMode * mode, SDL_DisplayMode * closest);
-func SDL_GetClosestDisplayMode(displayIndex sdlcommon.FInt, mode *SDL_DisplayMode, closest *SDL_DisplayMode) (res *SDL_DisplayMode) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetClosestDisplayMode").Call(
-		uintptr(displayIndex),
-		uintptr(unsafe.Pointer(mode)),
-		uintptr(unsafe.Pointer(closest)),
+// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate);
+func SDL_GetClosestFullscreenDisplayMode(displayID SDL_DisplayID, w, h sdlcommon.FInt, refresh_rate sdlcommon.FFloat) (res *SDL_DisplayMode) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetClosestFullscreenDisplayMode").Call(
+		uintptr(displayID),
+		uintptr(w),
+		uintptr(h),
+		uintptr(unsafe.Pointer(&refresh_rate)),
 	)
-	if t == 0 {
-
-	}
 	res = (*SDL_DisplayMode)(unsafe.Pointer(t))
 	return
 }
 
 /**
- * Get the index of the display associated with a window.
+ * Get information about the desktop's display mode.
  *
- * \param window the window to query
- * \returns the index of the display containing the center of the window on
- *          success or a negative error code on failure; call SDL_GetError()
- *          for more information.
+ * There's a difference between this function and SDL_GetCurrentDisplayMode()
+ * when SDL runs fullscreen and has changed the resolution. In that case this
+ * function will return the previous native display mode, and not the current
+ * display mode.
  *
- * \sa SDL_GetDisplayBounds
- * \sa SDL_GetNumVideoDisplays
+ * \param displayID the instance ID of the display to query
+ * \returns a pointer to the desktop display mode or NULL on error; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetCurrentDisplayMode
+ * \sa SDL_GetDisplays
  */
-//extern DECLSPEC int SDLCALL SDL_GetWindowDisplayIndex(SDL_Window * window);
-func (window *SDL_Window) SDL_GetWindowDisplayIndex() (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowDisplayIndex").Call(
-		uintptr(unsafe.Pointer(window)),
+// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID);
+func SDL_GetDesktopDisplayMode(displayID SDL_DisplayID) (res *SDL_DisplayMode) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDesktopDisplayMode").Call(
+		uintptr(displayID),
 	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
+	res = (*SDL_DisplayMode)(unsafe.Pointer(t))
 	return
 }
 
 /**
- * Set the display mode to use when a window is visible at fullscreen.
+ * Get information about the current display mode.
+ *
+ * There's a difference between this function and SDL_GetDesktopDisplayMode()
+ * when SDL runs fullscreen and has changed the resolution. In that case this
+ * function will return the current display mode, and not the previous native
+ * display mode.
+ *
+ * \param displayID the instance ID of the display to query
+ * \returns a pointer to the desktop display mode or NULL on error; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDesktopDisplayMode
+ * \sa SDL_GetDisplays
+ */
+// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID);
+func SDL_GetCurrentDisplayMode(displayID SDL_DisplayID) (res *SDL_DisplayMode) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetCurrentDisplayMode").Call(
+		uintptr(displayID),
+	)
+	res = (*SDL_DisplayMode)(unsafe.Pointer(t))
+	return
+}
+
+/**
+ * Get the display containing a point, in screen coordinates.
+ *
+ * \param point the point to query
+ * \returns the instance ID of the display containing the point or 0 on
+ *          failure; call SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplayBounds
+ * \sa SDL_GetDisplays
+ */
+// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForPoint(const SDL_Point *point);
+func (point *SDL_Point) SDL_GetDisplayForPoint() (res SDL_DisplayID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayForPoint").Call(
+		uintptr(unsafe.Pointer(point)),
+	)
+	res = SDL_DisplayID(t)
+	return
+}
+
+/**
+ * Get the display primarily containing a rect, in screen coordinates.
+ *
+ * \param rect the rect to query
+ * \returns the instance ID of the display entirely containing the rect or
+ *          closest to the center of the rect on success or 0 on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplayBounds
+ * \sa SDL_GetDisplays
+ */
+// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForRect(const SDL_Rect *rect);
+func (rect *SDL_Rect) SDL_GetDisplayForRect() (res SDL_DisplayID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayForRect").Call(
+		uintptr(unsafe.Pointer(rect)),
+	)
+	res = SDL_DisplayID(t)
+	return
+}
+
+/**
+ * Get the display associated with a window.
+ *
+ * \param window the window to query
+ * \returns the instance ID of the display containing the center of the window
+ *          on success or 0 on failure; call SDL_GetError() for more
+ *          information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetDisplayBounds
+ * \sa SDL_GetDisplays
+ */
+// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_GetDisplayForWindow() (res SDL_DisplayID) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDisplayForWindow").Call(
+		uintptr(unsafe.Pointer(window)),
+	)
+	res = SDL_DisplayID(t)
+	return
+}
+
+/**
+ * Set the display mode to use when a window is visible and fullscreen.
  *
  * This only affects the display mode used when the window is fullscreen. To
  * change the window size when the window is not fullscreen, use
  * SDL_SetWindowSize().
  *
  * \param window the window to affect
- * \param mode the SDL_DisplayMode structure representing the mode to use, or
- *             NULL to use the window's dimensions and the desktop's format
- *             and refresh rate
+ * \param mode a pointer to the display mode to use, which can be NULL for desktop mode, or one of the fullscreen modes returned by SDL_GetFullscreenDisplayModes().
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \sa SDL_GetWindowDisplayMode
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetWindowFullscreenMode
  * \sa SDL_SetWindowFullscreen
  */
-//extern DECLSPEC int SDLCALL SDL_SetWindowDisplayMode(SDL_Window * window,
-//const SDL_DisplayMode * mode);
-func (window *SDL_Window) SDL_SetWindowDisplayMode(mode *SDL_DisplayMode) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowDisplayIndex").Call(
+// extern DECLSPEC int SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode);
+func (window *SDL_Window) SDL_SetWindowFullscreenMode(mode *SDL_DisplayMode) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowFullscreenMode").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(mode)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -764,25 +682,41 @@ func (window *SDL_Window) SDL_SetWindowDisplayMode(mode *SDL_DisplayMode) (res s
  * Query the display mode to use when a window is visible at fullscreen.
  *
  * \param window the window to query
- * \param mode an SDL_DisplayMode structure filled in with the fullscreen
- *             display mode
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
+ * \returns a pointer to the fullscreen mode to use or NULL for desktop mode
  *
- * \sa SDL_SetWindowDisplayMode
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_SetWindowFullscreenMode
  * \sa SDL_SetWindowFullscreen
  */
-//extern DECLSPEC int SDLCALL SDL_GetWindowDisplayMode(SDL_Window * window,
-//SDL_DisplayMode * mode);
-func (window *SDL_Window) SDL_GetWindowDisplayMode(mode *SDL_DisplayMode) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowDisplayMode").Call(
+// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window);
+func (window *SDL_Window) SDL_GetWindowFullscreenMode() (res *SDL_DisplayMode) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowFullscreenMode").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(mode)),
 	)
-	if t == 0 {
+	res = (*SDL_DisplayMode)(unsafe.Pointer(t))
+	return
+}
 
-	}
-	res = sdlcommon.FInt(t)
+/**
+ * Get the raw ICC profile data for the screen the window is currently on.
+ *
+ * Data returned should be freed with SDL_free.
+ *
+ * \param window the window to query
+ * \param size the size of the ICC profile
+ * \returns the raw ICC profile data on success or NULL on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ */
+// extern DECLSPEC void *SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size);
+func (window *SDL_Window) SDL_GetWindowICCProfile(size *sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowICCProfile").Call(
+		uintptr(unsafe.Pointer(window)),
+		uintptr(unsafe.Pointer(size)),
+	)
+	res = t
 	return
 }
 
@@ -793,15 +727,15 @@ func (window *SDL_Window) SDL_GetWindowDisplayMode(mode *SDL_DisplayMode) (res s
  * \returns the pixel format of the window on success or
  *          SDL_PIXELFORMAT_UNKNOWN on failure; call SDL_GetError() for more
  *          information.
+ *
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC Uint32 SDLCALL SDL_GetWindowPixelFormat(SDL_Window * window);
-func (window *SDL_Window) SDL_GetWindowPixelFormat() (res sdlcommon.FUint32T) {
+// extern DECLSPEC Uint32 SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window);
+func (window *SDL_Window) SDL_GetWindowPixelFormat(mode *SDL_DisplayMode) (res sdlcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowPixelFormat").Call(
 		uintptr(unsafe.Pointer(window)),
+		uintptr(unsafe.Pointer(mode)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FUint32T(t)
 	return
 }
@@ -811,8 +745,7 @@ func (window *SDL_Window) SDL_GetWindowPixelFormat() (res sdlcommon.FUint32T) {
  *
  * `flags` may be any of the following OR'd together:
  *
- * - `SDL_WINDOW_FULLSCREEN`: fullscreen window
- * - `SDL_WINDOW_FULLSCREEN_DESKTOP`: fullscreen window at desktop resolution
+ * - `SDL_WINDOW_FULLSCREEN`: fullscreen window at desktop resolution
  * - `SDL_WINDOW_OPENGL`: window usable with an OpenGL context
  * - `SDL_WINDOW_VULKAN`: window usable with a Vulkan instance
  * - `SDL_WINDOW_METAL`: window usable with a Metal instance
@@ -821,22 +754,20 @@ func (window *SDL_Window) SDL_GetWindowPixelFormat() (res sdlcommon.FUint32T) {
  * - `SDL_WINDOW_RESIZABLE`: window can be resized
  * - `SDL_WINDOW_MINIMIZED`: window is minimized
  * - `SDL_WINDOW_MAXIMIZED`: window is maximized
- * - `SDL_WINDOW_INPUT_GRABBED`: window has grabbed input focus
- * - `SDL_WINDOW_ALLOW_HIGHDPI`: window should be created in high-DPI mode if
- *   supported (>= SDL 2.0.1)
+ * - `SDL_WINDOW_MOUSE_GRABBED`: window has grabbed mouse focus
  *
- * `SDL_WINDOW_SHOWN` is ignored by SDL_CreateWindow(). The SDL_Window is
- * implicitly shown if SDL_WINDOW_HIDDEN is not set. `SDL_WINDOW_SHOWN` may be
- * queried later using SDL_GetWindowFlags().
+ * The SDL_Window is implicitly shown if SDL_WINDOW_HIDDEN is not set.
  *
  * On Apple's macOS, you **must** set the NSHighResolutionCapable Info.plist
  * property to YES, otherwise you will not receive a High-DPI OpenGL canvas.
  *
- * If the window is created with the `SDL_WINDOW_ALLOW_HIGHDPI` flag, its size
- * in pixels may differ from its size in screen coordinates on platforms with
- * high-DPI support (e.g. iOS and macOS). Use SDL_GetWindowSize() to query the
- * client area's size in screen coordinates, and SDL_GL_GetDrawableSize() or
- * SDL_GetRendererOutputSize() to query the drawable size in pixels.
+ * The window size in pixels may differ from its size in screen coordinates if
+ * the window is on a high density display (one with an OS scaling factor).
+ * Use SDL_GetWindowSize() to query the client area's size in screen
+ * coordinates, and SDL_GetWindowSizeInPixels() or SDL_GetRenderOutputSize()
+ * to query the drawable size in pixels. Note that the drawable size can vary
+ * after the window is created and should be queried again if you get an
+ * SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED event.
  *
  * If the window is set fullscreen, the width and height parameters `w` and
  * `h` will not be used. However, invalid size parameters (e.g. too large) may
@@ -869,28 +800,23 @@ func (window *SDL_Window) SDL_GetWindowPixelFormat() (res sdlcommon.FUint32T) {
  * \returns the window that was created or NULL on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_CreateWindowFrom
  * \sa SDL_DestroyWindow
  */
-//extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title,
-//int x, int y, int w,
-//int h, Uint32 flags);
+// extern DECLSPEC SDL_Window *SDLCALL SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags);
 func SDL_CreateWindow(title sdlcommon.FConstCharP,
 	x sdlcommon.FInt, y sdlcommon.FInt, w sdlcommon.FInt,
 	h sdlcommon.FInt, flags sdlcommon.FUint32T) (res *SDL_Window) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateWindow").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(title))),
+		sdlcommon.UintPtrFromString(title),
 		uintptr(x),
 		uintptr(y),
 		uintptr(w),
 		uintptr(h),
 		uintptr(flags),
 	)
-	if t == 0 {
-
-	}
 	res = (*SDL_Window)(unsafe.Pointer(t))
 	return
 }
@@ -907,17 +833,16 @@ func SDL_CreateWindow(title sdlcommon.FConstCharP,
  * \returns the window that was created or NULL on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_CreateWindow
  * \sa SDL_DestroyWindow
  */
-//extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindowFrom(const void *data);
+// extern DECLSPEC SDL_Window *SDLCALL SDL_CreateWindowFrom(const void *data);
 func SDL_CreateWindowFrom(data sdlcommon.FConstVoidP) (res *SDL_Window) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateWindowFrom").Call(
 		data,
 	)
-	if t == 0 {
-
-	}
 	res = (*SDL_Window)(unsafe.Pointer(t))
 	return
 }
@@ -932,19 +857,16 @@ func SDL_CreateWindowFrom(data sdlcommon.FConstVoidP) (res *SDL_Window) {
  * \returns the ID of the window on success or 0 on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowFromID
  */
-//extern DECLSPEC Uint32 SDLCALL SDL_GetWindowID(SDL_Window * window);
-func (window *SDL_Window) SDL_GetWindowID() (res sdlcommon.FUint32T) {
+// extern DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window);
+func (window *SDL_Window) SDL_GetWindowID() (res SDL_WindowID) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowID").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FUint32T(t)
+	res = SDL_WindowID(t)
 	return
 }
 
@@ -958,16 +880,15 @@ func (window *SDL_Window) SDL_GetWindowID() (res sdlcommon.FUint32T) {
  * \returns the window associated with `id` or NULL if it doesn't exist; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetWindowID
  */
-//extern DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromID(Uint32 id);
-func SDL_GetWindowFromID(id sdlcommon.FUint32T) (res *SDL_Window) {
+// extern DECLSPEC SDL_Window *SDLCALL SDL_GetWindowFromID(SDL_WindowID id);
+func SDL_GetWindowFromID(id SDL_WindowID) (res *SDL_Window) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowFromID").Call(
 		uintptr(id),
 	)
-	if t == 0 {
-
-	}
 	res = (*SDL_Window)(unsafe.Pointer(t))
 	return
 }
@@ -978,6 +899,8 @@ func SDL_GetWindowFromID(id sdlcommon.FUint32T) (res *SDL_Window) {
  * \param window the window to query
  * \returns a mask of the SDL_WindowFlags associated with `window`
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_CreateWindow
  * \sa SDL_HideWindow
  * \sa SDL_MaximizeWindow
@@ -986,14 +909,11 @@ func SDL_GetWindowFromID(id sdlcommon.FUint32T) (res *SDL_Window) {
  * \sa SDL_SetWindowGrab
  * \sa SDL_ShowWindow
  */
-//extern DECLSPEC Uint32 SDLCALL SDL_GetWindowFlags(SDL_Window * window);
+// extern DECLSPEC Uint32 SDLCALL SDL_GetWindowFlags(SDL_Window *window);
 func (window *SDL_Window) SDL_GetWindowFlags() (res sdlcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowFlags").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FUint32T(t)
 	return
 }
@@ -1005,19 +925,20 @@ func (window *SDL_Window) SDL_GetWindowFlags() (res sdlcommon.FUint32T) {
  *
  * \param window the window to change
  * \param title the desired window title in UTF-8 format
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowTitle
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowTitle(SDL_Window * window,
-//const char *title);
-func (window *SDL_Window) SDL_SetWindowTitle(title sdlcommon.FConstCharP) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title);
+func (window *SDL_Window) SDL_SetWindowTitle(title sdlcommon.FConstCharP) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowTitle").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(title))),
+		sdlcommon.UintPtrFromString(title),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1028,16 +949,15 @@ func (window *SDL_Window) SDL_SetWindowTitle(title sdlcommon.FConstCharP) {
  * \returns the title of the window in UTF-8 format or "" if there is no
  *          title.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_SetWindowTitle
  */
-//extern DECLSPEC const char *SDLCALL SDL_GetWindowTitle(SDL_Window * window);
+// extern DECLSPEC const char *SDLCALL SDL_GetWindowTitle(SDL_Window *window);
 func (window *SDL_Window) SDL_GetWindowTitle() (res sdlcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowTitle").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.StringFromPtr(t)
 	return
 }
@@ -1047,17 +967,18 @@ func (window *SDL_Window) SDL_GetWindowTitle() (res sdlcommon.FConstCharP) {
  *
  * \param window the window to change
  * \param icon an SDL_Surface structure containing the icon for the window
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowIcon(SDL_Window * window,
-//SDL_Surface * icon);
-func (window *SDL_Window) SDL_SetWindowIcon(icon *SDL_Surface) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon);
+func (window *SDL_Window) SDL_SetWindowIcon(icon *SDL_Surface) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowIcon").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(icon)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1071,20 +992,17 @@ func (window *SDL_Window) SDL_SetWindowIcon(icon *SDL_Surface) {
  * \param userdata the associated pointer
  * \returns the previous value associated with `name`.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetWindowData
  */
-//extern DECLSPEC void* SDLCALL SDL_SetWindowData(SDL_Window * window,
-//const char *name,
-//void *userdata);
+// extern DECLSPEC void *SDLCALL SDL_SetWindowData(SDL_Window *window, const char *name, void *userdata);
 func (window *SDL_Window) SDL_SetWindowData(name sdlcommon.FConstCharP, userdata sdlcommon.FVoidP) (res sdlcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowData").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
+		sdlcommon.UintPtrFromString(name),
 		uintptr(unsafe.Pointer(userdata)),
 	)
-	if t == 0 {
-
-	}
 	res = t
 	return
 }
@@ -1096,149 +1014,141 @@ func (window *SDL_Window) SDL_SetWindowData(name sdlcommon.FConstCharP, userdata
  * \param name the name of the pointer
  * \returns the value associated with `name`.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_SetWindowData
  */
-//extern DECLSPEC void *SDLCALL SDL_GetWindowData(SDL_Window * window,
-//const char *name);
+// extern DECLSPEC void *SDLCALL SDL_GetWindowData(SDL_Window *window, const char *name);
 func (window *SDL_Window) SDL_GetWindowData(name sdlcommon.FConstCharP) (res sdlcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowData").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
 	)
-	if t == 0 {
-
-	}
 	res = t
 	return
 }
 
 /**
- * Set the position of a window.
- *
- * The window coordinate origin is the upper left of the display.
+ * Set the position of a window, in screen coordinates.
  *
  * \param window the window to reposition
- * \param x the x coordinate of the window in screen coordinates, or
- *          `SDL_WINDOWPOS_CENTERED` or `SDL_WINDOWPOS_UNDEFINED`
- * \param y the y coordinate of the window in screen coordinates, or
- *          `SDL_WINDOWPOS_CENTERED` or `SDL_WINDOWPOS_UNDEFINED`
+ * \param x the x coordinate of the window, or `SDL_WINDOWPOS_CENTERED` or
+ *          `SDL_WINDOWPOS_UNDEFINED`
+ * \param y the y coordinate of the window, or `SDL_WINDOWPOS_CENTERED` or
+ *          `SDL_WINDOWPOS_UNDEFINED`
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowPosition
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowPosition(SDL_Window * window,
-//int x, int y);
-func (window *SDL_Window) SDL_SetWindowPosition(x sdlcommon.FInt, y sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y);
+func (window *SDL_Window) SDL_SetWindowPosition(x sdlcommon.FInt, y sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowPosition").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(x),
 		uintptr(y),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Get the position of a window.
+ * Get the position of a window, in screen coordinates.
  *
  * If you do not need the value for one of the positions a NULL may be passed
  * in the `x` or `y` parameter.
  *
  * \param window the window to query
- * \param x a pointer filled in with the x position of the window, in screen
- *          coordinates, may be NULL
- * \param y a pointer filled in with the y position of the window, in screen
- *          coordinates, may be NULL
+ * \param x a pointer filled in with the x position of the window, may be NULL
+ * \param y a pointer filled in with the y position of the window, may be NULL
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_SetWindowPosition
  */
-//extern DECLSPEC void SDLCALL SDL_GetWindowPosition(SDL_Window * window,
-//int *x, int *y);
-func (window *SDL_Window) SDL_GetWindowPosition(x *sdlcommon.FInt, y *sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y);
+func (window *SDL_Window) SDL_GetWindowPosition(x *sdlcommon.FInt, y *sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowPosition").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(x)),
 		uintptr(unsafe.Pointer(y)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Set the size of a window's client area.
+ * Set the size of a window's client area, in screen coordinates.
  *
- * The window size in screen coordinates may differ from the size in pixels,
- * if the window was created with `SDL_WINDOW_ALLOW_HIGHDPI` on a platform
- * with high-dpi support (e.g. iOS or macOS). Use SDL_GL_GetDrawableSize() or
- * SDL_GetRendererOutputSize() to get the real client area size in pixels.
+ * The window size in screen coordinates may differ from the size in pixels if
+ * the window is on a high density display (one with an OS scaling factor).
  *
- * Fullscreen windows automatically match the size of the display mode, and
- * you should use SDL_SetWindowDisplayMode() to change their size.
+ * This only affects the size of the window when not in fullscreen mode. To change
+ * the fullscreen mode of a window, use SDL_SetWindowFullscreenMode()
  *
  * \param window the window to change
- * \param w the width of the window in pixels, in screen coordinates, must be
- *          > 0
- * \param h the height of the window in pixels, in screen coordinates, must be
- *          > 0
+ * \param w the width of the window, must be > 0
+ * \param h the height of the window, must be > 0
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowSize
- * \sa SDL_SetWindowDisplayMode
+ * \sa SDL_SetWindowFullscreenMode
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowSize(SDL_Window * window, int w,
-//int h);
-func (window *SDL_Window) SDL_SetWindowSize(w sdlcommon.FInt, h sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h);
+func (window *SDL_Window) SDL_SetWindowSize(w sdlcommon.FInt, h sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowSize").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(w),
 		uintptr(h),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Get the size of a window's client area.
+ * Get the size of a window's client area, in screen coordinates.
  *
  * NULL can safely be passed as the `w` or `h` parameter if the width or
  * height value is not desired.
  *
- * The window size in screen coordinates may differ from the size in pixels,
- * if the window was created with `SDL_WINDOW_ALLOW_HIGHDPI` on a platform
- * with high-dpi support (e.g. iOS or macOS). Use SDL_GL_GetDrawableSize(),
- * SDL_Vulkan_GetDrawableSize(), or SDL_GetRendererOutputSize() to get the
+ * The window size in screen coordinates may differ from the size in pixels if
+ * the window is on a high density display (one with an OS scaling factor).
+ * Use SDL_GetWindowSizeInPixels() or SDL_GetRenderOutputSize() to get the
  * real client area size in pixels.
  *
  * \param window the window to query the width and height from
- * \param w a pointer filled in with the width of the window, in screen
- *          coordinates, may be NULL
- * \param h a pointer filled in with the height of the window, in screen
- *          coordinates, may be NULL
+ * \param w a pointer filled in with the width of the window, may be NULL
+ * \param h a pointer filled in with the height of the window, may be NULL
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
  *
- * \sa SDL_GL_GetDrawableSize
- * \sa SDL_Vulkan_GetDrawableSize
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetRenderOutputSize
+ * \sa SDL_GetWindowSizeInPixels
  * \sa SDL_SetWindowSize
  */
-//extern DECLSPEC void SDLCALL SDL_GetWindowSize(SDL_Window * window, int *w,
-//int *h);
-func (window *SDL_Window) SDL_GetWindowSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h);
+func (window *SDL_Window) SDL_GetWindowSize(w *sdlcommon.FInt, h *sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowSize").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(w)),
 		uintptr(unsafe.Pointer(h)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Get the size of a window's borders (decorations) around the client area.
+ * Get the size of a window's borders (decorations) around the client area, in
+ * screen coordinates.
  *
  * Note: If this function fails (returns -1), the size values will be
  * initialized to 0, 0, 0, 0 (if a non-NULL pointer is provided), as if the
@@ -1265,125 +1175,149 @@ func (window *SDL_Window) SDL_GetWindowSize(w *sdlcommon.FInt, h *sdlcommon.FInt
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.5.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowSize
  */
-//extern DECLSPEC int SDLCALL SDL_GetWindowBordersSize(SDL_Window * window,
-//int *top, int *left,
-//int *bottom, int *right);
+// extern DECLSPEC int SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right);
 func (window *SDL_Window) SDL_GetWindowBordersSize(top *sdlcommon.FInt, left *sdlcommon.FInt, bottom *sdlcommon.FInt, right *sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowBordersSize").Call(
-		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(top)),
 		uintptr(unsafe.Pointer(left)),
 		uintptr(unsafe.Pointer(bottom)),
 		uintptr(unsafe.Pointer(right)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Set the minimum size of a window's client area.
+ * Get the size of a window's client area, in pixels.
  *
- * \param window the window to change
- * \param min_w the minimum width of the window in pixels
- * \param min_h the minimum height of the window in pixels
+ * The window size in pixels may differ from the size in screen coordinates if
+ * the window is on a high density display (one with an OS scaling factor).
  *
- * \sa SDL_GetWindowMinimumSize
- * \sa SDL_SetWindowMaximumSize
+ * \param window the window from which the drawable size should be queried
+ * \param w a pointer to variable for storing the width in pixels, may be NULL
+ * \param h a pointer to variable for storing the height in pixels, may be
+ *          NULL
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_CreateWindow
+ * \sa SDL_GetWindowSize
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowMinimumSize(SDL_Window * window,
-//int min_w, int min_h);
-func (window *SDL_Window) SDL_SetWindowMinimumSize(min_w sdlcommon.FInt, min_h sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowMinimumSize").Call(
-		uintptr(unsafe.Pointer(window)),
-		uintptr(min_w),
-		uintptr(min_h),
+// extern DECLSPEC int SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h);
+func (window *SDL_Window) SDL_GetWindowSizeInPixels(w *sdlcommon.FInt, h *sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowSizeInPixels").Call(
+		uintptr(unsafe.Pointer(w)),
+		uintptr(unsafe.Pointer(h)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Get the minimum size of a window's client area.
+ * Set the minimum size of a window's client area, in screen coordinates.
+ *
+ * \param window the window to change
+ * \param min_w the minimum width of the window
+ * \param min_h the minimum height of the window
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetWindowMinimumSize
+ * \sa SDL_SetWindowMaximumSize
+ */
+// extern DECLSPEC int SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h);
+func (window *SDL_Window) SDL_SetWindowMinimumSize(min_w, min_h sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowMinimumSize").Call(
+		uintptr(min_w),
+		uintptr(min_h),
+	)
+	res = sdlcommon.FInt(t)
+	return
+}
+
+/**
+ * Get the minimum size of a window's client area, in screen coordinates.
  *
  * \param window the window to query
  * \param w a pointer filled in with the minimum width of the window, may be
  *          NULL
  * \param h a pointer filled in with the minimum height of the window, may be
  *          NULL
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowMaximumSize
  * \sa SDL_SetWindowMinimumSize
  */
-//extern DECLSPEC void SDLCALL SDL_GetWindowMinimumSize(SDL_Window * window,
-//int *w, int *h);
-func (window *SDL_Window) SDL_GetWindowMinimumSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h);
+func (window *SDL_Window) SDL_GetWindowMinimumSize(w *sdlcommon.FInt, h *sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowMinimumSize").Call(
-		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(w)),
 		uintptr(unsafe.Pointer(h)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Set the maximum size of a window's client area.
+ * Set the maximum size of a window's client area, in screen coordinates.
  *
  * \param window the window to change
- * \param max_w the maximum width of the window in pixels
- * \param max_h the maximum height of the window in pixels
+ * \param max_w the maximum width of the window
+ * \param max_h the maximum height of the window
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowMaximumSize
  * \sa SDL_SetWindowMinimumSize
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowMaximumSize(SDL_Window * window,
-//int max_w, int max_h);
-func (window *SDL_Window) SDL_SetWindowMaximumSize(max_w sdlcommon.FInt, max_h sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h);
+func (window *SDL_Window) SDL_SetWindowMaximumSize(min_w sdlcommon.FInt, min_h sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowMaximumSize").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(max_w),
-		uintptr(max_h),
+		uintptr(min_w),
+		uintptr(min_h),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Get the maximum size of a window's client area.
+ * Get the maximum size of a window's client area, in screen coordinates.
  *
  * \param window the window to query
  * \param w a pointer filled in with the maximum width of the window, may be
  *          NULL
  * \param h a pointer filled in with the maximum height of the window, may be
  *          NULL
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowMinimumSize
  * \sa SDL_SetWindowMaximumSize
  */
-//extern DECLSPEC void SDLCALL SDL_GetWindowMaximumSize(SDL_Window * window,
-//int *w, int *h);
-func (window *SDL_Window) SDL_GetWindowMaximumSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h);
+func (window *SDL_Window) SDL_GetWindowMaximumSize(w *sdlcommon.FInt, h *sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowMaximumSize").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(w)),
 		uintptr(unsafe.Pointer(h)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1398,21 +1332,20 @@ func (window *SDL_Window) SDL_GetWindowMaximumSize(w *sdlcommon.FInt, h *sdlcomm
  *
  * \param window the window of which to change the border state
  * \param bordered SDL_FALSE to remove border, SDL_TRUE to add border
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowFlags
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowBordered(SDL_Window * window,
-//SDL_bool bordered);
-func (window *SDL_Window) SDL_SetWindowBordered(bordered bool) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowBordered(SDL_Window *window, SDL_bool bordered);
+func (window *SDL_Window) SDL_SetWindowBordered(bordered bool) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowBordered").Call(
 		uintptr(unsafe.Pointer(window)),
 		sdlcommon.CBool(bordered),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1427,47 +1360,46 @@ func (window *SDL_Window) SDL_SetWindowBordered(bordered bool) {
  *
  * \param window the window of which to change the resizable state
  * \param resizable SDL_TRUE to allow resizing, SDL_FALSE to disallow
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.5.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowFlags
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowResizable(SDL_Window * window,
-//SDL_bool resizable);
-func (window *SDL_Window) SDL_SetWindowResizable(resizable bool) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowResizable(SDL_Window *window, SDL_bool resizable);
+func (window *SDL_Window) SDL_SetWindowResizable(resizable bool) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowResizable").Call(
 		uintptr(unsafe.Pointer(window)),
 		sdlcommon.CBool(resizable),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- *  \brief Set the window to always be above the others.
+ * Set the window to always be above the others.
  *
- *  This will add or remove the window's `SDL_WINDOW_ALWAYS_ON_TOP`
- *  flag. This will bring the window to the front and keep the window above
- *  the rest.
+ * This will add or remove the window's `SDL_WINDOW_ALWAYS_ON_TOP` flag. This
+ * will bring the window to the front and keep the window above the rest.
  *
- *  \param window The window of which to change the always on top state.
- *  \param on_top  SDL_TRUE to set the window always on top, SDL_FALSE to disable.
+ * \param window The window of which to change the always on top state
+ * \param on_top SDL_TRUE to set the window always on top, SDL_FALSE to
+ *               disable
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
  *
- *  \sa SDL_SetWindowAlwaysOnTop
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetWindowFlags
  */
-
-//extern DECLSPEC void SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window * window,
-//SDL_bool on_top);
-func (window *SDL_Window) SDL_SetWindowAlwaysOnTop(on_top bool) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, SDL_bool on_top);
+func (window *SDL_Window) SDL_SetWindowAlwaysOnTop(on_top bool) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowAlwaysOnTop").Call(
 		uintptr(unsafe.Pointer(window)),
 		sdlcommon.CBool(on_top),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1475,18 +1407,20 @@ func (window *SDL_Window) SDL_SetWindowAlwaysOnTop(on_top bool) {
  * Show a window.
  *
  * \param window the window to show
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_HideWindow
  * \sa SDL_RaiseWindow
  */
-//extern DECLSPEC void SDLCALL SDL_ShowWindow(SDL_Window * window);
-func (window *SDL_Window) SDL_ShowWindow() {
+// extern DECLSPEC int SDLCALL SDL_ShowWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_ShowWindow() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ShowWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1494,17 +1428,19 @@ func (window *SDL_Window) SDL_ShowWindow() {
  * Hide a window.
  *
  * \param window the window to hide
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_ShowWindow
  */
-//extern DECLSPEC void SDLCALL SDL_HideWindow(SDL_Window * window);
-func (window *SDL_Window) SDL_HideWindow() {
+// extern DECLSPEC int SDLCALL SDL_HideWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_HideWindow() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HideWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1512,15 +1448,17 @@ func (window *SDL_Window) SDL_HideWindow() {
  * Raise a window above other windows and set the input focus.
  *
  * \param window the window to raise
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC void SDLCALL SDL_RaiseWindow(SDL_Window * window);
-func (window *SDL_Window) SDL_RaiseWindow() {
+// extern DECLSPEC int SDLCALL SDL_RaiseWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_RaiseWindow() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RaiseWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1528,18 +1466,20 @@ func (window *SDL_Window) SDL_RaiseWindow() {
  * Make a window as large as possible.
  *
  * \param window the window to maximize
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_MinimizeWindow
  * \sa SDL_RestoreWindow
  */
-//extern DECLSPEC void SDLCALL SDL_MaximizeWindow(SDL_Window * window);
-func (window *SDL_Window) SDL_MaximizeWindow() {
+// extern DECLSPEC int SDLCALL SDL_MaximizeWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_MaximizeWindow() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MaximizeWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1547,18 +1487,20 @@ func (window *SDL_Window) SDL_MaximizeWindow() {
  * Minimize a window to an iconic representation.
  *
  * \param window the window to minimize
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_MaximizeWindow
  * \sa SDL_RestoreWindow
  */
-//extern DECLSPEC void SDLCALL SDL_MinimizeWindow(SDL_Window * window);
-func (window *SDL_Window) SDL_MinimizeWindow() {
+// extern DECLSPEC int SDLCALL SDL_MinimizeWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_MinimizeWindow() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MinimizeWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1566,48 +1508,45 @@ func (window *SDL_Window) SDL_MinimizeWindow() {
  * Restore the size and position of a minimized or maximized window.
  *
  * \param window the window to restore
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_MaximizeWindow
  * \sa SDL_MinimizeWindow
  */
-//extern DECLSPEC void SDLCALL SDL_RestoreWindow(SDL_Window * window);
-func (window *SDL_Window) SDL_RestoreWindow() {
+// extern DECLSPEC int SDLCALL SDL_RestoreWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_RestoreWindow() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RestoreWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
  * Set a window's fullscreen state.
  *
- * `flags` may be `SDL_WINDOW_FULLSCREEN`, for "real" fullscreen with a
- * videomode change; `SDL_WINDOW_FULLSCREEN_DESKTOP` for "fake" fullscreen
- * that takes the size of the desktop; and 0 for windowed mode.
+ * By default a window in fullscreen state uses fullscreen desktop mode,
+ * but a specific display mode can be set using SDL_SetWindowFullscreenMode().
  *
  * \param window the window to change
- * \param flags `SDL_WINDOW_FULLSCREEN`, `SDL_WINDOW_FULLSCREEN_DESKTOP` or 0
+ * \param fullscreen SDL_TRUE for fullscreen mode, SDL_FALSE for windowed mode
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
- * \sa SDL_GetWindowDisplayMode
- * \sa SDL_SetWindowDisplayMode
+ * \sa SDL_GetWindowFullscreenMode
+ * \sa SDL_SetWindowFullscreenMode
  */
-//extern DECLSPEC int SDLCALL SDL_SetWindowFullscreen(SDL_Window * window,
-//Uint32 flags);
-func (window *SDL_Window) SDL_SetWindowFullscreen(flags sdlcommon.FUint32T) (res sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, SDL_bool fullscreen);
+func (window *SDL_Window) SDL_SetWindowFullscreen(fullscreen bool) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowFullscreen").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(flags),
+		sdlcommon.CBool(fullscreen),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -1630,17 +1569,16 @@ func (window *SDL_Window) SDL_SetWindowFullscreen(flags sdlcommon.FUint32T) (res
  * \returns the surface associated with the window, or NULL on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_UpdateWindowSurface
  * \sa SDL_UpdateWindowSurfaceRects
  */
-//extern DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window * window);
+// extern DECLSPEC SDL_Surface *SDLCALL SDL_GetWindowSurface(SDL_Window *window);
 func (window *SDL_Window) SDL_GetWindowSurface() (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowSurface").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
 	res = (*SDL_Surface)(unsafe.Pointer(t))
 	return
 }
@@ -1657,17 +1595,16 @@ func (window *SDL_Window) SDL_GetWindowSurface() (res *SDL_Surface) {
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetWindowSurface
  * \sa SDL_UpdateWindowSurfaceRects
  */
-//extern DECLSPEC int SDLCALL SDL_UpdateWindowSurface(SDL_Window * window);
+// extern DECLSPEC int SDLCALL SDL_UpdateWindowSurface(SDL_Window *window);
 func (window *SDL_Window) SDL_UpdateWindowSurface() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UpdateWindowSurface").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -1682,26 +1619,23 @@ func (window *SDL_Window) SDL_UpdateWindowSurface() (res sdlcommon.FInt) {
  *
  * \param window the window to update
  * \param rects an array of SDL_Rect structures representing areas of the
- *              surface to copy
+ *              surface to copy, in pixels
  * \param numrects the number of rectangles
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetWindowSurface
  * \sa SDL_UpdateWindowSurface
  */
-//extern DECLSPEC int SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window * window,
-//const SDL_Rect * rects,
-//int numrects);
+// extern DECLSPEC int SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects);
 func (window *SDL_Window) SDL_UpdateWindowSurfaceRects(rects *SDL_Rect, numrects sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UpdateWindowSurfaceRects").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(rects)),
 		uintptr(numrects),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -1709,75 +1643,96 @@ func (window *SDL_Window) SDL_UpdateWindowSurfaceRects(rects *SDL_Rect, numrects
 /**
  * Set a window's input grab mode.
  *
- * When input is grabbed the mouse is confined to the window.
+ * When input is grabbed, the mouse is confined to the window. This function
+ * will also grab the keyboard if `SDL_HINT_GRAB_KEYBOARD` is set. To grab the
+ * keyboard without also grabbing the mouse, use SDL_SetWindowKeyboardGrab().
  *
  * If the caller enables a grab while another window is currently grabbed, the
  * other window loses its grab in favor of the caller's window.
  *
  * \param window the window for which the input grab mode should be set
  * \param grabbed SDL_TRUE to grab input or SDL_FALSE to release input
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetGrabbedWindow
  * \sa SDL_GetWindowGrab
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowGrab(SDL_Window * window,
-//SDL_bool grabbed);
-func (window *SDL_Window) SDL_SetWindowGrab(grabbed bool) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowGrab(SDL_Window *window, SDL_bool grabbed);
+func (window *SDL_Window) SDL_SetWindowGrab(grabbed bool) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowGrab").Call(
 		uintptr(unsafe.Pointer(window)),
 		sdlcommon.CBool(grabbed),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
  * Set a window's keyboard grab mode.
  *
+ * Keyboard grab enables capture of system keyboard shortcuts like Alt+Tab or
+ * the Meta/Super key. Note that not all system keyboard shortcuts can be
+ * captured by applications (one example is Ctrl+Alt+Del on Windows).
+ *
+ * This is primarily intended for specialized applications such as VNC clients
+ * or VM frontends. Normal games should not use keyboard grab.
+ *
+ * When keyboard grab is enabled, SDL will continue to handle Alt+Tab when the
+ * window is full-screen to ensure the user is not trapped in your
+ * application. If you have a custom keyboard shortcut to exit fullscreen
+ * mode, you may suppress this behavior with
+ * `SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED`.
+ *
  * If the caller enables a grab while another window is currently grabbed, the
  * other window loses its grab in favor of the caller's window.
  *
  * \param window The window for which the keyboard grab mode should be set.
  * \param grabbed This is SDL_TRUE to grab keyboard, and SDL_FALSE to release.
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowKeyboardGrab
  * \sa SDL_SetWindowMouseGrab
  * \sa SDL_SetWindowGrab
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window * window,
-//SDL_bool grabbed);
-func (window *SDL_Window) SDL_SetWindowKeyboardGrab(grabbed bool) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, SDL_bool grabbed);
+func (window *SDL_Window) SDL_SetWindowKeyboardGrab(grabbed bool) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowKeyboardGrab").Call(
 		uintptr(unsafe.Pointer(window)),
 		sdlcommon.CBool(grabbed),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
  * Set a window's mouse grab mode.
  *
+ * Mouse grab confines the mouse cursor to the window.
+ *
  * \param window The window for which the mouse grab mode should be set.
+ * \param grabbed This is SDL_TRUE to grab mouse, and SDL_FALSE to release.
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowMouseGrab
  * \sa SDL_SetWindowKeyboardGrab
  * \sa SDL_SetWindowGrab
  */
-//extern DECLSPEC void SDLCALL SDL_SetWindowMouseGrab(SDL_Window * window,
-//SDL_bool grabbed);
-func (window *SDL_Window) SDL_SetWindowMouseGrab(grabbed bool) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, SDL_bool grabbed);
+func (window *SDL_Window) SDL_SetWindowMouseGrab(grabbed bool) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowMouseGrab").Call(
 		uintptr(unsafe.Pointer(window)),
 		sdlcommon.CBool(grabbed),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -1787,16 +1742,15 @@ func (window *SDL_Window) SDL_SetWindowMouseGrab(grabbed bool) {
  * \param window the window to query
  * \returns SDL_TRUE if input is grabbed, SDL_FALSE otherwise.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_SetWindowGrab
  */
-//extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowGrab(SDL_Window * window);
+// extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowGrab(SDL_Window *window);
 func (window *SDL_Window) SDL_GetWindowGrab() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowGrab").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.GoBool(t)
 	return
 }
@@ -1807,17 +1761,16 @@ func (window *SDL_Window) SDL_GetWindowGrab() (res bool) {
  * \param window the window to query
  * \returns SDL_TRUE if keyboard is grabbed, and SDL_FALSE otherwise.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_SetWindowKeyboardGrab
  * \sa SDL_GetWindowGrab
  */
-//extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window * window);
+// extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window);
 func (window *SDL_Window) SDL_GetWindowKeyboardGrab() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowKeyboardGrab").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.GoBool(t)
 	return
 }
@@ -1828,17 +1781,16 @@ func (window *SDL_Window) SDL_GetWindowKeyboardGrab() (res bool) {
  * \param window the window to query
  * \returns SDL_TRUE if mouse is grabbed, and SDL_FALSE otherwise.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_SetWindowKeyboardGrab
  * \sa SDL_GetWindowGrab
  */
-//extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window * window);
+// extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window);
 func (window *SDL_Window) SDL_GetWindowMouseGrab() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowMouseGrab").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.GoBool(t)
 	return
 }
@@ -1848,80 +1800,62 @@ func (window *SDL_Window) SDL_GetWindowMouseGrab() (res bool) {
  *
  * \returns the window if input is grabbed or NULL otherwise.
  *
- * \since This function is available since SDL 2.0.4.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowGrab
  * \sa SDL_SetWindowGrab
  */
-//extern DECLSPEC SDL_Window * SDLCALL SDL_GetGrabbedWindow(void);
+// extern DECLSPEC SDL_Window *SDLCALL SDL_GetGrabbedWindow(void);
 func SDL_GetGrabbedWindow() (res *SDL_Window) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGrabbedWindow").Call()
-	if t == 0 {
-
-	}
 	res = (*SDL_Window)(unsafe.Pointer(t))
 	return
 }
 
 /**
- * Set the brightness (gamma multiplier) for a given window's display.
+ * Confines the cursor to the specified area of a window.
  *
- * Despite the name and signature, this method sets the brightness of the
- * entire display, not an individual window. A window is considered to be
- * owned by the display that contains the window's center pixel. (The index of
- * this display can be retrieved using SDL_GetWindowDisplayIndex().) The
- * brightness set will not follow the window if it is moved to another
- * display.
+ * Note that this does NOT grab the cursor, it only defines the area a cursor
+ * is restricted to when the window has mouse focus.
  *
- * Many platforms will refuse to set the display brightness in modern times.
- * You are better off using a shader to adjust gamma during rendering, or
- * something similar.
- *
- * \param window the window used to select the display whose brightness will
- *               be changed
- * \param brightness the brightness (gamma multiplier) value to set where 0.0
- *                   is completely dark and 1.0 is normal brightness
+ * \param window The window that will be associated with the barrier.
+ * \param rect A rectangle area in window-relative coordinates. If NULL the
+ *             barrier for the specified window will be destroyed.
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \sa SDL_GetWindowBrightness
- * \sa SDL_SetWindowGammaRamp
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GetWindowMouseRect
+ * \sa SDL_SetWindowMouseGrab
  */
-//extern DECLSPEC int SDLCALL SDL_SetWindowBrightness(SDL_Window * window, float brightness);
-func (window *SDL_Window) SDL_SetWindowBrightness(brightness sdlcommon.FFloat) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowBrightness").Call(
+// extern DECLSPEC int SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect);
+func (window *SDL_Window) SDL_SetWindowMouseRect(rect *SDL_Rect) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowMouseRect").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(&brightness)),
+		uintptr(unsafe.Pointer(rect)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
 
 /**
- * Get the brightness (gamma multiplier) for a given window's display.
+ * Get the mouse confinement rectangle of a window.
  *
- * Despite the name and signature, this method retrieves the brightness of the
- * entire display, not an individual window. A window is considered to be
- * owned by the display that contains the window's center pixel. (The index of
- * this display can be retrieved using SDL_GetWindowDisplayIndex().)
+ * \param window The window to query
+ * \returns A pointer to the mouse confinement rectangle of a window, or NULL
+ *          if there isn't one.
  *
- * \param window the window used to select the display whose brightness will
- *               be queried
- * \returns the brightness for the display where 0.0 is completely dark and
- *          1.0 is normal brightness.
+ * \since This function is available since SDL 3.0.0.
  *
- * \sa SDL_SetWindowBrightness
+ * \sa SDL_SetWindowMouseRect
  */
-//extern DECLSPEC float SDLCALL SDL_GetWindowBrightness(SDL_Window * window);
-func (window *SDL_Window) SDL_GetWindowBrightness() (res sdlcommon.FFloat) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowBrightness").Call()
-	if t == 0 {
-
-	}
-	res = *(*sdlcommon.FFloat)(unsafe.Pointer(&t))
+// extern DECLSPEC const SDL_Rect *SDLCALL SDL_GetWindowMouseRect(SDL_Window *window);
+func (window *SDL_Window) SDL_GetWindowMouseRect() (res *SDL_Rect) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowMouseRect").Call(
+		uintptr(unsafe.Pointer(window)),
+	)
+	res = (*SDL_Rect)(unsafe.Pointer(t))
 	return
 }
 
@@ -1938,19 +1872,16 @@ func (window *SDL_Window) SDL_GetWindowBrightness() (res sdlcommon.FFloat) {
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.5.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetWindowOpacity
  */
-//extern DECLSPEC int SDLCALL SDL_SetWindowOpacity(SDL_Window * window, float opacity);
-func (window *SDL_Window) SDL_SetWindowOpacity(brightness sdlcommon.FFloat) (res sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity);
+func (window *SDL_Window) SDL_SetWindowOpacity(opacity sdlcommon.FFloat) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowOpacity").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(&brightness)),
+		uintptr(unsafe.Pointer(&opacity)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -1970,19 +1901,16 @@ func (window *SDL_Window) SDL_SetWindowOpacity(brightness sdlcommon.FFloat) (res
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.5.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_SetWindowOpacity
  */
-//extern DECLSPEC int SDLCALL SDL_GetWindowOpacity(SDL_Window * window, float * out_opacity);
-func (window *SDL_Window) SDL_GetWindowOpacity(out_opacity *sdlcommon.FFloat) (res sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GetWindowOpacity(SDL_Window *window, float *out_opacity);
+func (window *SDL_Window) SDL_GetWindowOpacity(opacity *sdlcommon.FFloat) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowOpacity").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(out_opacity)),
+		uintptr(unsafe.Pointer(opacity)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -1995,17 +1923,14 @@ func (window *SDL_Window) SDL_GetWindowOpacity(out_opacity *sdlcommon.FFloat) (r
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.5.
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC int SDLCALL SDL_SetWindowModalFor(SDL_Window * modal_window, SDL_Window * parent_window);
+// extern DECLSPEC int SDLCALL SDL_SetWindowModalFor(SDL_Window *modal_window, SDL_Window *parent_window);
 func (modal_window *SDL_Window) SDL_SetWindowModalFor(parent_window *SDL_Window) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowModalFor").Call(
 		uintptr(unsafe.Pointer(modal_window)),
 		uintptr(unsafe.Pointer(parent_window)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2021,103 +1946,15 @@ func (modal_window *SDL_Window) SDL_SetWindowModalFor(parent_window *SDL_Window)
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.5.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_RaiseWindow
  */
-//extern DECLSPEC int SDLCALL SDL_SetWindowInputFocus(SDL_Window * window);
+// extern DECLSPEC int SDLCALL SDL_SetWindowInputFocus(SDL_Window *window);
 func (window *SDL_Window) SDL_SetWindowInputFocus() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowInputFocus").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
-	return
-}
-
-/**
- * Set the gamma ramp for the display that owns a given window.
- *
- * Set the gamma translation table for the red, green, and blue channels of
- * the video hardware. Each table is an array of 256 16-bit quantities,
- * representing a mapping between the input and output for that channel. The
- * input is the index into the array, and the output is the 16-bit gamma value
- * at that index, scaled to the output color precision.
- *
- * Despite the name and signature, this method sets the gamma ramp of the
- * entire display, not an individual window. A window is considered to be
- * owned by the display that contains the window's center pixel. (The index of
- * this display can be retrieved using SDL_GetWindowDisplayIndex().) The gamma
- * ramp set will not follow the window if it is moved to another display.
- *
- * \param window the window used to select the display whose gamma ramp will
- *               be changed
- * \param red a 256 element array of 16-bit quantities representing the
- *            translation table for the red channel, or NULL
- * \param green a 256 element array of 16-bit quantities representing the
- *              translation table for the green channel, or NULL
- * \param blue a 256 element array of 16-bit quantities representing the
- *             translation table for the blue channel, or NULL
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
- *
- * \sa SDL_GetWindowGammaRamp
- */
-//extern DECLSPEC int SDLCALL SDL_SetWindowGammaRamp(SDL_Window * window,
-//const Uint16 * red,
-//const Uint16 * green,
-//const Uint16 * blue);
-func (window *SDL_Window) SDL_SetWindowGammaRamp(red *sdlcommon.FUint64T, green *sdlcommon.FUint64T, blue *sdlcommon.FUint64T) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowGammaRamp").Call(
-		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(red)),
-		uintptr(unsafe.Pointer(green)),
-		uintptr(unsafe.Pointer(blue)),
-	)
-	if t == 0 {
-
-	}
-	res = sdlcommon.FInt(t)
-	return
-}
-
-/**
- * Get the gamma ramp for a given window's display.
- *
- * Despite the name and signature, this method retrieves the gamma ramp of the
- * entire display, not an individual window. A window is considered to be
- * owned by the display that contains the window's center pixel. (The index of
- * this display can be retrieved using SDL_GetWindowDisplayIndex().)
- *
- * \param window the window used to select the display whose gamma ramp will
- *               be queried
- * \param red a 256 element array of 16-bit quantities filled in with the
- *            translation table for the red channel, or NULL
- * \param green a 256 element array of 16-bit quantities filled in with the
- *              translation table for the green channel, or NULL
- * \param blue a 256 element array of 16-bit quantities filled in with the
- *             translation table for the blue channel, or NULL
- * \returns 0 on success or a negative error code on failure; call
- *          SDL_GetError() for more information.
- *
- * \sa SDL_SetWindowGammaRamp
- */
-//extern DECLSPEC int SDLCALL SDL_GetWindowGammaRamp(SDL_Window * window,
-//Uint16 * red,
-//Uint16 * green,
-//Uint16 * blue);
-func (window *SDL_Window) SDL_GetWindowGammaRamp(red *sdlcommon.FUint64T, green *sdlcommon.FUint64T, blue *sdlcommon.FUint64T) (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowGammaRamp").Call(
-		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(red)),
-		uintptr(unsafe.Pointer(green)),
-		uintptr(unsafe.Pointer(blue)),
-	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2127,7 +1964,7 @@ func (window *SDL_Window) SDL_GetWindowGammaRamp(red *sdlcommon.FUint64T, green 
  *
  * \sa SDL_HitTest
  */
-type SDL_HitTestResult = int32
+type SDL_HitTestResult int32
 
 const (
 	SDL_HITTEST_NORMAL    = iota /**< Region is normal. No special properties. */
@@ -2152,9 +1989,9 @@ const (
  *
  * \sa SDL_SetWindowHitTest
  */
-//typedef SDL_HitTestResult (SDLCALL *SDL_HitTest)(SDL_Window *win,
-//const SDL_Point *area,
-//void *data);
+// typedef SDL_HitTestResult (SDLCALL *SDL_HitTest)(SDL_Window *win,
+//                                                  const SDL_Point *area,
+//                                                  void *data);
 type SDL_HitTest = func(win *SDL_Window, area *SDL_Point, data sdlcommon.FVoidP) uintptr //SDL_HitTestResult
 
 /**
@@ -2195,20 +2032,15 @@ type SDL_HitTest = func(win *SDL_Window, area *SDL_Point, data sdlcommon.FVoidP)
  * \returns 0 on success or -1 on error (including unsupported); call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.4.
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC int SDLCALL SDL_SetWindowHitTest(SDL_Window * window,
-//SDL_HitTest callback,
-//void *callback_data);
+// extern DECLSPEC int SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data);
 func (window *SDL_Window) SDL_SetWindowHitTest(callback SDL_HitTest, callback_data sdlcommon.FVoidP) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetWindowHitTest").Call(
 		uintptr(unsafe.Pointer(window)),
 		sdlcommon.NewCallback(callback),
 		callback_data,
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2220,16 +2052,15 @@ func (window *SDL_Window) SDL_SetWindowHitTest(callback SDL_HitTest, callback_da
  * \param operation the flash operation
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC int SDLCALL SDL_FlashWindow(SDL_Window * window, SDL_FlashOperation operation);
+// extern DECLSPEC int SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation);
 func (window *SDL_Window) SDL_FlashWindow(operation SDL_FlashOperation) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FlashWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(operation),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2242,18 +2073,16 @@ func (window *SDL_Window) SDL_FlashWindow(operation SDL_FlashOperation) (res sdl
  *
  * \param window the window to destroy
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_CreateWindow
  * \sa SDL_CreateWindowFrom
  */
-//extern DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window * window);
+// extern DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window *window);
 func (window *SDL_Window) SDL_DestroyWindow() {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DestroyWindow").Call(
+	sdlcommon.GetSDL2Dll().NewProc("SDL_DestroyWindow").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
-	return
 }
 
 /**
@@ -2267,17 +2096,16 @@ func (window *SDL_Window) SDL_DestroyWindow() {
  * \returns SDL_TRUE if the screensaver is enabled, SDL_FALSE if it is
  *          disabled.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_DisableScreenSaver
  * \sa SDL_EnableScreenSaver
  */
-//extern DECLSPEC SDL_bool SDLCALL SDL_IsScreenSaverEnabled(void);
-func SDL_IsScreenSaverEnabled() (res bool) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsScreenSaverEnabled").Call()
-	if t == 0 {
-
-	}
+// extern DECLSPEC SDL_bool SDLCALL SDL_ScreenSaverEnabled(void);
+func (window *SDL_Window) SDL_ScreenSaverEnabled() (res bool) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ScreenSaverEnabled").Call(
+		uintptr(unsafe.Pointer(window)),
+	)
 	res = sdlcommon.GoBool(t)
 	return
 }
@@ -2285,17 +2113,18 @@ func SDL_IsScreenSaverEnabled() (res bool) {
 /**
  * Allow the screen to be blanked by a screen saver.
  *
- * \since This function is available since SDL 2.0.0.
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_DisableScreenSaver
- * \sa SDL_IsScreenSaverEnabled
+ * \sa SDL_ScreenSaverEnabled
  */
-//extern DECLSPEC void SDLCALL SDL_EnableScreenSaver(void);
-func SDL_EnableScreenSaver() {
+// extern DECLSPEC int SDLCALL SDL_EnableScreenSaver(void);
+func SDL_EnableScreenSaver() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EnableScreenSaver").Call()
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -2305,17 +2134,21 @@ func SDL_EnableScreenSaver() {
  * If you disable the screensaver, it is automatically re-enabled when SDL
  * quits.
  *
- * \since This function is available since SDL 2.0.0.
+ * The screensaver is disabled by default since SDL 2.0.2. Before SDL 2.0.2
+ * the screensaver was enabled by default.
+ *
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_EnableScreenSaver
- * \sa SDL_IsScreenSaverEnabled
+ * \sa SDL_ScreenSaverEnabled
  */
-//extern DECLSPEC void SDLCALL SDL_DisableScreenSaver(void);
-func SDL_DisableScreenSaver() {
+// extern DECLSPEC int SDLCALL SDL_DisableScreenSaver(void);
+func SDL_DisableScreenSaver() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DisableScreenSaver").Call()
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -2339,17 +2172,17 @@ func SDL_DisableScreenSaver() {
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GL_GetProcAddress
  * \sa SDL_GL_UnloadLibrary
  */
-//extern DECLSPEC int SDLCALL SDL_GL_LoadLibrary(const char *path);
+// extern DECLSPEC int SDLCALL SDL_GL_LoadLibrary(const char *path);
 func SDL_GL_LoadLibrary(path0 sdlcommon.FConstCharP) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_LoadLibrary").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(path0))),
+		sdlcommon.UintPtrFromString(path0),
 	)
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -2375,7 +2208,7 @@ func SDL_GL_LoadLibrary(path0 sdlcommon.FConstCharP) (res sdlcommon.FInt) {
  *   of the function pointers that comes and goes with context lifespan.
  * - On X11, function pointers returned by this function are valid for any
  *   context, and can even be looked up before a context is created at all.
- *   This means that, for at least some sdlcommon OpenGL implementations, if you
+ *   This means that, for at least some common OpenGL implementations, if you
  *   look up a function that doesn't exist, you'll get a non-NULL result that
  *   is _NOT_ safe to call. You must always make sure the function is actually
  *   available for a given GL context before calling it, by checking for the
@@ -2398,18 +2231,41 @@ func SDL_GL_LoadLibrary(path0 sdlcommon.FConstCharP) (res sdlcommon.FInt) {
  * \returns a pointer to the named OpenGL function. The returned pointer
  *          should be cast to the appropriate function signature.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GL_ExtensionSupported
  * \sa SDL_GL_LoadLibrary
  * \sa SDL_GL_UnloadLibrary
  */
-//extern DECLSPEC void *SDLCALL SDL_GL_GetProcAddress(const char *proc);
+// extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_GL_GetProcAddress(const char *proc);
 func SDL_GL_GetProcAddress(path0 sdlcommon.FConstCharP) (res sdlcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetProcAddress").Call(
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(path0))),
 	)
-	if t == 0 {
+	res = t
+	return
+}
 
-	}
+/**
+ * Get an EGL library function by name.
+ *
+ * If an EGL library is loaded, this function allows applications to get entry
+ * points for EGL functions. This is useful to provide to an EGL API and
+ * extension loader.
+ *
+ * \param proc the name of an EGL function
+ * \returns a pointer to the named EGL function. The returned pointer should
+ *          be cast to the appropriate function signature.
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * \sa SDL_GL_GetCurrentEGLDisplay
+ */
+// extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_EGL_GetProcAddress(const char *proc);
+func SDL_EGL_GetProcAddress(path0 sdlcommon.FConstCharP) (res sdlcommon.FVoidP) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EGL_GetProcAddress").Call(
+		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(path0))),
+	)
 	res = t
 	return
 }
@@ -2417,15 +2273,13 @@ func SDL_GL_GetProcAddress(path0 sdlcommon.FConstCharP) (res sdlcommon.FVoidP) {
 /**
  * Unload the OpenGL library previously loaded by SDL_GL_LoadLibrary().
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GL_LoadLibrary
  */
-//extern DECLSPEC void SDLCALL SDL_GL_UnloadLibrary(void);
+// extern DECLSPEC void SDLCALL SDL_GL_UnloadLibrary(void);
 func SDL_GL_UnloadLibrary() {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_UnloadLibrary").Call()
-	if t == 0 {
-
-	}
-	return
+	sdlcommon.GetSDL2Dll().NewProc("SDL_GL_UnloadLibrary").Call()
 }
 
 /**
@@ -2445,17 +2299,13 @@ func SDL_GL_UnloadLibrary() {
  * \param extension the name of the extension to check
  * \returns SDL_TRUE if the extension is supported, SDL_FALSE otherwise.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC SDL_bool SDLCALL SDL_GL_ExtensionSupported(const char
-//*extension);
+// extern DECLSPEC SDL_bool SDLCALL SDL_GL_ExtensionSupported(const char *extension);
 func SDL_GL_ExtensionSupported(extension sdlcommon.FConstCharP) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_ExtensionSupported").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(extension))),
+		sdlcommon.UintPtrFromString(extension),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.GoBool(t)
 	return
 }
@@ -2463,18 +2313,14 @@ func SDL_GL_ExtensionSupported(extension sdlcommon.FConstCharP) (res bool) {
 /**
  * Reset all previously set OpenGL context attributes to their default values.
  *
- * \since This function is available since SDL 2.0.2.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GL_GetAttribute
  * \sa SDL_GL_SetAttribute
  */
-//extern DECLSPEC void SDLCALL SDL_GL_ResetAttributes(void);
+// extern DECLSPEC void SDLCALL SDL_GL_ResetAttributes(void);
 func SDL_GL_ResetAttributes() {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_ResetAttributes").Call()
-	if t == 0 {
-
-	}
-	return
+	sdlcommon.GetSDL2Dll().NewProc("SDL_GL_ResetAttributes").Call()
 }
 
 /**
@@ -2490,18 +2336,17 @@ func SDL_GL_ResetAttributes() {
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GL_GetAttribute
  * \sa SDL_GL_ResetAttributes
  */
-//extern DECLSPEC int SDLCALL SDL_GL_SetAttribute(SDL_GLattr attr, int value);
+// extern DECLSPEC int SDLCALL SDL_GL_SetAttribute(SDL_GLattr attr, int value);
 func SDL_GL_SetAttribute(attr SDL_GLattr, value sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_SetAttribute").Call(
 		uintptr(attr),
 		uintptr(value),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2514,18 +2359,17 @@ func SDL_GL_SetAttribute(attr SDL_GLattr, value sdlcommon.FInt) (res sdlcommon.F
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GL_ResetAttributes
  * \sa SDL_GL_SetAttribute
  */
-//extern DECLSPEC int SDLCALL SDL_GL_GetAttribute(SDL_GLattr attr, int *value);
+// extern DECLSPEC int SDLCALL SDL_GL_GetAttribute(SDL_GLattr attr, int *value);
 func SDL_GL_GetAttribute(attr SDL_GLattr, value *sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetAttribute").Call(
 		uintptr(attr),
 		uintptr(unsafe.Pointer(value)),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2545,19 +2389,17 @@ func SDL_GL_GetAttribute(attr SDL_GLattr, value *sdlcommon.FInt) (res sdlcommon.
  * \returns the OpenGL context associated with `window` or NULL on error; call
  *          SDL_GetError() for more details.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GL_DeleteContext
  * \sa SDL_GL_MakeCurrent
  */
-//extern DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *
-//window);
+// extern DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window);
 func (window *SDL_Window) SDL_GL_CreateContext() (res SDL_GLContext) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_CreateContext").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	if t == 0 {
-
-	}
-	res = *(*SDL_GLContext)(unsafe.Pointer(&t))
+	res = SDL_GLContext(t)
 	return
 }
 
@@ -2571,18 +2413,16 @@ func (window *SDL_Window) SDL_GL_CreateContext() (res SDL_GLContext) {
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GL_CreateContext
  */
-//extern DECLSPEC int SDLCALL SDL_GL_MakeCurrent(SDL_Window * window,
-//SDL_GLContext context);
+// extern DECLSPEC int SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context);
 func (window *SDL_Window) SDL_GL_MakeCurrent(context SDL_GLContext) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_MakeCurrent").Call(
 		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(&context)),
+		uintptr(context),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2593,14 +2433,11 @@ func (window *SDL_Window) SDL_GL_MakeCurrent(context SDL_GLContext) (res sdlcomm
  * \returns the currently active OpenGL window on success or NULL on failure;
  *          call SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC SDL_Window* SDLCALL SDL_GL_GetCurrentWindow(void);
+// extern DECLSPEC SDL_Window *SDLCALL SDL_GL_GetCurrentWindow(void);
 func SDL_GL_GetCurrentWindow() (res *SDL_Window) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetCurrentWindow").Call()
-	if t == 0 {
-
-	}
 	res = (*SDL_Window)(unsafe.Pointer(t))
 	return
 }
@@ -2611,51 +2448,95 @@ func SDL_GL_GetCurrentWindow() (res *SDL_Window) {
  * \returns the currently active OpenGL context or NULL on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GL_MakeCurrent
  */
-//extern DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void);
+// extern DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void);
 func SDL_GL_GetCurrentContext() (res SDL_GLContext) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetCurrentContext").Call()
-	if t == 0 {
-
-	}
-	res = *(*SDL_GLContext)(unsafe.Pointer(&t))
+	res = SDL_GLContext(t)
 	return
 }
 
 /**
- * Get the size of a window's underlying drawable in pixels.
+ * Get the currently active EGL display.
  *
- * This returns info useful for calling glViewport().
+ * \returns the currently active EGL display or NULL on failure; call
+ *          SDL_GetError() for more information.
  *
- * This may differ from SDL_GetWindowSize() if we're rendering to a high-DPI
- * drawable, i.e. the window was created with `SDL_WINDOW_ALLOW_HIGHDPI` on a
- * platform with high-DPI support (Apple calls this "Retina"), and not
- * disabled by the `SDL_HINT_VIDEO_HIGHDPI_DISABLED` hint.
- *
- * \param window the window from which the drawable size should be queried
- * \param w a pointer to variable for storing the width in pixels, may be NULL
- * \param h a pointer to variable for storing the height in pixels, may be
- *          NULL
- *
- * \since This function is available since SDL 2.0.1.
- *
- * \sa SDL_CreateWindow
- * \sa SDL_GetWindowSize
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC void SDLCALL SDL_GL_GetDrawableSize(SDL_Window * window, int *w,
-//int *h);
-func (window *SDL_Window) SDL_GL_GetDrawableSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetDrawableSize").Call(
-		uintptr(unsafe.Pointer(window)),
-		uintptr(unsafe.Pointer(w)),
-		uintptr(unsafe.Pointer(h)),
-	)
-	if t == 0 {
+// extern DECLSPEC SDL_EGLDisplay SDLCALL SDL_EGL_GetCurrentEGLDisplay(void);
+func SDL_EGL_GetCurrentEGLDisplay() (res SDL_EGLDisplay) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EGL_GetCurrentEGLDisplay").Call()
+	res = SDL_EGLDisplay(t)
+	return
+}
 
-	}
+/**
+ * Get the currently active EGL config.
+ *
+ * \returns the currently active EGL config or NULL on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
+ */
+// extern DECLSPEC SDL_EGLConfig SDLCALL SDL_EGL_GetCurrentEGLConfig(void);
+func SDL_EGL_GetCurrentEGLConfig() (res SDL_EGLConfig) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EGL_GetCurrentEGLConfig").Call()
+	res = SDL_EGLConfig(t)
+	return
+}
+
+/**
+ * Get the EGL surface associated with the window.
+ *
+ * \returns the EGLSurface pointer associated with the window, or NULL on
+ *          failure.
+ *
+ * \since This function is available since SDL 3.0.0.
+ */
+// extern DECLSPEC SDL_EGLSurface SDLCALL SDL_EGL_GetWindowEGLSurface(SDL_Window *window);
+func (window *SDL_Window) SDL_EGL_GetWindowEGLSurface() (res SDL_EGLConfig) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EGL_GetWindowEGLSurface").Call(
+		uintptr(unsafe.Pointer(window)),
+	)
+	res = SDL_EGLConfig(t)
+	return
+}
+
+/**
+ * Sets the callbacks for defining custom EGLAttrib arrays for EGL
+ * initialization.
+ *
+ * Each callback should return a pointer to an EGL attribute array terminated
+ * with EGL_NONE. Callbacks may return NULL pointers to signal an error, which
+ * will cause the SDL_CreateWindow process to fail gracefully.
+ *
+ * The arrays returned by each callback will be appended to the existing
+ * attribute arrays defined by SDL.
+ *
+ * NOTE: These callback pointers will be reset after SDL_GL_ResetAttributes.
+ *
+ * \param platformAttribCallback Callback for attributes to pass to
+ *                               eglGetPlatformDisplay.
+ * \param surfaceAttribCallback Callback for attributes to pass to
+ *                              eglCreateSurface.
+ * \param contextAttribCallback Callback for attributes to pass to
+ *                              eglCreateContext.
+ *
+ * \since This function is available since SDL 3.0.0.
+ */
+// extern DECLSPEC void SDLCALL SDL_EGL_SetEGLAttributeCallbacks(SDL_EGLAttribArrayCallback platformAttribCallback,
+//                                                               SDL_EGLIntArrayCallback surfaceAttribCallback,
+//                                                               SDL_EGLIntArrayCallback contextAttribCallback);
+func SDL_EGL_SetEGLAttributeCallbacks(platformAttribCallback SDL_EGLAttribArrayCallback, surfaceAttribCallback SDL_EGLIntArrayCallback) (res SDL_EGLConfig) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EGL_SetEGLAttributeCallbacks").Call(
+		sdlcommon.NewCallback(platformAttribCallback),
+		sdlcommon.NewCallback(surfaceAttribCallback),
+	)
+	res = SDL_EGLConfig(t)
 	return
 }
 
@@ -2671,13 +2552,8 @@ func (window *SDL_Window) SDL_GL_GetDrawableSize(w *sdlcommon.FInt, h *sdlcommon
  * retry the call with 1 for the interval.
  *
  * Adaptive vsync is implemented for some glX drivers with
- * GLX_EXT_swap_control_tear:
- *
- * https://www.opengl.org/registry/specs/EXT/glx_swap_control_tear.txt
- *
- * and for some Windows drivers with WGL_EXT_swap_control_tear:
- *
- * https://www.opengl.org/registry/specs/EXT/wgl_swap_control_tear.txt
+ * GLX_EXT_swap_control_tear, and for some Windows drivers with
+ * WGL_EXT_swap_control_tear.
  *
  * Read more on the Khronos wiki:
  * https://www.khronos.org/opengl/wiki/Swap_Interval#Adaptive_Vsync
@@ -2687,18 +2563,15 @@ func (window *SDL_Window) SDL_GL_GetDrawableSize(w *sdlcommon.FInt, h *sdlcommon
  * \returns 0 on success or -1 if setting the swap interval is not supported;
  *          call SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GL_GetSwapInterval
  */
-//extern DECLSPEC int SDLCALL SDL_GL_SetSwapInterval(int interval);
+// extern DECLSPEC int SDLCALL SDL_GL_SetSwapInterval(int interval);
 func SDL_GL_SetSwapInterval(interval sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_SetSwapInterval").Call(
 		uintptr(interval),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2707,23 +2580,24 @@ func SDL_GL_SetSwapInterval(interval sdlcommon.FInt) (res sdlcommon.FInt) {
  * Get the swap interval for the current OpenGL context.
  *
  * If the system can't determine the swap interval, or there isn't a valid
- * current context, this function will return 0 as a safe default.
+ * current context, this function will set *interval to 0 as a safe default.
  *
- * \returns 0 if there is no vertical retrace synchronization, 1 if the buffer
- *          swap is synchronized with the vertical retrace, and -1 if late
- *          swaps happen immediately instead of waiting for the next retrace;
- *          call SDL_GetError() for more information.
+ * \param interval Output interval value. 0 if there is no vertical retrace
+ *                 synchronization, 1 if the buffer swap is synchronized with
+ *                 the vertical retrace, and -1 if late swaps happen
+ *                 immediately instead of waiting for the next retrace
+ * \returns 0 on success or -1 error. call SDL_GetError() for more
+ *          information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GL_SetSwapInterval
  */
-//extern DECLSPEC int SDLCALL SDL_GL_GetSwapInterval(void);
-func SDL_GL_GetSwapInterval() (res sdlcommon.FInt) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetSwapInterval").Call()
-	if t == 0 {
-
-	}
+// extern DECLSPEC int SDLCALL SDL_GL_GetSwapInterval(int *interval);
+func SDL_GL_GetSwapInterval(interval *sdlcommon.FInt) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetSwapInterval").Call(
+		uintptr(unsafe.Pointer(interval)),
+	)
 	res = sdlcommon.FInt(t)
 	return
 }
@@ -2739,13 +2613,15 @@ func SDL_GL_GetSwapInterval() (res sdlcommon.FInt) {
  * extra.
  *
  * \param window the window to change
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  */
-//extern DECLSPEC void SDLCALL SDL_GL_SwapWindow(SDL_Window * window);
-func (window *SDL_Window) SDL_GL_SwapWindow(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+// extern DECLSPEC int SDLCALL SDL_GL_SwapWindow(SDL_Window *window);
+func (window *SDL_Window) SDL_GL_SwapWindow() (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_SwapWindow").Call()
-	if t == 0 {
-
-	}
+	res = sdlcommon.FInt(t)
 	return
 }
 
@@ -2753,16 +2629,26 @@ func (window *SDL_Window) SDL_GL_SwapWindow(w *sdlcommon.FInt, h *sdlcommon.FInt
  * Delete an OpenGL context.
  *
  * \param context the OpenGL context to be deleted
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GL_CreateContext
  */
-//extern DECLSPEC void SDLCALL SDL_GL_DeleteContext(SDL_GLContext context);
-func SDL_GL_DeleteContext(context SDL_GLContext) {
-	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_DeleteContext").Call(
-		uintptr(unsafe.Pointer(&context)),
-	)
-	if t == 0 {
-
-	}
+// extern DECLSPEC int SDLCALL SDL_GL_DeleteContext(SDL_GLContext context);
+func SDL_GL_DeleteContext(c SDL_GLContext) (res sdlcommon.FInt) {
+	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_DeleteContext").Call(uintptr(c))
+	res = sdlcommon.FInt(t)
 	return
 }
+
+/* @} */ /* OpenGL support functions */
+
+/* Ends C function definitions when using C++ */
+// #ifdef __cplusplus
+// }
+// #endif
+// #include <SDL3/SDL_close_code.h>
+
+// #endif /* SDL_video_h_ */

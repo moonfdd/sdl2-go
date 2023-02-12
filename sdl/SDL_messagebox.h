@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -22,10 +22,10 @@
 #ifndef SDL_messagebox_h_
 #define SDL_messagebox_h_
 
-#include "SDL_stdinc.h"
-#include "SDL_video.h"      /* For SDL_Window */
+#include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_video.h>      /* For SDL_Window */
 
-#include "begin_code.h"
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -133,7 +133,7 @@ typedef struct
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
- * \since This function is available since SDL 2.0.0.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_ShowSimpleMessageBox
  */
@@ -175,6 +175,8 @@ extern DECLSPEC int SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *message
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_ShowMessageBox
  */
 extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(Uint32 flags, const char *title, const char *message, SDL_Window *window);
@@ -184,8 +186,6 @@ extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(Uint32 flags, const char *t
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
 #endif /* SDL_messagebox_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */

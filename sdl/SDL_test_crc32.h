@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -24,7 +24,7 @@
  *
  *  Include file for SDL test framework.
  *
- *  This code is a part of the SDL2_test library, not the main SDL library.
+ *  This code is a part of the SDL test library, not the main SDL library.
  */
 
 /*
@@ -36,7 +36,7 @@
 #ifndef SDL_test_crc32_h_
 #define SDL_test_crc32_h_
 
-#include "begin_code.h"
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -79,7 +79,7 @@ extern "C" {
  * \returns 0 for OK, -1 on error
  *
  */
- int SDLTest_Crc32Init(SDLTest_Crc32Context * crcContext);
+ int SDLTest_Crc32Init(SDLTest_Crc32Context *crcContext);
 
 
 /**
@@ -93,12 +93,12 @@ extern "C" {
  * \returns 0 for OK, -1 on error
  *
  */
-int SDLTest_Crc32Calc(SDLTest_Crc32Context * crcContext, CrcUint8 *inBuf, CrcUint32 inLen, CrcUint32 *crc32);
+int SDLTest_Crc32Calc(SDLTest_Crc32Context *crcContext, CrcUint8 *inBuf, CrcUint32 inLen, CrcUint32 *crc32);
 
 /* Same routine broken down into three steps */
-int SDLTest_Crc32CalcStart(SDLTest_Crc32Context * crcContext, CrcUint32 *crc32);
-int SDLTest_Crc32CalcEnd(SDLTest_Crc32Context * crcContext, CrcUint32 *crc32);
-int SDLTest_Crc32CalcBuffer(SDLTest_Crc32Context * crcContext, CrcUint8 *inBuf, CrcUint32 inLen, CrcUint32 *crc32);
+int SDLTest_Crc32CalcStart(SDLTest_Crc32Context *crcContext, CrcUint32 *crc32);
+int SDLTest_Crc32CalcEnd(SDLTest_Crc32Context *crcContext, CrcUint32 *crc32);
+int SDLTest_Crc32CalcBuffer(SDLTest_Crc32Context *crcContext, CrcUint8 *inBuf, CrcUint32 inLen, CrcUint32 *crc32);
 
 
 /**
@@ -110,15 +110,13 @@ int SDLTest_Crc32CalcBuffer(SDLTest_Crc32Context * crcContext, CrcUint8 *inBuf, 
  *
 */
 
-int SDLTest_Crc32Done(SDLTest_Crc32Context * crcContext);
+int SDLTest_Crc32Done(SDLTest_Crc32Context *crcContext);
 
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
 #endif /* SDL_test_crc32_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */

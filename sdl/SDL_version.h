@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -28,9 +28,9 @@
 #ifndef SDL_version_h_
 #define SDL_version_h_
 
-#include "SDL_stdinc.h"
+#include <SDL3/SDL_stdinc.h>
 
-#include "begin_code.h"
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -57,9 +57,9 @@ typedef struct SDL_version
 
 /* Printable format: "%d.%d.%d", MAJOR, MINOR, PATCHLEVEL
 */
-#define SDL_MAJOR_VERSION   2
+#define SDL_MAJOR_VERSION   3
 #define SDL_MINOR_VERSION   0
-#define SDL_PATCHLEVEL      16
+#define SDL_PATCHLEVEL      0
 
 /**
  * Macro to determine SDL version program was compiled against.
@@ -86,13 +86,11 @@ typedef struct SDL_version
 /**
  *  This macro turns the version numbers into a numeric value:
  *  \verbatim
-    (1,2,3) -> (1203)
+    (1,2,3) -> (0x1000203)
     \endverbatim
- *
- *  This assumes that there will never be more than 100 patchlevels.
  */
-#define SDL_VERSIONNUM(X, Y, Z)                     \
-    ((X)*1000 + (Y)*100 + (Z))
+#define SDL_VERSIONNUM(X, Y, Z) \
+    ((X) << 24 | (Y) << 8 | (Z) << 0)
 
 /**
  *  This is the version number macro for the current SDL version.
@@ -117,10 +115,14 @@ typedef struct SDL_version
  * This function may be called safely at any time, even before SDL_Init().
  *
  * \param ver the SDL_version structure that contains the version information
+ * \returns 0 on success or a negative error code on failure; call
+ *          SDL_GetError() for more information.
+ *
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_GetRevision
  */
-extern DECLSPEC void SDLCALL SDL_GetVersion(SDL_version * ver);
+extern DECLSPEC int SDLCALL SDL_GetVersion(SDL_version * ver);
 
 /**
  * Get the code revision of SDL that is linked against your program.
@@ -145,28 +147,17 @@ extern DECLSPEC void SDLCALL SDL_GetVersion(SDL_version * ver);
  * \returns an arbitrary string, uniquely identifying the exact revision of
  *          the SDL library in use.
  *
+ * \since This function is available since SDL 3.0.0.
+ *
  * \sa SDL_GetVersion
  */
 extern DECLSPEC const char *SDLCALL SDL_GetRevision(void);
-
-/**
- * Obsolete function, do not use.
- *
- * When SDL was hosted in a Mercurial repository, and was built carefully,
- * this would return the revision number that the build was created from.
- * This number was not reliable for several reasons, but more importantly,
- * SDL is now hosted in a git repository, which does not offer numbers at
- * all, only hashes. This function only ever returns zero now. Don't use it.
- */
-extern SDL_DEPRECATED DECLSPEC int SDLCALL SDL_GetRevisionNumber(void);
 
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
 #endif /* SDL_version_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */

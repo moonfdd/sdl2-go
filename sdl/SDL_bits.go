@@ -4,7 +4,7 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
 
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -23,9 +23,113 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
   3. This notice may not be removed or altered from any source distribution.
 */
 
-func SDL_HasExactlyOneBitSet32(x sdlcommon.FUint32T) bool {
+/**
+ *  \file SDL_bits.h
+ *
+ *  Functions for fiddling with bits and bitmasks.
+ */
+
+// #ifndef SDL_bits_h_
+// #define SDL_bits_h_
+
+// #include <SDL3/SDL_stdinc.h>
+
+// #include <SDL3/SDL_begin_code.h>
+// /* Set up for C function definitions, even when using C++ */
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
+
+/**
+ *  \file SDL_bits.h
+ */
+
+/**
+ *  Get the index of the most significant bit. Result is undefined when called
+ *  with 0. This operation can also be stated as "count leading zeroes" and
+ *  "log base 2".
+ *
+ *  \return the index of the most significant bit, or -1 if the value is 0.
+ */
+// #if defined(__WATCOMC__) && defined(__386__)
+// extern __inline int _SDL_bsr_watcom(Uint32);
+// #pragma aux _SDL_bsr_watcom = \
+//     "bsr eax, eax" \
+//     parm [eax] nomemory \
+//     value [eax] \
+//     modify exact [eax] nomemory;
+// #endif
+
+// SDL_FORCE_INLINE int
+// SDL_MostSignificantBitIndex32(Uint32 x)
+// {
+// #if defined(__GNUC__) && (__GNUC__ >= 4 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4))
+//     /* Count Leading Zeroes builtin in GCC.
+//      * http://gcc.gnu.org/onlinedocs/gcc-4.3.4/gcc/Other-Builtins.html
+//      */
+//     if (x == 0) {
+//         return -1;
+//     }
+//     return 31 - __builtin_clz(x);
+// #elif defined(__WATCOMC__) && defined(__386__)
+//     if (x == 0) {
+//         return -1;
+//     }
+//     return _SDL_bsr_watcom(x);
+// #elif defined(_MSC_VER)
+//     unsigned long index;
+//     if (_BitScanReverse(&index, x)) {
+//         return index;
+//     }
+//     return -1;
+// #else
+//     /* Based off of Bit Twiddling Hacks by Sean Eron Anderson
+//      * <seander@cs.stanford.edu>, released in the public domain.
+//      * http://graphics.stanford.edu/~seander/bithacks.html#IntegerLog
+//      */
+//     const Uint32 b[] = {0x2, 0xC, 0xF0, 0xFF00, 0xFFFF0000};
+//     const int    S[] = {1, 2, 4, 8, 16};
+
+//     int msbIndex = 0;
+//     int i;
+
+//     if (x == 0) {
+//         return -1;
+//     }
+
+//     for (i = 4; i >= 0; i--)
+//     {
+//         if (x & b[i])
+//         {
+//             x >>= S[i];
+//             msbIndex |= S[i];
+//         }
+//     }
+
+//     return msbIndex;
+// #endif
+// }
+
+// SDL_FORCE_INLINE SDL_bool
+// SDL_HasExactlyOneBitSet32(Uint32 x)
+// {
+//     if (x && !(x & (x - 1))) {
+//         return SDL_TRUE;
+//     }
+//     return SDL_FALSE;
+// }
+
+func SDL_HasExactlyOneBitSet32(x sdlcommon.FUint32T) (res bool) {
 	if x != 0 && (x&(x-1)) == 0 {
 		return true
 	}
 	return false
 }
+
+/* Ends C function definitions when using C++ */
+// #ifdef __cplusplus
+// }
+// #endif
+// #include <SDL3/SDL_close_code.h>
+
+// #endif /* SDL_bits_h_ */

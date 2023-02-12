@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/moonfdd/sdl2-go/sdl"
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"io/ioutil"
 	"sync"
 	"syscall"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdl"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 var o sync.Once

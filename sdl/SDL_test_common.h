@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -20,19 +20,19 @@
 */
 
 /**
- *  \file SDL_test_sdlcommon.h
+ *  \file SDL_test_common.h
  *
  *  Include file for SDL test framework.
  *
- *  This code is a part of the SDL2_test library, not the main SDL library.
+ *  This code is a part of the SDL test library, not the main SDL library.
  */
 
-/* Ported from original test\sdlcommon.h file. */
+/* Ported from original test\common.h file. */
 
-#ifndef SDL_test_sdlcommon_h_
-#define SDL_test_sdlcommon_h_
+#ifndef SDL_test_common_h_
+#define SDL_test_common_h_
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
 
 #if defined(__PSP__)
 #define DEFAULT_WINDOW_WIDTH  480
@@ -50,6 +50,7 @@
 #define VERBOSE_RENDER  0x00000004
 #define VERBOSE_EVENT   0x00000008
 #define VERBOSE_AUDIO   0x00000010
+#define VERBOSE_MOTION  0x00000020
 
 typedef struct
 {
@@ -60,7 +61,8 @@ typedef struct
 
     /* Video info */
     const char *videodriver;
-    int display;
+    int display_index;
+    SDL_DisplayID displayID;
     const char *window_title;
     const char *window_icon;
     Uint32 window_flags;
@@ -75,9 +77,13 @@ typedef struct
     int window_maxH;
     int logical_w;
     int logical_h;
+    SDL_RendererLogicalPresentation logical_presentation;
+    SDL_ScaleMode logical_scale_mode;
     float scale;
     int depth;
-    int refresh_rate;
+    float refresh_rate;
+    SDL_bool fullscreen_exclusive;
+    SDL_DisplayMode fullscreen_mode;
     int num_windows;
     SDL_Window **windows;
 
@@ -91,6 +97,7 @@ typedef struct
     /* Audio info */
     const char *audiodriver;
     SDL_AudioSpec audiospec;
+    SDL_AudioDeviceID audio_id;
 
     /* GL settings */
     int gl_red_size;
@@ -114,9 +121,13 @@ typedef struct
     int gl_minor_version;
     int gl_debug;
     int gl_profile_mask;
-} SDLTest_sdlcommonState;
 
-#include "begin_code.h"
+    /* Additional fields added in 2.0.18 */
+    SDL_Rect confine;
+
+} SDLTest_CommonState;
+
+#include <SDL3/SDL_begin_code.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -125,106 +136,105 @@ extern "C" {
 /* Function prototypes */
 
 /**
- * \brief Parse command line parameters and create sdlcommon state.
+ * \brief Parse command line parameters and create common state.
  *
  * \param argv Array of command line parameters
  * \param flags Flags indicating which subsystem to initialize (i.e. SDL_INIT_VIDEO | SDL_INIT_AUDIO)
  *
- * \returns a newly allocated sdlcommon state object.
+ * \returns a newly allocated common state object.
  */
-SDLTest_sdlcommonState *SDLTest_sdlcommonCreateState(char **argv, Uint32 flags);
+SDLTest_CommonState *SDLTest_CommonCreateState(char **argv, Uint32 flags);
 
 /**
- * \brief Process one sdlcommon argument.
+ * \brief Process one common argument.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The common state describing the test window to create.
  * \param index The index of the argument to process in argv[].
  *
  * \returns the number of arguments processed (i.e. 1 for --fullscreen, 2 for --video [videodriver], or -1 on error.
  */
-int SDLTest_sdlcommonArg(SDLTest_sdlcommonState * state, int index);
+int SDLTest_CommonArg(SDLTest_CommonState *state, int index);
 
 
 /**
  * \brief Logs command line usage info.
  *
  * This logs the appropriate command line options for the subsystems in use
- *  plus other sdlcommon options, and then any application-specific options.
+ *  plus other common options, and then any application-specific options.
  *  This uses the SDL_Log() function and splits up output to be friendly to
  *  80-character-wide terminals.
  *
- * \param state The sdlcommon state describing the test window for the app.
+ * \param state The common state describing the test window for the app.
  * \param argv0 argv[0], as passed to main/SDL_main.
  * \param options an array of strings for application specific options. The last element of the array should be NULL.
  */
-void SDLTest_sdlcommonLogUsage(SDLTest_sdlcommonState * state, const char *argv0, const char **options);
+void SDLTest_CommonLogUsage(SDLTest_CommonState *state, const char *argv0, const char **options);
 
 /**
- * \brief Returns sdlcommon usage information
+ * \brief Returns common usage information
  *
- * You should (probably) be using SDLTest_sdlcommonLogUsage() instead, but this
+ * You should (probably) be using SDLTest_CommonLogUsage() instead, but this
  *  function remains for binary compatibility. Strings returned from this
- *  function are valid until SDLTest_sdlcommonQuit() is called, in which case
+ *  function are valid until SDLTest_CommonQuit() is called, in which case
  *  those strings' memory is freed and can no longer be used.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The common state describing the test window to create.
  * \returns a string with usage information
  */
-const char *SDLTest_sdlcommonUsage(SDLTest_sdlcommonState * state);
+const char *SDLTest_CommonUsage(SDLTest_CommonState *state);
 
 /**
  * \brief Open test window.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The common state describing the test window to create.
  *
  * \returns SDL_TRUE if initialization succeeded, false otherwise
  */
-SDL_bool SDLTest_sdlcommonInit(SDLTest_sdlcommonState * state);
+SDL_bool SDLTest_CommonInit(SDLTest_CommonState *state);
 
 /**
  * \brief Easy argument handling when test app doesn't need any custom args.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The common state describing the test window to create.
  * \param argc argc, as supplied to SDL_main
  * \param argv argv, as supplied to SDL_main
  *
  * \returns SDL_FALSE if app should quit, true otherwise.
  */
-SDL_bool SDLTest_sdlcommonDefaultArgs(SDLTest_sdlcommonState * state, const int argc, char **argv);
+SDL_bool SDLTest_CommonDefaultArgs(SDLTest_CommonState *state, const int argc, char **argv);
 
 /**
- * \brief sdlcommon event handler for test windows.
+ * \brief Common event handler for test windows.
  *
- * \param state The sdlcommon state used to create test window.
+ * \param state The common state used to create test window.
  * \param event The event to handle.
  * \param done Flag indicating we are done.
  *
  */
-void SDLTest_sdlcommonEvent(SDLTest_sdlcommonState * state, SDL_Event * event, int *done);
+void SDLTest_CommonEvent(SDLTest_CommonState *state, SDL_Event *event, int *done);
 
 /**
  * \brief Close test window.
  *
- * \param state The sdlcommon state used to create test window.
+ * \param state The common state used to create test window.
  *
  */
-void SDLTest_sdlcommonQuit(SDLTest_sdlcommonState * state);
+void SDLTest_CommonQuit(SDLTest_CommonState *state);
 
 /**
  * \brief Draws various window information (position, size, etc.) to the renderer.
  *
  * \param renderer The renderer to draw to.
  * \param window The window whose information should be displayed.
+ * \param usedHeight Returns the height used, so the caller can draw more below.
  *
  */
-void SDLTest_sdlcommonDrawWindowInfo(SDL_Renderer * renderer, SDL_Window * window);
+void SDLTest_CommonDrawWindowInfo(SDL_Renderer *renderer, SDL_Window *window, float *usedHeight);
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include <SDL3/SDL_close_code.h>
 
-#endif /* SDL_test_sdlcommon_h_ */
-
-/* vi: set ts=4 sw=4 expandtab: */
+#endif /* SDL_test_common_h_ */

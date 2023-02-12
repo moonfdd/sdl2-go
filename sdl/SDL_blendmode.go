@@ -2,10 +2,46 @@ package sdl
 
 import "github.com/moonfdd/sdl2-go/sdlcommon"
 
+/*
+  Simple DirectMedia Layer
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
+
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
+*/
+
 /**
- *  \brief The blend mode used in SDL_RenderCopy() and drawing operations.
+ *  \file SDL_blendmode.h
+ *
+ *  Header file declaring the SDL_BlendMode enumeration
  */
-type SDL_BlendMode = int32
+
+// #ifndef SDL_blendmode_h_
+// #define SDL_blendmode_h_
+
+// #include <SDL3/SDL_begin_code.h>
+// /* Set up for C function definitions, even when using C++ */
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
+
+/**
+ *  \brief The blend mode used in SDL_RenderTexture() and drawing operations.
+ */
+type SDL_BlendMode int32
 
 const (
 	SDL_BLENDMODE_NONE = 0x00000000 /**< no blending
@@ -31,7 +67,7 @@ const (
 /**
  *  \brief The blend operation used when combining source and destination pixel components
  */
-type SDL_BlendOperation = int32
+type SDL_BlendOperation int32
 
 const (
 	SDL_BLENDOPERATION_ADD          = 0x1 /**< dst + src: supported by all renderers */
@@ -44,7 +80,7 @@ const (
 /**
  *  \brief The normalized factor used to multiply pixel components
  */
-type SDL_BlendFactor = int32
+type SDL_BlendFactor int32
 
 const (
 	SDL_BLENDFACTOR_ZERO                = 0x1 /**< 0, 0, 0, 0 */
@@ -104,10 +140,10 @@ const (
  * SDL 2.0.6. All renderers support the four blend modes listed in the
  * SDL_BlendMode enumeration.
  *
- * - **direct3d**: Supports `SDL_BLENDOPERATION_ADD` with all factors.
- * - **direct3d11**: Supports all operations with all factors. However, some
+ * - **direct3d**: Supports all operations with all factors. However, some
  *   factors produce unexpected results with `SDL_BLENDOPERATION_MINIMUM` and
  *   `SDL_BLENDOPERATION_MAXIMUM`.
+ * - **direct3d11**: Same as Direct3D 9.
  * - **opengl**: Supports the `SDL_BLENDOPERATION_ADD` operation with all
  *   factors. OpenGL versions 1.1, 1.2, and 1.3 do not work correctly with SDL
  *   2.0.6.
@@ -144,19 +180,19 @@ const (
  * \returns an SDL_BlendMode that represents the chosen factors and
  *          operations.
  *
- * \since This function is available in SDL 2.0.6.
+ * \since This function is available since SDL 3.0.0.
  *
  * \sa SDL_SetRenderDrawBlendMode
  * \sa SDL_GetRenderDrawBlendMode
  * \sa SDL_SetTextureBlendMode
  * \sa SDL_GetTextureBlendMode
  */
-//extern DECLSPEC SDL_BlendMode SDLCALL SDL_ComposeCustomBlendMode(SDL_BlendFactor srcColorFactor,
-//SDL_BlendFactor dstColorFactor,
-//SDL_BlendOperation colorOperation,
-//SDL_BlendFactor srcAlphaFactor,
-//SDL_BlendFactor dstAlphaFactor,
-//SDL_BlendOperation alphaOperation);
+// extern DECLSPEC SDL_BlendMode SDLCALL SDL_ComposeCustomBlendMode(SDL_BlendFactor srcColorFactor,
+//                                                                  SDL_BlendFactor dstColorFactor,
+//                                                                  SDL_BlendOperation colorOperation,
+//                                                                  SDL_BlendFactor srcAlphaFactor,
+//                                                                  SDL_BlendFactor dstAlphaFactor,
+//                                                                  SDL_BlendOperation alphaOperation);
 func SDL_ComposeCustomBlendMode(srcColorFactor SDL_BlendFactor,
 	dstColorFactor SDL_BlendFactor,
 	colorOperation SDL_BlendOperation,
@@ -171,9 +207,14 @@ func SDL_ComposeCustomBlendMode(srcColorFactor SDL_BlendFactor,
 		uintptr(dstAlphaFactor),
 		uintptr(alphaOperation),
 	)
-	if t == 0 {
-
-	}
 	res = SDL_BlendMode(t)
 	return
 }
+
+// /* Ends C function definitions when using C++ */
+// #ifdef __cplusplus
+// }
+// #endif
+// #include <SDL3/SDL_close_code.h>
+
+// #endif /* SDL_blendmode_h_ */
