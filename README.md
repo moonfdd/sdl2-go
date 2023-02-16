@@ -10,5 +10,7 @@ You'd better use "folder sdl2"
 # fast start
 
 git clone https://github.com/moonfdd/sdl2-go.git
+
 cd sdl2-go
+
 go run ./examplesv2/a05-sdl-yuv/main.go
