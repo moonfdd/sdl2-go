@@ -1,9 +1,10 @@
-package sdl
+package sdl2
 
 import "C"
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /**

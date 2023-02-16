@@ -1,4 +1,4 @@
-package sdl
+package sdl2
 
 import (
 	"github.com/moonfdd/sdl2-go/sdlcommon"
@@ -1789,7 +1789,7 @@ func SDL_GetHintBoolean(name sdlcommon.FConstCharP, default_value bool) (res boo
  * \param newValue the new value hint is to be set to
  */
 //typedef void (SDLCALL *SDL_HintCallback)(void *userdata, const char *name, const char *oldValue, const char *newValue);
-type SDL_HintCallback = func(userdata sdlcommon.FVoidP, name sdlcommon.FConstCharP, oldValue sdlcommon.FConstCharP, newValue sdlcommon.FConstCharP) uintptr
+type SDL_HintCallback = func(userdata sdlcommon.FVoidP, name sdlcommon.FConstCharPStruct, oldValue sdlcommon.FConstCharPStruct, newValue sdlcommon.FConstCharPStruct) uintptr
 
 /**
  * Add a function to watch a particular hint.

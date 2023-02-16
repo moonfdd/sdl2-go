@@ -1,8 +1,9 @@
-package sdl
+package sdl2
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /**
@@ -479,15 +480,11 @@ func (surface *SDL_Surface) SDL_SaveBMP_RW(dst *SDL_RWops, freedst sdlcommon.FIn
  */
 //extern DECLSPEC int SDLCALL SDL_SetSurfaceRLE(SDL_Surface * surface,
 //int flag);
-func (surface *SDL_Surface) SDL_SetSurfaceRLE(dst *SDL_RWops, flag sdlcommon.FInt) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SetSurfaceRLE(flag sdlcommon.FInt) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetSurfaceRLE").Call(
 		uintptr(unsafe.Pointer(surface)),
-		uintptr(unsafe.Pointer(dst)),
 		uintptr(flag),
 	)
-	if t == 0 {
-
-	}
 	res = sdlcommon.FInt(t)
 	return
 }

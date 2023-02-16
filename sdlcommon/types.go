@@ -25,6 +25,8 @@ type FUnsignedCharP = string
 type FUnsignedInt = uint32
 type FSizeT = uint64
 type FUnsignedLong = uint32
+type FUnsignedShort = uint16
+type WcharTPStruct = uintptr
 
 type FAVAdler = uint32
 type FFileP = uintptr
@@ -38,7 +40,9 @@ type FVaList = *byte
 
 type FFTSample = float32
 type SDL_GLContext = uintptr
-type FWcharT = string
+
+// type FWcharT = string
+type FWcharTP = string
 
 type FConstCharPStruct = uintptr
 

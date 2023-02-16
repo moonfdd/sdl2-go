@@ -2,15 +2,16 @@ package sdlcommon
 
 import (
 	"sync"
-	"syscall"
+
+	"github.com/ying32/dylib"
 )
 
-var sdl2Dll *syscall.LazyDLL
+var sdl2Dll *dylib.LazyDLL
 var sdl2DllOnce sync.Once
 
-func GetSDL2Dll() (ans *syscall.LazyDLL) {
+func GetSDL2Dll() (ans *dylib.LazyDLL) {
 	sdl2DllOnce.Do(func() {
-		sdl2Dll = syscall.NewLazyDLL(sdl2Path)
+		sdl2Dll = dylib.NewLazyDLL(sdl2Path)
 	})
 	ans = sdl2Dll
 	return

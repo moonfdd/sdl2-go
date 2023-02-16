@@ -1,4 +1,4 @@
-package sdl
+package sdl2
 
 //#ifndef __gl2platform_h_
 //#define __gl2platform_h_

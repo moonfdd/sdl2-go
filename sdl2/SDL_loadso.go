@@ -1,4 +1,4 @@
-package sdl
+package sdl2
 
 import "github.com/moonfdd/sdl2-go/sdlcommon"
 
@@ -49,7 +49,7 @@ func SDL_LoadObject(sofile sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
  */
 //extern DECLSPEC void *SDLCALL SDL_LoadFunction(void *handle,
 //const char *name);
-func SDL_LoadFunction(handle sdlcommon.FVoidP, name sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+func SDL_LoadFunction(handle sdlcommon.FVoidP, name sdlcommon.FConstCharP) (res sdlcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadFunction").Call(
 		handle,
 		sdlcommon.UintPtrFromString(name),
@@ -57,7 +57,7 @@ func SDL_LoadFunction(handle sdlcommon.FVoidP, name sdlcommon.FConstCharP) (res 
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = t
 	return
 }
 

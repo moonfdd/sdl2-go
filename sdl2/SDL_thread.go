@@ -1,8 +1,9 @@
-package sdl
+package sdl2
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /* The SDL tread structure, defined in SDL_thread.c */
@@ -221,7 +222,7 @@ func (thread *SDL_Thread) SDL_GetThreadID() (res SDL_threadID) {
  *          SDL_GetError() for more information.
  */
 //extern DECLSPEC int SDLCALL SDL_SetThreadPriority(SDL_ThreadPriority priority);
-func (thread *SDL_Thread) SDL_SetThreadPriority(priority SDL_ThreadPriority) (res sdlcommon.FInt) {
+func SDL_SetThreadPriority(priority SDL_ThreadPriority) (res sdlcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetThreadPriority").Call(
 		uintptr(priority),
 	)

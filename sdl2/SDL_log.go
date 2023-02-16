@@ -1,8 +1,9 @@
-package sdl
+package sdl2
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /*

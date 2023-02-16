@@ -1,8 +1,9 @@
-package sdl
+package sdl2
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 type SDL_Cursor struct {
@@ -447,9 +448,9 @@ func SDL_CreateSystemCursor(id SDL_SystemCursor) (res *SDL_Cursor) {
  * \sa SDL_ShowCursor
  */
 //extern DECLSPEC void SDLCALL SDL_SetCursor(SDL_Cursor * cursor);
-func (surface *SDL_Surface) SDL_SetCursor() {
+func (cursor *SDL_Cursor) SDL_SetCursor() {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetCursor").Call(
-		uintptr(unsafe.Pointer(surface)),
+		uintptr(unsafe.Pointer(cursor)),
 	)
 	if t == 0 {
 

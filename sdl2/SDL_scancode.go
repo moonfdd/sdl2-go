@@ -1,4 +1,4 @@
-package sdl
+package sdl2
 
 /**
  *  \brief The SDL keyboard scancode representation.

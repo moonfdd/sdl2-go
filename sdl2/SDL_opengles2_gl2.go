@@ -1,4 +1,4 @@
-package sdl
+package sdl2
 
 //#ifndef __gl2_h_
 //const __gl2_h_

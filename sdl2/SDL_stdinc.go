@@ -1,8 +1,9 @@
-package sdl
+package sdl2
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 //type SDL_bool = int32
@@ -663,7 +664,7 @@ func SDL_memset(dst sdlcommon.FVoidP, c sdlcommon.FInt, len0 sdlcommon.FSizeT) (
 //extern DECLSPEC int SDLCALL SDL_memcmp(const void *s1, const void *s2, size_t len);
 
 //extern DECLSPEC size_t SDLCALL SDL_wcslen(const wchar_t *wstr);
-func SDL_wcslen(wstr sdlcommon.FWcharT) (res sdlcommon.FSizeT) {
+func SDL_wcslen(wstr sdlcommon.FWcharTP) (res sdlcommon.FSizeT) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_crc32").Call(
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(wstr))),
 	)
@@ -677,7 +678,7 @@ func SDL_wcslen(wstr sdlcommon.FWcharT) (res sdlcommon.FSizeT) {
 //extern DECLSPEC size_t SDLCALL SDL_wcslcpy(SDL_OUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen);
 //extern DECLSPEC size_t SDLCALL SDL_wcslcat(SDL_INOUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen);
 //extern DECLSPEC wchar_t *SDLCALL SDL_wcsdup(const wchar_t *wstr);
-func SDL_wcsdup(wstr sdlcommon.FWcharT) (res sdlcommon.FWcharT) {
+func SDL_wcsdup(wstr sdlcommon.FWcharTP) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcsdup").Call(
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(wstr))),
 	)
@@ -689,7 +690,7 @@ func SDL_wcsdup(wstr sdlcommon.FWcharT) (res sdlcommon.FWcharT) {
 }
 
 //extern DECLSPEC wchar_t *SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle);
-func SDL_wcsstr(haystack sdlcommon.FWcharT, needle sdlcommon.FWcharT) (res sdlcommon.FWcharT) {
+func SDL_wcsstr(haystack sdlcommon.FWcharTP, needle sdlcommon.FWcharTP) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcsstr").Call(
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(haystack))),
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(needle))),
@@ -702,7 +703,7 @@ func SDL_wcsstr(haystack sdlcommon.FWcharT, needle sdlcommon.FWcharT) (res sdlco
 }
 
 //extern DECLSPEC int SDLCALL SDL_wcscmp(const wchar_t *str1, const wchar_t *str2);
-func SDL_wcscmp(str1 sdlcommon.FWcharT, str2 sdlcommon.FWcharT) (res sdlcommon.FWcharT) {
+func SDL_wcscmp(str1 sdlcommon.FWcharTP, str2 sdlcommon.FWcharTP) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcscmp").Call(
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(str1))),
 		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(str2))),

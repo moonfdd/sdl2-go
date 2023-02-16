@@ -1,0 +1,45 @@
+# sdl2-go
+SDL2 2.0.16 wrapped for Go
+
+test passed in win10 x64
+
+SDL_assert.go SDL_AssertData
+SDL_atomic.go SDL_atomic_t
+SDL_audio.go SDL_AudioSpec SDL_AudioCVT
+
+SDL_events.go SDL_CommonEvent SDL_DisplayEvent SDL_WindowEvent SDL_KeyboardEvent SDL_TextEditingEvent
+SDL_TextInputEvent SDL_MouseMotionEvent SDL_MouseButtonEvent SDL_MouseWheelEvent SDL_JoyAxisEvent
+SDL_JoyBallEvent SDL_JoyHatEvent SDL_JoyButtonEvent SDL_JoyDeviceEvent SDL_ControllerAxisEvent
+SDL_ControllerButtonEvent SDL_ControllerDeviceEvent SDL_ControllerTouchpadEvent SDL_ControllerSensorEvent SDL_AudioDeviceEvent
+SDL_TouchFingerEvent SDL_MultiGestureEvent SDL_DollarGestureEvent SDL_DropEvent SDL_SensorEvent
+SDL_QuitEvent SDL_OSEvent SDL_UserEvent SDL_SysWMEvent SDL_Event
+
+SDL_gamecontroller.go SDL_GameControllerButtonBind
+
+SDL_haptic.go SDL_HapticDirection SDL_HapticConstant SDL_HapticPeriodic SDL_HapticCondition SDL_HapticRamp
+SDL_HapticLeftRight SDL_HapticCustom SDL_HapticEffect
+
+SDL_joystick.go SDL_JoystickGUID
+
+SDL_keyboard.go SDL_Keysym
+
+SDL_locale.go SDL_Locale
+
+SDL_messagebox.go SDL_MessageBoxButtonData SDL_MessageBoxColor SDL_MessageBoxColorScheme SDL_MessageBoxData
+
+SDL_pixels.go SDL_Color SDL_Palette SDL_PixelFormat
+
+SDL_rect.go SDL_Point SDL_FPoint SDL_Rect SDL_FRect
+
+SDL_render.go SDL_RendererInfo
+
+SDL_rwops.go SDL_RWops
+
+SDL_shape.go SDL_WindowShapeMode
+
+SDL_surface.go SDL_Surface
+
+SDL_touch.go SDL_Finger
+
+SDL_video.go SDL_DisplayMode
+

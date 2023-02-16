@@ -1,8 +1,9 @@
-package sdl
+package sdl2
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 //typedef void (SDLCALL * SDL_WindowsMessageHook)(void *userdata, void *hWnd, unsigned int message, Uint64 wParam, Sint64 lParam);
@@ -561,7 +562,7 @@ const (
  * \sa SDL_WinRTGetFSPathUTF8
  */
 //extern DECLSPEC const wchar_t * SDLCALL SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType);
-func SDL_WinRTGetFSPathUNICODE(pathType SDL_WinRT_Path) (res sdlcommon.FWcharT) {
+func SDL_WinRTGetFSPathUNICODE(pathType SDL_WinRT_Path) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WinRTGetFSPathUNICODE").Call(
 		uintptr(pathType),
 	)
@@ -594,7 +595,7 @@ func SDL_WinRTGetFSPathUNICODE(pathType SDL_WinRT_Path) (res sdlcommon.FWcharT) 
  * \sa SDL_WinRTGetFSPathUNICODE
  */
 //extern DECLSPEC const char * SDLCALL SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType);
-func SDL_WinRTGetFSPathUTF8(pathType SDL_WinRT_Path) (res sdlcommon.FWcharT) {
+func SDL_WinRTGetFSPathUTF8(pathType SDL_WinRT_Path) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WinRTGetFSPathUTF8").Call(
 		uintptr(pathType),
 	)
