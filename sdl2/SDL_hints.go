@@ -1,6 +1,7 @@
 package sdl2
 
 import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -14,17 +15,18 @@ import (
  */
 const SDL_HINT_ACCELEROMETER_AS_JOYSTICK = "SDL_ACCELEROMETER_AS_JOYSTICK"
 
-/**
-  *  \brief Specify the behavior of Alt+Tab while the keyboard is grabbed.
-  *
-  * By default, SDL emulates Alt+Tab functionality while the keyboard is grabbed
-  * and your window is full-screen. This prevents the user from getting stuck in
-  * your application if you've enabled keyboard grab.
-  *
-  * The variable can be set to the following values:
-  *   "0"       - SDL will not handle Alt+Tab. Your application is responsible
-                  for handling Alt+Tab while the keyboard is grabbed.
-  *   "1"       - SDL will minimize your window when Alt+Tab is pressed (default)
+/*
+*
+  - \brief Specify the behavior of Alt+Tab while the keyboard is grabbed.
+    *
+  - By default, SDL emulates Alt+Tab functionality while the keyboard is grabbed
+  - and your window is full-screen. This prevents the user from getting stuck in
+  - your application if you've enabled keyboard grab.
+    *
+  - The variable can be set to the following values:
+  - "0"       - SDL will not handle Alt+Tab. Your application is responsible
+    for handling Alt+Tab while the keyboard is grabbed.
+  - "1"       - SDL will minimize your window when Alt+Tab is pressed (default)
 */
 const SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED = "SDL_ALLOW_ALT_TAB_WHILE_GRABBED"
 
@@ -892,7 +894,7 @@ const SDL_HINT_ORIENTATIONS = "SDL_IOS_ORIENTATIONS"
  *  your own event, if you want).
  *
  *  The format of this hint is a comma-separated list of language and locale,
- *  combined with an underscore, as is a sdlcommon format: "en_GB". Locale is
+ *  combined with an underscore, as is a ffcommon format: "en_GB". Locale is
  *  optional: "en". So you might have a list like this: "en_GB,jp,es_PT"
  */
 const SDL_HINT_PREFERRED_LOCALES = "SDL_PREFERRED_LOCALES"
@@ -1691,16 +1693,16 @@ const (
 //extern DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name,
 //const char *value,
 //SDL_HintPriority priority);
-func SDL_SetHintWithPriority(name, value sdlcommon.FConstCharP, priority SDL_HintPriority) (res bool) {
+func SDL_SetHintWithPriority(name, value ffcommon.FConstCharP, priority SDL_HintPriority) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetHintWithPriority").Call(
-		sdlcommon.UintPtrFromString(name),
-		sdlcommon.UintPtrFromString(value),
+		ffcommon.UintPtrFromString(name),
+		ffcommon.UintPtrFromString(value),
 		uintptr(priority),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1720,15 +1722,15 @@ func SDL_SetHintWithPriority(name, value sdlcommon.FConstCharP, priority SDL_Hin
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name,
 //const char *value);
-func SDL_SetHint(name, value sdlcommon.FConstCharP) (res bool) {
+func SDL_SetHint(name, value ffcommon.FConstCharP) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetHint").Call(
-		sdlcommon.UintPtrFromString(name),
-		sdlcommon.UintPtrFromString(value),
+		ffcommon.UintPtrFromString(name),
+		ffcommon.UintPtrFromString(value),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1742,14 +1744,14 @@ func SDL_SetHint(name, value sdlcommon.FConstCharP) (res bool) {
  * \sa SDL_SetHintWithPriority
  */
 //extern DECLSPEC const char * SDLCALL SDL_GetHint(const char *name);
-func SDL_GetHint(name sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+func SDL_GetHint(name ffcommon.FConstCharP) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetHint").Call(
-		sdlcommon.UintPtrFromString(name),
+		ffcommon.UintPtrFromString(name),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -1768,15 +1770,15 @@ func SDL_GetHint(name sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GetHintBoolean(const char *name, SDL_bool default_value);
 
-func SDL_GetHintBoolean(name sdlcommon.FConstCharP, default_value bool) (res bool) {
+func SDL_GetHintBoolean(name ffcommon.FConstCharP, default_value bool) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetHintBoolean").Call(
-		sdlcommon.UintPtrFromString(name),
-		sdlcommon.CBool(default_value),
+		ffcommon.UintPtrFromString(name),
+		ffcommon.CBool(default_value),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1789,7 +1791,7 @@ func SDL_GetHintBoolean(name sdlcommon.FConstCharP, default_value bool) (res boo
  * \param newValue the new value hint is to be set to
  */
 //typedef void (SDLCALL *SDL_HintCallback)(void *userdata, const char *name, const char *oldValue, const char *newValue);
-type SDL_HintCallback = func(userdata sdlcommon.FVoidP, name sdlcommon.FConstCharPStruct, oldValue sdlcommon.FConstCharPStruct, newValue sdlcommon.FConstCharPStruct) uintptr
+type SDL_HintCallback = func(userdata ffcommon.FVoidP, name ffcommon.FConstCharPStruct, oldValue ffcommon.FConstCharPStruct, newValue ffcommon.FConstCharPStruct) uintptr
 
 /**
  * Add a function to watch a particular hint.
@@ -1806,10 +1808,10 @@ type SDL_HintCallback = func(userdata sdlcommon.FVoidP, name sdlcommon.FConstCha
 //extern DECLSPEC void SDLCALL SDL_AddHintCallback(const char *name,
 //SDL_HintCallback callback,
 //void *userdata);
-func SDL_AddHintCallback(name sdlcommon.FConstCharP, callback SDL_HintCallback, userdata sdlcommon.FVoidP) {
+func SDL_AddHintCallback(name ffcommon.FConstCharP, callback SDL_HintCallback, userdata ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AddHintCallback").Call(
-		sdlcommon.UintPtrFromString(name),
-		sdlcommon.NewCallback(callback),
+		ffcommon.UintPtrFromString(name),
+		ffcommon.NewCallback(callback),
 		userdata,
 	)
 	if t == 0 {
@@ -1833,10 +1835,10 @@ func SDL_AddHintCallback(name sdlcommon.FConstCharP, callback SDL_HintCallback, 
 //extern DECLSPEC void SDLCALL SDL_DelHintCallback(const char *name,
 //SDL_HintCallback callback,
 //void *userdata);
-func SDL_DelHintCallback(name sdlcommon.FConstCharP, callback SDL_HintCallback, userdata sdlcommon.FVoidP) {
+func SDL_DelHintCallback(name ffcommon.FConstCharP, callback SDL_HintCallback, userdata ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DelHintCallback").Call(
-		sdlcommon.UintPtrFromString(name),
-		sdlcommon.NewCallback(callback),
+		ffcommon.UintPtrFromString(name),
+		ffcommon.NewCallback(callback),
 		userdata,
 	)
 	if t == 0 {

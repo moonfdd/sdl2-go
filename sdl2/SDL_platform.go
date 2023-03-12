@@ -1,6 +1,7 @@
 package sdl2
 
 import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -19,11 +20,11 @@ import (
  *          available, returns a string beginning with the text "Unknown".
  */
 //extern DECLSPEC const char * SDLCALL SDL_GetPlatform (void);
-func SDL_GetPlatform() (res sdlcommon.FConstCharP) {
+func SDL_GetPlatform() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPlatform").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }

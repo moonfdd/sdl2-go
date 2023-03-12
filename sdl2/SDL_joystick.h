@@ -742,7 +742,7 @@ extern DECLSPEC int SDLCALL SDL_JoystickRumble(SDL_Joystick *joystick, Uint16 lo
  *
  * Note that this function is for _trigger_ rumble; the first joystick to
  * support this was the PlayStation 5's DualShock 5 controller. If you want
- * the (more sdlcommon) whole-controller rumble, use SDL_JoystickRumble()
+ * the (more ffcommon) whole-controller rumble, use SDL_JoystickRumble()
  * instead.
  *
  * \param joystick The joystick to vibrate

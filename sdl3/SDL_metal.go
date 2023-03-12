@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -50,7 +51,7 @@ import (
  *  \note This can be cast directly to an NSView or UIView.
  */
 // typedef void *SDL_MetalView;
-type SDL_MetalView = sdlcommon.FVoidP
+type SDL_MetalView = ffcommon.FVoidP
 
 /**
  *  \name Metal support functions
@@ -106,7 +107,7 @@ func SDL_Metal_DestroyView(view SDL_MetalView) {
  * \sa SDL_Metal_CreateView
  */
 // extern DECLSPEC void *SDLCALL SDL_Metal_GetLayer(SDL_MetalView view);
-func SDL_Metal_GetLayer(view SDL_MetalView) (res sdlcommon.FVoidP) {
+func SDL_Metal_GetLayer(view SDL_MetalView) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Metal_GetLayer").Call(
 		view,
 	)

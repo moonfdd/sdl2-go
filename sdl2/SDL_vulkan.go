@@ -1,8 +1,10 @@
 package sdl2
 
 import (
-	"github.com/moonfdd/sdl2-go/sdlcommon"
 	"unsafe"
+
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 /**
@@ -20,7 +22,7 @@ import (
  * creating any Vulkan windows. If no Vulkan loader library is loaded, the
  * default library will be loaded upon creation of the first Vulkan window.
  *
- * It is fairly sdlcommon for Vulkan applications to link with libvulkan instead
+ * It is fairly ffcommon for Vulkan applications to link with libvulkan instead
  * of explicitly loading it at run time. This will work with SDL provided the
  * application links to a dynamic library and both it and SDL use the same
  * search path.
@@ -32,7 +34,7 @@ import (
  *
  * On Apple devices, if `path` is NULL, SDL will attempt to find the
  * `vkGetInstanceProcAddr` address within all the Mach-O images of the current
- * process. This is because it is fairly sdlcommon for Vulkan applications to
+ * process. This is because it is fairly ffcommon for Vulkan applications to
  * link with libvulkan (and historically MoltenVK was provided as a static
  * library). If it is not found, on macOS, SDL will attempt to load
  * `vulkan.framework/vulkan`, `libvulkan.1.dylib`,
@@ -55,11 +57,11 @@ import (
  * \sa SDL_Vulkan_UnloadLibrary
  */
 //extern DECLSPEC int SDLCALL SDL_Vulkan_LoadLibrary(const char *path);
-func SDL_Vulkan_LoadLibrary(path0 sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_Vulkan_LoadLibrary(path0 ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Vulkan_LoadLibrary").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(path0))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(path0))),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -72,7 +74,7 @@ func SDL_Vulkan_LoadLibrary(path0 sdlcommon.FConstCharP) (res sdlcommon.FInt) {
  * \returns the function pointer for `vkGetInstanceProcAddr` or NULL on error.
  */
 //extern DECLSPEC void *SDLCALL SDL_Vulkan_GetVkGetInstanceProcAddr(void);
-func SDL_Vulkan_GetVkGetInstanceProcAddr() (res sdlcommon.FVoidP) {
+func SDL_Vulkan_GetVkGetInstanceProcAddr() (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Vulkan_GetVkGetInstanceProcAddr").Call()
 	res = t
 	return
@@ -125,8 +127,8 @@ func SDL_Vulkan_UnloadLibrary() {
 //extern DECLSPEC SDL_bool SDLCALL SDL_Vulkan_GetInstanceExtensions(SDL_Window *window,
 //unsigned int *pCount,
 //const char **pNames);
-func (window *SDL_Window) SDL_Vulkan_GetInstanceExtensions(pCount *sdlcommon.FUnsignedInt,
-	pNames *sdlcommon.FBuf) (res bool) {
+func (window *SDL_Window) SDL_Vulkan_GetInstanceExtensions(pCount *ffcommon.FUnsignedInt,
+	pNames *ffcommon.FBuf) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Vulkan_GetInstanceExtensions").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(pCount)),
@@ -135,7 +137,7 @@ func (window *SDL_Window) SDL_Vulkan_GetInstanceExtensions(pCount *sdlcommon.FUn
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -170,7 +172,7 @@ func (window *SDL_Window) SDL_Vulkan_CreateSurface(instance VkInstance,
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -194,7 +196,7 @@ func (window *SDL_Window) SDL_Vulkan_CreateSurface(instance VkInstance,
  */
 //extern DECLSPEC void SDLCALL SDL_Vulkan_GetDrawableSize(SDL_Window * window,
 //int *w, int *h);
-func (window *SDL_Window) SDL_Vulkan_GetDrawableSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+func (window *SDL_Window) SDL_Vulkan_GetDrawableSize(w *ffcommon.FInt, h *ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Vulkan_GetDrawableSize").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(w)),

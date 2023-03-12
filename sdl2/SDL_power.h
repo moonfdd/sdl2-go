@@ -55,7 +55,7 @@ typedef enum
  * You should never take a battery status as absolute truth. Batteries
  * (especially failing batteries) are delicate hardware, and the values
  * reported here are best estimates based on what that hardware reports. It's
- * not unsdlcommon for older batteries to lose stored power much faster than it
+ * not unffcommon for older batteries to lose stored power much faster than it
  * reports, or completely drain when reporting it has 20 percent left, etc.
  *
  * Battery status can change at any time; if you are concerned with power

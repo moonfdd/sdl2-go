@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -53,10 +54,10 @@ import (
  *  \note  If you are looking for translated character input, see the ::SDL_EVENT_TEXT_INPUT event.
  */
 type SDL_Keysym struct {
-	Scancode SDL_Scancode       /**< SDL physical key code - see ::SDL_Scancode for details */
-	Sym      SDL_Keycode        /**< SDL virtual key code - see ::SDL_Keycode for details */
-	Mod      sdlcommon.FUint16T /**< current key modifiers */
-	Unused   sdlcommon.FUint32T
+	Scancode SDL_Scancode      /**< SDL physical key code - see ::SDL_Scancode for details */
+	Sym      SDL_Keycode       /**< SDL virtual key code - see ::SDL_Keycode for details */
+	Mod      ffcommon.FUint16T /**< current key modifiers */
+	Unused   ffcommon.FUint32T
 }
 
 /* Function prototypes */
@@ -105,11 +106,11 @@ func SDL_GetKeyboardFocus() (res *SDL_Window) {
  * \sa SDL_ResetKeyboard
  */
 // extern DECLSPEC const Uint8 *SDLCALL SDL_GetKeyboardState(int *numkeys);
-func SDL_GetKeyboardState(numkeys *sdlcommon.FInt) (res *sdlcommon.FUint8T) {
+func SDL_GetKeyboardState(numkeys *ffcommon.FInt) (res *ffcommon.FUint8T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetKeyboardState").Call(
 		uintptr(unsafe.Pointer(numkeys)),
 	)
-	res = (*sdlcommon.FUint8T)(unsafe.Pointer(t))
+	res = (*ffcommon.FUint8T)(unsafe.Pointer(t))
 	return
 }
 
@@ -123,7 +124,7 @@ func SDL_GetKeyboardState(numkeys *sdlcommon.FInt) (res *sdlcommon.FUint8T) {
  * \sa SDL_GetKeyboardState
  */
 // extern DECLSPEC void SDLCALL SDL_ResetKeyboard(void);
-func SDL_ResetKeyboard(numkeys *sdlcommon.FInt) {
+func SDL_ResetKeyboard(numkeys *ffcommon.FInt) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_ResetKeyboard").Call()
 }
 
@@ -239,11 +240,11 @@ func SDL_GetScancodeFromKey(key SDL_Keycode) (res SDL_Scancode) {
  * \sa SDL_GetScancodeFromName
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetScancodeName(SDL_Scancode scancode);
-func SDL_GetScancodeName(scancode SDL_Scancode) (res sdlcommon.FConstCharP) {
+func SDL_GetScancodeName(scancode SDL_Scancode) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetScancodeName").Call(
 		uintptr(scancode),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -261,9 +262,9 @@ func SDL_GetScancodeName(scancode SDL_Scancode) (res sdlcommon.FConstCharP) {
  * \sa SDL_GetScancodeName
  */
 // extern DECLSPEC SDL_Scancode SDLCALL SDL_GetScancodeFromName(const char *name);
-func SDL_GetScancodeFromName(name sdlcommon.FConstCharP) (res SDL_Scancode) {
+func SDL_GetScancodeFromName(name ffcommon.FConstCharP) (res SDL_Scancode) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetScancodeFromName").Call(
-		sdlcommon.UintPtrFromString(name),
+		ffcommon.UintPtrFromString(name),
 	)
 	res = SDL_Scancode(t)
 	return
@@ -287,11 +288,11 @@ func SDL_GetScancodeFromName(name sdlcommon.FConstCharP) (res SDL_Scancode) {
  * \sa SDL_GetScancodeFromKey
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetKeyName(SDL_Keycode key);
-func SDL_GetKeyName(key SDL_Keycode) (res sdlcommon.FConstCharP) {
+func SDL_GetKeyName(key SDL_Keycode) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetKeyName").Call(
 		uintptr(key),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -309,9 +310,9 @@ func SDL_GetKeyName(key SDL_Keycode) (res sdlcommon.FConstCharP) {
  * \sa SDL_GetScancodeFromName
  */
 // extern DECLSPEC SDL_Keycode SDLCALL SDL_GetKeyFromName(const char *name);
-func SDL_GetKeyFromName(name sdlcommon.FConstCharP) (res SDL_Keycode) {
+func SDL_GetKeyFromName(name ffcommon.FConstCharP) (res SDL_Keycode) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetKeyFromName").Call(
-		sdlcommon.UintPtrFromString(name),
+		ffcommon.UintPtrFromString(name),
 	)
 	res = SDL_Keycode(t)
 	return
@@ -349,7 +350,7 @@ func SDL_StartTextInput() {
 // extern DECLSPEC SDL_bool SDLCALL SDL_TextInputActive(void);
 func SDL_IsTextInputActive() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsTextInputActive").Call()
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -386,7 +387,7 @@ func SDL_ClearComposition() {
 // extern DECLSPEC SDL_bool SDLCALL SDL_TextInputShown(void);
 func SDL_TextInputShown() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_TextInputShown").Call()
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -411,11 +412,11 @@ func SDL_TextInputShown() (res bool) {
  * \sa SDL_StartTextInput
  */
 // extern DECLSPEC int SDLCALL SDL_SetTextInputRect(const SDL_Rect *rect);
-func (rect *SDL_Rect) SDL_SetTextInputRect() (res sdlcommon.FInt) {
+func (rect *SDL_Rect) SDL_SetTextInputRect() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetTextInputRect").Call(
 		uintptr(unsafe.Pointer(rect)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -433,7 +434,7 @@ func (rect *SDL_Rect) SDL_SetTextInputRect() (res sdlcommon.FInt) {
 // extern DECLSPEC SDL_bool SDLCALL SDL_HasScreenKeyboardSupport(void);
 func SDL_HasScreenKeyboardSupport() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasScreenKeyboardSupport").Call()
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -452,7 +453,7 @@ func (window *SDL_Window) SDL_IsScreenKeyboardShown() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsScreenKeyboardShown").Call(
 		uintptr(unsafe.Pointer(window)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 

@@ -1,6 +1,6 @@
 package sdl3
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import "github.com/moonfdd/ffmpeg-go/ffcommon"
 
 /*
   Simple DirectMedia Layer
@@ -119,7 +119,7 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
 //     return SDL_FALSE;
 // }
 
-func SDL_HasExactlyOneBitSet32(x sdlcommon.FUint32T) (res bool) {
+func SDL_HasExactlyOneBitSet32(x ffcommon.FUint32T) (res bool) {
 	if x != 0 && (x&(x-1)) == 0 {
 		return true
 	}

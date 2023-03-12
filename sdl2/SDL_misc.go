@@ -1,6 +1,9 @@
 package sdl2
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
 
 /**
  * Open a URL/URI in the browser or other appropriate external application.
@@ -32,13 +35,13 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
  * \since This function is available in SDL 2.0.14 and newer
  */
 //extern DECLSPEC int SDLCALL SDL_OpenURL(const char *url);
-func SDL_OpenURL(url sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_OpenURL(url ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OpenURL").Call(
-		sdlcommon.UintPtrFromString(url),
+		ffcommon.UintPtrFromString(url),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }

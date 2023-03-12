@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -25,7 +26,7 @@ const (
  * You should never take a battery status as absolute truth. Batteries
  * (especially failing batteries) are delicate hardware, and the values
  * reported here are best estimates based on what that hardware reports. It's
- * not unsdlcommon for older batteries to lose stored power much faster than it
+ * not unffcommon for older batteries to lose stored power much faster than it
  * reports, or completely drain when reporting it has 20 percent left, etc.
  *
  * Battery status can change at any time; if you are concerned with power
@@ -44,7 +45,7 @@ const (
  * \returns an SDL_PowerState enum representing the current battery state.
  */
 //extern DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *secs, int *pct);
-func SDL_GetPowerInfo(secs, pct *sdlcommon.FInt) (res SDL_PowerState) {
+func SDL_GetPowerInfo(secs, pct *ffcommon.FInt) (res SDL_PowerState) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPowerInfo").Call(
 		uintptr(unsafe.Pointer(secs)),
 		uintptr(unsafe.Pointer(pct)),

@@ -1,6 +1,9 @@
 package sdl3
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
 
 /*
   Simple DirectMedia Layer
@@ -67,11 +70,11 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
  * \sa SDL_UnloadObject
  */
 // extern DECLSPEC void *SDLCALL SDL_LoadObject(const char *sofile);
-func SDL_LoadObject(sofile sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+func SDL_LoadObject(sofile ffcommon.FConstCharP) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadObject").Call(
-		sdlcommon.UintPtrFromString(sofile),
+		ffcommon.UintPtrFromString(sofile),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -101,10 +104,10 @@ func SDL_LoadObject(sofile sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
  * \sa SDL_UnloadObject
  */
 // extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(void *handle, const char *name);
-func SDL_LoadFunction(handle sdlcommon.FVoidP, name sdlcommon.FConstCharP) (res sdlcommon.FVoidP) {
+func SDL_LoadFunction(handle ffcommon.FVoidP, name ffcommon.FConstCharP) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadFunction").Call(
 		handle,
-		sdlcommon.UintPtrFromString(name),
+		ffcommon.UintPtrFromString(name),
 	)
 	res = t
 	return
@@ -121,7 +124,7 @@ func SDL_LoadFunction(handle sdlcommon.FVoidP, name sdlcommon.FConstCharP) (res 
  * \sa SDL_LoadObject
  */
 // extern DECLSPEC void SDLCALL SDL_UnloadObject(void *handle);
-func SDL_UnloadObject(p sdlcommon.FVoidP) {
+func SDL_UnloadObject(p ffcommon.FVoidP) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_UnloadObject").Call(
 		p,
 	)

@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -13,204 +14,205 @@ import (
 //	SDL_TRUE  = 1
 //)
 
-//
-///**
+// /**
 // * \brief A signed 8-bit integer type.
 // */
-//const SDL_MAX_SINT8   ((Sint8)0x7F)           /* 127 */
-//const SDL_MIN_SINT8   ((Sint8)(~0x7F))        /* -128 */
-//typedef int8_t Sint8;
-///**
+// const SDL_MAX_SINT8   ((Sint8)0x7F)           /* 127 */
+// const SDL_MIN_SINT8   ((Sint8)(~0x7F))        /* -128 */
+// typedef int8_t Sint8;
+// /**
 // * \brief An unsigned 8-bit integer type.
 // */
-//const SDL_MAX_UINT8   ((Uint8)0xFF)           /* 255 */
-//const SDL_MIN_UINT8   ((Uint8)0x00)           /* 0 */
-//typedef uint8_t Uint8;
-///**
+// const SDL_MAX_UINT8   ((Uint8)0xFF)           /* 255 */
+// const SDL_MIN_UINT8   ((Uint8)0x00)           /* 0 */
+// typedef uint8_t Uint8;
+// /**
 // * \brief A signed 16-bit integer type.
 // */
-//const SDL_MAX_SINT16  ((Sint16)0x7FFF)        /* 32767 */
-//const SDL_MIN_SINT16  ((Sint16)(~0x7FFF))     /* -32768 */
-//typedef int16_t Sint16;
-///**
+// const SDL_MAX_SINT16  ((Sint16)0x7FFF)        /* 32767 */
+// const SDL_MIN_SINT16  ((Sint16)(~0x7FFF))     /* -32768 */
+// typedef int16_t Sint16;
+// /**
 // * \brief An unsigned 16-bit integer type.
 // */
-//const SDL_MAX_UINT16  ((Uint16)0xFFFF)        /* 65535 */
-//const SDL_MIN_UINT16  ((Uint16)0x0000)        /* 0 */
-//typedef uint16_t Uint16;
-///**
+// const SDL_MAX_UINT16  ((Uint16)0xFFFF)        /* 65535 */
+// const SDL_MIN_UINT16  ((Uint16)0x0000)        /* 0 */
+// typedef uint16_t Uint16;
+// /**
 // * \brief A signed 32-bit integer type.
 // */
-//const SDL_MAX_SINT32  ((Sint32)0x7FFFFFFF)    /* 2147483647 */
-//const SDL_MIN_SINT32  ((Sint32)(~0x7FFFFFFF)) /* -2147483648 */
-//typedef int32_t Sint32;
-///**
+// const SDL_MAX_SINT32  ((Sint32)0x7FFFFFFF)    /* 2147483647 */
+// const SDL_MIN_SINT32  ((Sint32)(~0x7FFFFFFF)) /* -2147483648 */
+// typedef int32_t Sint32;
+// /**
 // * \brief An unsigned 32-bit integer type.
 // */
-//const SDL_MAX_UINT32  ((Uint32)0xFFFFFFFFu)   /* 4294967295 */
-//const SDL_MIN_UINT32  ((Uint32)0x00000000)    /* 0 */
-//typedef uint32_t Uint32;
+// const SDL_MAX_UINT32  ((Uint32)0xFFFFFFFFu)   /* 4294967295 */
+// const SDL_MIN_UINT32  ((Uint32)0x00000000)    /* 0 */
+// typedef uint32_t Uint32;
 //
-///**
+// /**
 // * \brief A signed 64-bit integer type.
 // */
-//const SDL_MAX_SINT64  ((Sint64)0x7FFFFFFFFFFFFFFFll)      /* 9223372036854775807 */
-//const SDL_MIN_SINT64  ((Sint64)(~0x7FFFFFFFFFFFFFFFll))   /* -9223372036854775808 */
-//typedef int64_t Sint64;
-///**
+// const SDL_MAX_SINT64  ((Sint64)0x7FFFFFFFFFFFFFFFll)      /* 9223372036854775807 */
+// const SDL_MIN_SINT64  ((Sint64)(~0x7FFFFFFFFFFFFFFFll))   /* -9223372036854775808 */
+// typedef int64_t Sint64;
+// /**
 // * \brief An unsigned 64-bit integer type.
 // */
-//const SDL_MAX_UINT64  ((Uint64)0xFFFFFFFFFFFFFFFFull)     /* 18446744073709551615 */
-//const SDL_MIN_UINT64  ((Uint64)(0x0000000000000000ull))   /* 0 */
-//typedef uint64_t Uint64;
+// const SDL_MAX_UINT64  ((Uint64)0xFFFFFFFFFFFFFFFFull)     /* 18446744073709551615 */
+// const SDL_MIN_UINT64  ((Uint64)(0x0000000000000000ull))   /* 0 */
+// typedef uint64_t Uint64;
 //
-///* @} *//* Basic data types */
+// /* @} *//* Basic data types */
 //
-///* Make sure we have macros for printing width-based integers.
+// /* Make sure we have macros for printing width-based integers.
 // * <stdint.h> should define these but this is not true all platforms.
 // * (for example win32) */
-//#ifndef SDL_PRIs64
-//#ifdef PRIs64
-//#define SDL_PRIs64 PRIs64
-//#elif defined(__WIN32__)
-//#define SDL_PRIs64 "I64d"
-//#elif defined(__LINUX__) && defined(__LP64__)
-//#define SDL_PRIs64 "ld"
-//#else
-//#define SDL_PRIs64 "lld"
-//#endif
-//#endif
-//#ifndef SDL_PRIu64
-//#ifdef PRIu64
-//#define SDL_PRIu64 PRIu64
-//#elif defined(__WIN32__)
-//#define SDL_PRIu64 "I64u"
-//#elif defined(__LINUX__) && defined(__LP64__)
-//#define SDL_PRIu64 "lu"
-//#else
-//#define SDL_PRIu64 "llu"
-//#endif
-//#endif
-//#ifndef SDL_PRIx64
-//#ifdef PRIx64
-//#define SDL_PRIx64 PRIx64
-//#elif defined(__WIN32__)
-//#define SDL_PRIx64 "I64x"
-//#elif defined(__LINUX__) && defined(__LP64__)
-//#define SDL_PRIx64 "lx"
-//#else
-//#define SDL_PRIx64 "llx"
-//#endif
-//#endif
-//#ifndef SDL_PRIX64
-//#ifdef PRIX64
-//#define SDL_PRIX64 PRIX64
-//#elif defined(__WIN32__)
-//#define SDL_PRIX64 "I64X"
-//#elif defined(__LINUX__) && defined(__LP64__)
-//#define SDL_PRIX64 "lX"
-//#else
-//#define SDL_PRIX64 "llX"
-//#endif
-//#endif
-//#ifndef SDL_PRIs32
-//#ifdef PRId32
-//#define SDL_PRIs32 PRId32
-//#else
-//#define SDL_PRIs32 "d"
-//#endif
-//#endif
-//#ifndef SDL_PRIu32
-//#ifdef PRIu32
-//#define SDL_PRIu32 PRIu32
-//#else
-//#define SDL_PRIu32 "u"
-//#endif
-//#endif
-//#ifndef SDL_PRIx32
-//#ifdef PRIx32
-//#define SDL_PRIx32 PRIx32
-//#else
-//#define SDL_PRIx32 "x"
-//#endif
-//#endif
-//#ifndef SDL_PRIX32
-//#ifdef PRIX32
-//#define SDL_PRIX32 PRIX32
-//#else
-//#define SDL_PRIX32 "X"
-//#endif
-//#endif
+// #ifndef SDL_PRIs64
+// #ifdef PRIs64
+// #define SDL_PRIs64 PRIs64
+// #elif defined(__WIN32__)
+// #define SDL_PRIs64 "I64d"
+// #elif defined(__LINUX__) && defined(__LP64__)
+// #define SDL_PRIs64 "ld"
+// #else
+// #define SDL_PRIs64 "lld"
+// #endif
+// #endif
+// #ifndef SDL_PRIu64
+// #ifdef PRIu64
+// #define SDL_PRIu64 PRIu64
+// #elif defined(__WIN32__)
+// #define SDL_PRIu64 "I64u"
+// #elif defined(__LINUX__) && defined(__LP64__)
+// #define SDL_PRIu64 "lu"
+// #else
+// #define SDL_PRIu64 "llu"
+// #endif
+// #endif
+// #ifndef SDL_PRIx64
+// #ifdef PRIx64
+// #define SDL_PRIx64 PRIx64
+// #elif defined(__WIN32__)
+// #define SDL_PRIx64 "I64x"
+// #elif defined(__LINUX__) && defined(__LP64__)
+// #define SDL_PRIx64 "lx"
+// #else
+// #define SDL_PRIx64 "llx"
+// #endif
+// #endif
+// #ifndef SDL_PRIX64
+// #ifdef PRIX64
+// #define SDL_PRIX64 PRIX64
+// #elif defined(__WIN32__)
+// #define SDL_PRIX64 "I64X"
+// #elif defined(__LINUX__) && defined(__LP64__)
+// #define SDL_PRIX64 "lX"
+// #else
+// #define SDL_PRIX64 "llX"
+// #endif
+// #endif
+// #ifndef SDL_PRIs32
+// #ifdef PRId32
+// #define SDL_PRIs32 PRId32
+// #else
+// #define SDL_PRIs32 "d"
+// #endif
+// #endif
+// #ifndef SDL_PRIu32
+// #ifdef PRIu32
+// #define SDL_PRIu32 PRIu32
+// #else
+// #define SDL_PRIu32 "u"
+// #endif
+// #endif
+// #ifndef SDL_PRIx32
+// #ifdef PRIx32
+// #define SDL_PRIx32 PRIx32
+// #else
+// #define SDL_PRIx32 "x"
+// #endif
+// #endif
+// #ifndef SDL_PRIX32
+// #ifdef PRIX32
+// #define SDL_PRIX32 PRIX32
+// #else
+// #define SDL_PRIX32 "X"
+// #endif
+// #endif
 //
-///* Annotations to help code analysis tools */
-//#ifdef SDL_DISABLE_ANALYZE_MACROS
-//#define SDL_IN_BYTECAP(x)
-//#define SDL_INOUT_Z_CAP(x)
-//#define SDL_OUT_Z_CAP(x)
-//#define SDL_OUT_CAP(x)
-//#define SDL_OUT_BYTECAP(x)
-//#define SDL_OUT_Z_BYTECAP(x)
-//#define SDL_PRINTF_FORMAT_STRING
-//#define SDL_SCANF_FORMAT_STRING
-//#define SDL_PRINTF_VARARG_FUNC( fmtargnumber )
-//#define SDL_SCANF_VARARG_FUNC( fmtargnumber )
-//#else
-//#if defined(_MSC_VER) && (_MSC_VER >= 1600) /* VS 2010 and above */
-//#include <sal.h>
+// /* Annotations to help code analysis tools */
+// #ifdef SDL_DISABLE_ANALYZE_MACROS
+// #define SDL_IN_BYTECAP(x)
+// #define SDL_INOUT_Z_CAP(x)
+// #define SDL_OUT_Z_CAP(x)
+// #define SDL_OUT_CAP(x)
+// #define SDL_OUT_BYTECAP(x)
+// #define SDL_OUT_Z_BYTECAP(x)
+// #define SDL_PRINTF_FORMAT_STRING
+// #define SDL_SCANF_FORMAT_STRING
+// #define SDL_PRINTF_VARARG_FUNC( fmtargnumber )
+// #define SDL_SCANF_VARARG_FUNC( fmtargnumber )
+// #else
+// #if defined(_MSC_VER) && (_MSC_VER >= 1600) /* VS 2010 and above */
+// #include <sal.h>
 //
-//#define SDL_IN_BYTECAP(x) _In_bytecount_(x)
-//#define SDL_INOUT_Z_CAP(x) _Inout_z_cap_(x)
-//#define SDL_OUT_Z_CAP(x) _Out_z_cap_(x)
-//#define SDL_OUT_CAP(x) _Out_cap_(x)
-//#define SDL_OUT_BYTECAP(x) _Out_bytecap_(x)
-//#define SDL_OUT_Z_BYTECAP(x) _Out_z_bytecap_(x)
+// #define SDL_IN_BYTECAP(x) _In_bytecount_(x)
+// #define SDL_INOUT_Z_CAP(x) _Inout_z_cap_(x)
+// #define SDL_OUT_Z_CAP(x) _Out_z_cap_(x)
+// #define SDL_OUT_CAP(x) _Out_cap_(x)
+// #define SDL_OUT_BYTECAP(x) _Out_bytecap_(x)
+// #define SDL_OUT_Z_BYTECAP(x) _Out_z_bytecap_(x)
 //
-//#define SDL_PRINTF_FORMAT_STRING _Printf_format_string_
-//#define SDL_SCANF_FORMAT_STRING _Scanf_format_string_impl_
-//#else
-//#define SDL_IN_BYTECAP(x)
-//#define SDL_INOUT_Z_CAP(x)
-//#define SDL_OUT_Z_CAP(x)
-//#define SDL_OUT_CAP(x)
-//#define SDL_OUT_BYTECAP(x)
-//#define SDL_OUT_Z_BYTECAP(x)
-//#define SDL_PRINTF_FORMAT_STRING
-//#define SDL_SCANF_FORMAT_STRING
-//#endif
-//#if defined(__GNUC__)
-//#define SDL_PRINTF_VARARG_FUNC( fmtargnumber ) __attribute__ (( format( __printf__, fmtargnumber, fmtargnumber+1 )))
-//#define SDL_SCANF_VARARG_FUNC( fmtargnumber ) __attribute__ (( format( __scanf__, fmtargnumber, fmtargnumber+1 )))
-//#else
-//#define SDL_PRINTF_VARARG_FUNC( fmtargnumber )
-//#define SDL_SCANF_VARARG_FUNC( fmtargnumber )
-//#endif
-//#endif /* SDL_DISABLE_ANALYZE_MACROS */
+// #define SDL_PRINTF_FORMAT_STRING _Printf_format_string_
+// #define SDL_SCANF_FORMAT_STRING _Scanf_format_string_impl_
+// #else
+// #define SDL_IN_BYTECAP(x)
+// #define SDL_INOUT_Z_CAP(x)
+// #define SDL_OUT_Z_CAP(x)
+// #define SDL_OUT_CAP(x)
+// #define SDL_OUT_BYTECAP(x)
+// #define SDL_OUT_Z_BYTECAP(x)
+// #define SDL_PRINTF_FORMAT_STRING
+// #define SDL_SCANF_FORMAT_STRING
+// #endif
+// #if defined(__GNUC__)
+// #define SDL_PRINTF_VARARG_FUNC( fmtargnumber ) __attribute__ (( format( __printf__, fmtargnumber, fmtargnumber+1 )))
+// #define SDL_SCANF_VARARG_FUNC( fmtargnumber ) __attribute__ (( format( __scanf__, fmtargnumber, fmtargnumber+1 )))
+// #else
+// #define SDL_PRINTF_VARARG_FUNC( fmtargnumber )
+// #define SDL_SCANF_VARARG_FUNC( fmtargnumber )
+// #endif
+// #endif /* SDL_DISABLE_ANALYZE_MACROS */
 //
-//#define SDL_COMPILE_TIME_ASSERT(name, x)               \
-//typedef int SDL_compile_time_assert_ ## name[(x) * 2 - 1]
-///** \cond */
-//#ifndef DOXYGEN_SHOULD_IGNORE_THIS
-//SDL_COMPILE_TIME_ASSERT(uint8, sizeof(Uint8) == 1);
-//SDL_COMPILE_TIME_ASSERT(sint8, sizeof(Sint8) == 1);
-//SDL_COMPILE_TIME_ASSERT(uint16, sizeof(Uint16) == 2);
-//SDL_COMPILE_TIME_ASSERT(sint16, sizeof(Sint16) == 2);
-//SDL_COMPILE_TIME_ASSERT(uint32, sizeof(Uint32) == 4);
-//SDL_COMPILE_TIME_ASSERT(sint32, sizeof(Sint32) == 4);
-//SDL_COMPILE_TIME_ASSERT(uint64, sizeof(Uint64) == 8);
-//SDL_COMPILE_TIME_ASSERT(sint64, sizeof(Sint64) == 8);
-//#endif /* DOXYGEN_SHOULD_IGNORE_THIS */
-///** \endcond */
+// #define SDL_COMPILE_TIME_ASSERT(name, x)               \
+// typedef int SDL_compile_time_assert_ ## name[(x) * 2 - 1]
+// /** \cond */
+// #ifndef DOXYGEN_SHOULD_IGNORE_THIS
+// SDL_COMPILE_TIME_ASSERT(uint8, sizeof(Uint8) == 1);
+// SDL_COMPILE_TIME_ASSERT(sint8, sizeof(Sint8) == 1);
+// SDL_COMPILE_TIME_ASSERT(uint16, sizeof(Uint16) == 2);
+// SDL_COMPILE_TIME_ASSERT(sint16, sizeof(Sint16) == 2);
+// SDL_COMPILE_TIME_ASSERT(uint32, sizeof(Uint32) == 4);
+// SDL_COMPILE_TIME_ASSERT(sint32, sizeof(Sint32) == 4);
+// SDL_COMPILE_TIME_ASSERT(uint64, sizeof(Uint64) == 8);
+// SDL_COMPILE_TIME_ASSERT(sint64, sizeof(Sint64) == 8);
+// #endif /* DOXYGEN_SHOULD_IGNORE_THIS */
+// /** \endcond */
 //
-///* Check to make sure enums are the size of ints, for structure packing.
-//   For both Watcom C/C++ and Borland C/C++ the compiler option that makes
-//   enums having the size of an int must be enabled.
-//   This is "-b" for Borland C/C++ and "-ei" for Watcom C/C++ (v11).
-//*/
+// /* Check to make sure enums are the size of ints, for structure packing.
 //
-///** \cond */
-//#ifndef DOXYGEN_SHOULD_IGNORE_THIS
-//#if !defined(__ANDROID__) && !defined(__VITA__)
-///* TODO: include/SDL_stdinc.h:174: error: size of array 'SDL_dummy_enum' is negative */
+//	For both Watcom C/C++ and Borland C/C++ the compiler option that makes
+//	enums having the size of an int must be enabled.
+//	This is "-b" for Borland C/C++ and "-ei" for Watcom C/C++ (v11).
+//
+// */
+//
+// /** \cond */
+// #ifndef DOXYGEN_SHOULD_IGNORE_THIS
+// #if !defined(__ANDROID__) && !defined(__VITA__)
+// /* TODO: include/SDL_stdinc.h:174: error: size of array 'SDL_dummy_enum' is negative */
 type SDL_DUMMY_ENUM int32
 
 const (
@@ -237,7 +239,7 @@ const (
 //#endif
 
 //extern DECLSPEC void *SDLCALL SDL_malloc(size_t size);
-func SDL_malloc(size sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+func SDL_malloc(size ffcommon.FSizeT) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_malloc").Call(
 		uintptr(size),
 	)
@@ -249,7 +251,7 @@ func SDL_malloc(size sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
 }
 
 //extern DECLSPEC void *SDLCALL SDL_calloc(size_t nmemb, size_t size);
-func SDL_calloc(nmemb sdlcommon.FSizeT, size sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+func SDL_calloc(nmemb ffcommon.FSizeT, size ffcommon.FSizeT) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_calloc").Call(
 		uintptr(nmemb),
 		uintptr(size),
@@ -262,7 +264,7 @@ func SDL_calloc(nmemb sdlcommon.FSizeT, size sdlcommon.FSizeT) (res sdlcommon.FV
 }
 
 //extern DECLSPEC void *SDLCALL SDL_realloc(void *mem, size_t size);
-func SDL_realloc(mem sdlcommon.FVoidP, size sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+func SDL_realloc(mem ffcommon.FVoidP, size ffcommon.FSizeT) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_realloc").Call(
 		mem,
 		uintptr(size),
@@ -275,7 +277,7 @@ func SDL_realloc(mem sdlcommon.FVoidP, size sdlcommon.FSizeT) (res sdlcommon.FVo
 }
 
 //extern DECLSPEC void SDLCALL SDL_free(void *mem);
-func SDL_free(mem sdlcommon.FVoidP) {
+func SDL_free(mem ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_free").Call(
 		mem,
 	)
@@ -285,17 +287,17 @@ func SDL_free(mem sdlcommon.FVoidP) {
 	return
 }
 
-//typedef void *(SDLCALL *SDL_malloc_func)(size_t size);
-type SDL_malloc_func = func(size sdlcommon.FSizeT) sdlcommon.FVoidP
+// typedef void *(SDLCALL *SDL_malloc_func)(size_t size);
+type SDL_malloc_func = func(size ffcommon.FSizeT) ffcommon.FVoidP
 
-//typedef void *(SDLCALL *SDL_calloc_func)(size_t nmemb, size_t size);
-type SDL_calloc_func = func(nmemb, size sdlcommon.FSizeT) sdlcommon.FVoidP
+// typedef void *(SDLCALL *SDL_calloc_func)(size_t nmemb, size_t size);
+type SDL_calloc_func = func(nmemb, size ffcommon.FSizeT) ffcommon.FVoidP
 
-//typedef void *(SDLCALL *SDL_realloc_func)(void *mem, size_t size);
-type SDL_realloc_func = func(mem sdlcommon.FVoidP, size sdlcommon.FSizeT) sdlcommon.FVoidP
+// typedef void *(SDLCALL *SDL_realloc_func)(void *mem, size_t size);
+type SDL_realloc_func = func(mem ffcommon.FVoidP, size ffcommon.FSizeT) ffcommon.FVoidP
 
-//typedef void (SDLCALL *SDL_free_func)(void *mem);
-type SDL_free_func = func(mem sdlcommon.FVoidP) uintptr
+// typedef void (SDLCALL *SDL_free_func)(void *mem);
+type SDL_free_func = func(mem ffcommon.FVoidP) uintptr
 
 /**
  * Get the current set of SDL memory functions
@@ -309,10 +311,10 @@ func SDL_GetMemoryFunctions(malloc_func SDL_malloc_func,
 	realloc_func SDL_realloc_func,
 	free_func SDL_free_func) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetMemoryFunctions").Call(
-		sdlcommon.NewCallback(malloc_func),
-		sdlcommon.NewCallback(calloc_func),
-		sdlcommon.NewCallback(realloc_func),
-		sdlcommon.NewCallback(free_func),
+		ffcommon.NewCallback(malloc_func),
+		ffcommon.NewCallback(calloc_func),
+		ffcommon.NewCallback(realloc_func),
+		ffcommon.NewCallback(free_func),
 	)
 	if t == 0 {
 
@@ -330,17 +332,17 @@ func SDL_GetMemoryFunctions(malloc_func SDL_malloc_func,
 func SDL_SetMemoryFunctions(malloc_func SDL_malloc_func,
 	calloc_func SDL_calloc_func,
 	realloc_func SDL_realloc_func,
-	free_func SDL_free_func) (res sdlcommon.FInt) {
+	free_func SDL_free_func) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetMemoryFunctions").Call(
-		sdlcommon.NewCallback(malloc_func),
-		sdlcommon.NewCallback(calloc_func),
-		sdlcommon.NewCallback(realloc_func),
-		sdlcommon.NewCallback(free_func),
+		ffcommon.NewCallback(malloc_func),
+		ffcommon.NewCallback(calloc_func),
+		ffcommon.NewCallback(realloc_func),
+		ffcommon.NewCallback(free_func),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -348,48 +350,48 @@ func SDL_SetMemoryFunctions(malloc_func SDL_malloc_func,
  * Get the number of outstanding (unfreed) allocations
  */
 //extern DECLSPEC int SDLCALL SDL_GetNumAllocations(void);
-func SDL_GetNumAllocations() (res sdlcommon.FInt) {
+func SDL_GetNumAllocations() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumAllocations").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC char *SDLCALL SDL_getenv(const char *name);
-func SDL_getenv(name sdlcommon.FConstCharP) (res sdlcommon.FCharP) {
+func SDL_getenv(name ffcommon.FConstCharP) (res ffcommon.FCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_getenv").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(name))),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_setenv(const char *name, const char *value, int overwrite);
-func SDL_setenv(name sdlcommon.FConstCharP, value sdlcommon.FConstCharP, overwrite sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_setenv(name ffcommon.FConstCharP, value ffcommon.FConstCharP, overwrite ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_getenv").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(name))),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(value))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(name))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(value))),
 		uintptr(overwrite),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC void SDLCALL SDL_qsort(void *base, size_t nmemb, size_t size, int (*compare) (const void *, const void *));
-func SDL_qsort(base sdlcommon.FVoidP, nmemb sdlcommon.FSizeT, size sdlcommon.FSizeT, compare func(sdlcommon.FConstVoidP, sdlcommon.FConstVoidP) uintptr) {
+func SDL_qsort(base ffcommon.FVoidP, nmemb ffcommon.FSizeT, size ffcommon.FSizeT, compare func(ffcommon.FConstVoidP, ffcommon.FConstVoidP) uintptr) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_qsort").Call(
 		base,
 		uintptr(nmemb),
 		uintptr(size),
-		sdlcommon.NewCallback(compare),
+		ffcommon.NewCallback(compare),
 	)
 	if t == 0 {
 
@@ -398,14 +400,14 @@ func SDL_qsort(base sdlcommon.FVoidP, nmemb sdlcommon.FSizeT, size sdlcommon.FSi
 }
 
 //extern DECLSPEC int SDLCALL SDL_abs(int x);
-func SDL_abs(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_abs(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_abs").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -415,175 +417,175 @@ func SDL_abs(x sdlcommon.FInt) (res sdlcommon.FInt) {
 //#define SDL_max(x, y) (((x) > (y)) ? (x) : (y))
 
 //extern DECLSPEC int SDLCALL SDL_isalpha(int x);
-func SDL_isalpha(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isalpha(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isalpha").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isalnum(int x);
-func SDL_isalnum(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isalnum(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isalnum").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isblank(int x);
-func SDL_isblank(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isblank(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isblank").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_iscntrl(int x);
-func SDL_iscntrl(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_iscntrl(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_iscntrl").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isdigit(int x);
-func SDL_isdigit(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isdigit(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isdigit").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isxdigit(int x);
-func SDL_isxdigit(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isxdigit(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isxdigit").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_ispunct(int x);
-func SDL_ispunct(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_ispunct(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ispunct").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isspace(int x);
-func SDL_isspace(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isspace(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isspace").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isupper(int x);
-func SDL_isupper(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isupper(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isupper").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_islower(int x);
-func SDL_islower(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_islower(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_islower").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isprint(int x);
-func SDL_isprint(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isprint(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isprint").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_isgraph(int x);
-func SDL_isgraph(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_isgraph(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_isgraph").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_toupper(int x);
-func SDL_toupper(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_toupper(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_toupper").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_tolower(int x);
-func SDL_tolower(x sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_tolower(x ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_tolower").Call(
 		uintptr(x),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
 //extern DECLSPEC Uint32 SDLCALL SDL_crc32(Uint32 crc, const void *data, size_t len);
-func SDL_crc32(crc sdlcommon.FUint32T, data sdlcommon.FVoidP, len0 sdlcommon.FSizeT) (res sdlcommon.FUint32T) {
+func SDL_crc32(crc ffcommon.FUint32T, data ffcommon.FVoidP, len0 ffcommon.FSizeT) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_crc32").Call(
 		uintptr(crc),
 		data,
@@ -592,12 +594,12 @@ func SDL_crc32(crc sdlcommon.FUint32T, data sdlcommon.FVoidP, len0 sdlcommon.FSi
 	if t == 0 {
 
 	}
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }
 
 //extern DECLSPEC void *SDLCALL SDL_memset(SDL_OUT_BYTECAP(len) void *dst, int c, size_t len);
-func SDL_memset(dst sdlcommon.FVoidP, c sdlcommon.FInt, len0 sdlcommon.FSizeT) (res sdlcommon.FVoidP) {
+func SDL_memset(dst ffcommon.FVoidP, c ffcommon.FInt, len0 ffcommon.FSizeT) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_memset").Call(
 		dst,
 		uintptr(c),
@@ -664,14 +666,14 @@ func SDL_memset(dst sdlcommon.FVoidP, c sdlcommon.FInt, len0 sdlcommon.FSizeT) (
 //extern DECLSPEC int SDLCALL SDL_memcmp(const void *s1, const void *s2, size_t len);
 
 //extern DECLSPEC size_t SDLCALL SDL_wcslen(const wchar_t *wstr);
-func SDL_wcslen(wstr sdlcommon.FWcharTP) (res sdlcommon.FSizeT) {
+func SDL_wcslen(wstr sdlcommon.FWcharTP) (res ffcommon.FSizeT) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_crc32").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(wstr))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(wstr))),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FSizeT(t)
+	res = ffcommon.FSizeT(t)
 	return
 }
 
@@ -680,38 +682,38 @@ func SDL_wcslen(wstr sdlcommon.FWcharTP) (res sdlcommon.FSizeT) {
 //extern DECLSPEC wchar_t *SDLCALL SDL_wcsdup(const wchar_t *wstr);
 func SDL_wcsdup(wstr sdlcommon.FWcharTP) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcsdup").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(wstr))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(wstr))),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
 //extern DECLSPEC wchar_t *SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle);
 func SDL_wcsstr(haystack sdlcommon.FWcharTP, needle sdlcommon.FWcharTP) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcsstr").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(haystack))),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(needle))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(haystack))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(needle))),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
 //extern DECLSPEC int SDLCALL SDL_wcscmp(const wchar_t *str1, const wchar_t *str2);
 func SDL_wcscmp(str1 sdlcommon.FWcharTP, str2 sdlcommon.FWcharTP) (res sdlcommon.FWcharTP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_wcscmp").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(str1))),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(str2))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(str1))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(str2))),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 

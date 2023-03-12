@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -378,42 +379,42 @@ const (
  * on little-endian systems and SDL_PIXELFORMAT_RGBA8888 on big-endian systems).
  */
 type SDL_Color struct {
-	R sdlcommon.FUint8T
-	G sdlcommon.FUint8T
-	B sdlcommon.FUint8T
-	A sdlcommon.FUint8T
+	R ffcommon.FUint8T
+	G ffcommon.FUint8T
+	B ffcommon.FUint8T
+	A ffcommon.FUint8T
 }
 type SDL_Colour = SDL_Color
 
 type SDL_Palette struct {
-	Ncolors  sdlcommon.FInt
+	Ncolors  ffcommon.FInt
 	Colors   *SDL_Color
-	Version  sdlcommon.FUint32T
-	Refcount sdlcommon.FInt
+	Version  ffcommon.FUint32T
+	Refcount ffcommon.FInt
 }
 
 /**
  *  \note Everything in the pixel format structure is read-only.
  */
 type SDL_PixelFormat struct {
-	Format        sdlcommon.FUint32T
+	Format        ffcommon.FUint32T
 	Palette       *SDL_Palette
-	BitsPerPixel  sdlcommon.FUint8T
-	BytesPerPixel sdlcommon.FUint8T
-	Padding       [2]sdlcommon.FUint8T
-	Rmask         sdlcommon.FUint32T
-	Gmask         sdlcommon.FUint32T
-	Bmask         sdlcommon.FUint32T
-	Amask         sdlcommon.FUint32T
-	Rloss         sdlcommon.FUint8T
-	Gloss         sdlcommon.FUint8T
-	Bloss         sdlcommon.FUint8T
-	Aloss         sdlcommon.FUint8T
-	Rshift        sdlcommon.FUint8T
-	Gshift        sdlcommon.FUint8T
-	Bshift        sdlcommon.FUint8T
-	Ashift        sdlcommon.FUint8T
-	Refcount      sdlcommon.FInt
+	BitsPerPixel  ffcommon.FUint8T
+	BytesPerPixel ffcommon.FUint8T
+	Padding       [2]ffcommon.FUint8T
+	Rmask         ffcommon.FUint32T
+	Gmask         ffcommon.FUint32T
+	Bmask         ffcommon.FUint32T
+	Amask         ffcommon.FUint32T
+	Rloss         ffcommon.FUint8T
+	Gloss         ffcommon.FUint8T
+	Bloss         ffcommon.FUint8T
+	Aloss         ffcommon.FUint8T
+	Rshift        ffcommon.FUint8T
+	Gshift        ffcommon.FUint8T
+	Bshift        ffcommon.FUint8T
+	Ashift        ffcommon.FUint8T
+	Refcount      ffcommon.FInt
 	Next          *SDL_PixelFormat
 }
 
@@ -427,11 +428,11 @@ type SDL_PixelFormat struct {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
-func SDL_GetPixelFormatName(format sdlcommon.FUint32T) (res sdlcommon.FConstCharP) {
+func SDL_GetPixelFormatName(format ffcommon.FUint32T) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPixelFormatName").Call(
 		uintptr(format),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -457,12 +458,12 @@ func SDL_GetPixelFormatName(format sdlcommon.FUint32T) (res sdlcommon.FConstChar
 //                                                             Uint32 * Gmask,
 //                                                             Uint32 * Bmask,
 //                                                             Uint32 * Amask);
-func SDL_GetMasksForPixelFormatEnum(format sdlcommon.FUint32T,
-	bpp *sdlcommon.FInt,
-	Rmask *sdlcommon.FUint32T,
-	Gmask *sdlcommon.FUint32T,
-	Bmask *sdlcommon.FUint32T,
-	Amask *sdlcommon.FUint32T) (res bool) {
+func SDL_GetMasksForPixelFormatEnum(format ffcommon.FUint32T,
+	bpp *ffcommon.FInt,
+	Rmask *ffcommon.FUint32T,
+	Gmask *ffcommon.FUint32T,
+	Bmask *ffcommon.FUint32T,
+	Amask *ffcommon.FUint32T) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetMasksForPixelFormatEnum").Call(
 		uintptr(format),
 		uintptr(unsafe.Pointer(bpp)),
@@ -471,7 +472,7 @@ func SDL_GetMasksForPixelFormatEnum(format sdlcommon.FUint32T,
 		uintptr(unsafe.Pointer(Bmask)),
 		uintptr(unsafe.Pointer(Amask)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -497,11 +498,11 @@ func SDL_GetMasksForPixelFormatEnum(format sdlcommon.FUint32T,
 //                                                           Uint32 Gmask,
 //                                                           Uint32 Bmask,
 //                                                           Uint32 Amask);
-func SDL_GetPixelFormatEnumForMasks(bpp sdlcommon.FInt,
-	Rmask sdlcommon.FUint32T,
-	Gmask sdlcommon.FUint32T,
-	Bmask sdlcommon.FUint32T,
-	Amask sdlcommon.FUint32T) (res sdlcommon.FUint32T) {
+func SDL_GetPixelFormatEnumForMasks(bpp ffcommon.FInt,
+	Rmask ffcommon.FUint32T,
+	Gmask ffcommon.FUint32T,
+	Bmask ffcommon.FUint32T,
+	Amask ffcommon.FUint32T) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPixelFormatEnumForMasks").Call(
 		uintptr(bpp),
 		uintptr(Rmask),
@@ -509,7 +510,7 @@ func SDL_GetPixelFormatEnumForMasks(bpp sdlcommon.FInt,
 		uintptr(Bmask),
 		uintptr(Amask),
 	)
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }
 
@@ -529,7 +530,7 @@ func SDL_GetPixelFormatEnumForMasks(bpp sdlcommon.FInt,
  * \sa SDL_DestroyPixelFormat
  */
 // extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_CreatePixelFormat(Uint32 pixel_format);
-func SDL_CreatePixelFormat(pixel_format sdlcommon.FUint32T) (res *SDL_PixelFormat) {
+func SDL_CreatePixelFormat(pixel_format ffcommon.FUint32T) (res *SDL_PixelFormat) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreatePixelFormat").Call(
 		uintptr(pixel_format),
 	)
@@ -568,7 +569,7 @@ func (format *SDL_PixelFormat) SDL_DestroyPixelFormat() {
  * \sa SDL_DestroyPalette
  */
 // extern DECLSPEC SDL_Palette *SDLCALL SDL_CreatePalette(int ncolors);
-func SDL_CreatePalette(ncolors sdlcommon.FInt) (res *SDL_Palette) {
+func SDL_CreatePalette(ncolors ffcommon.FInt) (res *SDL_Palette) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreatePalette").Call(
 		uintptr(ncolors),
 	)
@@ -591,12 +592,12 @@ func SDL_CreatePalette(ncolors sdlcommon.FInt) (res *SDL_Palette) {
  */
 // extern DECLSPEC int SDLCALL SDL_SetPixelFormatPalette(SDL_PixelFormat * format,
 //                                                       SDL_Palette *palette);
-func (format *SDL_PixelFormat) SDL_SetPixelFormatPalette(palette *SDL_Palette) (res sdlcommon.FInt) {
+func (format *SDL_PixelFormat) SDL_SetPixelFormatPalette(palette *SDL_Palette) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetPixelFormatPalette").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(unsafe.Pointer(palette)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -619,14 +620,14 @@ func (format *SDL_PixelFormat) SDL_SetPixelFormatPalette(palette *SDL_Palette) (
 //                                                  const SDL_Color * colors,
 //                                                  int firstcolor, int ncolors);
 func (format *SDL_PixelFormat) SDL_SetPaletteColors(palette *SDL_Palette,
-	firstcolor, ncolors sdlcommon.FInt) (res sdlcommon.FInt) {
+	firstcolor, ncolors ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetPaletteColors").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(unsafe.Pointer(palette)),
 		uintptr(firstcolor),
 		uintptr(ncolors),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -678,14 +679,14 @@ func (palette *SDL_Palette) SDL_DestroyPalette() {
  */
 // extern DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format,
 //                                           Uint8 r, Uint8 g, Uint8 b);
-func (format *SDL_PixelFormat) SDL_MapRGB(r, g, b sdlcommon.FUint8T) (res sdlcommon.FUint32T) {
+func (format *SDL_PixelFormat) SDL_MapRGB(r, g, b ffcommon.FUint8T) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MapRGB").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(r),
 		uintptr(g),
 		uintptr(b),
 	)
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }
 
@@ -724,7 +725,7 @@ func (format *SDL_PixelFormat) SDL_MapRGB(r, g, b sdlcommon.FUint8T) (res sdlcom
 // extern DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format,
 //                                            Uint8 r, Uint8 g, Uint8 b,
 //                                            Uint8 a);
-func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a sdlcommon.FUint8T) (res sdlcommon.FUint32T) {
+func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a ffcommon.FUint8T) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MapRGBA").Call(
 		uintptr(unsafe.Pointer(format)),
 		uintptr(r),
@@ -732,7 +733,7 @@ func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a sdlcommon.FUint8T) (res sd
 		uintptr(b),
 		uintptr(a),
 	)
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }
 
@@ -760,9 +761,9 @@ func (format *SDL_PixelFormat) SDL_MapRGBA(r, g, b, a sdlcommon.FUint8T) (res sd
 // extern DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel,
 //                                         const SDL_PixelFormat * format,
 //                                         Uint8 * r, Uint8 * g, Uint8 * b);
-func SDL_GetRGB(pixel sdlcommon.FUint32T,
+func SDL_GetRGB(pixel ffcommon.FUint32T,
 	format *SDL_PixelFormat,
-	r, g, b *sdlcommon.FUint8T) {
+	r, g, b *ffcommon.FUint8T) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_GetRGB").Call(
 		uintptr(pixel),
 		uintptr(unsafe.Pointer(format)),
@@ -801,9 +802,9 @@ func SDL_GetRGB(pixel sdlcommon.FUint32T,
 //                                          const SDL_PixelFormat * format,
 //                                          Uint8 * r, Uint8 * g, Uint8 * b,
 //                                          Uint8 * a);
-func SDL_GetRGBA(pixel sdlcommon.FUint32T,
+func SDL_GetRGBA(pixel ffcommon.FUint32T,
 	format *SDL_PixelFormat,
-	r, g, b, a *sdlcommon.FUint8T) {
+	r, g, b, a *ffcommon.FUint8T) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_GetRGBA").Call(
 		uintptr(pixel),
 		uintptr(unsafe.Pointer(format)),

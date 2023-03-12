@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -17,12 +18,12 @@ const (
 )
 
 type SDL_AssertData struct {
-	AlwaysIgnore sdlcommon.FInt
-	TriggerCount sdlcommon.FUnsignedInt
-	Condition    sdlcommon.FConstCharPStruct
-	Filename     sdlcommon.FConstCharPStruct
-	Linenum      sdlcommon.FInt
-	Function     sdlcommon.FConstCharPStruct
+	AlwaysIgnore ffcommon.FInt
+	TriggerCount ffcommon.FUnsignedInt
+	Condition    ffcommon.FConstCharPStruct
+	Filename     ffcommon.FConstCharPStruct
+	Linenum      ffcommon.FInt
+	Function     ffcommon.FConstCharPStruct
 	Next         *SDL_AssertData
 }
 
@@ -31,12 +32,12 @@ type SDL_AssertData struct {
 //const char *,
 //const char *, int)
 func (d *SDL_AssertData) SDL_ReportAssertion(
-	s1 sdlcommon.FConstCharP,
-	s2 sdlcommon.FConstCharP, i sdlcommon.FInt) (res SDL_AssertState) {
+	s1 ffcommon.FConstCharP,
+	s2 ffcommon.FConstCharP, i ffcommon.FInt) (res SDL_AssertState) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ReportAssertion").Call(
 		uintptr(unsafe.Pointer(d)),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(s1))),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(s2))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(s1))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(s2))),
 		uintptr(i),
 	)
 	res = SDL_AssertState(t)
@@ -53,7 +54,7 @@ func (d *SDL_AssertData) SDL_ReportAssertion(
  */
 //typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)(
 //const SDL_AssertData* data, void* userdata);
-type SDL_AssertionHandler = func(data *SDL_AssertData, userdata sdlcommon.FVoidP) SDL_AssertState
+type SDL_AssertionHandler = func(data *SDL_AssertData, userdata ffcommon.FVoidP) SDL_AssertState
 
 /**
 * Set an application-defined assertion handler.
@@ -78,9 +79,9 @@ type SDL_AssertionHandler = func(data *SDL_AssertData, userdata sdlcommon.FVoidP
 //SDL_AssertionHandler handler,
 //void *userdata);
 func SDL_SetAssertionHandler(handler SDL_AssertionHandler,
-	userdata sdlcommon.FVoidP) {
+	userdata ffcommon.FVoidP) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_SetAssertionHandler").Call(
-		sdlcommon.NewCallback(handler),
+		ffcommon.NewCallback(handler),
 		userdata,
 	)
 }
@@ -129,7 +130,7 @@ func SDL_GetDefaultAssertionHandler() (res uintptr /* *SDL_AssertionHandler*/) {
 * \sa SDL_SetAssertionHandler
  */
 //extern DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetAssertionHandler(void **puserdata);
-func SDL_GetAssertionHandler(puserdata *sdlcommon.FVoidP) (res uintptr /* *SDL_AssertionHandler */) {
+func SDL_GetAssertionHandler(puserdata *ffcommon.FVoidP) (res uintptr /* *SDL_AssertionHandler */) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetAssertionHandler").Call(
 		uintptr(unsafe.Pointer(puserdata)),
 	)

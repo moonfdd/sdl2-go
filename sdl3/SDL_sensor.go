@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -68,7 +69,7 @@ type SDL_Sensor struct {
  * The ID value starts at 1 and increments from there. The value 0 is an invalid ID.
  */
 // typedef Uint32 SDL_SensorID;
-type SDL_SensorID = sdlcommon.FUint32T
+type SDL_SensorID = ffcommon.FUint32T
 
 /* The different sensors defined by SDL
  *
@@ -151,7 +152,7 @@ const SDL_STANDARD_GRAVITY = 9.80665
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC SDL_SensorID *SDLCALL SDL_GetSensors(int *count);
-func SDL_GetSensors(count *sdlcommon.FInt) (res *SDL_SensorID) {
+func SDL_GetSensors(count *ffcommon.FInt) (res *SDL_SensorID) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSensors").Call(
 		uintptr(unsafe.Pointer(count)),
 	)
@@ -168,11 +169,11 @@ func SDL_GetSensors(count *sdlcommon.FInt) (res *SDL_SensorID) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetSensorInstanceName(SDL_SensorID instance_id);
-func SDL_GetSensorInstanceName(count *sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+func SDL_GetSensorInstanceName(count *ffcommon.FInt) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSensorInstanceName").Call(
 		uintptr(unsafe.Pointer(count)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -204,11 +205,11 @@ func SDL_GetSensorInstanceType(instance_id SDL_SensorID) (res SDL_SensorType) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetSensorInstanceNonPortableType(SDL_SensorID instance_id);
-func SDL_GetSensorInstanceNonPortableType(instance_id SDL_SensorID) (res sdlcommon.FInt) {
+func SDL_GetSensorInstanceNonPortableType(instance_id SDL_SensorID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSensorInstanceNonPortableType").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -255,11 +256,11 @@ func SDL_GetSensorFromInstanceID(instance_id SDL_SensorID) (res *SDL_Sensor) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetSensorName(SDL_Sensor *sensor);
-func (sensor *SDL_Sensor) SDL_GetSensorName() (res sdlcommon.FConstCharP) {
+func (sensor *SDL_Sensor) SDL_GetSensorName() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSensorName").Call(
 		uintptr(unsafe.Pointer(sensor)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -290,11 +291,11 @@ func (sensor *SDL_Sensor) SDL_GetSensorType() (res SDL_SensorType) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetSensorNonPortableType(SDL_Sensor *sensor);
-func (sensor *SDL_Sensor) SDL_GetSensorNonPortableType() (res sdlcommon.FInt) {
+func (sensor *SDL_Sensor) SDL_GetSensorNonPortableType() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSensorNonPortableType").Call(
 		uintptr(unsafe.Pointer(sensor)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -328,13 +329,13 @@ func (sensor *SDL_Sensor) SDL_GetSensorInstanceID() (res SDL_SensorID) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetSensorData(SDL_Sensor *sensor, float *data, int num_values);
-func (sensor *SDL_Sensor) SDL_GetSensorData(data *sdlcommon.FFloat, num_values sdlcommon.FInt) (res sdlcommon.FInt) {
+func (sensor *SDL_Sensor) SDL_GetSensorData(data *ffcommon.FFloat, num_values ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSensorData").Call(
 		uintptr(unsafe.Pointer(sensor)),
 		uintptr(unsafe.Pointer(data)),
 		uintptr(num_values),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

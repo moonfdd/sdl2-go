@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -23,8 +24,8 @@ import (
  */
 /* @{ */
 
-//typedef int SDL_SpinLock;
-type SDL_SpinLock sdlcommon.FInt
+// typedef int SDL_SpinLock;
+type SDL_SpinLock ffcommon.FInt
 
 /**
  * Try to lock a spin lock by setting it to a non-zero value.
@@ -47,7 +48,7 @@ func (lock *SDL_SpinLock) SDL_AtomicTryLock() (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -140,7 +141,7 @@ func (lock *SDL_SpinLock) SDL_AtomicUnlock() {
  * http://preshing.com/20120913/acquire-and-release-semantics
  */
 //extern DECLSPEC void SDLCALL SDL_MemoryBarrierReleaseFunction(void);
-func SDL_MemoryBarrierReleaseFunction() (res sdlcommon.FConstCharP) {
+func SDL_MemoryBarrierReleaseFunction() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MemoryBarrierReleaseFunction").Call()
 	if t == 0 {
 
@@ -149,7 +150,7 @@ func SDL_MemoryBarrierReleaseFunction() (res sdlcommon.FConstCharP) {
 }
 
 //extern DECLSPEC void SDLCALL SDL_MemoryBarrierAcquireFunction(void);
-func SDL_MemoryBarrierAcquireFunction() (res sdlcommon.FConstCharP) {
+func SDL_MemoryBarrierAcquireFunction() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MemoryBarrierAcquireFunction").Call()
 	if t == 0 {
 
@@ -218,7 +219,7 @@ func SDL_MemoryBarrierAcquireFunction() (res sdlcommon.FConstCharP) {
  */
 //typedef struct { int value; } SDL_atomic_t;
 type SDL_atomic_t struct {
-	Value sdlcommon.FInt
+	Value ffcommon.FInt
 }
 
 /**
@@ -239,7 +240,7 @@ type SDL_atomic_t struct {
  * \sa SDL_AtomicSet
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_AtomicCAS(SDL_atomic_t *a, int oldval, int newval);
-func (a *SDL_atomic_t) SDL_AtomicCAS(oldval sdlcommon.FInt, newval sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+func (a *SDL_atomic_t) SDL_AtomicCAS(oldval ffcommon.FInt, newval ffcommon.FInt) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AtomicCAS").Call(
 		uintptr(unsafe.Pointer(a)),
 		uintptr(oldval),
@@ -248,7 +249,7 @@ func (a *SDL_atomic_t) SDL_AtomicCAS(oldval sdlcommon.FInt, newval sdlcommon.FIn
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -267,7 +268,7 @@ func (a *SDL_atomic_t) SDL_AtomicCAS(oldval sdlcommon.FInt, newval sdlcommon.FIn
  * \sa SDL_AtomicGet
  */
 //extern DECLSPEC int SDLCALL SDL_AtomicSet(SDL_atomic_t *a, int v);
-func (a *SDL_atomic_t) SDL_AtomicSet(v sdlcommon.FInt) (res sdlcommon.FInt) {
+func (a *SDL_atomic_t) SDL_AtomicSet(v ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AtomicSet").Call(
 		uintptr(unsafe.Pointer(a)),
 		uintptr(v),
@@ -275,7 +276,7 @@ func (a *SDL_atomic_t) SDL_AtomicSet(v sdlcommon.FInt) (res sdlcommon.FInt) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -291,14 +292,14 @@ func (a *SDL_atomic_t) SDL_AtomicSet(v sdlcommon.FInt) (res sdlcommon.FInt) {
  * \sa SDL_AtomicSet
  */
 //extern DECLSPEC int SDLCALL SDL_AtomicGet(SDL_atomic_t *a);
-func (a *SDL_atomic_t) SDL_AtomicGet() (res sdlcommon.FInt) {
+func (a *SDL_atomic_t) SDL_AtomicGet() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AtomicGet").Call(
 		uintptr(unsafe.Pointer(a)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -318,7 +319,7 @@ func (a *SDL_atomic_t) SDL_AtomicGet() (res sdlcommon.FInt) {
  * \sa SDL_AtomicIncRef
  */
 //extern DECLSPEC int SDLCALL SDL_AtomicAdd(SDL_atomic_t *a, int v);
-func (a *SDL_atomic_t) SDL_AtomicAdd(v sdlcommon.FInt) (res sdlcommon.FInt) {
+func (a *SDL_atomic_t) SDL_AtomicAdd(v ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AtomicAdd").Call(
 		uintptr(unsafe.Pointer(a)),
 		uintptr(v),
@@ -326,7 +327,7 @@ func (a *SDL_atomic_t) SDL_AtomicAdd(v sdlcommon.FInt) (res sdlcommon.FInt) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -365,7 +366,7 @@ func (a *SDL_atomic_t) SDL_AtomicAdd(v sdlcommon.FInt) (res sdlcommon.FInt) {
  * \sa SDL_AtomicSetPtr
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_AtomicCASPtr(void **a, void *oldval, void *newval);
-func SDL_AtomicCASPtr(a *sdlcommon.FVoidP, oldval, newval sdlcommon.FVoidP) (res bool) {
+func SDL_AtomicCASPtr(a *ffcommon.FVoidP, oldval, newval ffcommon.FVoidP) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AtomicCASPtr").Call(
 		uintptr(unsafe.Pointer(a)),
 		uintptr(unsafe.Pointer(oldval)),
@@ -374,7 +375,7 @@ func SDL_AtomicCASPtr(a *sdlcommon.FVoidP, oldval, newval sdlcommon.FVoidP) (res
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -392,7 +393,7 @@ func SDL_AtomicCASPtr(a *sdlcommon.FVoidP, oldval, newval sdlcommon.FVoidP) (res
  * \sa SDL_AtomicGetPtr
  */
 //extern DECLSPEC void* SDLCALL SDL_AtomicSetPtr(void **a, void* v);
-func SDL_AtomicSetPtr(a *sdlcommon.FVoidP, v sdlcommon.FVoidP) (res sdlcommon.FVoidP) {
+func SDL_AtomicSetPtr(a *ffcommon.FVoidP, v ffcommon.FVoidP) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AtomicSetPtr").Call(
 		uintptr(unsafe.Pointer(a)),
 		uintptr(unsafe.Pointer(v)),
@@ -417,7 +418,7 @@ func SDL_AtomicSetPtr(a *sdlcommon.FVoidP, v sdlcommon.FVoidP) (res sdlcommon.FV
  * \sa SDL_AtomicSetPtr
  */
 //extern DECLSPEC void* SDLCALL SDL_AtomicGetPtr(void **a);
-func SDL_AtomicGetPtr(a *sdlcommon.FVoidP) (res sdlcommon.FVoidP) {
+func SDL_AtomicGetPtr(a *ffcommon.FVoidP) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AtomicGetPtr").Call(
 		uintptr(unsafe.Pointer(a)),
 	)

@@ -362,7 +362,7 @@ typedef Uint32 SDL_AudioDeviceID;
  * Internet, but it will still allow a specific host to be specified in
  * SDL_OpenAudioDevice().
  *
- * In many sdlcommon cases, when this function returns a value <= 0, it can still
+ * In many ffcommon cases, when this function returns a value <= 0, it can still
  * successfully open the default device (NULL for first argument of
  * SDL_OpenAudioDevice()).
  *
@@ -938,7 +938,7 @@ extern DECLSPEC void SDLCALL SDL_MixAudio(Uint8 * dst, const Uint8 * src,
  * distorted by clipping, because there is no accumulator with greater range
  * than the input (not to mention this being an inefficient way of doing it).
  *
- * It is a sdlcommon misconception that this function is required to write audio
+ * It is a ffcommon misconception that this function is required to write audio
  * data to an output stream in an audio callback. While you can do that,
  * SDL_MixAudioFormat() is really only needed when you're mixing a single
  * audio stream with a volume adjustment.

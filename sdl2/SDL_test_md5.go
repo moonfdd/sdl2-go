@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -14,10 +15,10 @@ type MD5UINT4 = uint32
 
 /* Data structure for MD5 (Message-Digest) computation */
 type SDLTest_Md5Context struct {
-	I      [2]MD5UINT4        /* number of _bits_ handled mod 2^64 */
-	Buf    [4]MD5UINT4        /* scratch buffer */
-	In     [64]sdlcommon.FBuf /* input buffer */
-	Digest [16]sdlcommon.FBuf /* actual digest after Md5Final call */
+	I      [2]MD5UINT4       /* number of _bits_ handled mod 2^64 */
+	Buf    [4]MD5UINT4       /* scratch buffer */
+	In     [64]ffcommon.FBuf /* input buffer */
+	Digest [16]ffcommon.FBuf /* actual digest after Md5Final call */
 }
 
 /* ---------- Function Prototypes ------------- */
@@ -54,9 +55,9 @@ func (mdContext *SDLTest_Md5Context) SDLTest_Md5Init() {
  *       in the message whose digest is being computed.
  */
 
-//void SDLTest_Md5Update(SDLTest_Md5Context * mdContext, unsigned char *inBuf,
-//unsigned int inLen);
-func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf sdlcommon.FBuf, inLen sdlcommon.FInt) {
+// void SDLTest_Md5Update(SDLTest_Md5Context * mdContext, unsigned char *inBuf,
+// unsigned int inLen);
+func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf ffcommon.FBuf, inLen ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Md5Update").Call(
 		uintptr(unsafe.Pointer(mdContext)),
 		uintptr(unsafe.Pointer(inBuf)),
@@ -78,7 +79,7 @@ func (mdContext *SDLTest_Md5Context) SDLTest_Md5Update(inBuf sdlcommon.FBuf, inL
  *       Always call before using the digest[] variable.
  */
 
-//void SDLTest_Md5Final(SDLTest_Md5Context * mdContext);
+// void SDLTest_Md5Final(SDLTest_Md5Context * mdContext);
 func (mdContext *SDLTest_Md5Context) SDLTest_Md5Final() {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Md5Final").Call(
 		uintptr(unsafe.Pointer(mdContext)),

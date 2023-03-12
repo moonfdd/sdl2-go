@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -368,7 +369,8 @@ const SDL_HAPTIC_STEERING_AXIS = 3
  */
 const SDL_HAPTIC_INFINITY = 4294967295
 
-/**
+/*
+*
 *  \brief Structure that represents a haptic direction.
 *
 *  This is the direction where the force comes from,
@@ -382,33 +384,34 @@ const SDL_HAPTIC_INFINITY = 4294967295
 *  Cardinal directions of the haptic device are relative to the positioning
 *  of the device.  North is considered to be away from the user.
 *
-*  The following diagram represents the cardinal directions:
-*  \verbatim
-                .--.
-                |__| .-------.
-                |=.| |.-----.|
-                |--| ||     ||
-                |  | |'-----'|
-                |__|~')_____('
-                  [ COMPUTER ]
 
+  - The following diagram represents the cardinal directions:
 
-                    North (0,-1)
-                        ^
-                        |
-                        |
-  (-1,0)  West <----[ HAPTIC ]----> East (1,0)
-                        |
-                        |
-                        v
-                     South (0,1)
+  - \verbatim
+    .--.
+    |__| .-------.
+    |=.| |.-----.|
+    |--| ||     ||
+    |  | |'-----'|
+    |__|~')_____('
+    [ COMPUTER ]
 
+    North (0,-1)
+    ^
+    |
+    |
+    (-1,0)  West <----[ HAPTIC ]----> East (1,0)
+    |
+    |
+    v
+    South (0,1)
 
-                     [ USER ]
-                       \|||/
-                       (o o)
-                 ---ooO-(_)-Ooo---
-   \endverbatim
+    [ USER ]
+    \|||/
+    (o o)
+    ---ooO-(_)-Ooo---
+    \endverbatim
+
 *
 *  If type is ::SDL_HAPTIC_POLAR, direction is encoded by hundredths of a
 *  degree starting north and turning clockwise.  ::SDL_HAPTIC_POLAR only uses
@@ -465,7 +468,7 @@ const SDL_HAPTIC_INFINITY = 4294967295
 *  \sa SDL_HapticNumAxes
 */
 type SDL_HapticDirection struct {
-	Type sdlcommon.FUint8T    /**< The type of encoding. */
+	Type ffcommon.FUint8T     /**< The type of encoding. */
 	Dir  [3]sdlcommon.FSint32 /**< The encoded direction. */
 }
 
@@ -482,28 +485,29 @@ type SDL_HapticDirection struct {
  */
 type SDL_HapticConstant struct {
 	/* Header */
-	Type      sdlcommon.FUint16T  /**< ::SDL_HAPTIC_CONSTANT */
+	Type      ffcommon.FUint16T   /**< ::SDL_HAPTIC_CONSTANT */
 	Direction SDL_HapticDirection /**< Direction of the effect. */
 
 	/* Replay */
-	Length sdlcommon.FUint32T /**< Duration of the effect. */
-	Delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length ffcommon.FUint32T /**< Duration of the effect. */
+	Delay  ffcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   ffcommon.FUint16T /**< Button that triggers the effect. */
+	Interval ffcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Constant */
 	Level sdlcommon.FSint16 /**< Strength of the constant effect. */
 
 	/* Envelope */
-	AttackLength sdlcommon.FUint16T /**< Duration of the attack. */
-	AttackLevel  sdlcommon.FUint16T /**< Level at the start of the attack. */
-	FadeLength   sdlcommon.FUint16T /**< Duration of the fade. */
-	FadeLevel    sdlcommon.FUint16T /**< Level at the end of the fade. */
+	AttackLength ffcommon.FUint16T /**< Duration of the attack. */
+	AttackLevel  ffcommon.FUint16T /**< Level at the start of the attack. */
+	FadeLength   ffcommon.FUint16T /**< Duration of the fade. */
+	FadeLevel    ffcommon.FUint16T /**< Level at the end of the fade. */
 }
 
-/**
+/*
+*
 *  \brief A structure containing a template for a Periodic effect.
 *
 *  The struct handles the following effects:
@@ -525,33 +529,36 @@ type SDL_HapticConstant struct {
 *   - 27000: Displaced 75% of its period.
 *   - 36000: Displaced 100% of its period, same as 0, but 0 is preferred.
 *
-*  Examples:
-*  \verbatim
-   SDL_HAPTIC_SINE
-     __      __      __      __
+
+  - Examples:
+
+  - \verbatim
+    SDL_HAPTIC_SINE
+    __      __      __      __
     /  \    /  \    /  \    /
-   /    \__/    \__/    \__/
+    /    \__/    \__/    \__/
 
-   SDL_HAPTIC_SQUARE
+    SDL_HAPTIC_SQUARE
     __    __    __    __    __
-   |  |  |  |  |  |  |  |  |  |
-   |  |__|  |__|  |__|  |__|  |
+    |  |  |  |  |  |  |  |  |  |
+    |  |__|  |__|  |__|  |__|  |
 
-   SDL_HAPTIC_TRIANGLE
-     /\    /\    /\    /\    /\
+    SDL_HAPTIC_TRIANGLE
+    /\    /\    /\    /\    /\
     /  \  /  \  /  \  /  \  /
-   /    \/    \/    \/    \/
+    /    \/    \/    \/    \/
 
-   SDL_HAPTIC_SAWTOOTHUP
-     /|  /|  /|  /|  /|  /|  /|
+    SDL_HAPTIC_SAWTOOTHUP
+    /|  /|  /|  /|  /|  /|  /|
     / | / | / | / | / | / | / |
-   /  |/  |/  |/  |/  |/  |/  |
+    /  |/  |/  |/  |/  |/  |/  |
 
-   SDL_HAPTIC_SAWTOOTHDOWN
-   \  |\  |\  |\  |\  |\  |\  |
+    SDL_HAPTIC_SAWTOOTHDOWN
+    \  |\  |\  |\  |\  |\  |\  |
     \ | \ | \ | \ | \ | \ | \ |
-     \|  \|  \|  \|  \|  \|  \|
-   \endverbatim
+    \|  \|  \|  \|  \|  \|  \|
+    \endverbatim
+
 *
 *  \sa SDL_HAPTIC_SINE
 *  \sa SDL_HAPTIC_LEFTRIGHT
@@ -563,30 +570,30 @@ type SDL_HapticConstant struct {
 type SDL_HapticPeriodic struct {
 
 	/* Header */
-	Type sdlcommon.FUint16T /**< ::SDL_HAPTIC_SINE, ::SDL_HAPTIC_LEFTRIGHT,
+	Type ffcommon.FUint16T /**< ::SDL_HAPTIC_SINE, ::SDL_HAPTIC_LEFTRIGHT,
 	  ::SDL_HAPTIC_TRIANGLE, ::SDL_HAPTIC_SAWTOOTHUP or
 	  ::SDL_HAPTIC_SAWTOOTHDOWN */
 	Direction SDL_HapticDirection /**< Direction of the effect. */
 
 	/* Replay */
-	Length sdlcommon.FUint32T /**< Duration of the effect. */
-	Delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length ffcommon.FUint32T /**< Duration of the effect. */
+	Delay  ffcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   ffcommon.FUint16T /**< Button that triggers the effect. */
+	Interval ffcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Periodic */
-	Period    sdlcommon.FUint16T /**< Period of the wave. */
-	Magnitude sdlcommon.FSint16  /**< Peak value; if negative, equivalent to 180 degrees extra phase shift. */
-	Offset    sdlcommon.FSint16  /**< Mean value of the wave. */
-	Phase     sdlcommon.FUint16T /**< Positive phase shift given by hundredth of a degree. */
+	Period    ffcommon.FUint16T /**< Period of the wave. */
+	Magnitude sdlcommon.FSint16 /**< Peak value; if negative, equivalent to 180 degrees extra phase shift. */
+	Offset    sdlcommon.FSint16 /**< Mean value of the wave. */
+	Phase     ffcommon.FUint16T /**< Positive phase shift given by hundredth of a degree. */
 
 	/* Envelope */
-	AttackLength sdlcommon.FUint16T /**< Duration of the attack. */
-	AttackLevel  sdlcommon.FUint16T /**< Level at the start of the attack. */
-	FadeLength   sdlcommon.FUint16T /**< Duration of the fade. */
-	FadeLevel    sdlcommon.FUint16T /**< Level at the end of the fade. */
+	AttackLength ffcommon.FUint16T /**< Duration of the attack. */
+	AttackLevel  ffcommon.FUint16T /**< Level at the start of the attack. */
+	FadeLength   ffcommon.FUint16T /**< Duration of the fade. */
+	FadeLevel    ffcommon.FUint16T /**< Level at the end of the fade. */
 }
 
 /**
@@ -616,25 +623,25 @@ type SDL_HapticPeriodic struct {
 type SDL_HapticCondition struct {
 
 	/* Header */
-	Type sdlcommon.FUint16T /**< ::SDL_HAPTIC_SPRING, ::SDL_HAPTIC_DAMPER,
+	Type ffcommon.FUint16T /**< ::SDL_HAPTIC_SPRING, ::SDL_HAPTIC_DAMPER,
 	  ::SDL_HAPTIC_INERTIA or ::SDL_HAPTIC_FRICTION */
 	Direction SDL_HapticDirection /**< Direction of the effect - Not used ATM. */
 
 	/* Replay */
-	Length sdlcommon.FUint32T /**< Duration of the effect. */
-	delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length ffcommon.FUint32T /**< Duration of the effect. */
+	delay  ffcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   ffcommon.FUint16T /**< Button that triggers the effect. */
+	Interval ffcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Condition */
-	RightSat   [3]sdlcommon.FUint16T /**< Level when joystick is to the positive side; max 0xFFFF. */
-	LeftSat    [3]sdlcommon.FUint16T /**< Level when joystick is to the negative side; max 0xFFFF. */
-	RightCoeff [3]sdlcommon.FSint16  /**< How fast to increase the force towards the positive side. */
-	LeftCoeff  [3]sdlcommon.FSint16  /**< How fast to increase the force towards the negative side. */
-	Deadband   [3]sdlcommon.FUint16T /**< Size of the dead zone; max 0xFFFF: whole axis-range when 0-centered. */
-	Center     [3]sdlcommon.FSint16  /**< Position of the dead zone. */
+	RightSat   [3]ffcommon.FUint16T /**< Level when joystick is to the positive side; max 0xFFFF. */
+	LeftSat    [3]ffcommon.FUint16T /**< Level when joystick is to the negative side; max 0xFFFF. */
+	RightCoeff [3]sdlcommon.FSint16 /**< How fast to increase the force towards the positive side. */
+	LeftCoeff  [3]sdlcommon.FSint16 /**< How fast to increase the force towards the negative side. */
+	Deadband   [3]ffcommon.FUint16T /**< Size of the dead zone; max 0xFFFF: whole axis-range when 0-centered. */
+	Center     [3]sdlcommon.FSint16 /**< Position of the dead zone. */
 }
 
 /**
@@ -652,26 +659,26 @@ type SDL_HapticCondition struct {
  */
 type SDL_HapticRamp struct {
 	/* Header */
-	Type      sdlcommon.FUint16T  /**< ::SDL_HAPTIC_RAMP */
+	Type      ffcommon.FUint16T   /**< ::SDL_HAPTIC_RAMP */
 	Direction SDL_HapticDirection /**< Direction of the effect. */
 
 	/* Replay */
-	Length sdlcommon.FUint32T /**< Duration of the effect. */
-	Delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length ffcommon.FUint32T /**< Duration of the effect. */
+	Delay  ffcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   ffcommon.FUint16T /**< Button that triggers the effect. */
+	Interval ffcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Ramp */
 	Start sdlcommon.FSint16 /**< Beginning strength level. */
 	End   sdlcommon.FSint16 /**< Ending strength level. */
 
 	/* Envelope */
-	AttackLength sdlcommon.FUint16T /**< Duration of the attack. */
-	AttackLevel  sdlcommon.FUint16T /**< Level at the start of the attack. */
-	FadeLength   sdlcommon.FUint16T /**< Duration of the fade. */
-	FadeLevel    sdlcommon.FUint16T /**< Level at the end of the fade. */
+	AttackLength ffcommon.FUint16T /**< Duration of the attack. */
+	AttackLevel  ffcommon.FUint16T /**< Level at the start of the attack. */
+	FadeLength   ffcommon.FUint16T /**< Duration of the fade. */
+	FadeLevel    ffcommon.FUint16T /**< Level at the end of the fade. */
 }
 
 /**
@@ -689,14 +696,14 @@ type SDL_HapticRamp struct {
 type SDL_HapticLeftRight struct {
 
 	/* Header */
-	Type sdlcommon.FUint16T /**< ::SDL_HAPTIC_LEFTRIGHT */
+	Type ffcommon.FUint16T /**< ::SDL_HAPTIC_LEFTRIGHT */
 
 	/* Replay */
-	Length sdlcommon.FUint32T /**< Duration of the effect in milliseconds. */
+	Length ffcommon.FUint32T /**< Duration of the effect in milliseconds. */
 
 	/* Rumble */
-	LargeMagnitude sdlcommon.FUint16T /**< Control of the large controller motor. */
-	SmallMagnitude sdlcommon.FUint16T /**< Control of the small controller motor. */
+	LargeMagnitude ffcommon.FUint16T /**< Control of the large controller motor. */
+	SmallMagnitude ffcommon.FUint16T /**< Control of the small controller motor. */
 }
 
 /**
@@ -717,31 +724,32 @@ type SDL_HapticLeftRight struct {
 type SDL_HapticCustom struct {
 
 	/* Header */
-	Type      sdlcommon.FUint16T  /**< ::SDL_HAPTIC_CUSTOM */
+	Type      ffcommon.FUint16T   /**< ::SDL_HAPTIC_CUSTOM */
 	Direction SDL_HapticDirection /**< Direction of the effect. */
 
 	/* Replay */
-	Length sdlcommon.FUint32T /**< Duration of the effect. */
-	Delay  sdlcommon.FUint16T /**< Delay before starting the effect. */
+	Length ffcommon.FUint32T /**< Duration of the effect. */
+	Delay  ffcommon.FUint16T /**< Delay before starting the effect. */
 
 	/* Trigger */
-	Button   sdlcommon.FUint16T /**< Button that triggers the effect. */
-	Interval sdlcommon.FUint16T /**< How soon it can be triggered again after button. */
+	Button   ffcommon.FUint16T /**< Button that triggers the effect. */
+	Interval ffcommon.FUint16T /**< How soon it can be triggered again after button. */
 
 	/* Custom */
-	Channels sdlcommon.FUint8T   /**< Axes to use, minimum of one. */
-	Period   sdlcommon.FUint16T  /**< Sample periods. */
-	Samples  sdlcommon.FUint16T  /**< Amount of samples. */
-	Data     *sdlcommon.FUint16T /**< Should contain channels*samples items. */
+	Channels ffcommon.FUint8T   /**< Axes to use, minimum of one. */
+	Period   ffcommon.FUint16T  /**< Sample periods. */
+	Samples  ffcommon.FUint16T  /**< Amount of samples. */
+	Data     *ffcommon.FUint16T /**< Should contain channels*samples items. */
 
 	/* Envelope */
-	AttackLength sdlcommon.FUint16T /**< Duration of the attack. */
-	AttackLevel  sdlcommon.FUint16T /**< Level at the start of the attack. */
-	FadeLength   sdlcommon.FUint16T /**< Duration of the fade. */
-	FadeLevel    sdlcommon.FUint16T /**< Level at the end of the fade. */
+	AttackLength ffcommon.FUint16T /**< Duration of the attack. */
+	AttackLevel  ffcommon.FUint16T /**< Level at the start of the attack. */
+	FadeLength   ffcommon.FUint16T /**< Duration of the fade. */
+	FadeLevel    ffcommon.FUint16T /**< Level at the end of the fade. */
 }
 
-/**
+/*
+*
 *  \brief The generic template for any haptic effect.
 *
 *  All values max at 32767 (0x7FFF).  Signed values also can be negative.
@@ -779,26 +787,29 @@ type SDL_HapticCustom struct {
 *  \endcode
 *
 *
-*  Here we have an example of a constant effect evolution in time:
-*  \verbatim
-   Strength
-   ^
-   |
-   |    effect level -->  _________________
-   |                     /                 \
-   |                    /                   \
-   |                   /                     \
-   |                  /                       \
-   | attack_level --> |                        \
-   |                  |                        |  <---  fade_level
-   |
-   +--------------------------------------------------> Time
-                      [--]                 [---]
-                      attack_length        fade_length
 
-   [------------------][-----------------------]
-   delay               length
-   \endverbatim
+  - Here we have an example of a constant effect evolution in time:
+
+  - \verbatim
+    Strength
+    ^
+    |
+    |    effect level -->  _________________
+    |                     /                 \
+    |                    /                   \
+    |                   /                     \
+    |                  /                       \
+    | attack_level --> |                        \
+    |                  |                        |  <---  fade_level
+    |
+    +--------------------------------------------------> Time
+    [--]                 [---]
+    attack_length        fade_length
+
+    [------------------][-----------------------]
+    delay               length
+    \endverbatim
+
 *
 *  Note either the attack_level or the fade_level may be above the actual
 *  effect level.
@@ -813,7 +824,7 @@ type SDL_HapticCustom struct {
 type SDL_HapticEffect struct {
 
 	/* Common for all force feedback effects */
-	Type      sdlcommon.FUint16T  /**< Effect type. */
+	Type      ffcommon.FUint16T   /**< Effect type. */
 	Constant  SDL_HapticConstant  /**< Constant effect. */
 	Periodic  SDL_HapticPeriodic  /**< Periodic effect. */
 	Condition SDL_HapticCondition /**< Condition effect. */
@@ -835,9 +846,9 @@ type SDL_HapticEffect struct {
  * \sa SDL_HapticName
  */
 // extern DECLSPEC int SDLCALL SDL_NumHaptics(void);
-func SDL_NumHaptics() (res sdlcommon.FInt) {
+func SDL_NumHaptics() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_NumHaptics").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -856,11 +867,11 @@ func SDL_NumHaptics() (res sdlcommon.FInt) {
  * \sa SDL_NumHaptics
  */
 // extern DECLSPEC const char *SDLCALL SDL_HapticName(int device_index);
-func SDL_HapticName(device_index sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+func SDL_HapticName(device_index ffcommon.FInt) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticName").Call(
 		uintptr(device_index),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -890,7 +901,7 @@ func SDL_HapticName(device_index sdlcommon.FInt) (res sdlcommon.FConstCharP) {
  * \sa SDL_HapticStopAll
  */
 // extern DECLSPEC SDL_Haptic *SDLCALL SDL_HapticOpen(int device_index);
-func SDL_HapticOpen(device_index sdlcommon.FInt) (res *SDL_Haptic) {
+func SDL_HapticOpen(device_index ffcommon.FInt) (res *SDL_Haptic) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticOpen").Call(
 		uintptr(device_index),
 	)
@@ -911,11 +922,11 @@ func SDL_HapticOpen(device_index sdlcommon.FInt) (res *SDL_Haptic) {
  * \sa SDL_HapticOpen
  */
 // extern DECLSPEC int SDLCALL SDL_HapticOpened(int device_index);
-func SDL_HapticOpened(device_index sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_HapticOpened(device_index ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticOpened").Call(
 		uintptr(device_index),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -932,11 +943,11 @@ func SDL_HapticOpened(device_index sdlcommon.FInt) (res sdlcommon.FInt) {
  * \sa SDL_HapticOpened
  */
 // extern DECLSPEC int SDLCALL SDL_HapticIndex(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticIndex() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticIndex() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticIndex").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -950,9 +961,9 @@ func (haptic *SDL_Haptic) SDL_HapticIndex() (res sdlcommon.FInt) {
  * \sa SDL_HapticOpenFromMouse
  */
 // extern DECLSPEC int SDLCALL SDL_MouseIsHaptic(void);
-func SDL_MouseIsHaptic() (res sdlcommon.FInt) {
+func SDL_MouseIsHaptic() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MouseIsHaptic").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -987,11 +998,11 @@ func SDL_HapticOpenFromMouse() (res *SDL_Haptic) {
  * \sa SDL_HapticOpenFromJoystick
  */
 // extern DECLSPEC int SDLCALL SDL_JoystickIsHaptic(SDL_Joystick * joystick);
-func (joystick *SDL_Joystick) SDL_JoystickIsHaptic() (res sdlcommon.FInt) {
+func (joystick *SDL_Joystick) SDL_JoystickIsHaptic() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_JoystickIsHaptic").Call(
 		uintptr(unsafe.Pointer(joystick)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1059,11 +1070,11 @@ func (haptic *SDL_Haptic) SDL_HapticClose() {
  * \sa SDL_HapticQuery
  */
 // extern DECLSPEC int SDLCALL SDL_HapticNumEffects(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticNumEffects() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticNumEffects() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticNumEffects").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1083,11 +1094,11 @@ func (haptic *SDL_Haptic) SDL_HapticNumEffects() (res sdlcommon.FInt) {
  * \sa SDL_HapticQuery
  */
 // extern DECLSPEC int SDLCALL SDL_HapticNumEffectsPlaying(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticNumEffectsPlaying() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticNumEffectsPlaying() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticNumEffectsPlaying").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1104,11 +1115,11 @@ func (haptic *SDL_Haptic) SDL_HapticNumEffectsPlaying() (res sdlcommon.FInt) {
  * \sa SDL_HapticNumEffects
  */
 // extern DECLSPEC unsigned int SDLCALL SDL_HapticQuery(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticQuery() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticQuery() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticQuery").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1125,11 +1136,11 @@ func (haptic *SDL_Haptic) SDL_HapticQuery() (res sdlcommon.FInt) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_HapticNumAxes(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticNumAxes() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticNumAxes() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticNumAxes").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1150,12 +1161,12 @@ func (haptic *SDL_Haptic) SDL_HapticNumAxes() (res sdlcommon.FInt) {
 // extern DECLSPEC int SDLCALL SDL_HapticEffectSupported(SDL_Haptic * haptic,
 //                                                       SDL_HapticEffect *
 //                                                       effect);
-func (haptic *SDL_Haptic) SDL_HapticEffectSupported(effect *SDL_HapticEffect) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticEffectSupported(effect *SDL_HapticEffect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticEffectSupported").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(unsafe.Pointer(effect)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1176,12 +1187,12 @@ func (haptic *SDL_Haptic) SDL_HapticEffectSupported(effect *SDL_HapticEffect) (r
  */
 // extern DECLSPEC int SDLCALL SDL_HapticNewEffect(SDL_Haptic * haptic,
 //                                                 SDL_HapticEffect * effect);
-func (haptic *SDL_Haptic) SDL_HapticNewEffect(effect *SDL_HapticEffect) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticNewEffect(effect *SDL_HapticEffect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticNewEffect").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(unsafe.Pointer(effect)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1209,13 +1220,13 @@ func (haptic *SDL_Haptic) SDL_HapticNewEffect(effect *SDL_HapticEffect) (res sdl
 // extern DECLSPEC int SDLCALL SDL_HapticUpdateEffect(SDL_Haptic * haptic,
 //                                                    int effect,
 //                                                    SDL_HapticEffect * data);
-func (haptic *SDL_Haptic) SDL_HapticUpdateEffect(effect sdlcommon.FInt, data *SDL_HapticEffect) (res sdlcommon.FConstCharP) {
+func (haptic *SDL_Haptic) SDL_HapticUpdateEffect(effect ffcommon.FInt, data *SDL_HapticEffect) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticUpdateEffect").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(effect),
 		uintptr(unsafe.Pointer(data)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -1244,13 +1255,13 @@ func (haptic *SDL_Haptic) SDL_HapticUpdateEffect(effect sdlcommon.FInt, data *SD
 // extern DECLSPEC int SDLCALL SDL_HapticRunEffect(SDL_Haptic * haptic,
 //                                                 int effect,
 //                                                 Uint32 iterations);
-func (haptic *SDL_Haptic) SDL_HapticRunEffect(effect sdlcommon.FInt, iterations sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticRunEffect(effect ffcommon.FInt, iterations ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticRunEffect").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(effect),
 		uintptr(iterations),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1269,12 +1280,12 @@ func (haptic *SDL_Haptic) SDL_HapticRunEffect(effect sdlcommon.FInt, iterations 
  * \sa SDL_HapticDestroyEffect
  * \sa SDL_HapticRunEffect
  */
-func (haptic *SDL_Haptic) SDL_HapticStopEffect(effect sdlcommon.FInt) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticStopEffect(effect ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticStopEffect").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(effect),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1293,7 +1304,7 @@ func (haptic *SDL_Haptic) SDL_HapticStopEffect(effect sdlcommon.FInt) (res sdlco
  */
 // extern DECLSPEC void SDLCALL SDL_HapticDestroyEffect(SDL_Haptic * haptic,
 //                                                      int effect);
-func (haptic *SDL_Haptic) SDL_HapticDestroyEffect(effect sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticDestroyEffect(effect ffcommon.FInt) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_HapticDestroyEffect").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(effect),
@@ -1317,12 +1328,12 @@ func (haptic *SDL_Haptic) SDL_HapticDestroyEffect(effect sdlcommon.FInt) {
  */
 // extern DECLSPEC int SDLCALL SDL_HapticGetEffectStatus(SDL_Haptic * haptic,
 //                                                       int effect);
-func (haptic *SDL_Haptic) SDL_HapticGetEffectStatus(effect sdlcommon.FInt) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticGetEffectStatus(effect ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticGetEffectStatus").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(effect),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1346,12 +1357,12 @@ func (haptic *SDL_Haptic) SDL_HapticGetEffectStatus(effect sdlcommon.FInt) (res 
  * \sa SDL_HapticQuery
  */
 // extern DECLSPEC int SDLCALL SDL_HapticSetGain(SDL_Haptic * haptic, int gain);
-func (haptic *SDL_Haptic) SDL_HapticSetGain(gain sdlcommon.FInt) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticSetGain(gain ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticSetGain").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(gain),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1374,12 +1385,12 @@ func (haptic *SDL_Haptic) SDL_HapticSetGain(gain sdlcommon.FInt) (res sdlcommon.
  */
 // extern DECLSPEC int SDLCALL SDL_HapticSetAutocenter(SDL_Haptic * haptic,
 //                                                     int autocenter);
-func (haptic *SDL_Haptic) SDL_HapticSetAutocenter(autocenter sdlcommon.FInt) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticSetAutocenter(autocenter ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticSetAutocenter").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(autocenter),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1401,11 +1412,11 @@ func (haptic *SDL_Haptic) SDL_HapticSetAutocenter(autocenter sdlcommon.FInt) (re
  * \sa SDL_HapticUnpause
  */
 // extern DECLSPEC int SDLCALL SDL_HapticPause(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticPause() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticPause() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticPause").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1423,11 +1434,11 @@ func (haptic *SDL_Haptic) SDL_HapticPause() (res sdlcommon.FInt) {
  * \sa SDL_HapticPause
  */
 // extern DECLSPEC int SDLCALL SDL_HapticUnpause(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticUnpause() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticUnpause() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticUnpause").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1441,11 +1452,11 @@ func (haptic *SDL_Haptic) SDL_HapticUnpause() (res sdlcommon.FInt) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_HapticStopAll(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticStopAll() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticStopAll() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticStopAll").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1464,11 +1475,11 @@ func (haptic *SDL_Haptic) SDL_HapticStopAll() (res sdlcommon.FInt) {
  * \sa SDL_HapticRumbleStop
  */
 // extern DECLSPEC int SDLCALL SDL_HapticRumbleSupported(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticRumbleSupported() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticRumbleSupported() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticRumbleSupported").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1487,11 +1498,11 @@ func (haptic *SDL_Haptic) SDL_HapticRumbleSupported() (res sdlcommon.FInt) {
  * \sa SDL_HapticRumbleSupported
  */
 // extern DECLSPEC int SDLCALL SDL_HapticRumbleInit(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticRumbleInit() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticRumbleInit() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticRumbleInit").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1511,13 +1522,13 @@ func (haptic *SDL_Haptic) SDL_HapticRumbleInit() (res sdlcommon.FInt) {
  * \sa SDL_HapticRumbleSupported
  */
 // extern DECLSPEC int SDLCALL SDL_HapticRumblePlay(SDL_Haptic * haptic, float strength, Uint32 length );
-func (haptic *SDL_Haptic) SDL_HapticRumblePlay(strength sdlcommon.FFloat, length sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticRumblePlay(strength ffcommon.FFloat, length ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticRumblePlay").Call(
 		uintptr(unsafe.Pointer(haptic)),
 		uintptr(unsafe.Pointer(&strength)),
 		uintptr(length),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1535,11 +1546,11 @@ func (haptic *SDL_Haptic) SDL_HapticRumblePlay(strength sdlcommon.FFloat, length
  * \sa SDL_HapticRumbleSupported
  */
 // extern DECLSPEC int SDLCALL SDL_HapticRumbleStop(SDL_Haptic * haptic);
-func (haptic *SDL_Haptic) SDL_HapticRumbleStop() (res sdlcommon.FInt) {
+func (haptic *SDL_Haptic) SDL_HapticRumbleStop() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HapticRumbleStop").Call(
 		uintptr(unsafe.Pointer(haptic)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

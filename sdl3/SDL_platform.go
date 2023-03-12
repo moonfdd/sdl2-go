@@ -1,6 +1,9 @@
 package sdl3
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
 
 /*
   Simple DirectMedia Layer
@@ -57,9 +60,9 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC const char * SDLCALL SDL_GetPlatform (void);
-func SDL_GetPlatform() (res sdlcommon.FConstCharP) {
+func SDL_GetPlatform() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPlatform").Call()
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 

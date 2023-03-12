@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -84,7 +85,7 @@ const (
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *seconds, int *percent);
-func SDL_GetPowerInfo(secs, pct *sdlcommon.FInt) (res SDL_PowerState) {
+func SDL_GetPowerInfo(secs, pct *ffcommon.FInt) (res SDL_PowerState) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPowerInfo").Call(
 		uintptr(unsafe.Pointer(secs)),
 		uintptr(unsafe.Pointer(pct)),

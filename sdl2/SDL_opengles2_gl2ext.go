@@ -1,51 +1,54 @@
 package sdl2
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
 
-//#ifndef __gl2ext_h_
-//#define __gl2ext_h_
+// #ifndef __gl2ext_h_
+// #define __gl2ext_h_
 //
-///* $Revision: 22801 $ on $Date:: 2013-08-21 03:20:48 -0700 #$ */
+// /* $Revision: 22801 $ on $Date:: 2013-08-21 03:20:48 -0700 #$ */
 //
-//#ifdef __cplusplus
-//extern "C" {
-//#endif
+// #ifdef __cplusplus
+// #endif
 //
-///*
+// /*
 // * This document is licensed under the SGI Free Software B License Version
 // * 2.0. For details, see http://oss.sgi.com/projects/FreeB/ .
 // */
 //
-//#ifndef GL_APIENTRYP
-//#   define GL_APIENTRYP GL_APIENTRY*
-//#endif
+// #ifndef GL_APIENTRYP
+// #   define GL_APIENTRYP GL_APIENTRY*
+// #endif
 //
-///* New types shared by several extensions */
+// /* New types shared by several extensions */
 //
-//#ifndef __gl3_h_
-///* These are defined with respect to <inttypes.h> in the
+// #ifndef __gl3_h_
+// /* These are defined with respect to <inttypes.h> in the
 // * Apple extension spec, but they are also used by non-APPLE
 // * extensions, and in the Khronos header we use the Khronos
 // * portable types in khrplatform.h, which must be defined.
 // */
-//typedef khronos_int64_t GLint64;
-//typedef khronos_uint64_t GLuint64;
-//typedef struct __GLsync *GLsync;
-//#endif
+// typedef khronos_int64_t GLint64;
+// typedef khronos_uint64_t GLuint64;
+// typedef struct __GLsync *GLsync;
+// #endif
 //
-//
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * OES extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_OES_compressed_ETC1_RGB8_texture */
-//#ifndef GL_OES_compressed_ETC1_RGB8_texture
+// /* GL_OES_compressed_ETC1_RGB8_texture */
+// #ifndef GL_OES_compressed_ETC1_RGB8_texture
+//
+//extern "C" {
 const GL_ETC1_RGB8_OES = 0x8D64
 
-//#endif
+// #endif
 //
-///* GL_OES_compressed_paletted_texture */
-//#ifndef GL_OES_compressed_paletted_texture
+// /* GL_OES_compressed_paletted_texture */
+// #ifndef GL_OES_compressed_paletted_texture
 const GL_PALETTE4_RGB8_OES = 0x8B90
 const GL_PALETTE4_RGBA8_OES = 0x8B91
 const GL_PALETTE4_R5_G6_B5_OES = 0x8B92
@@ -57,70 +60,70 @@ const GL_PALETTE8_R5_G6_B5_OES = 0x8B97
 const GL_PALETTE8_RGBA4_OES = 0x8B98
 const GL_PALETTE8_RGB5_A1_OES = 0x8B99
 
-//#endif
+// #endif
 //
-///* GL_OES_depth24 */
-//#ifndef GL_OES_depth24
+// /* GL_OES_depth24 */
+// #ifndef GL_OES_depth24
 const GL_DEPTH_COMPONENT24_OES = 0x81A6
 
 //#endif
 
-///* GL_OES_depth32 */
-//#ifndef GL_OES_depth32
-//const GL_DEPTH_COMPONENT32_OES              =                  0x81A7
-//#endif
+// /* GL_OES_depth32 */
+// #ifndef GL_OES_depth32
+// const GL_DEPTH_COMPONENT32_OES              =                  0x81A7
+// #endif
 //
-///* GL_OES_depth_texture */
-///* No new tokens introduced by this extension. */
+// /* GL_OES_depth_texture */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_OES_EGL_image */
-//#ifndef GL_OES_EGL_image
-//typedef void* GLeglImageOES;
-type GLeglImageOES = sdlcommon.FVoidP
+// /* GL_OES_EGL_image */
+// #ifndef GL_OES_EGL_image
+// typedef void* GLeglImageOES;
+type GLeglImageOES = ffcommon.FVoidP
 
 //#endif
 
-///* GL_OES_EGL_image_external */
-//#ifndef GL_OES_EGL_image_external
-///* GLeglImageOES defined in GL_OES_EGL_image already. */
+// /* GL_OES_EGL_image_external */
+// #ifndef GL_OES_EGL_image_external
+// /* GLeglImageOES defined in GL_OES_EGL_image already. */
 const GL_TEXTURE_EXTERNAL_OES = 0x8D65
 const GL_SAMPLER_EXTERNAL_OES = 0x8D66
 const GL_TEXTURE_BINDING_EXTERNAL_OES = 0x8D67
 const GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES = 0x8D68
 
-//#endif
+// #endif
 //
-///* GL_OES_element_index_uint */
-//#ifndef GL_OES_element_index_uint
-//const GL_UNSIGNED_INT                            =             0x1405
-//#endif
+// /* GL_OES_element_index_uint */
+// #ifndef GL_OES_element_index_uint
+// const GL_UNSIGNED_INT                            =             0x1405
+// #endif
 //
-///* GL_OES_get_program_binary */
-//#ifndef GL_OES_get_program_binary
+// /* GL_OES_get_program_binary */
+// #ifndef GL_OES_get_program_binary
 const GL_PROGRAM_BINARY_LENGTH_OES = 0x8741
 const GL_NUM_PROGRAM_BINARY_FORMATS_OES = 0x87FE
 const GL_PROGRAM_BINARY_FORMATS_OES = 0x87FF
 
-//#endif
+// #endif
 //
-///* GL_OES_mapbuffer */
-//#ifndef GL_OES_mapbuffer
+// /* GL_OES_mapbuffer */
+// #ifndef GL_OES_mapbuffer
 const GL_WRITE_ONLY_OES = 0x88B9
 const GL_BUFFER_ACCESS_OES = 0x88BB
 const GL_BUFFER_MAPPED_OES = 0x88BC
 const GL_BUFFER_MAP_POINTER_OES = 0x88BD
 
-//#endif
+// #endif
 //
-///* GL_OES_packed_depth_stencil */
-//#ifndef GL_OES_packed_depth_stencil
-//const GL_DEPTH_STENCIL_OES             =                       0x84F9
-//const GL_UNSIGNED_INT_24_8_OES         =                       0x84FA
-//const GL_DEPTH24_STENCIL8_OES           =                      0x88F0
-//#endif
+// /* GL_OES_packed_depth_stencil */
+// #ifndef GL_OES_packed_depth_stencil
+// const GL_DEPTH_STENCIL_OES             =                       0x84F9
+// const GL_UNSIGNED_INT_24_8_OES         =                       0x84FA
+// const GL_DEPTH24_STENCIL8_OES           =                      0x88F0
+// #endif
 //
-///* GL_OES_required_internalformat */
-//#ifndef GL_OES_required_internalformat
+// /* GL_OES_required_internalformat */
+// #ifndef GL_OES_required_internalformat
 const GL_ALPHA8_OES = 0x803C
 const GL_DEPTH_COMPONENT16_OES = 0x81A5
 
@@ -134,43 +137,43 @@ const GL_RGBA4_OES = 0x8056
 const GL_RGB5_A1_OES = 0x8057
 const GL_RGB565_OES = 0x8D62
 
-///* reuse GL_RGB8_OES */
-///* reuse GL_RGBA8_OES */
-///* reuse GL_RGB10_EXT */
-///* reuse GL_RGB10_A2_EXT */
-//#endif
+// /* reuse GL_RGB8_OES */
+// /* reuse GL_RGBA8_OES */
+// /* reuse GL_RGB10_EXT */
+// /* reuse GL_RGB10_A2_EXT */
+// #endif
 //
-///* GL_OES_rgb8_rgba8 */
-//#ifndef GL_OES_rgb8_rgba8
+// /* GL_OES_rgb8_rgba8 */
+// #ifndef GL_OES_rgb8_rgba8
 const GL_RGB8_OES = 0x8051
 const GL_RGBA8_OES = 0x8058
 
 //#endif
 
-///* GL_OES_standard_derivatives */
-//#ifndef GL_OES_standard_derivatives
+// /* GL_OES_standard_derivatives */
+// #ifndef GL_OES_standard_derivatives
 const GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES = 0x8B8B
 
-//#endif
+// #endif
 //
-///* GL_OES_stencil1 */
-//#ifndef GL_OES_stencil1
-//const GL_STENCIL_INDEX1_OES                                   0x8D46
-//#endif
+// /* GL_OES_stencil1 */
+// #ifndef GL_OES_stencil1
+// const GL_STENCIL_INDEX1_OES                                   0x8D46
+// #endif
 //
-///* GL_OES_stencil4 */
-//#ifndef GL_OES_stencil4
+// /* GL_OES_stencil4 */
+// #ifndef GL_OES_stencil4
 const GL_STENCIL_INDEX4_OES = 0x8D47
 
-//#endif
+// #endif
 //
-//#ifndef GL_OES_surfaceless_context
+// #ifndef GL_OES_surfaceless_context
 const GL_FRAMEBUFFER_UNDEFINED_OES = 0x8219
 
-//#endif
+// #endif
 //
-///* GL_OES_texture_3D */
-//#ifndef GL_OES_texture_3D
+// /* GL_OES_texture_3D */
+// #ifndef GL_OES_texture_3D
 const GL_TEXTURE_WRAP_R_OES = 0x8072
 const GL_TEXTURE_3D_OES = 0x806F
 const GL_TEXTURE_BINDING_3D_OES = 0x806A
@@ -178,49 +181,49 @@ const GL_MAX_3D_TEXTURE_SIZE_OES = 0x8073
 const GL_SAMPLER_3D_OES = 0x8B5F
 const GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES = 0x8CD4
 
-//#endif
+// #endif
 //
-///* GL_OES_texture_float */
-///* No new tokens introduced by this extension. */
+// /* GL_OES_texture_float */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_OES_texture_float_linear */
-///* No new tokens introduced by this extension. */
+// /* GL_OES_texture_float_linear */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_OES_texture_half_float */
-//#ifndef GL_OES_texture_half_float
+// /* GL_OES_texture_half_float */
+// #ifndef GL_OES_texture_half_float
 const GL_HALF_FLOAT_OES = 0x8D61
 
-//#endif
+// #endif
 //
-///* GL_OES_texture_half_float_linear */
-///* No new tokens introduced by this extension. */
+// /* GL_OES_texture_half_float_linear */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_OES_texture_npot */
-///* No new tokens introduced by this extension. */
+// /* GL_OES_texture_npot */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_OES_vertex_array_object */
-//#ifndef GL_OES_vertex_array_object
+// /* GL_OES_vertex_array_object */
+// #ifndef GL_OES_vertex_array_object
 const GL_VERTEX_ARRAY_BINDING_OES = 0x85B5
 
-//#endif
+// #endif
 //
-///* GL_OES_vertex_half_float */
-///* GL_HALF_FLOAT_OES defined in GL_OES_texture_half_float already. */
+// /* GL_OES_vertex_half_float */
+// /* GL_HALF_FLOAT_OES defined in GL_OES_texture_half_float already. */
 //
-///* GL_OES_vertex_type_10_10_10_2 */
-//#ifndef GL_OES_vertex_type_10_10_10_2
+// /* GL_OES_vertex_type_10_10_10_2 */
+// #ifndef GL_OES_vertex_type_10_10_10_2
 const GL_UNSIGNED_INT_10_10_10_2_OES = 0x8DF6
 const GL_INT_10_10_10_2_OES = 0x8DF7
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * KHR extension tokens
 // *------------------------------------------------------------------------*/
 //
-//#ifndef GL_KHR_debug
-//typedef void (GL_APIENTRYP GLDEBUGPROCKHR)(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar *message,const void *userParam);
-//todo
+// #ifndef GL_KHR_debug
+// typedef void (GL_APIENTRYP GLDEBUGPROCKHR)(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar *message,const void *userParam);
+// todo
 const GL_DEBUG_OUTPUT_SYNCHRONOUS_KHR = 0x8242
 const GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR = 0x8243
 const GL_DEBUG_CALLBACK_FUNCTION_KHR = 0x8244
@@ -264,9 +267,9 @@ const GL_CONTEXT_FLAG_DEBUG_BIT_KHR = 0x00000002
 const GL_STACK_OVERFLOW_KHR = 0x0503
 const GL_STACK_UNDERFLOW_KHR = 0x0504
 
-//#endif
+// #endif
 //
-//#ifndef GL_KHR_texture_compression_astc_ldr
+// #ifndef GL_KHR_texture_compression_astc_ldr
 const GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 0x93B0
 const GL_COMPRESSED_RGBA_ASTC_5x4_KHR = 0x93B1
 const GL_COMPRESSED_RGBA_ASTC_5x5_KHR = 0x93B2
@@ -296,29 +299,29 @@ const GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = 0x93DB
 const GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 0x93DC
 const GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 0x93DD
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * AMD extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_AMD_compressed_3DC_texture */
-//#ifndef GL_AMD_compressed_3DC_texture
+// /* GL_AMD_compressed_3DC_texture */
+// #ifndef GL_AMD_compressed_3DC_texture
 const GL_3DC_X_AMD = 0x87F9
 const GL_3DC_XY_AMD = 0x87FA
 
-//#endif
+// #endif
 //
-///* GL_AMD_compressed_ATC_texture */
-//#ifndef GL_AMD_compressed_ATC_texture
+// /* GL_AMD_compressed_ATC_texture */
+// #ifndef GL_AMD_compressed_ATC_texture
 const GL_ATC_RGB_AMD = 0x8C92
 const GL_ATC_RGBA_EXPLICIT_ALPHA_AMD = 0x8C93
 const GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = 0x87EE
 
-//#endif
+// #endif
 //
-///* GL_AMD_performance_monitor */
-//#ifndef GL_AMD_performance_monitor
+// /* GL_AMD_performance_monitor */
+// #ifndef GL_AMD_performance_monitor
 const GL_COUNTER_TYPE_AMD = 0x8BC0
 const GL_COUNTER_RANGE_AMD = 0x8BC1
 const GL_UNSIGNED_INT64_AMD = 0x8BC2
@@ -327,20 +330,20 @@ const GL_PERFMON_RESULT_AVAILABLE_AMD = 0x8BC4
 const GL_PERFMON_RESULT_SIZE_AMD = 0x8BC5
 const GL_PERFMON_RESULT_AMD = 0x8BC6
 
-//#endif
+// #endif
 //
-///* GL_AMD_program_binary_Z400 */
-//#ifndef GL_AMD_program_binary_Z400
+// /* GL_AMD_program_binary_Z400 */
+// #ifndef GL_AMD_program_binary_Z400
 const GL_Z400_BINARY_AMD = 0x8740
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * ANGLE extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_ANGLE_depth_texture */
-//#ifndef GL_ANGLE_depth_texture
+// /* GL_ANGLE_depth_texture */
+// #ifndef GL_ANGLE_depth_texture
 const GL_DEPTH_COMPONENT = 0x1902
 const GL_DEPTH_STENCIL_OES = 0x84F9
 const GL_UNSIGNED_SHORT = 0x1403
@@ -350,77 +353,77 @@ const GL_DEPTH_COMPONENT16 = 0x81A5
 const GL_DEPTH_COMPONENT32_OES = 0x81A7
 const GL_DEPTH24_STENCIL8_OES = 0x88F0
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_framebuffer_blit */
-//#ifndef GL_ANGLE_framebuffer_blit
+// /* GL_ANGLE_framebuffer_blit */
+// #ifndef GL_ANGLE_framebuffer_blit
 const GL_READ_FRAMEBUFFER_ANGLE = 0x8CA8
 const GL_DRAW_FRAMEBUFFER_ANGLE = 0x8CA9
 const GL_DRAW_FRAMEBUFFER_BINDING_ANGLE = 0x8CA6
 const GL_READ_FRAMEBUFFER_BINDING_ANGLE = 0x8CAA
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_framebuffer_multisample */
-//#ifndef GL_ANGLE_framebuffer_multisample
+// /* GL_ANGLE_framebuffer_multisample */
+// #ifndef GL_ANGLE_framebuffer_multisample
 const GL_RENDERBUFFER_SAMPLES_ANGLE = 0x8CAB
 const GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE = 0x8D56
 const GL_MAX_SAMPLES_ANGLE = 0x8D57
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_instanced_arrays */
-//#ifndef GL_ANGLE_instanced_arrays
+// /* GL_ANGLE_instanced_arrays */
+// #ifndef GL_ANGLE_instanced_arrays
 const GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 0x88FE
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_pack_reverse_row_order */
-//#ifndef GL_ANGLE_pack_reverse_row_order
+// /* GL_ANGLE_pack_reverse_row_order */
+// #ifndef GL_ANGLE_pack_reverse_row_order
 const GL_PACK_REVERSE_ROW_ORDER_ANGLE = 0x93A4
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_program_binary */
-//#ifndef GL_ANGLE_program_binary
+// /* GL_ANGLE_program_binary */
+// #ifndef GL_ANGLE_program_binary
 const GL_PROGRAM_BINARY_ANGLE = 0x93A6
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_texture_compression_dxt3 */
-//#ifndef GL_ANGLE_texture_compression_dxt3
+// /* GL_ANGLE_texture_compression_dxt3 */
+// #ifndef GL_ANGLE_texture_compression_dxt3
 const GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE = 0x83F2
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_texture_compression_dxt5 */
-//#ifndef GL_ANGLE_texture_compression_dxt5
+// /* GL_ANGLE_texture_compression_dxt5 */
+// #ifndef GL_ANGLE_texture_compression_dxt5
 const GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE = 0x83F3
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_texture_usage */
-//#ifndef GL_ANGLE_texture_usage
+// /* GL_ANGLE_texture_usage */
+// #ifndef GL_ANGLE_texture_usage
 const GL_TEXTURE_USAGE_ANGLE = 0x93A2
 const GL_FRAMEBUFFER_ATTACHMENT_ANGLE = 0x93A3
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_translated_shader_source */
-//#ifndef GL_ANGLE_translated_shader_source
+// /* GL_ANGLE_translated_shader_source */
+// #ifndef GL_ANGLE_translated_shader_source
 const GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE = 0x93A0
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * APPLE extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_APPLE_copy_texture_levels */
-///* No new tokens introduced by this extension. */
+// /* GL_APPLE_copy_texture_levels */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_APPLE_framebuffer_multisample */
-//#ifndef GL_APPLE_framebuffer_multisample
+// /* GL_APPLE_framebuffer_multisample */
+// #ifndef GL_APPLE_framebuffer_multisample
 const GL_RENDERBUFFER_SAMPLES_APPLE = 0x8CAB
 const GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_APPLE = 0x8D56
 const GL_MAX_SAMPLES_APPLE = 0x8D57
@@ -429,10 +432,10 @@ const GL_DRAW_FRAMEBUFFER_APPLE = 0x8CA9
 const GL_DRAW_FRAMEBUFFER_BINDING_APPLE = 0x8CA6
 const GL_READ_FRAMEBUFFER_BINDING_APPLE = 0x8CAA
 
-//#endif
+// #endif
 //
-///* GL_APPLE_rgb_422 */
-//#ifndef GL_APPLE_rgb_422
+// /* GL_APPLE_rgb_422 */
+// #ifndef GL_APPLE_rgb_422
 const GL_RGB_422_APPLE = 0x8A1F
 const GL_UNSIGNED_SHORT_8_8_APPLE = 0x85BA
 const GL_UNSIGNED_SHORT_8_8_REV_APPLE = 0x85BB
@@ -459,63 +462,63 @@ const GL_WAIT_FAILED_APPLE = 0x911D
 const GL_SYNC_FLUSH_COMMANDS_BIT_APPLE = 0x00000001
 const GL_TIMEOUT_IGNORED_APPLE = 0xFFFFFFFFFFFFFFFF
 
-//#endif
+// #endif
 //
-///* GL_APPLE_texture_format_BGRA8888 */
-//#ifndef GL_APPLE_texture_format_BGRA8888
-//const GL_BGRA_EXT                            =                 0x80E1
-//#endif
+// /* GL_APPLE_texture_format_BGRA8888 */
+// #ifndef GL_APPLE_texture_format_BGRA8888
+// const GL_BGRA_EXT                            =                 0x80E1
+// #endif
 //
-///* GL_APPLE_texture_max_level */
-//#ifndef GL_APPLE_texture_max_level
+// /* GL_APPLE_texture_max_level */
+// #ifndef GL_APPLE_texture_max_level
 const GL_TEXTURE_MAX_LEVEL_APPLE = 0x813D
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * ARM extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_ARM_mali_program_binary */
-//#ifndef GL_ARM_mali_program_binary
+// /* GL_ARM_mali_program_binary */
+// #ifndef GL_ARM_mali_program_binary
 const GL_MALI_PROGRAM_BINARY_ARM = 0x8F61
 
-////#endif
+// //#endif
 //
-///* GL_ARM_mali_shader_binary */
-//#ifndef GL_ARM_mali_shader_binary
+// /* GL_ARM_mali_shader_binary */
+// #ifndef GL_ARM_mali_shader_binary
 const GL_MALI_SHADER_BINARY_ARM = 0x8F60
 
-//#endif
+// #endif
 //
-///* GL_ARM_rgba8 */
-///* No new tokens introduced by this extension. */
+// /* GL_ARM_rgba8 */
+// /* No new tokens introduced by this extension. */
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * EXT extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_EXT_blend_minmax */
-//#ifndef GL_EXT_blend_minmax
+// /* GL_EXT_blend_minmax */
+// #ifndef GL_EXT_blend_minmax
 const GL_MIN_EXT = 0x8007
 const GL_MAX_EXT = 0x8008
 
-//#endif
+// #endif
 //
-///* GL_EXT_color_buffer_half_float */
-//#ifndef GL_EXT_color_buffer_half_float
+// /* GL_EXT_color_buffer_half_float */
+// #ifndef GL_EXT_color_buffer_half_float
 const GL_RGBA16F_EXT = 0x881A
 const GL_RGB16F_EXT = 0x881B
 
-//const GL_RG16F_EXT                                   =         0x822F
-//const GL_R16F_EXT                                      =       0x822D
+// const GL_RG16F_EXT                                   =         0x822F
+// const GL_R16F_EXT                                      =       0x822D
 const GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT = 0x8211
 const GL_UNSIGNED_NORMALIZED_EXT = 0x8C17
 
-//#endif
+// #endif
 //
-///* GL_EXT_debug_label */
-//#ifndef GL_EXT_debug_label
+// /* GL_EXT_debug_label */
+// #ifndef GL_EXT_debug_label
 const GL_PROGRAM_PIPELINE_OBJECT_EXT = 0x8A4F
 const GL_PROGRAM_OBJECT_EXT = 0x8B40
 const GL_SHADER_OBJECT_EXT = 0x8B48
@@ -523,20 +526,20 @@ const GL_BUFFER_OBJECT_EXT = 0x9151
 const GL_QUERY_OBJECT_EXT = 0x9153
 const GL_VERTEX_ARRAY_OBJECT_EXT = 0x9154
 
-//#endif
+// #endif
 //
-///* GL_EXT_debug_marker */
-///* No new tokens introduced by this extension. */
+// /* GL_EXT_debug_marker */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_EXT_discard_framebuffer */
-//#ifndef GL_EXT_discard_framebuffer
+// /* GL_EXT_discard_framebuffer */
+// #ifndef GL_EXT_discard_framebuffer
 const GL_COLOR_EXT = 0x1800
 const GL_DEPTH_EXT = 0x1801
 const GL_STENCIL_EXT = 0x1802
 
-//#endif
+// #endif
 //
-//#ifndef GL_EXT_disjoint_timer_query
+// #ifndef GL_EXT_disjoint_timer_query
 const GL_QUERY_COUNTER_BITS_EXT = 0x8864
 const GL_CURRENT_QUERY_EXT = 0x8865
 const GL_QUERY_RESULT_EXT = 0x8866
@@ -545,10 +548,10 @@ const GL_TIME_ELAPSED_EXT = 0x88BF
 const GL_TIMESTAMP_EXT = 0x8E28
 const GL_GPU_DISJOINT_EXT = 0x8FBB
 
-//#endif
+// #endif
 //
-//#ifndef GL_EXT_draw_buffers
-//const GL_EXT_draw_buffers = 1
+// #ifndef GL_EXT_draw_buffers
+// const GL_EXT_draw_buffers = 1
 const GL_MAX_COLOR_ATTACHMENTS_EXT = 0x8CDF
 const GL_MAX_DRAW_BUFFERS_EXT = 0x8824
 const GL_DRAW_BUFFER0_EXT = 0x8825
@@ -584,10 +587,10 @@ const GL_COLOR_ATTACHMENT13_EXT = 0x8CED
 const GL_COLOR_ATTACHMENT14_EXT = 0x8CEE
 const GL_COLOR_ATTACHMENT15_EXT = 0x8CEF
 
-//#endif
+// #endif
 //
-///* GL_EXT_map_buffer_range */
-//#ifndef GL_EXT_map_buffer_range
+// /* GL_EXT_map_buffer_range */
+// #ifndef GL_EXT_map_buffer_range
 const GL_MAP_READ_BIT_EXT = 0x0001
 const GL_MAP_WRITE_BIT_EXT = 0x0002
 const GL_MAP_INVALIDATE_RANGE_BIT_EXT = 0x0004
@@ -595,10 +598,10 @@ const GL_MAP_INVALIDATE_BUFFER_BIT_EXT = 0x0008
 const GL_MAP_FLUSH_EXPLICIT_BIT_EXT = 0x0010
 const GL_MAP_UNSYNCHRONIZED_BIT_EXT = 0x0020
 
-//#endif
+// #endif
 //
-///* GL_EXT_multisampled_render_to_texture */
-//#ifndef GL_EXT_multisampled_render_to_texture
+// /* GL_EXT_multisampled_render_to_texture */
+// #ifndef GL_EXT_multisampled_render_to_texture
 const GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT = 0x8D6C
 
 /* reuse values from GL_EXT_framebuffer_multisample (desktop extension) */
@@ -606,42 +609,42 @@ const GL_RENDERBUFFER_SAMPLES_EXT = 0x8CAB
 const GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT = 0x8D56
 const GL_MAX_SAMPLES_EXT = 0x8D57
 
-//#endif
+// #endif
 //
-///* GL_EXT_multiview_draw_buffers */
-//#ifndef GL_EXT_multiview_draw_buffers
+// /* GL_EXT_multiview_draw_buffers */
+// #ifndef GL_EXT_multiview_draw_buffers
 const GL_COLOR_ATTACHMENT_EXT = 0x90F0
 const GL_MULTIVIEW_EXT = 0x90F1
 const GL_DRAW_BUFFER_EXT = 0x0C01
 const GL_READ_BUFFER_EXT = 0x0C02
 const GL_MAX_MULTIVIEW_BUFFERS_EXT = 0x90F2
 
-//#endif
+// #endif
 //
-///* GL_EXT_multi_draw_arrays */
-///* No new tokens introduced by this extension. */
+// /* GL_EXT_multi_draw_arrays */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_EXT_occlusion_query_boolean */
-//#ifndef GL_EXT_occlusion_query_boolean
+// /* GL_EXT_occlusion_query_boolean */
+// #ifndef GL_EXT_occlusion_query_boolean
 const GL_ANY_SAMPLES_PASSED_EXT = 0x8C2F
 const GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT = 0x8D6A
 
-//const GL_CURRENT_QUERY_EXT                        =            0x8865
-//const GL_QUERY_RESULT_EXT                         =            0x8866
-//const GL_QUERY_RESULT_AVAILABLE_EXT                =           0x8867
-//#endif
+// const GL_CURRENT_QUERY_EXT                        =            0x8865
+// const GL_QUERY_RESULT_EXT                         =            0x8866
+// const GL_QUERY_RESULT_AVAILABLE_EXT                =           0x8867
+// #endif
 //
-///* GL_EXT_read_format_bgra */
-//#ifndef GL_EXT_read_format_bgra
-//const GL_BGRA_EXT                                 =            0x80E1
+// /* GL_EXT_read_format_bgra */
+// #ifndef GL_EXT_read_format_bgra
+// const GL_BGRA_EXT                                 =            0x80E1
 const GL_UNSIGNED_SHORT_4_4_4_4_REV_EXT = 0x8365
 const GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT = 0x8366
 
-//#endif
+// #endif
 //
-///* GL_EXT_robustness */
-//#ifndef GL_EXT_robustness
-///* reuse GL_NO_ERROR */
+// /* GL_EXT_robustness */
+// #ifndef GL_EXT_robustness
+// /* reuse GL_NO_ERROR */
 const GL_GUILTY_CONTEXT_RESET_EXT = 0x8253
 const GL_INNOCENT_CONTEXT_RESET_EXT = 0x8254
 const GL_UNKNOWN_CONTEXT_RESET_EXT = 0x8255
@@ -650,10 +653,10 @@ const GL_RESET_NOTIFICATION_STRATEGY_EXT = 0x8256
 const GL_LOSE_CONTEXT_ON_RESET_EXT = 0x8252
 const GL_NO_RESET_NOTIFICATION_EXT = 0x8261
 
-//#endif
+// #endif
 //
-///* GL_EXT_separate_shader_objects */
-//#ifndef GL_EXT_separate_shader_objects
+// /* GL_EXT_separate_shader_objects */
+// #ifndef GL_EXT_separate_shader_objects
 const GL_VERTEX_SHADER_BIT_EXT = 0x00000001
 const GL_FRAGMENT_SHADER_BIT_EXT = 0x00000002
 const GL_ALL_SHADER_BITS_EXT = 0xFFFFFFFF
@@ -661,82 +664,82 @@ const GL_PROGRAM_SEPARABLE_EXT = 0x8258
 const GL_ACTIVE_PROGRAM_EXT = 0x8259
 const GL_PROGRAM_PIPELINE_BINDING_EXT = 0x825A
 
-//#endif
+// #endif
 //
-///* GL_EXT_shader_framebuffer_fetch */
-//#ifndef GL_EXT_shader_framebuffer_fetch
+// /* GL_EXT_shader_framebuffer_fetch */
+// #ifndef GL_EXT_shader_framebuffer_fetch
 const GL_FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT = 0x8A52
 
-//#endif
+// #endif
 //
-///* GL_EXT_shader_texture_lod */
-///* No new tokens introduced by this extension. */
+// /* GL_EXT_shader_texture_lod */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_EXT_shadow_samplers */
-//#ifndef GL_EXT_shadow_samplers
+// /* GL_EXT_shadow_samplers */
+// #ifndef GL_EXT_shadow_samplers
 const GL_TEXTURE_COMPARE_MODE_EXT = 0x884C
 const GL_TEXTURE_COMPARE_FUNC_EXT = 0x884D
 const GL_COMPARE_REF_TO_TEXTURE_EXT = 0x884E
 const GL_SAMPLER_2D_SHADOW_EXT = 0x8B62
 
-//#endif
+// #endif
 //
-///* GL_EXT_sRGB */
-//#ifndef GL_EXT_sRGB
+// /* GL_EXT_sRGB */
+// #ifndef GL_EXT_sRGB
 const GL_SRGB_EXT = 0x8C40
 const GL_SRGB_ALPHA_EXT = 0x8C42
 const GL_SRGB8_ALPHA8_EXT = 0x8C43
 const GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT = 0x8210
 
-//#endif
+// #endif
 //
-///* GL_EXT_sRGB_write_control */
-//#ifndef GL_EXT_sRGB_write_control
+// /* GL_EXT_sRGB_write_control */
+// #ifndef GL_EXT_sRGB_write_control
 const GL_EXT_sRGB_write_control = 1
 const GL_FRAMEBUFFER_SRGB_EXT = 0x8DB9
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_compression_dxt1 */
-//#ifndef GL_EXT_texture_compression_dxt1
+// /* GL_EXT_texture_compression_dxt1 */
+// #ifndef GL_EXT_texture_compression_dxt1
 const GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 0x83F0
 const GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 0x83F1
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_filter_anisotropic */
-//#ifndef GL_EXT_texture_filter_anisotropic
+// /* GL_EXT_texture_filter_anisotropic */
+// #ifndef GL_EXT_texture_filter_anisotropic
 const GL_TEXTURE_MAX_ANISOTROPY_EXT = 0x84FE
 const GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 0x84FF
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_format_BGRA8888 */
-//#ifndef GL_EXT_texture_format_BGRA8888
+// /* GL_EXT_texture_format_BGRA8888 */
+// #ifndef GL_EXT_texture_format_BGRA8888
 const GL_BGRA_EXT = 0x80E1
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_rg */
-//#ifndef GL_EXT_texture_rg
+// /* GL_EXT_texture_rg */
+// #ifndef GL_EXT_texture_rg
 const GL_RED_EXT = 0x1903
 const GL_RG_EXT = 0x8227
 
-//const GL_R8_EXT                      =                         0x8229
-//const GL_RG8_EXT                      =                        0x822B
-//#endif
+// const GL_R8_EXT                      =                         0x8229
+// const GL_RG8_EXT                      =                        0x822B
+// #endif
 //
-///* GL_EXT_texture_sRGB_decode */
-//#ifndef GL_EXT_texture_sRGB_decode
+// /* GL_EXT_texture_sRGB_decode */
+// #ifndef GL_EXT_texture_sRGB_decode
 const GL_EXT_texture_sRGB_decode = 1
 const GL_TEXTURE_SRGB_DECODE_EXT = 0x8A48
 const GL_DECODE_EXT = 0x8A49
 const GL_SKIP_DECODE_EXT = 0x8A4A
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_storage */
-//#ifndef GL_EXT_texture_storage
+// /* GL_EXT_texture_storage */
+// #ifndef GL_EXT_texture_storage
 const GL_TEXTURE_IMMUTABLE_FORMAT_EXT = 0x912F
 const GL_ALPHA8_EXT = 0x803C
 const GL_LUMINANCE8_EXT = 0x8040
@@ -762,96 +765,96 @@ const GL_RG32F_EXT = 0x8230
 const GL_R16F_EXT = 0x822D
 const GL_RG16F_EXT = 0x822F
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_type_2_10_10_10_REV */
-//#ifndef GL_EXT_texture_type_2_10_10_10_REV
+// /* GL_EXT_texture_type_2_10_10_10_REV */
+// #ifndef GL_EXT_texture_type_2_10_10_10_REV
 const GL_UNSIGNED_INT_2_10_10_10_REV_EXT = 0x8368
 
-//#endif
+// #endif
 //
-///* GL_EXT_unpack_subimage */
-//#ifndef GL_EXT_unpack_subimage
+// /* GL_EXT_unpack_subimage */
+// #ifndef GL_EXT_unpack_subimage
 const GL_UNPACK_ROW_LENGTH_EXT = 0x0CF2
 const GL_UNPACK_SKIP_ROWS_EXT = 0x0CF3
 const GL_UNPACK_SKIP_PIXELS_EXT = 0x0CF4
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * DMP extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_DMP_shader_binary */
-//#ifndef GL_DMP_shader_binary
+// /* GL_DMP_shader_binary */
+// #ifndef GL_DMP_shader_binary
 const GL_SHADER_BINARY_DMP = 0x9250
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * FJ extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_FJ_shader_binary_GCCSO */
-//#ifndef GL_FJ_shader_binary_GCCSO
+// /* GL_FJ_shader_binary_GCCSO */
+// #ifndef GL_FJ_shader_binary_GCCSO
 const GL_GCCSO_SHADER_BINARY_FJ = 0x9260
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * IMG extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_IMG_program_binary */
-//#ifndef GL_IMG_program_binary
+// /* GL_IMG_program_binary */
+// #ifndef GL_IMG_program_binary
 const GL_SGX_PROGRAM_BINARY_IMG = 0x9130
 
-//#endif
+// #endif
 //
-///* GL_IMG_read_format */
-//#ifndef GL_IMG_read_format
+// /* GL_IMG_read_format */
+// #ifndef GL_IMG_read_format
 const GL_BGRA_IMG = 0x80E1
 const GL_UNSIGNED_SHORT_4_4_4_4_REV_IMG = 0x8365
 
-//#endif
+// #endif
 //
-///* GL_IMG_shader_binary */
-//#ifndef GL_IMG_shader_binary
+// /* GL_IMG_shader_binary */
+// #ifndef GL_IMG_shader_binary
 const GL_SGX_BINARY_IMG = 0x8C0A
 
-//#endif
+// #endif
 //
-///* GL_IMG_texture_compression_pvrtc */
-//#ifndef GL_IMG_texture_compression_pvrtc
+// /* GL_IMG_texture_compression_pvrtc */
+// #ifndef GL_IMG_texture_compression_pvrtc
 const GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 0x8C00
 const GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG = 0x8C01
 const GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 0x8C02
 const GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG = 0x8C03
 
-//#endif
+// #endif
 //
-///* GL_IMG_texture_compression_pvrtc2 */
-//#ifndef GL_IMG_texture_compression_pvrtc2
+// /* GL_IMG_texture_compression_pvrtc2 */
+// #ifndef GL_IMG_texture_compression_pvrtc2
 const GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG = 0x9137
 const GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG = 0x9138
 
-//#endif
+// #endif
 //
-///* GL_IMG_multisampled_render_to_texture */
-//#ifndef GL_IMG_multisampled_render_to_texture
+// /* GL_IMG_multisampled_render_to_texture */
+// #ifndef GL_IMG_multisampled_render_to_texture
 const GL_RENDERBUFFER_SAMPLES_IMG = 0x9133
 const GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG = 0x9134
 const GL_MAX_SAMPLES_IMG = 0x9135
 const GL_TEXTURE_SAMPLES_IMG = 0x9136
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * NV extension tokens
 // *------------------------------------------------------------------------*/
 //
-///* GL_NV_coverage_sample */
-//#ifndef GL_NV_coverage_sample
+// /* GL_NV_coverage_sample */
+// #ifndef GL_NV_coverage_sample
 const GL_COVERAGE_COMPONENT_NV = 0x8ED0
 const GL_COVERAGE_COMPONENT4_NV = 0x8ED1
 const GL_COVERAGE_ATTACHMENT_NV = 0x8ED2
@@ -862,16 +865,16 @@ const GL_COVERAGE_EDGE_FRAGMENTS_NV = 0x8ED6
 const GL_COVERAGE_AUTOMATIC_NV = 0x8ED7
 const GL_COVERAGE_BUFFER_BIT_NV = 0x00008000
 
-//#endif
+// #endif
 //
-///* GL_NV_depth_nonlinear */
-//#ifndef GL_NV_depth_nonlinear
+// /* GL_NV_depth_nonlinear */
+// #ifndef GL_NV_depth_nonlinear
 const GL_DEPTH_COMPONENT16_NONLINEAR_NV = 0x8E2C
 
 //#endif
 
-///* GL_NV_draw_buffers */
-//#ifndef GL_NV_draw_buffers
+// /* GL_NV_draw_buffers */
+// #ifndef GL_NV_draw_buffers
 const GL_MAX_DRAW_BUFFERS_NV = 0x8824
 const GL_DRAW_BUFFER0_NV = 0x8825
 const GL_DRAW_BUFFER1_NV = 0x8826
@@ -906,54 +909,54 @@ const GL_COLOR_ATTACHMENT13_NV = 0x8CED
 const GL_COLOR_ATTACHMENT14_NV = 0x8CEE
 const GL_COLOR_ATTACHMENT15_NV = 0x8CEF
 
-//#endif
+// #endif
 //
-///* GL_NV_draw_instanced */
-///* No new tokens introduced by this extension. */
+// /* GL_NV_draw_instanced */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_NV_fbo_color_attachments */
-//#ifndef GL_NV_fbo_color_attachments
+// /* GL_NV_fbo_color_attachments */
+// #ifndef GL_NV_fbo_color_attachments
 const GL_MAX_COLOR_ATTACHMENTS_NV = 0x8CDF
 
-///* GL_COLOR_ATTACHMENT{0-15}_NV defined in GL_NV_draw_buffers already. */
-//#endif
+// /* GL_COLOR_ATTACHMENT{0-15}_NV defined in GL_NV_draw_buffers already. */
+// #endif
 //
-///* GL_NV_fence */
-//#ifndef GL_NV_fence
+// /* GL_NV_fence */
+// #ifndef GL_NV_fence
 const GL_ALL_COMPLETED_NV = 0x84F2
 const GL_FENCE_STATUS_NV = 0x84F3
 const GL_FENCE_CONDITION_NV = 0x84F4
 
-//#endif
+// #endif
 //
-///* GL_NV_framebuffer_blit */
-//#ifndef GL_NV_framebuffer_blit
+// /* GL_NV_framebuffer_blit */
+// #ifndef GL_NV_framebuffer_blit
 const GL_READ_FRAMEBUFFER_NV = 0x8CA8
 const GL_DRAW_FRAMEBUFFER_NV = 0x8CA9
 const GL_DRAW_FRAMEBUFFER_BINDING_NV = 0x8CA6
 const GL_READ_FRAMEBUFFER_BINDING_NV = 0x8CAA
 
-//#endif
+// #endif
 //
-///* GL_NV_framebuffer_multisample */
-//#ifndef GL_NV_framebuffer_multisample
+// /* GL_NV_framebuffer_multisample */
+// #ifndef GL_NV_framebuffer_multisample
 const GL_RENDERBUFFER_SAMPLES_NV = 0x8CAB
 const GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV = 0x8D56
 const GL_MAX_SAMPLES_NV = 0x8D57
 
-//#endif
+// #endif
 //
-///* GL_NV_generate_mipmap_sRGB */
-///* No new tokens introduced by this extension. */
+// /* GL_NV_generate_mipmap_sRGB */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_NV_instanced_arrays */
-//#ifndef GL_NV_instanced_arrays
+// /* GL_NV_instanced_arrays */
+// #ifndef GL_NV_instanced_arrays
 const GL_VERTEX_ATTRIB_ARRAY_DIVISOR_NV = 0x88FE
 
-//#endif
+// #endif
 //
-///* GL_NV_read_buffer */
-//#ifndef GL_NV_read_buffer
+// /* GL_NV_read_buffer */
+// #ifndef GL_NV_read_buffer
 const GL_READ_BUFFER_NV = 0x0C02
 
 //#endif
@@ -1020,22 +1023,22 @@ const GL_ALPHA_TEST_QCOM = 0x0BC0
 const GL_ALPHA_TEST_FUNC_QCOM = 0x0BC1
 const GL_ALPHA_TEST_REF_QCOM = 0x0BC2
 
-//#endif
+// #endif
 //
-///* GL_QCOM_binning_control */
-//#ifndef GL_QCOM_binning_control
+// /* GL_QCOM_binning_control */
+// #ifndef GL_QCOM_binning_control
 const GL_BINNING_CONTROL_HINT_QCOM = 0x8FB0
 const GL_CPU_OPTIMIZED_QCOM = 0x8FB1
 const GL_GPU_OPTIMIZED_QCOM = 0x8FB2
 const GL_RENDER_DIRECT_TO_FRAMEBUFFER_QCOM = 0x8FB3
 
-//#endif
+// #endif
 //
-///* GL_QCOM_driver_control */
-///* No new tokens introduced by this extension. */
+// /* GL_QCOM_driver_control */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_QCOM_extended_get */
-//#ifndef GL_QCOM_extended_get
+// /* GL_QCOM_extended_get */
+// #ifndef GL_QCOM_extended_get
 const GL_TEXTURE_WIDTH_QCOM = 0x8BD2
 const GL_TEXTURE_HEIGHT_QCOM = 0x8BD3
 const GL_TEXTURE_DEPTH_QCOM = 0x8BD4
@@ -1048,25 +1051,25 @@ const GL_TEXTURE_TARGET_QCOM = 0x8BDA
 const GL_TEXTURE_OBJECT_VALID_QCOM = 0x8BDB
 const GL_STATE_RESTORE = 0x8BDC
 
-//#endif
+// #endif
 //
-///* GL_QCOM_extended_get2 */
-///* No new tokens introduced by this extension. */
+// /* GL_QCOM_extended_get2 */
+// /* No new tokens introduced by this extension. */
 //
-///* GL_QCOM_perfmon_global_mode */
-//#ifndef GL_QCOM_perfmon_global_mode
+// /* GL_QCOM_perfmon_global_mode */
+// #ifndef GL_QCOM_perfmon_global_mode
 const GL_PERFMON_GLOBAL_MODE_QCOM = 0x8FA0
 
-//#endif
+// #endif
 //
-///* GL_QCOM_writeonly_rendering */
-//#ifndef GL_QCOM_writeonly_rendering
+// /* GL_QCOM_writeonly_rendering */
+// #ifndef GL_QCOM_writeonly_rendering
 const GL_WRITEONLY_RENDERING_QCOM = 0x8823
 
-//#endif
+// #endif
 //
-///* GL_QCOM_tiled_rendering */
-//#ifndef GL_QCOM_tiled_rendering
+// /* GL_QCOM_tiled_rendering */
+// #ifndef GL_QCOM_tiled_rendering
 const GL_COLOR_BUFFER_BIT0_QCOM = 0x00000001
 const GL_COLOR_BUFFER_BIT1_QCOM = 0x00000002
 const GL_COLOR_BUFFER_BIT2_QCOM = 0x00000004
@@ -1110,48 +1113,48 @@ const GL_MULTISAMPLE_BUFFER_BIT7_QCOM = 0x80000000
 //#ifndef GL_VIV_shader_binary
 const GL_SHADER_BINARY_VIV = 0x8FC4
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * End of extension tokens, start of corresponding extension functions
 // *------------------------------------------------------------------------*/
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * OES extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_OES_compressed_ETC1_RGB8_texture */
-//#ifndef GL_OES_compressed_ETC1_RGB8_texture
+// /* GL_OES_compressed_ETC1_RGB8_texture */
+// #ifndef GL_OES_compressed_ETC1_RGB8_texture
 const GL_OES_compressed_ETC1_RGB8_texture = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_compressed_paletted_texture */
-//#ifndef GL_OES_compressed_paletted_texture
+// /* GL_OES_compressed_paletted_texture */
+// #ifndef GL_OES_compressed_paletted_texture
 const GL_OES_compressed_paletted_texture = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_depth24 */
-//#ifndef GL_OES_depth24
+// /* GL_OES_depth24 */
+// #ifndef GL_OES_depth24
 const GL_OES_depth24 = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_depth32 */
-//#ifndef GL_OES_depth32
+// /* GL_OES_depth32 */
+// #ifndef GL_OES_depth32
 const GL_OES_depth32 = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_depth_texture */
-//#ifndef GL_OES_depth_texture
+// /* GL_OES_depth_texture */
+// #ifndef GL_OES_depth_texture
 const GL_OES_depth_texture = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_EGL_image */
-//#ifndef GL_OES_EGL_image
+// /* GL_OES_EGL_image */
+// #ifndef GL_OES_EGL_image
 const GL_OES_EGL_image = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1175,22 +1178,22 @@ const GL_OES_EGL_image_external = 1
 //#ifndef GL_OES_element_index_uint
 const GL_OES_element_index_uint = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_fbo_render_mipmap */
-//#ifndef GL_OES_fbo_render_mipmap
+// /* GL_OES_fbo_render_mipmap */
+// #ifndef GL_OES_fbo_render_mipmap
 const GL_OES_fbo_render_mipmap = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_fragment_precision_high */
-//#ifndef GL_OES_fragment_precision_high
+// /* GL_OES_fragment_precision_high */
+// #ifndef GL_OES_fragment_precision_high
 const GL_OES_fragment_precision_high = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_get_program_binary */
-//#ifndef GL_OES_get_program_binary
+// /* GL_OES_get_program_binary */
+// #ifndef GL_OES_get_program_binary
 const GL_OES_get_program_binary = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1207,37 +1210,37 @@ const GL_OES_get_program_binary = 1
 //#ifndef GL_OES_mapbuffer
 const GL_OES_mapbuffer = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void* GL_APIENTRY glMapBufferOES (GLenum target, GLenum access);
-//todo
-func glMapBufferOES() (res sdlcommon.FConstCharP) {
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void* GL_APIENTRY glMapBufferOES (GLenum target, GLenum access);
+// todo
+func glMapBufferOES() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("glMapBufferOES").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
-//GL_APICALL GLboolean GL_APIENTRY glUnmapBufferOES (GLenum target);
-//todo
-func glUnmapBufferOES() (res sdlcommon.FConstCharP) {
+// GL_APICALL GLboolean GL_APIENTRY glUnmapBufferOES (GLenum target);
+// todo
+func glUnmapBufferOES() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("glUnmapBufferOES").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
-//GL_APICALL void GL_APIENTRY glGetBufferPointervOES (GLenum target, GLenum pname, GLvoid **params);
-//todo
-func glGetBufferPointervOES() (res sdlcommon.FConstCharP) {
+// GL_APICALL void GL_APIENTRY glGetBufferPointervOES (GLenum target, GLenum pname, GLvoid **params);
+// todo
+func glGetBufferPointervOES() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("glGetBufferPointervOES").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -1254,39 +1257,39 @@ func glGetBufferPointervOES() (res sdlcommon.FConstCharP) {
 //#ifndef GL_OES_packed_depth_stencil
 const GL_OES_packed_depth_stencil = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_required_internalformat */
-//#ifndef GL_OES_required_internalformat
+// /* GL_OES_required_internalformat */
+// #ifndef GL_OES_required_internalformat
 const GL_OES_required_internalformat = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_rgb8_rgba8 */
-//#ifndef GL_OES_rgb8_rgba8
+// /* GL_OES_rgb8_rgba8 */
+// #ifndef GL_OES_rgb8_rgba8
 const GL_OES_rgb8_rgba8 = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_standard_derivatives */
-//#ifndef GL_OES_standard_derivatives
+// /* GL_OES_standard_derivatives */
+// #ifndef GL_OES_standard_derivatives
 const GL_OES_standard_derivatives = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_stencil1 */
-//#ifndef GL_OES_stencil1
+// /* GL_OES_stencil1 */
+// #ifndef GL_OES_stencil1
 const GL_OES_stencil1 = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_stencil4 */
-//#ifndef GL_OES_stencil4
+// /* GL_OES_stencil4 */
+// #ifndef GL_OES_stencil4
 const GL_OES_stencil4 = 1
 
-//#endif
+// #endif
 //
-//#ifndef GL_OES_surfaceless_context
+// #ifndef GL_OES_surfaceless_context
 const GL_OES_surfaceless_context = 1
 
 //#endif
@@ -1321,34 +1324,34 @@ const GL_OES_texture_3D = 1
 //#ifndef GL_OES_texture_float
 const GL_OES_texture_float = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_texture_float_linear */
-//#ifndef GL_OES_texture_float_linear
+// /* GL_OES_texture_float_linear */
+// #ifndef GL_OES_texture_float_linear
 const GL_OES_texture_float_linear = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_texture_half_float */
-//#ifndef GL_OES_texture_half_float
+// /* GL_OES_texture_half_float */
+// #ifndef GL_OES_texture_half_float
 const GL_OES_texture_half_float = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_texture_half_float_linear */
-//#ifndef GL_OES_texture_half_float_linear
+// /* GL_OES_texture_half_float_linear */
+// #ifndef GL_OES_texture_half_float_linear
 const GL_OES_texture_half_float_linear = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_texture_npot */
-//#ifndef GL_OES_texture_npot
+// /* GL_OES_texture_npot */
+// #ifndef GL_OES_texture_npot
 const GL_OES_texture_npot = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_vertex_array_object */
-//#ifndef GL_OES_vertex_array_object
+// /* GL_OES_vertex_array_object */
+// #ifndef GL_OES_vertex_array_object
 const GL_OES_vertex_array_object = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1371,81 +1374,80 @@ const GL_OES_vertex_array_object = 1
 //#ifndef GL_OES_vertex_half_float
 const GL_OES_vertex_half_float = 1
 
-//#endif
+// #endif
 //
-///* GL_OES_vertex_type_10_10_10_2 */
-//#ifndef GL_OES_vertex_type_10_10_10_2
+// /* GL_OES_vertex_type_10_10_10_2 */
+// #ifndef GL_OES_vertex_type_10_10_10_2
 const GL_OES_vertex_type_10_10_10_2 = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * KHR extension functions
 // *------------------------------------------------------------------------*/
 //
-//#ifndef GL_KHR_debug
+// #ifndef GL_KHR_debug
 const GL_KHR_debug = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glDebugMessageControlKHR (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
-//GL_APICALL void GL_APIENTRY glDebugMessageInsertKHR (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
-//GL_APICALL void GL_APIENTRY glDebugMessageCallbackKHR (GLDEBUGPROCKHR callback, const void *userParam);
-//GL_APICALL GLuint GL_APIENTRY glGetDebugMessageLogKHR (GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-//GL_APICALL void GL_APIENTRY glPushDebugGroupKHR (GLenum source, GLuint id, GLsizei length, const GLchar *message);
-//GL_APICALL void GL_APIENTRY glPopDebugGroupKHR (void);
-//GL_APICALL void GL_APIENTRY glObjectLabelKHR (GLenum identifier, GLuint name, GLsizei length, const GLchar *label);
-//GL_APICALL void GL_APIENTRY glGetObjectLabelKHR (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
-//GL_APICALL void GL_APIENTRY glObjectPtrLabelKHR (const void *ptr, GLsizei length, const GLchar *label);
-//GL_APICALL void GL_APIENTRY glGetObjectPtrLabelKHR (const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
-//GL_APICALL void GL_APIENTRY glGetPointervKHR (GLenum pname, GLvoid **params);
-//#endif
-//typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGECONTROLKHRPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
-//todo
-//typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGEINSERTKHRPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
-//todo
-//typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGECALLBACKKHRPROC) (GLDEBUGPROCKHR callback, const void *userParam);
-//todo
-//typedef GLuint (GL_APIENTRYP PFNGLGETDEBUGMESSAGELOGKHRPROC) (GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPUSHDEBUGGROUPKHRPROC) (GLenum source, GLuint id, GLsizei length, const GLchar *message);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPOPDEBUGGROUPKHRPROC) (void);
-//todo
-//typedef void (GL_APIENTRYP PFNGLOBJECTLABELKHRPROC) (GLenum identifier, GLuint name, GLsizei length, const GLchar *label);
-//todo
-//typedef void (GL_APIENTRYP PFNGLGETOBJECTLABELKHRPROC) (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
-//todo
-//typedef void (GL_APIENTRYP PFNGLOBJECTPTRLABELKHRPROC) (const void *ptr, GLsizei length, const GLchar *label);
-//todo
-//typedef void (GL_APIENTRYP PFNGLGETOBJECTPTRLABELKHRPROC) (const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
-//todo
-//typedef void (GL_APIENTRYP PFNGLGETPOINTERVKHRPROC) (GLenum pname, GLvoid **params);
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glDebugMessageControlKHR (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
+// GL_APICALL void GL_APIENTRY glDebugMessageInsertKHR (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
+// GL_APICALL void GL_APIENTRY glDebugMessageCallbackKHR (GLDEBUGPROCKHR callback, const void *userParam);
+// GL_APICALL GLuint GL_APIENTRY glGetDebugMessageLogKHR (GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
+// GL_APICALL void GL_APIENTRY glPushDebugGroupKHR (GLenum source, GLuint id, GLsizei length, const GLchar *message);
+// GL_APICALL void GL_APIENTRY glPopDebugGroupKHR (void);
+// GL_APICALL void GL_APIENTRY glObjectLabelKHR (GLenum identifier, GLuint name, GLsizei length, const GLchar *label);
+// GL_APICALL void GL_APIENTRY glGetObjectLabelKHR (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
+// GL_APICALL void GL_APIENTRY glObjectPtrLabelKHR (const void *ptr, GLsizei length, const GLchar *label);
+// GL_APICALL void GL_APIENTRY glGetObjectPtrLabelKHR (const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
+// GL_APICALL void GL_APIENTRY glGetPointervKHR (GLenum pname, GLvoid **params);
+// #endif
+// typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGECONTROLKHRPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
+// todo
+// typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGEINSERTKHRPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
+// todo
+// typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGECALLBACKKHRPROC) (GLDEBUGPROCKHR callback, const void *userParam);
+// todo
+// typedef GLuint (GL_APIENTRYP PFNGLGETDEBUGMESSAGELOGKHRPROC) (GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPUSHDEBUGGROUPKHRPROC) (GLenum source, GLuint id, GLsizei length, const GLchar *message);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPOPDEBUGGROUPKHRPROC) (void);
+// todo
+// typedef void (GL_APIENTRYP PFNGLOBJECTLABELKHRPROC) (GLenum identifier, GLuint name, GLsizei length, const GLchar *label);
+// todo
+// typedef void (GL_APIENTRYP PFNGLGETOBJECTLABELKHRPROC) (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
+// todo
+// typedef void (GL_APIENTRYP PFNGLOBJECTPTRLABELKHRPROC) (const void *ptr, GLsizei length, const GLchar *label);
+// todo
+// typedef void (GL_APIENTRYP PFNGLGETOBJECTPTRLABELKHRPROC) (const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
+// todo
+// typedef void (GL_APIENTRYP PFNGLGETPOINTERVKHRPROC) (GLenum pname, GLvoid **params);
+// #endif
 //
-//#ifndef GL_KHR_texture_compression_astc_ldr
+// #ifndef GL_KHR_texture_compression_astc_ldr
 const GL_KHR_texture_compression_astc_ldr = 1
 
-//#endif
+// #endif
 //
-//
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * AMD extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_AMD_compressed_3DC_texture */
-//#ifndef GL_AMD_compressed_3DC_texture
+// /* GL_AMD_compressed_3DC_texture */
+// #ifndef GL_AMD_compressed_3DC_texture
 const GL_AMD_compressed_3DC_texture = 1
 
-//#endif
+// #endif
 //
-///* GL_AMD_compressed_ATC_texture */
-//#ifndef GL_AMD_compressed_ATC_texture
+// /* GL_AMD_compressed_ATC_texture */
+// #ifndef GL_AMD_compressed_ATC_texture
 const GL_AMD_compressed_ATC_texture = 1
 
-//#endif
+// #endif
 //
-///* AMD_performance_monitor */
-//#ifndef GL_AMD_performance_monitor
+// /* AMD_performance_monitor */
+// #ifndef GL_AMD_performance_monitor
 const GL_AMD_performance_monitor = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1489,20 +1491,20 @@ const GL_AMD_performance_monitor = 1
 //#ifndef GL_AMD_program_binary_Z400
 const GL_AMD_program_binary_Z400 = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * ANGLE extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_ANGLE_depth_texture */
-//#ifndef GL_ANGLE_depth_texture
+// /* GL_ANGLE_depth_texture */
+// #ifndef GL_ANGLE_depth_texture
 const GL_ANGLE_depth_texture = 1
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_framebuffer_blit */
-//#ifndef GL_ANGLE_framebuffer_blit
+// /* GL_ANGLE_framebuffer_blit */
+// #ifndef GL_ANGLE_framebuffer_blit
 const GL_ANGLE_framebuffer_blit = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1516,14 +1518,14 @@ const GL_ANGLE_framebuffer_blit = 1
 //#ifndef GL_ANGLE_framebuffer_multisample
 const GL_ANGLE_framebuffer_multisample = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glRenderbufferStorageMultisampleANGLE (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-//#endif
-//typedef void (GL_APIENTRYP PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-//todo
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glRenderbufferStorageMultisampleANGLE (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+// #endif
+// typedef void (GL_APIENTRYP PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+// todo
+// #endif
 //
-//#ifndef GL_ANGLE_instanced_arrays
+// #ifndef GL_ANGLE_instanced_arrays
 const GL_ANGLE_instanced_arrays = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1539,37 +1541,37 @@ const GL_ANGLE_instanced_arrays = 1
 //todo
 //#endif
 
-///* GL_ANGLE_pack_reverse_row_order */
-//#ifndef GL_ANGLE_pack_reverse_row_order
+// /* GL_ANGLE_pack_reverse_row_order */
+// #ifndef GL_ANGLE_pack_reverse_row_order
 const GL_ANGLE_pack_reverse_row_order = 1
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_program_binary */
-//#ifndef GL_ANGLE_program_binary
+// /* GL_ANGLE_program_binary */
+// #ifndef GL_ANGLE_program_binary
 const GL_ANGLE_program_binary = 1
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_texture_compression_dxt3 */
-//#ifndef GL_ANGLE_texture_compression_dxt3
+// /* GL_ANGLE_texture_compression_dxt3 */
+// #ifndef GL_ANGLE_texture_compression_dxt3
 const GL_ANGLE_texture_compression_dxt3 = 1
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_texture_compression_dxt5 */
-//#ifndef GL_ANGLE_texture_compression_dxt5
+// /* GL_ANGLE_texture_compression_dxt5 */
+// #ifndef GL_ANGLE_texture_compression_dxt5
 const GL_ANGLE_texture_compression_dxt5 = 1
 
-//#endif
+// #endif
 //
-///* GL_ANGLE_texture_usage */
-//#ifndef GL_ANGLE_texture_usage
+// /* GL_ANGLE_texture_usage */
+// #ifndef GL_ANGLE_texture_usage
 const GL_ANGLE_texture_usage = 1
 
-//#endif
+// #endif
 //
-//#ifndef GL_ANGLE_translated_shader_source
+// #ifndef GL_ANGLE_translated_shader_source
 const GL_ANGLE_translated_shader_source = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1587,29 +1589,29 @@ const GL_ANGLE_translated_shader_source = 1
 //#ifndef GL_APPLE_copy_texture_levels
 const GL_APPLE_copy_texture_levels = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glCopyTextureLevelsAPPLE (GLuint destinationTexture, GLuint sourceTexture, GLint sourceBaseLevel, GLsizei sourceLevelCount);
-//#endif
-//typedef void (GL_APIENTRYP PFNGLCOPYTEXTURELEVELSAPPLEPROC) (GLuint destinationTexture, GLuint sourceTexture, GLint sourceBaseLevel, GLsizei sourceLevelCount);
-//todo
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glCopyTextureLevelsAPPLE (GLuint destinationTexture, GLuint sourceTexture, GLint sourceBaseLevel, GLsizei sourceLevelCount);
+// #endif
+// typedef void (GL_APIENTRYP PFNGLCOPYTEXTURELEVELSAPPLEPROC) (GLuint destinationTexture, GLuint sourceTexture, GLint sourceBaseLevel, GLsizei sourceLevelCount);
+// todo
+// #endif
 //
-///* GL_APPLE_framebuffer_multisample */
-//#ifndef GL_APPLE_framebuffer_multisample
+// /* GL_APPLE_framebuffer_multisample */
+// #ifndef GL_APPLE_framebuffer_multisample
 const GL_APPLE_framebuffer_multisample = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glRenderbufferStorageMultisampleAPPLE (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-//GL_APICALL void GL_APIENTRY glResolveMultisampleFramebufferAPPLE (void);
-//#endif /* GL_GLEXT_PROTOTYPES */
-//typedef void (GL_APIENTRYP PFNGLRENDERBUFFERSTORAGEMULTISAMPLEAPPLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-//todo
-//typedef void (GL_APIENTRYP PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLEPROC) (void);
-//todo
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glRenderbufferStorageMultisampleAPPLE (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+// GL_APICALL void GL_APIENTRY glResolveMultisampleFramebufferAPPLE (void);
+// #endif /* GL_GLEXT_PROTOTYPES */
+// typedef void (GL_APIENTRYP PFNGLRENDERBUFFERSTORAGEMULTISAMPLEAPPLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+// todo
+// typedef void (GL_APIENTRYP PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLEPROC) (void);
+// todo
+// #endif
 //
-///* GL_APPLE_rgb_422 */
-//#ifndef GL_APPLE_rgb_422
+// /* GL_APPLE_rgb_422 */
+// #ifndef GL_APPLE_rgb_422
 const GL_APPLE_rgb_422 = 1
 
 //#endif
@@ -1647,54 +1649,54 @@ const GL_APPLE_sync = 1
 //#ifndef GL_APPLE_texture_format_BGRA8888
 const GL_APPLE_texture_format_BGRA8888 = 1
 
-//#endif
+// #endif
 //
-///* GL_APPLE_texture_max_level */
-//#ifndef GL_APPLE_texture_max_level
+// /* GL_APPLE_texture_max_level */
+// #ifndef GL_APPLE_texture_max_level
 const GL_APPLE_texture_max_level = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * ARM extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_ARM_mali_program_binary */
-//#ifndef GL_ARM_mali_program_binary
+// /* GL_ARM_mali_program_binary */
+// #ifndef GL_ARM_mali_program_binary
 const GL_ARM_mali_program_binary = 1
 
-//#endif
+// #endif
 //
-///* GL_ARM_mali_shader_binary */
-//#ifndef GL_ARM_mali_shader_binary
+// /* GL_ARM_mali_shader_binary */
+// #ifndef GL_ARM_mali_shader_binary
 const GL_ARM_mali_shader_binary = 1
 
-//#endif
+// #endif
 //
-///* GL_ARM_rgba8 */
-//#ifndef GL_ARM_rgba8
+// /* GL_ARM_rgba8 */
+// #ifndef GL_ARM_rgba8
 const GL_ARM_rgba8 = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * EXT extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_EXT_blend_minmax */
-//#ifndef GL_EXT_blend_minmax
+// /* GL_EXT_blend_minmax */
+// #ifndef GL_EXT_blend_minmax
 const GL_EXT_blend_minmax = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_color_buffer_half_float */
-//#ifndef GL_EXT_color_buffer_half_float
+// /* GL_EXT_color_buffer_half_float */
+// #ifndef GL_EXT_color_buffer_half_float
 const GL_EXT_color_buffer_half_float = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_debug_label */
-//#ifndef GL_EXT_debug_label
+// /* GL_EXT_debug_label */
+// #ifndef GL_EXT_debug_label
 const GL_EXT_debug_label = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1735,7 +1737,7 @@ const GL_EXT_discard_framebuffer = 1
 //todo
 //#endif
 
-//#ifndef GL_EXT_disjoint_timer_query
+// #ifndef GL_EXT_disjoint_timer_query
 const GL_EXT_disjoint_timer_query = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1775,32 +1777,32 @@ const GL_EXT_disjoint_timer_query = 1
 //todo
 //#endif /* GL_EXT_disjoint_timer_query */
 
-//#ifndef GL_EXT_draw_buffers
+// #ifndef GL_EXT_draw_buffers
 const GL_EXT_draw_buffers = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glDrawBuffersEXT (GLsizei n, const GLenum *bufs);
-//#endif
-//typedef void (GL_APIENTRYP PFNGLDRAWBUFFERSEXTPROC) (GLsizei n, const GLenum *bufs);
-//todo
-//#endif /* GL_EXT_draw_buffers */
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glDrawBuffersEXT (GLsizei n, const GLenum *bufs);
+// #endif
+// typedef void (GL_APIENTRYP PFNGLDRAWBUFFERSEXTPROC) (GLsizei n, const GLenum *bufs);
+// todo
+// #endif /* GL_EXT_draw_buffers */
 //
-///* GL_EXT_map_buffer_range */
-//#ifndef GL_EXT_map_buffer_range
+// /* GL_EXT_map_buffer_range */
+// #ifndef GL_EXT_map_buffer_range
 const GL_EXT_map_buffer_range = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void* GL_APIENTRY glMapBufferRangeEXT (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access);
-//GL_APICALL void GL_APIENTRY glFlushMappedBufferRangeEXT (GLenum target, GLintptr offset, GLsizeiptr length);
-//#endif
-//typedef void* (GL_APIENTRYP PFNGLMAPBUFFERRANGEEXTPROC) (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access);
-//todo
-//typedef void (GL_APIENTRYP PFNGLFLUSHMAPPEDBUFFERRANGEEXTPROC) (GLenum target, GLintptr offset, GLsizeiptr length);
-//todo
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void* GL_APIENTRY glMapBufferRangeEXT (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access);
+// GL_APICALL void GL_APIENTRY glFlushMappedBufferRangeEXT (GLenum target, GLintptr offset, GLsizeiptr length);
+// #endif
+// typedef void* (GL_APIENTRYP PFNGLMAPBUFFERRANGEEXTPROC) (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access);
+// todo
+// typedef void (GL_APIENTRYP PFNGLFLUSHMAPPEDBUFFERRANGEEXTPROC) (GLenum target, GLintptr offset, GLsizeiptr length);
+// todo
+// #endif
 //
-///* GL_EXT_multisampled_render_to_texture */
-//#ifndef GL_EXT_multisampled_render_to_texture
+// /* GL_EXT_multisampled_render_to_texture */
+// #ifndef GL_EXT_multisampled_render_to_texture
 const GL_EXT_multisampled_render_to_texture = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1817,34 +1819,34 @@ const GL_EXT_multisampled_render_to_texture = 1
 //#ifndef GL_EXT_multiview_draw_buffers
 const GL_EXT_multiview_draw_buffers = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glReadBufferIndexedEXT (GLenum src, GLint index);
-//GL_APICALL void GL_APIENTRY glDrawBuffersIndexedEXT (GLint n, const GLenum *location, const GLint *indices);
-//GL_APICALL void GL_APIENTRY glGetIntegeri_vEXT (GLenum target, GLuint index, GLint *data);
-//#endif
-//typedef void (GL_APIENTRYP PFNGLREADBUFFERINDEXEDEXTPROC) (GLenum src, GLint index);
-//todo
-//typedef void (GL_APIENTRYP PFNGLDRAWBUFFERSINDEXEDEXTPROC) (GLint n, const GLenum *location, const GLint *indices);
-//todo
-//typedef void (GL_APIENTRYP PFNGLGETINTEGERI_VEXTPROC) (GLenum target, GLuint index, GLint *data);
-//todo
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glReadBufferIndexedEXT (GLenum src, GLint index);
+// GL_APICALL void GL_APIENTRY glDrawBuffersIndexedEXT (GLint n, const GLenum *location, const GLint *indices);
+// GL_APICALL void GL_APIENTRY glGetIntegeri_vEXT (GLenum target, GLuint index, GLint *data);
+// #endif
+// typedef void (GL_APIENTRYP PFNGLREADBUFFERINDEXEDEXTPROC) (GLenum src, GLint index);
+// todo
+// typedef void (GL_APIENTRYP PFNGLDRAWBUFFERSINDEXEDEXTPROC) (GLint n, const GLenum *location, const GLint *indices);
+// todo
+// typedef void (GL_APIENTRYP PFNGLGETINTEGERI_VEXTPROC) (GLenum target, GLuint index, GLint *data);
+// todo
+// #endif
 //
-//#ifndef GL_EXT_multi_draw_arrays
+// #ifndef GL_EXT_multi_draw_arrays
 const GL_EXT_multi_draw_arrays = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glMultiDrawArraysEXT (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-//GL_APICALL void GL_APIENTRY glMultiDrawElementsEXT (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
-//#endif /* GL_GLEXT_PROTOTYPES */
-//typedef void (GL_APIENTRYP PFNGLMULTIDRAWARRAYSEXTPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-//todo
-//typedef void (GL_APIENTRYP PFNGLMULTIDRAWELEMENTSEXTPROC) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
-//todo
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glMultiDrawArraysEXT (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
+// GL_APICALL void GL_APIENTRY glMultiDrawElementsEXT (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+// #endif /* GL_GLEXT_PROTOTYPES */
+// typedef void (GL_APIENTRYP PFNGLMULTIDRAWARRAYSEXTPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
+// todo
+// typedef void (GL_APIENTRYP PFNGLMULTIDRAWELEMENTSEXTPROC) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+// todo
+// #endif
 //
-///* GL_EXT_occlusion_query_boolean */
-//#ifndef GL_EXT_occlusion_query_boolean
+// /* GL_EXT_occlusion_query_boolean */
+// #ifndef GL_EXT_occlusion_query_boolean
 const GL_EXT_occlusion_query_boolean = 1
 
 /* All entry points also exist in GL_EXT_disjoint_timer_query */
@@ -1854,10 +1856,10 @@ const GL_EXT_occlusion_query_boolean = 1
 //#ifndef GL_EXT_read_format_bgra
 const GL_EXT_read_format_bgra = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_robustness */
-//#ifndef GL_EXT_robustness
+// /* GL_EXT_robustness */
+// #ifndef GL_EXT_robustness
 const GL_EXT_robustness = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -1880,150 +1882,150 @@ const GL_EXT_robustness = 1
 //#ifndef GL_EXT_separate_shader_objects
 const GL_EXT_separate_shader_objects = 1
 
-//#ifdef GL_GLEXT_PROTOTYPES
-//GL_APICALL void GL_APIENTRY glUseProgramStagesEXT (GLuint pipeline, GLbitfield stages, GLuint program);
-//GL_APICALL void GL_APIENTRY glActiveShaderProgramEXT (GLuint pipeline, GLuint program);
-//GL_APICALL GLuint GL_APIENTRY glCreateShaderProgramvEXT (GLenum type, GLsizei count, const GLchar **strings);
-//GL_APICALL void GL_APIENTRY glBindProgramPipelineEXT (GLuint pipeline);
-//GL_APICALL void GL_APIENTRY glDeleteProgramPipelinesEXT (GLsizei n, const GLuint *pipelines);
-//GL_APICALL void GL_APIENTRY glGenProgramPipelinesEXT (GLsizei n, GLuint *pipelines);
-//GL_APICALL GLboolean GL_APIENTRY glIsProgramPipelineEXT (GLuint pipeline);
-//GL_APICALL void GL_APIENTRY glProgramParameteriEXT (GLuint program, GLenum pname, GLint value);
-//GL_APICALL void GL_APIENTRY glGetProgramPipelineivEXT (GLuint pipeline, GLenum pname, GLint *params);
-//GL_APICALL void GL_APIENTRY glProgramUniform1iEXT (GLuint program, GLint location, GLint x);
-//GL_APICALL void GL_APIENTRY glProgramUniform2iEXT (GLuint program, GLint location, GLint x, GLint y);
-//GL_APICALL void GL_APIENTRY glProgramUniform3iEXT (GLuint program, GLint location, GLint x, GLint y, GLint z);
-//GL_APICALL void GL_APIENTRY glProgramUniform4iEXT (GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w);
-//GL_APICALL void GL_APIENTRY glProgramUniform1fEXT (GLuint program, GLint location, GLfloat x);
-//GL_APICALL void GL_APIENTRY glProgramUniform2fEXT (GLuint program, GLint location, GLfloat x, GLfloat y);
-//GL_APICALL void GL_APIENTRY glProgramUniform3fEXT (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z);
-//GL_APICALL void GL_APIENTRY glProgramUniform4fEXT (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-//GL_APICALL void GL_APIENTRY glProgramUniform1ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
-//GL_APICALL void GL_APIENTRY glProgramUniform2ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
-//GL_APICALL void GL_APIENTRY glProgramUniform3ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
-//GL_APICALL void GL_APIENTRY glProgramUniform4ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
-//GL_APICALL void GL_APIENTRY glProgramUniform1fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//GL_APICALL void GL_APIENTRY glProgramUniform2fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//GL_APICALL void GL_APIENTRY glProgramUniform3fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//GL_APICALL void GL_APIENTRY glProgramUniform4fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//GL_APICALL void GL_APIENTRY glProgramUniformMatrix2fvEXT (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-//GL_APICALL void GL_APIENTRY glProgramUniformMatrix3fvEXT (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-//GL_APICALL void GL_APIENTRY glProgramUniformMatrix4fvEXT (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-//GL_APICALL void GL_APIENTRY glValidateProgramPipelineEXT (GLuint pipeline);
-//GL_APICALL void GL_APIENTRY glGetProgramPipelineInfoLogEXT (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
-//#endif
-//typedef void (GL_APIENTRYP PFNGLUSEPROGRAMSTAGESEXTPROC) (GLuint pipeline, GLbitfield stages, GLuint program);
-//todo
-//typedef void (GL_APIENTRYP PFNGLACTIVESHADERPROGRAMEXTPROC) (GLuint pipeline, GLuint program);
-//todo
-//typedef GLuint (GL_APIENTRYP PFNGLCREATESHADERPROGRAMVEXTPROC) (GLenum type, GLsizei count, const GLchar **strings);
-//todo
-//typedef void (GL_APIENTRYP PFNGLBINDPROGRAMPIPELINEEXTPROC) (GLuint pipeline);
-//todo
-//typedef void (GL_APIENTRYP PFNGLDELETEPROGRAMPIPELINESEXTPROC) (GLsizei n, const GLuint *pipelines);
-//todo
-//typedef void (GL_APIENTRYP PFNGLGENPROGRAMPIPELINESEXTPROC) (GLsizei n, GLuint *pipelines);
-//todo
-//typedef GLboolean (GL_APIENTRYP PFNGLISPROGRAMPIPELINEEXTPROC) (GLuint pipeline);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMPARAMETERIEXTPROC) (GLuint program, GLenum pname, GLint value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLGETPROGRAMPIPELINEIVEXTPROC) (GLuint pipeline, GLenum pname, GLint *params);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1IEXTPROC) (GLuint program, GLint location, GLint x);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2IEXTPROC) (GLuint program, GLint location, GLint x, GLint y);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3IEXTPROC) (GLuint program, GLint location, GLint x, GLint y, GLint z);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4IEXTPROC) (GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1FEXTPROC) (GLuint program, GLint location, GLfloat x);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2FEXTPROC) (GLuint program, GLint location, GLfloat x, GLfloat y);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3FEXTPROC) (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4FEXTPROC) (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORMMATRIX2FVEXTPROC) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORMMATRIX3FVEXTPROC) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORMMATRIX4FVEXTPROC) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-//todo
-//typedef void (GL_APIENTRYP PFNGLVALIDATEPROGRAMPIPELINEEXTPROC) (GLuint pipeline);
-//todo
-//typedef void (GL_APIENTRYP PFNGLGETPROGRAMPIPELINEINFOLOGEXTPROC) (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
-//todo
-//#endif
+// #ifdef GL_GLEXT_PROTOTYPES
+// GL_APICALL void GL_APIENTRY glUseProgramStagesEXT (GLuint pipeline, GLbitfield stages, GLuint program);
+// GL_APICALL void GL_APIENTRY glActiveShaderProgramEXT (GLuint pipeline, GLuint program);
+// GL_APICALL GLuint GL_APIENTRY glCreateShaderProgramvEXT (GLenum type, GLsizei count, const GLchar **strings);
+// GL_APICALL void GL_APIENTRY glBindProgramPipelineEXT (GLuint pipeline);
+// GL_APICALL void GL_APIENTRY glDeleteProgramPipelinesEXT (GLsizei n, const GLuint *pipelines);
+// GL_APICALL void GL_APIENTRY glGenProgramPipelinesEXT (GLsizei n, GLuint *pipelines);
+// GL_APICALL GLboolean GL_APIENTRY glIsProgramPipelineEXT (GLuint pipeline);
+// GL_APICALL void GL_APIENTRY glProgramParameteriEXT (GLuint program, GLenum pname, GLint value);
+// GL_APICALL void GL_APIENTRY glGetProgramPipelineivEXT (GLuint pipeline, GLenum pname, GLint *params);
+// GL_APICALL void GL_APIENTRY glProgramUniform1iEXT (GLuint program, GLint location, GLint x);
+// GL_APICALL void GL_APIENTRY glProgramUniform2iEXT (GLuint program, GLint location, GLint x, GLint y);
+// GL_APICALL void GL_APIENTRY glProgramUniform3iEXT (GLuint program, GLint location, GLint x, GLint y, GLint z);
+// GL_APICALL void GL_APIENTRY glProgramUniform4iEXT (GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w);
+// GL_APICALL void GL_APIENTRY glProgramUniform1fEXT (GLuint program, GLint location, GLfloat x);
+// GL_APICALL void GL_APIENTRY glProgramUniform2fEXT (GLuint program, GLint location, GLfloat x, GLfloat y);
+// GL_APICALL void GL_APIENTRY glProgramUniform3fEXT (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z);
+// GL_APICALL void GL_APIENTRY glProgramUniform4fEXT (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+// GL_APICALL void GL_APIENTRY glProgramUniform1ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
+// GL_APICALL void GL_APIENTRY glProgramUniform2ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
+// GL_APICALL void GL_APIENTRY glProgramUniform3ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
+// GL_APICALL void GL_APIENTRY glProgramUniform4ivEXT (GLuint program, GLint location, GLsizei count, const GLint *value);
+// GL_APICALL void GL_APIENTRY glProgramUniform1fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// GL_APICALL void GL_APIENTRY glProgramUniform2fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// GL_APICALL void GL_APIENTRY glProgramUniform3fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// GL_APICALL void GL_APIENTRY glProgramUniform4fvEXT (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// GL_APICALL void GL_APIENTRY glProgramUniformMatrix2fvEXT (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+// GL_APICALL void GL_APIENTRY glProgramUniformMatrix3fvEXT (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+// GL_APICALL void GL_APIENTRY glProgramUniformMatrix4fvEXT (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+// GL_APICALL void GL_APIENTRY glValidateProgramPipelineEXT (GLuint pipeline);
+// GL_APICALL void GL_APIENTRY glGetProgramPipelineInfoLogEXT (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+// #endif
+// typedef void (GL_APIENTRYP PFNGLUSEPROGRAMSTAGESEXTPROC) (GLuint pipeline, GLbitfield stages, GLuint program);
+// todo
+// typedef void (GL_APIENTRYP PFNGLACTIVESHADERPROGRAMEXTPROC) (GLuint pipeline, GLuint program);
+// todo
+// typedef GLuint (GL_APIENTRYP PFNGLCREATESHADERPROGRAMVEXTPROC) (GLenum type, GLsizei count, const GLchar **strings);
+// todo
+// typedef void (GL_APIENTRYP PFNGLBINDPROGRAMPIPELINEEXTPROC) (GLuint pipeline);
+// todo
+// typedef void (GL_APIENTRYP PFNGLDELETEPROGRAMPIPELINESEXTPROC) (GLsizei n, const GLuint *pipelines);
+// todo
+// typedef void (GL_APIENTRYP PFNGLGENPROGRAMPIPELINESEXTPROC) (GLsizei n, GLuint *pipelines);
+// todo
+// typedef GLboolean (GL_APIENTRYP PFNGLISPROGRAMPIPELINEEXTPROC) (GLuint pipeline);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMPARAMETERIEXTPROC) (GLuint program, GLenum pname, GLint value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLGETPROGRAMPIPELINEIVEXTPROC) (GLuint pipeline, GLenum pname, GLint *params);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1IEXTPROC) (GLuint program, GLint location, GLint x);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2IEXTPROC) (GLuint program, GLint location, GLint x, GLint y);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3IEXTPROC) (GLuint program, GLint location, GLint x, GLint y, GLint z);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4IEXTPROC) (GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1FEXTPROC) (GLuint program, GLint location, GLfloat x);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2FEXTPROC) (GLuint program, GLint location, GLfloat x, GLfloat y);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3FEXTPROC) (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4FEXTPROC) (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4IVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLint *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM1FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM2FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM3FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORM4FVEXTPROC) (GLuint program, GLint location, GLsizei count, const GLfloat *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORMMATRIX2FVEXTPROC) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORMMATRIX3FVEXTPROC) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLPROGRAMUNIFORMMATRIX4FVEXTPROC) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+// todo
+// typedef void (GL_APIENTRYP PFNGLVALIDATEPROGRAMPIPELINEEXTPROC) (GLuint pipeline);
+// todo
+// typedef void (GL_APIENTRYP PFNGLGETPROGRAMPIPELINEINFOLOGEXTPROC) (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+// todo
+// #endif
 //
-///* GL_EXT_shader_framebuffer_fetch */
-//#ifndef GL_EXT_shader_framebuffer_fetch
+// /* GL_EXT_shader_framebuffer_fetch */
+// #ifndef GL_EXT_shader_framebuffer_fetch
 const GL_EXT_shader_framebuffer_fetch = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_shader_texture_lod */
-//#ifndef GL_EXT_shader_texture_lod
+// /* GL_EXT_shader_texture_lod */
+// #ifndef GL_EXT_shader_texture_lod
 const GL_EXT_shader_texture_lod = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_shadow_samplers */
-//#ifndef GL_EXT_shadow_samplers
+// /* GL_EXT_shadow_samplers */
+// #ifndef GL_EXT_shadow_samplers
 const GL_EXT_shadow_samplers = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_sRGB */
-//#ifndef GL_EXT_sRGB
+// /* GL_EXT_sRGB */
+// #ifndef GL_EXT_sRGB
 const GL_EXT_sRGB = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_compression_dxt1 */
-//#ifndef GL_EXT_texture_compression_dxt1
+// /* GL_EXT_texture_compression_dxt1 */
+// #ifndef GL_EXT_texture_compression_dxt1
 const GL_EXT_texture_compression_dxt1 = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_filter_anisotropic */
-//#ifndef GL_EXT_texture_filter_anisotropic
+// /* GL_EXT_texture_filter_anisotropic */
+// #ifndef GL_EXT_texture_filter_anisotropic
 const GL_EXT_texture_filter_anisotropic = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_format_BGRA8888 */
-//#ifndef GL_EXT_texture_format_BGRA8888
+// /* GL_EXT_texture_format_BGRA8888 */
+// #ifndef GL_EXT_texture_format_BGRA8888
 const GL_EXT_texture_format_BGRA8888 = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_rg */
-//#ifndef GL_EXT_texture_rg
+// /* GL_EXT_texture_rg */
+// #ifndef GL_EXT_texture_rg
 const GL_EXT_texture_rg = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_texture_storage */
-//#ifndef GL_EXT_texture_storage
+// /* GL_EXT_texture_storage */
+// #ifndef GL_EXT_texture_storage
 const GL_EXT_texture_storage = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -2052,70 +2054,70 @@ const GL_EXT_texture_storage = 1
 //#ifndef GL_EXT_texture_type_2_10_10_10_REV
 const GL_EXT_texture_type_2_10_10_10_REV = 1
 
-//#endif
+// #endif
 //
-///* GL_EXT_unpack_subimage */
-//#ifndef GL_EXT_unpack_subimage
+// /* GL_EXT_unpack_subimage */
+// #ifndef GL_EXT_unpack_subimage
 const GL_EXT_unpack_subimage = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * DMP extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_DMP_shader_binary */
-//#ifndef GL_DMP_shader_binary
+// /* GL_DMP_shader_binary */
+// #ifndef GL_DMP_shader_binary
 const GL_DMP_shader_binary = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * FJ extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_FJ_shader_binary_GCCSO */
-//#ifndef GL_FJ_shader_binary_GCCSO
+// /* GL_FJ_shader_binary_GCCSO */
+// #ifndef GL_FJ_shader_binary_GCCSO
 const GL_FJ_shader_binary_GCCSO = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * IMG extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_IMG_program_binary */
-//#ifndef GL_IMG_program_binary
+// /* GL_IMG_program_binary */
+// #ifndef GL_IMG_program_binary
 const GL_IMG_program_binary = 1
 
-//#endif
+// #endif
 //
-///* GL_IMG_read_format */
-//#ifndef GL_IMG_read_format
+// /* GL_IMG_read_format */
+// #ifndef GL_IMG_read_format
 const GL_IMG_read_format = 1
 
-//#endif
+// #endif
 //
-///* GL_IMG_shader_binary */
-//#ifndef GL_IMG_shader_binary
+// /* GL_IMG_shader_binary */
+// #ifndef GL_IMG_shader_binary
 const GL_IMG_shader_binary = 1
 
-//#endif
+// #endif
 //
-///* GL_IMG_texture_compression_pvrtc */
-//#ifndef GL_IMG_texture_compression_pvrtc
+// /* GL_IMG_texture_compression_pvrtc */
+// #ifndef GL_IMG_texture_compression_pvrtc
 const GL_IMG_texture_compression_pvrtc = 1
 
-//#endif
+// #endif
 //
-///* GL_IMG_texture_compression_pvrtc2 */
-//#ifndef GL_IMG_texture_compression_pvrtc2
+// /* GL_IMG_texture_compression_pvrtc2 */
+// #ifndef GL_IMG_texture_compression_pvrtc2
 const GL_IMG_texture_compression_pvrtc2 = 1
 
-//#endif
+// #endif
 //
-///* GL_IMG_multisampled_render_to_texture */
-//#ifndef GL_IMG_multisampled_render_to_texture
+// /* GL_IMG_multisampled_render_to_texture */
+// #ifndef GL_IMG_multisampled_render_to_texture
 const GL_IMG_multisampled_render_to_texture = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -2150,10 +2152,10 @@ const GL_NV_coverage_sample = 1
 //#ifndef GL_NV_depth_nonlinear
 const GL_NV_depth_nonlinear = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_draw_buffers */
-//#ifndef GL_NV_draw_buffers
+// /* GL_NV_draw_buffers */
+// #ifndef GL_NV_draw_buffers
 const GL_NV_draw_buffers = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -2180,10 +2182,10 @@ const GL_NV_draw_buffers = 1
 //#ifndef GL_NV_fbo_color_attachments
 const GL_NV_fbo_color_attachments = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_fence */
-//#ifndef GL_NV_fence
+// /* GL_NV_fence */
+// #ifndef GL_NV_fence
 const GL_NV_fence = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -2237,10 +2239,10 @@ const GL_NV_framebuffer_multisample = 1
 //#ifndef GL_NV_generate_mipmap_sRGB
 const GL_NV_generate_mipmap_sRGB = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_instanced_arrays */
-//#ifndef GL_NV_instanced_arrays
+// /* GL_NV_instanced_arrays */
+// #ifndef GL_NV_instanced_arrays
 const GL_NV_instanced_arrays = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -2265,68 +2267,68 @@ const GL_NV_read_buffer = 1
 //#ifndef GL_NV_read_buffer_front
 const GL_NV_read_buffer_front = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_read_depth */
-//#ifndef GL_NV_read_depth
+// /* GL_NV_read_depth */
+// #ifndef GL_NV_read_depth
 const GL_NV_read_depth = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_read_depth_stencil */
-//#ifndef GL_NV_read_depth_stencil
+// /* GL_NV_read_depth_stencil */
+// #ifndef GL_NV_read_depth_stencil
 const GL_NV_read_depth_stencil = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_read_stencil */
-//#ifndef GL_NV_read_stencil
+// /* GL_NV_read_stencil */
+// #ifndef GL_NV_read_stencil
 const GL_NV_read_stencil = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_shadow_samplers_array */
-//#ifndef GL_NV_shadow_samplers_array
+// /* GL_NV_shadow_samplers_array */
+// #ifndef GL_NV_shadow_samplers_array
 const GL_NV_shadow_samplers_array = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_shadow_samplers_cube */
-//#ifndef GL_NV_shadow_samplers_cube
+// /* GL_NV_shadow_samplers_cube */
+// #ifndef GL_NV_shadow_samplers_cube
 const GL_NV_shadow_samplers_cube = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_sRGB_formats */
-//#ifndef GL_NV_sRGB_formats
+// /* GL_NV_sRGB_formats */
+// #ifndef GL_NV_sRGB_formats
 const GL_NV_sRGB_formats = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_texture_border_clamp */
-//#ifndef GL_NV_texture_border_clamp
+// /* GL_NV_texture_border_clamp */
+// #ifndef GL_NV_texture_border_clamp
 const GL_NV_texture_border_clamp = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_texture_compression_s3tc_update */
-//#ifndef GL_NV_texture_compression_s3tc_update
+// /* GL_NV_texture_compression_s3tc_update */
+// #ifndef GL_NV_texture_compression_s3tc_update
 const GL_NV_texture_compression_s3tc_update = 1
 
-//#endif
+// #endif
 //
-///* GL_NV_texture_npot_2D_mipmap */
-//#ifndef GL_NV_texture_npot_2D_mipmap
+// /* GL_NV_texture_npot_2D_mipmap */
+// #ifndef GL_NV_texture_npot_2D_mipmap
 const GL_NV_texture_npot_2D_mipmap = 1
 
-//#endif
+// #endif
 //
-///*------------------------------------------------------------------------*
+// /*------------------------------------------------------------------------*
 // * QCOM extension functions
 // *------------------------------------------------------------------------*/
 //
-///* GL_QCOM_alpha_test */
-//#ifndef GL_QCOM_alpha_test
+// /* GL_QCOM_alpha_test */
+// #ifndef GL_QCOM_alpha_test
 const GL_QCOM_alpha_test = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -2340,10 +2342,10 @@ const GL_QCOM_alpha_test = 1
 //#ifndef GL_QCOM_binning_control
 const GL_QCOM_binning_control = 1
 
-//#endif
+// #endif
 //
-///* GL_QCOM_driver_control */
-//#ifndef GL_QCOM_driver_control
+// /* GL_QCOM_driver_control */
+// #ifndef GL_QCOM_driver_control
 const GL_QCOM_driver_control = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES
@@ -2418,16 +2420,16 @@ const GL_QCOM_extended_get2 = 1
 //#ifndef GL_QCOM_perfmon_global_mode
 const GL_QCOM_perfmon_global_mode = 1
 
-//#endif
+// #endif
 //
-///* GL_QCOM_writeonly_rendering */
-//#ifndef GL_QCOM_writeonly_rendering
+// /* GL_QCOM_writeonly_rendering */
+// #ifndef GL_QCOM_writeonly_rendering
 const GL_QCOM_writeonly_rendering = 1
 
-//#endif
+// #endif
 //
-///* GL_QCOM_tiled_rendering */
-//#ifndef GL_QCOM_tiled_rendering
+// /* GL_QCOM_tiled_rendering */
+// #ifndef GL_QCOM_tiled_rendering
 const GL_QCOM_tiled_rendering = 1
 
 //#ifdef GL_GLEXT_PROTOTYPES

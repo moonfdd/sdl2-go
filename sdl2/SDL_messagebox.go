@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -33,16 +34,16 @@ const (
  * Individual button data.
  */
 type SDL_MessageBoxButtonData struct {
-	Flags    sdlcommon.FUint32T     /**< ::SDL_MessageBoxButtonFlags */
-	Buttonid sdlcommon.FInt         /**< User defined button id (value returned via SDL_ShowMessageBox) */
-	Text     sdlcommon.FCharPStruct /**< The UTF-8 button text */
+	Flags    ffcommon.FUint32T     /**< ::SDL_MessageBoxButtonFlags */
+	Buttonid ffcommon.FInt         /**< User defined button id (value returned via SDL_ShowMessageBox) */
+	Text     ffcommon.FCharPStruct /**< The UTF-8 button text */
 }
 
 /**
  * RGB value used in a message box color scheme
  */
 type SDL_MessageBoxColor struct {
-	R, G, B sdlcommon.FUint8T
+	R, G, B ffcommon.FUint8T
 }
 
 type SDL_MessageBoxColorType = int32
@@ -67,12 +68,12 @@ type SDL_MessageBoxColorScheme struct {
  * MessageBox structure containing title, text, window, etc.
  */
 type SDL_MessageBoxData struct {
-	Flags   sdlcommon.FUint32T          /**< ::SDL_MessageBoxFlags */
-	Window  *SDL_Window                 /**< Parent window, can be NULL */
-	Title   sdlcommon.FConstCharPStruct /**< UTF-8 title */
-	Message sdlcommon.FConstCharPStruct /**< UTF-8 message text */
+	Flags   ffcommon.FUint32T          /**< ::SDL_MessageBoxFlags */
+	Window  *SDL_Window                /**< Parent window, can be NULL */
+	Title   ffcommon.FConstCharPStruct /**< UTF-8 title */
+	Message ffcommon.FConstCharPStruct /**< UTF-8 message text */
 
-	Numbuttons sdlcommon.FInt
+	Numbuttons ffcommon.FInt
 	Buttons    *SDL_MessageBoxButtonData
 
 	ColorScheme *SDL_MessageBoxColorScheme /**< ::SDL_MessageBoxColorScheme, can be NULL to use system settings */
@@ -112,7 +113,7 @@ type SDL_MessageBoxData struct {
  * \sa SDL_ShowSimpleMessageBox
  */
 //extern DECLSPEC int SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid);
-func SDL_ShowMessageBox(messageboxdata *SDL_MessageBoxData, buttonid *sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_ShowMessageBox(messageboxdata *SDL_MessageBoxData, buttonid *ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ShowMessageBox").Call(
 		uintptr(unsafe.Pointer(messageboxdata)),
 		uintptr(unsafe.Pointer(buttonid)),
@@ -120,7 +121,7 @@ func SDL_ShowMessageBox(messageboxdata *SDL_MessageBoxData, buttonid *sdlcommon.
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -163,16 +164,16 @@ func SDL_ShowMessageBox(messageboxdata *SDL_MessageBoxData, buttonid *sdlcommon.
  * \sa SDL_ShowMessageBox
  */
 //extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(Uint32 flags, const char *title, const char *message, SDL_Window *window);
-func SDL_ShowSimpleMessageBox(flags sdlcommon.FUint32T, title sdlcommon.FConstCharP, message sdlcommon.FConstCharP, window *SDL_Window) (res sdlcommon.FInt) {
+func SDL_ShowSimpleMessageBox(flags ffcommon.FUint32T, title ffcommon.FConstCharP, message ffcommon.FConstCharP, window *SDL_Window) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ShowSimpleMessageBox").Call(
 		uintptr(flags),
-		sdlcommon.UintPtrFromString(title),
-		sdlcommon.UintPtrFromString(message),
+		ffcommon.UintPtrFromString(title),
+		ffcommon.UintPtrFromString(message),
 		uintptr(unsafe.Pointer(window)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }

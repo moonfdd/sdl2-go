@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -124,12 +125,12 @@ func SDL_UnlockSensors() {
  * \returns the number of sensors detected.
  */
 //extern DECLSPEC int SDLCALL SDL_NumSensors(void);
-func SDL_NumSensors() (res sdlcommon.FInt) {
+func SDL_NumSensors() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_NumSensors").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -140,14 +141,14 @@ func SDL_NumSensors() (res sdlcommon.FInt) {
  * \returns the sensor name, or NULL if `device_index` is out of range.
  */
 //extern DECLSPEC const char *SDLCALL SDL_SensorGetDeviceName(int device_index);
-func SDL_SensorGetDeviceName(device_index sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+func SDL_SensorGetDeviceName(device_index ffcommon.FInt) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorGetDeviceName").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -159,7 +160,7 @@ func SDL_SensorGetDeviceName(device_index sdlcommon.FInt) (res sdlcommon.FConstC
  *          out of range.
  */
 //extern DECLSPEC SDL_SensorType SDLCALL SDL_SensorGetDeviceType(int device_index);
-func SDL_SensorGetDeviceType(device_index sdlcommon.FInt) (res SDL_SensorType) {
+func SDL_SensorGetDeviceType(device_index ffcommon.FInt) (res SDL_SensorType) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorGetDeviceType").Call(
 		uintptr(device_index),
 	)
@@ -178,14 +179,14 @@ func SDL_SensorGetDeviceType(device_index sdlcommon.FInt) (res SDL_SensorType) {
  *          of range.
  */
 //extern DECLSPEC int SDLCALL SDL_SensorGetDeviceNonPortableType(int device_index);
-func SDL_SensorGetDeviceNonPortableType(device_index sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_SensorGetDeviceNonPortableType(device_index ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorGetDeviceNonPortableType").Call(
 		uintptr(device_index),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -196,7 +197,7 @@ func SDL_SensorGetDeviceNonPortableType(device_index sdlcommon.FInt) (res sdlcom
  * \returns the sensor instance ID, or -1 if `device_index` is out of range.
  */
 //extern DECLSPEC SDL_SensorID SDLCALL SDL_SensorGetDeviceInstanceID(int device_index);
-func SDL_SensorGetDeviceInstanceID(device_index sdlcommon.FInt) (res SDL_SensorID) {
+func SDL_SensorGetDeviceInstanceID(device_index ffcommon.FInt) (res SDL_SensorID) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorGetDeviceInstanceID").Call(
 		uintptr(device_index),
 	)
@@ -214,7 +215,7 @@ func SDL_SensorGetDeviceInstanceID(device_index sdlcommon.FInt) (res SDL_SensorI
  * \returns an SDL_Sensor sensor object, or NULL if an error occurred.
  */
 //extern DECLSPEC SDL_Sensor *SDLCALL SDL_SensorOpen(int device_index);
-func SDL_SensorOpen(device_index sdlcommon.FInt) (res *SDL_Sensor) {
+func SDL_SensorOpen(device_index ffcommon.FInt) (res *SDL_Sensor) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorOpen").Call(
 		uintptr(device_index),
 	)
@@ -250,14 +251,14 @@ func SDL_SensorFromInstanceID(instance_id SDL_SensorID) (res *SDL_Sensor) {
  * \returns the sensor name, or NULL if `sensor` is NULL.
  */
 //extern DECLSPEC const char *SDLCALL SDL_SensorGetName(SDL_Sensor *sensor);
-func (sensor *SDL_Sensor) SDL_SensorGetName() (res sdlcommon.FConstCharP) {
+func (sensor *SDL_Sensor) SDL_SensorGetName() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorGetName").Call(
 		uintptr(unsafe.Pointer(sensor)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -287,14 +288,14 @@ func (sensor *SDL_Sensor) SDL_SensorGetType() (res SDL_SensorType) {
  * \returns the sensor platform dependent type, or -1 if `sensor` is NULL.
  */
 //extern DECLSPEC int SDLCALL SDL_SensorGetNonPortableType(SDL_Sensor *sensor);
-func (sensor *SDL_Sensor) SDL_SensorGetNonPortableType() (res sdlcommon.FInt) {
+func (sensor *SDL_Sensor) SDL_SensorGetNonPortableType() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorGetNonPortableType").Call(
 		uintptr(unsafe.Pointer(sensor)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -327,7 +328,7 @@ func (sensor *SDL_Sensor) SDL_SensorGetInstanceID() (res SDL_SensorID) {
  * \returns 0 or -1 if an error occurred.
  */
 //extern DECLSPEC int SDLCALL SDL_SensorGetData(SDL_Sensor * sensor, float *data, int num_values);
-func (sensor *SDL_Sensor) SDL_SensorGetData(data *sdlcommon.FFloat, num_values sdlcommon.FInt) (res sdlcommon.FInt) {
+func (sensor *SDL_Sensor) SDL_SensorGetData(data *ffcommon.FFloat, num_values ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SensorGetData").Call(
 		uintptr(unsafe.Pointer(sensor)),
 		uintptr(unsafe.Pointer(data)),
@@ -336,7 +337,7 @@ func (sensor *SDL_Sensor) SDL_SensorGetData(data *sdlcommon.FFloat, num_values s
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

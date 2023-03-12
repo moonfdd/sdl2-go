@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -71,16 +72,16 @@ import (
  * \sa SDL_GetError
  */
 // extern DECLSPEC int SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1);
-func SDL_SetError(fmt0 sdlcommon.FConstCharP, aList ...sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_SetError(fmt0 ffcommon.FConstCharP, aList ...ffcommon.FInt) (res ffcommon.FInt) {
 	uintptrList := make([]uintptr, 0)
-	uintptrList = append(uintptrList, uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(fmt0))))
+	uintptrList = append(uintptrList, uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(fmt0))))
 	for _, a := range aList {
 		uintptrList = append(uintptrList, uintptr(a))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetError").Call(
 		uintptrList...,
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -120,9 +121,9 @@ func SDL_SetError(fmt0 sdlcommon.FConstCharP, aList ...sdlcommon.FInt) (res sdlc
  * \sa SDL_SetError
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetError(void);
-func SDL_GetError() (res sdlcommon.FConstCharP) {
+func SDL_GetError() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetError").Call()
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -142,12 +143,12 @@ func SDL_GetError() (res sdlcommon.FConstCharP) {
  * \sa SDL_GetError
  */
 // extern DECLSPEC char * SDLCALL SDL_GetErrorMsg(char *errstr, int maxlen);
-func SDL_GetErrorMsg(errstr sdlcommon.FCharP, maxlen sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+func SDL_GetErrorMsg(errstr ffcommon.FCharP, maxlen ffcommon.FInt) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetErrorMsg").Call(
-		sdlcommon.UintPtrFromString(errstr),
+		ffcommon.UintPtrFromString(errstr),
 		uintptr(maxlen),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -195,11 +196,11 @@ const (
 
 /* SDL_Error() unconditionally returns -1. */
 // extern DECLSPEC int SDLCALL SDL_Error(SDL_errorcode code);
-func SDL_Error(code SDL_errorcode) (res sdlcommon.FInt) {
+func SDL_Error(code SDL_errorcode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetError").Call(
 		uintptr(code),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

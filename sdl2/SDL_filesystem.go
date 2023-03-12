@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -45,12 +46,12 @@ import (
  * \sa SDL_GetPrefPath
  */
 //extern DECLSPEC char *SDLCALL SDL_GetBasePath(void);
-func SDL_GetBasePath() (res sdlcommon.FConstCharP) {
+func SDL_GetBasePath() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetBasePath").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -110,14 +111,14 @@ func SDL_GetBasePath() (res sdlcommon.FConstCharP) {
  * \sa SDL_GetBasePath
  */
 //extern DECLSPEC char *SDLCALL SDL_GetPrefPath(const char *org, const char *app);
-func SDL_GetPrefPath(org sdlcommon.FConstCharP, app sdlcommon.FConstCharP) (res sdlcommon.FConstCharP) {
+func SDL_GetPrefPath(org ffcommon.FConstCharP, app ffcommon.FConstCharP) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPrefPath").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(org))),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(app))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(org))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(app))),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }

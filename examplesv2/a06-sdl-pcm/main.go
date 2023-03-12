@@ -3,7 +3,7 @@ package main
 //import (
 //	"fmt"
 //	"github.com/moonfdd/sdl2-go/sdl"
-//	"github.com/moonfdd/sdl2-go/sdlcommon"
+//	"github.com/moonfdd/ffmpeg-go/ffcommon"
 //	"io/ioutil"
 //	"syscall"
 //	"unsafe"
@@ -21,7 +21,7 @@ package main
 //var s_audio_end uintptr
 //
 ////音频设备回调函数
-//func fill_audio_pcm(udata sdlcommon.FVoidP, stream *sdlcommon.FUint8T, len1 sdlcommon.FInt) uintptr {
+//func fill_audio_pcm(udata ffcommon.FVoidP, stream *ffcommon.FUint8T, len1 ffcommon.FInt) uintptr {
 //
 //	sdl.SDL_memset(uintptr(unsafe.Pointer(stream)), 0, uint64(len1))
 //	if s_audio_pos > s_audio_end-PCM_BUFFER_SIZE {

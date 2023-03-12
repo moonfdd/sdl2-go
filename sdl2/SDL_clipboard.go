@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -19,9 +20,9 @@ import (
  * \sa SDL_HasClipboardText
  */
 //extern DECLSPEC int SDLCALL SDL_SetClipboardText(const char *text);
-func SDL_SetClipboardText(text sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_SetClipboardText(text ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetClipboardText").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(text))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(text))),
 	)
 	if t == 0 {
 
@@ -44,12 +45,12 @@ func SDL_SetClipboardText(text sdlcommon.FConstCharP) (res sdlcommon.FInt) {
  * \sa SDL_SetClipboardText
  */
 //extern DECLSPEC char * SDLCALL SDL_GetClipboardText(void);
-func SDL_GetClipboardText() (res sdlcommon.FConstCharP) {
+func SDL_GetClipboardText() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetClipboardText").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -69,6 +70,6 @@ func SDL_HasClipboardText() (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }

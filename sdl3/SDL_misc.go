@@ -1,6 +1,9 @@
 package sdl3
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
 
 /*
   Simple DirectMedia Layer
@@ -71,11 +74,11 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_OpenURL(const char *url);
-func SDL_OpenURL(url sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_OpenURL(url ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OpenURL").Call(
-		sdlcommon.UintPtrFromString(url),
+		ffcommon.UintPtrFromString(url),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

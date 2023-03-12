@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -26,14 +27,14 @@ type SDL_GestureID = int64
  * \sa SDL_GetTouchDevice
  */
 //extern DECLSPEC int SDLCALL SDL_RecordGesture(SDL_TouchID touchId);
-func SDL_RecordGesture(touchId SDL_TouchID) (res sdlcommon.FInt) {
+func SDL_RecordGesture(touchId SDL_TouchID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RecordGesture").Call(
 		uintptr(touchId),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -50,14 +51,14 @@ func SDL_RecordGesture(touchId SDL_TouchID) (res sdlcommon.FInt) {
  * \sa SDL_SaveDollarTemplate
  */
 //extern DECLSPEC int SDLCALL SDL_SaveAllDollarTemplates(SDL_RWops *dst);
-func (dst *SDL_RWops) SDL_SaveAllDollarTemplates() (res sdlcommon.FInt) {
+func (dst *SDL_RWops) SDL_SaveAllDollarTemplates() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SaveAllDollarTemplates").Call(
 		uintptr(unsafe.Pointer(dst)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -75,14 +76,14 @@ func (dst *SDL_RWops) SDL_SaveAllDollarTemplates() (res sdlcommon.FInt) {
  * \sa SDL_SaveAllDollarTemplates
  */
 //extern DECLSPEC int SDLCALL SDL_SaveDollarTemplate(SDL_GestureID gestureId,SDL_RWops *dst);
-func (dst *SDL_RWops) SDL_SaveDollarTemplate() (res sdlcommon.FInt) {
+func (dst *SDL_RWops) SDL_SaveDollarTemplate() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SaveDollarTemplate").Call(
 		uintptr(unsafe.Pointer(dst)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -100,7 +101,7 @@ func (dst *SDL_RWops) SDL_SaveDollarTemplate() (res sdlcommon.FInt) {
  * \sa SDL_SaveDollarTemplate
  */
 //extern DECLSPEC int SDLCALL SDL_LoadDollarTemplates(SDL_TouchID touchId, SDL_RWops *src);
-func SDL_LoadDollarTemplates(touchId SDL_TouchID, src *SDL_RWops) (res sdlcommon.FInt) {
+func SDL_LoadDollarTemplates(touchId SDL_TouchID, src *SDL_RWops) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadDollarTemplates").Call(
 		uintptr(touchId),
 		uintptr(unsafe.Pointer(src)),
@@ -108,6 +109,6 @@ func SDL_LoadDollarTemplates(touchId SDL_TouchID, src *SDL_RWops) (res sdlcommon
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }

@@ -1666,9 +1666,9 @@ extern DECLSPEC int SDLCALL SDL_GL_LoadLibrary(const char *path);
  * \sa SDL_GL_UnloadLibrary
  */
 // extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_GL_GetProcAddress(const char *proc);
-func SDL_GL_GetProcAddress(path0 sdlcommon.FConstCharP) (res sdlcommon.FVoidP) {
+func SDL_GL_GetProcAddress(path0 ffcommon.FConstCharP) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_GetProcAddress").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(path0))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(path0))),
 	)
 	if t == 0 {
 

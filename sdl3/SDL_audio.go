@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -72,7 +73,7 @@ import (
 *  There are macros in SDL 2.0 and later to query these bits.
 */
 // typedef Uint16 SDL_AudioFormat;
-type SDL_AudioFormat sdlcommon.FUint16T
+type SDL_AudioFormat ffcommon.FUint16T
 
 /**
  *  \name Audio flags
@@ -179,7 +180,7 @@ const SDL_AUDIO_ALLOW_ANY_CHANGE = (SDL_AUDIO_ALLOW_FREQUENCY_CHANGE | SDL_AUDIO
  */
 // typedef void (SDLCALL * SDL_AudioCallback) (void *userdata, Uint8 * stream,
 //                                             int len);
-type SDL_AudioCallback = func(userdata sdlcommon.FVoidP, stream *sdlcommon.FUint8T, len0 sdlcommon.FInt) uintptr
+type SDL_AudioCallback = func(userdata ffcommon.FVoidP, stream *ffcommon.FUint8T, len0 ffcommon.FInt) uintptr
 
 /**
  *  The calculated values in this structure are calculated by SDL_OpenAudioDevice().
@@ -194,15 +195,15 @@ type SDL_AudioCallback = func(userdata sdlcommon.FVoidP, stream *sdlcommon.FUint
  *  8:  FL FR FC LFE BL BR SL SR    (7.1 surround)
  */
 type SDL_AudioSpec struct {
-	Freq     sdlcommon.FInt     /**< DSP frequency -- samples per second */
-	Format   SDL_AudioFormat    /**< Audio data format */
-	Channels sdlcommon.FUint8T  /**< Number of channels: 1 mono, 2 stereo */
-	Silence  sdlcommon.FUint8T  /**< Audio buffer silence value (calculated) */
-	Samples  sdlcommon.FUint16T /**< Audio buffer size in sample FRAMES (total samples divided by channel count) */
-	Padding  sdlcommon.FUint16T /**< Necessary for some compile environments */
-	Cize     sdlcommon.FUint32T /**< Audio buffer size in bytes (calculated) */
-	Callback uintptr            //*SDL_AudioCallback // /**< Callback that feeds the audio device (NULL to use SDL_QueueAudio()). */
-	Userdata sdlcommon.FVoidP   /**< Userdata passed to callback (ignored for NULL callbacks). */
+	Freq     ffcommon.FInt     /**< DSP frequency -- samples per second */
+	Format   SDL_AudioFormat   /**< Audio data format */
+	Channels ffcommon.FUint8T  /**< Number of channels: 1 mono, 2 stereo */
+	Silence  ffcommon.FUint8T  /**< Audio buffer silence value (calculated) */
+	Samples  ffcommon.FUint16T /**< Audio buffer size in sample FRAMES (total samples divided by channel count) */
+	Padding  ffcommon.FUint16T /**< Necessary for some compile environments */
+	Cize     ffcommon.FUint32T /**< Audio buffer size in bytes (calculated) */
+	Callback uintptr           //*SDL_AudioCallback // /**< Callback that feeds the audio device (NULL to use SDL_QueueAudio()). */
+	Userdata ffcommon.FVoidP   /**< Userdata passed to callback (ignored for NULL callbacks). */
 }
 
 /* Function prototypes */
@@ -235,9 +236,9 @@ type SDL_AudioSpec struct {
  * \sa SDL_GetAudioDriver
  */
 // extern DECLSPEC int SDLCALL SDL_GetNumAudioDrivers(void);
-func SDL_GetNumAudioDrivers() (res sdlcommon.FInt) {
+func SDL_GetNumAudioDrivers() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumAudioDrivers").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -262,9 +263,9 @@ func SDL_GetNumAudioDrivers() (res sdlcommon.FInt) {
  * \sa SDL_GetNumAudioDrivers
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetAudioDriver(int index);
-func SDL_GetAudioDriver() (res sdlcommon.FConstCharP) {
+func SDL_GetAudioDriver() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetAudioDriver").Call()
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -285,9 +286,9 @@ func SDL_GetAudioDriver() (res sdlcommon.FConstCharP) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetCurrentAudioDriver(void);
-func SDL_GetCurrentAudioDriver() (res sdlcommon.FConstCharP) {
+func SDL_GetCurrentAudioDriver() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetCurrentAudioDriver").Call()
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -295,7 +296,7 @@ func SDL_GetCurrentAudioDriver() (res sdlcommon.FConstCharP) {
  *  SDL Audio Device IDs.
  */
 // typedef Uint32 SDL_AudioDeviceID;
-type SDL_AudioDeviceID sdlcommon.FUint32T
+type SDL_AudioDeviceID ffcommon.FUint32T
 
 /**
  * Get the number of built-in audio devices.
@@ -342,11 +343,11 @@ type SDL_AudioDeviceID sdlcommon.FUint32T
  * \sa SDL_OpenAudioDevice
  */
 // extern DECLSPEC int SDLCALL SDL_GetNumAudioDevices(int iscapture);
-func SDL_GetNumAudioDevices(iscapture sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_GetNumAudioDevices(iscapture ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumAudioDevices").Call(
 		uintptr(iscapture),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -377,12 +378,12 @@ func SDL_GetNumAudioDevices(iscapture sdlcommon.FInt) (res sdlcommon.FInt) {
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetAudioDeviceName(int index,
 //                                                            int iscapture);
-func SDL_GetAudioDeviceName(index, iscapture sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+func SDL_GetAudioDeviceName(index, iscapture ffcommon.FInt) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetAudioDeviceName").Call(
 		uintptr(index),
 		uintptr(iscapture),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -412,13 +413,13 @@ func SDL_GetAudioDeviceName(index, iscapture sdlcommon.FInt) (res sdlcommon.FCon
 // extern DECLSPEC int SDLCALL SDL_GetAudioDeviceSpec(int index,
 //                                                    int iscapture,
 //                                                    SDL_AudioSpec *spec);
-func SDL_GetAudioDeviceSpec(index, iscapture sdlcommon.FInt, spec *SDL_AudioSpec) (res sdlcommon.FInt) {
+func SDL_GetAudioDeviceSpec(index, iscapture ffcommon.FInt, spec *SDL_AudioSpec) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetAudioDeviceSpec").Call(
 		uintptr(index),
 		uintptr(iscapture),
 		uintptr(unsafe.Pointer(spec)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -456,13 +457,13 @@ func SDL_GetAudioDeviceSpec(index, iscapture sdlcommon.FInt, spec *SDL_AudioSpec
 //                                                     SDL_AudioSpec *spec,
 //                                                     int iscapture);
 
-func SDL_GetDefaultAudioInfo(name **sdlcommon.FChar, spec *SDL_AudioSpec, iscapture sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_GetDefaultAudioInfo(name **ffcommon.FChar, spec *SDL_AudioSpec, iscapture ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetDefaultAudioInfo").Call(
 		uintptr(unsafe.Pointer(name)),
 		uintptr(unsafe.Pointer(spec)),
 		uintptr(iscapture),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -575,9 +576,9 @@ func SDL_GetDefaultAudioInfo(name **sdlcommon.FChar, spec *SDL_AudioSpec, iscapt
 //                                                   SDL_AudioSpec *obtained,
 //                                                   int allowed_changes);
 
-func SDL_OpenAudioDevice(device sdlcommon.FConstCharP, iscapture sdlcommon.FInt, desired *SDL_AudioSpec, obtained *SDL_AudioSpec, allowed_changes sdlcommon.FInt) (res SDL_AudioDeviceID) {
+func SDL_OpenAudioDevice(device ffcommon.FConstCharP, iscapture ffcommon.FInt, desired *SDL_AudioSpec, obtained *SDL_AudioSpec, allowed_changes ffcommon.FInt) (res SDL_AudioDeviceID) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_OpenAudioDevice").Call(
-		sdlcommon.UintPtrFromString(device),
+		ffcommon.UintPtrFromString(device),
 		uintptr(iscapture),
 		uintptr(unsafe.Pointer(desired)),
 		uintptr(unsafe.Pointer(obtained)),
@@ -643,11 +644,11 @@ func SDL_GetAudioStatus() (res SDL_AudioStatus) {
  * \sa SDL_PauseAudioDevice
  */
 // extern DECLSPEC int SDLCALL SDL_PlayAudioDevice(SDL_AudioDeviceID dev);
-func SDL_PlayAudioDevice(dev SDL_AudioDeviceID) (res sdlcommon.FInt) {
+func SDL_PlayAudioDevice(dev SDL_AudioDeviceID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_PlayAudioDevice").Call(
 		uintptr(dev),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -674,11 +675,11 @@ func SDL_PlayAudioDevice(dev SDL_AudioDeviceID) (res sdlcommon.FInt) {
  */
 // extern DECLSPEC int SDLCALL SDL_PauseAudioDevice(SDL_AudioDeviceID dev);
 
-func SDL_PauseAudioDevice(dev SDL_AudioDeviceID) (res sdlcommon.FInt) {
+func SDL_PauseAudioDevice(dev SDL_AudioDeviceID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_PauseAudioDevice").Call(
 		uintptr(dev),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -768,7 +769,7 @@ func SDL_PauseAudioDevice(dev SDL_AudioDeviceID) (res sdlcommon.FInt) {
 //                                                       SDL_AudioSpec * spec,
 //                                                       Uint8 ** audio_buf,
 //                                                       Uint32 * audio_len);
-func (src *SDL_RWops) SDL_LoadWAV_RW(freesrc sdlcommon.FInt, spec *SDL_AudioSpec, audio_buf **sdlcommon.FUint8T, audio_len *sdlcommon.FUint32T) (res *SDL_AudioSpec) {
+func (src *SDL_RWops) SDL_LoadWAV_RW(freesrc ffcommon.FInt, spec *SDL_AudioSpec, audio_buf **ffcommon.FUint8T, audio_len *ffcommon.FUint32T) (res *SDL_AudioSpec) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadWAV_RW").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(freesrc),
@@ -831,11 +832,11 @@ type SDL_AudioStream struct {
 //                                                             Uint8 dst_channels,
 //                                                             int dst_rate);
 func SDL_CreateAudioStream(src_format SDL_AudioFormat,
-	src_channels sdlcommon.FUint8T,
-	src_rate sdlcommon.FInt,
+	src_channels ffcommon.FUint8T,
+	src_rate ffcommon.FInt,
 	dst_format SDL_AudioFormat,
-	dst_channels sdlcommon.FUint8T,
-	dst_rate sdlcommon.FInt) (res *SDL_AudioSpec) {
+	dst_channels ffcommon.FUint8T,
+	dst_rate ffcommon.FInt) (res *SDL_AudioSpec) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateAudioStream").Call(
 		uintptr(src_format),
 		uintptr(src_channels),
@@ -866,13 +867,13 @@ func SDL_CreateAudioStream(src_format SDL_AudioFormat,
  * \sa SDL_DestroyAudioStream
  */
 // extern DECLSPEC int SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len);
-func (stream *SDL_AudioStream) SDL_PutAudioStreamData(buf sdlcommon.FConstVoidP, len0 sdlcommon.FInt) (res sdlcommon.FInt) {
+func (stream *SDL_AudioStream) SDL_PutAudioStreamData(buf ffcommon.FConstVoidP, len0 ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_PutAudioStreamData").Call(
 		uintptr(unsafe.Pointer(stream)),
 		buf,
 		uintptr(len0),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -894,13 +895,13 @@ func (stream *SDL_AudioStream) SDL_PutAudioStreamData(buf sdlcommon.FConstVoidP,
  * \sa SDL_DestroyAudioStream
  */
 // extern DECLSPEC int SDLCALL SDL_GetAudioStreamData(SDL_AudioStream *stream, void *buf, int len);
-func (stream *SDL_AudioStream) SDL_GetAudioStreamData(buf sdlcommon.FConstVoidP, len0 sdlcommon.FInt) (res sdlcommon.FInt) {
+func (stream *SDL_AudioStream) SDL_GetAudioStreamData(buf ffcommon.FConstVoidP, len0 ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetAudioStreamData").Call(
 		uintptr(unsafe.Pointer(stream)),
 		buf,
 		uintptr(len0),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -921,11 +922,11 @@ func (stream *SDL_AudioStream) SDL_GetAudioStreamData(buf sdlcommon.FConstVoidP,
  * \sa SDL_DestroyAudioStream
  */
 // extern DECLSPEC int SDLCALL SDL_GetAudioStreamAvailable(SDL_AudioStream *stream);
-func (stream *SDL_AudioStream) SDL_GetAudioStreamAvailable() (res sdlcommon.FInt) {
+func (stream *SDL_AudioStream) SDL_GetAudioStreamAvailable() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetAudioStreamAvailable").Call(
 		uintptr(unsafe.Pointer(stream)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -947,11 +948,11 @@ func (stream *SDL_AudioStream) SDL_GetAudioStreamAvailable() (res sdlcommon.FInt
  * \sa SDL_DestroyAudioStream
  */
 // extern DECLSPEC int SDLCALL SDL_FlushAudioStream(SDL_AudioStream *stream);
-func (stream *SDL_AudioStream) SDL_FlushAudioStream() (res sdlcommon.FInt) {
+func (stream *SDL_AudioStream) SDL_FlushAudioStream() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FlushAudioStream").Call(
 		uintptr(unsafe.Pointer(stream)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -972,11 +973,11 @@ func (stream *SDL_AudioStream) SDL_FlushAudioStream() (res sdlcommon.FInt) {
  * \sa SDL_DestroyAudioStream
  */
 // extern DECLSPEC int SDLCALL SDL_ClearAudioStream(SDL_AudioStream *stream);
-func (stream *SDL_AudioStream) SDL_ClearAudioStream() (res sdlcommon.FInt) {
+func (stream *SDL_AudioStream) SDL_ClearAudioStream() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ClearAudioStream").Call(
 		uintptr(unsafe.Pointer(stream)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1037,7 +1038,7 @@ const SDL_MIX_MAXVOLUME = 128
 //                                                 const Uint8 * src,
 //                                                 SDL_AudioFormat format,
 //                                                 Uint32 len, int volume);
-func SDL_MixAudioFormat(dst *sdlcommon.FUint8T, src *sdlcommon.FUint8T, format SDL_AudioFormat, len0 sdlcommon.FUint32T, volume sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_MixAudioFormat(dst *ffcommon.FUint8T, src *ffcommon.FUint8T, format SDL_AudioFormat, len0 ffcommon.FUint32T, volume ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_MixAudioFormat").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(unsafe.Pointer(src)),
@@ -1045,7 +1046,7 @@ func SDL_MixAudioFormat(dst *sdlcommon.FUint8T, src *sdlcommon.FUint8T, format S
 		uintptr(len0),
 		uintptr(volume),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1096,13 +1097,13 @@ func SDL_MixAudioFormat(dst *sdlcommon.FUint8T, src *sdlcommon.FUint8T, format S
  * \sa SDL_GetQueuedAudioSize
  */
 // extern DECLSPEC int SDLCALL SDL_QueueAudio(SDL_AudioDeviceID dev, const void *data, Uint32 len);
-func SDL_QueueAudio(dev SDL_AudioDeviceID, data sdlcommon.FConstVoidP, len0 sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func SDL_QueueAudio(dev SDL_AudioDeviceID, data ffcommon.FConstVoidP, len0 ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_QueueAudio").Call(
 		uintptr(dev),
 		data,
 		uintptr(len0),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1153,13 +1154,13 @@ func SDL_QueueAudio(dev SDL_AudioDeviceID, data sdlcommon.FConstVoidP, len0 sdlc
  * \sa SDL_GetQueuedAudioSize
  */
 // extern DECLSPEC Uint32 SDLCALL SDL_DequeueAudio(SDL_AudioDeviceID dev, void *data, Uint32 len);
-func SDL_DequeueAudio(dev SDL_AudioDeviceID, data sdlcommon.FConstVoidP, len0 sdlcommon.FUint32T) (res sdlcommon.FUint32T) {
+func SDL_DequeueAudio(dev SDL_AudioDeviceID, data ffcommon.FConstVoidP, len0 ffcommon.FUint32T) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DequeueAudio").Call(
 		uintptr(dev),
 		data,
 		uintptr(len0),
 	)
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }
 
@@ -1196,11 +1197,11 @@ func SDL_DequeueAudio(dev SDL_AudioDeviceID, data sdlcommon.FConstVoidP, len0 sd
  * \sa SDL_DequeueAudio
  */
 // extern DECLSPEC Uint32 SDLCALL SDL_GetQueuedAudioSize(SDL_AudioDeviceID dev);
-func SDL_GetQueuedAudioSize(dev SDL_AudioDeviceID) (res sdlcommon.FUint32T) {
+func SDL_GetQueuedAudioSize(dev SDL_AudioDeviceID) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetQueuedAudioSize").Call(
 		uintptr(dev),
 	)
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }
 
@@ -1239,11 +1240,11 @@ func SDL_GetQueuedAudioSize(dev SDL_AudioDeviceID) (res sdlcommon.FUint32T) {
  * \sa SDL_DequeueAudio
  */
 // extern DECLSPEC int SDLCALL SDL_ClearQueuedAudio(SDL_AudioDeviceID dev);
-func SDL_ClearQueuedAudio(dev SDL_AudioDeviceID) (res sdlcommon.FInt) {
+func SDL_ClearQueuedAudio(dev SDL_AudioDeviceID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ClearQueuedAudio").Call(
 		uintptr(dev),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1297,11 +1298,11 @@ func SDL_ClearQueuedAudio(dev SDL_AudioDeviceID) (res sdlcommon.FInt) {
  * \sa SDL_UnlockAudioDevice
  */
 // extern DECLSPEC int SDLCALL SDL_LockAudioDevice(SDL_AudioDeviceID dev);
-func SDL_LockAudioDevice(dev SDL_AudioDeviceID) (res sdlcommon.FInt) {
+func SDL_LockAudioDevice(dev SDL_AudioDeviceID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LockAudioDevice").Call(
 		uintptr(dev),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1388,15 +1389,15 @@ func SDL_CloseAudioDevice(dev SDL_AudioDeviceID) {
 //                                                     Uint8 **dst_data,
 //                                                     int *dst_len);
 func SDL_ConvertAudioSamples(src_format SDL_AudioFormat,
-	src_channels sdlcommon.FUint8T,
-	src_rate sdlcommon.FInt,
-	src_data *sdlcommon.FUint8T,
-	src_len sdlcommon.FInt,
+	src_channels ffcommon.FUint8T,
+	src_rate ffcommon.FInt,
+	src_data *ffcommon.FUint8T,
+	src_len ffcommon.FInt,
 	dst_format SDL_AudioFormat,
-	dst_channels sdlcommon.FUint8T,
-	dst_rate sdlcommon.FInt,
-	dst_data **sdlcommon.FUint8T,
-	dst_len *sdlcommon.FInt) (res sdlcommon.FInt) {
+	dst_channels ffcommon.FUint8T,
+	dst_rate ffcommon.FInt,
+	dst_data **ffcommon.FUint8T,
+	dst_len *ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ConvertAudioSamples").Call(
 		uintptr(src_format),
 		uintptr(src_channels),
@@ -1409,7 +1410,7 @@ func SDL_ConvertAudioSamples(src_format SDL_AudioFormat,
 		uintptr(unsafe.Pointer(dst_data)),
 		uintptr(unsafe.Pointer(dst_len)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

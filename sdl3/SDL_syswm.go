@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -227,8 +228,8 @@ const (
  *  The custom event structure.
  */
 type SDL_SysWMmsg struct {
-	Version   sdlcommon.FUint32T
-	Subsystem sdlcommon.FUint32T /**< SDL_SYSWM_TYPE */
+	Version   ffcommon.FUint32T
+	Subsystem ffcommon.FUint32T /**< SDL_SYSWM_TYPE */
 
 	//     Uint32 padding[(2 * (sizeof (void *) >= 8 ? sizeof (void *) : sizeof(Uint64)) - 2 * sizeof(Uint32)) / sizeof(Uint32)];
 
@@ -259,8 +260,8 @@ type SDL_SysWMmsg struct {
  *  low level system it is using, and will be one of SDL_SYSWM_TYPE.
  */
 type SDL_SysWMinfo struct {
-	Version   sdlcommon.FUint32T
-	Subsystem sdlcommon.FUint32T /**< SDL_SYSWM_TYPE */
+	Version   ffcommon.FUint32T
+	Subsystem ffcommon.FUint32T /**< SDL_SYSWM_TYPE */
 
 	//     Uint32 padding[(2 * (sizeof (void *) >= 8 ? sizeof (void *) : sizeof(Uint64)) - 2 * sizeof(Uint32)) / sizeof(Uint32)];
 
@@ -382,13 +383,13 @@ type SDL_SysWMinfo struct {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetWindowWMInfo(SDL_Window *window, SDL_SysWMinfo *info, Uint32 version);
-func (window *SDL_Window) SDL_GetWindowWMInfo(info *SDL_SysWMinfo, version sdlcommon.FUint32T) (res bool) {
+func (window *SDL_Window) SDL_GetWindowWMInfo(info *SDL_SysWMinfo, version ffcommon.FUint32T) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetWindowWMInfo").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(unsafe.Pointer(info)),
 		uintptr(version),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 

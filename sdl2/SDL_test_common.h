@@ -20,17 +20,17 @@
 */
 
 /**
- *  \file SDL_test_sdlcommon.h
+ *  \file SDL_test_ffcommon.h
  *
  *  Include file for SDL test framework.
  *
  *  This code is a part of the SDL2_test library, not the main SDL library.
  */
 
-/* Ported from original test\sdlcommon.h file. */
+/* Ported from original test\ffcommon.h file. */
 
-#ifndef SDL_test_sdlcommon_h_
-#define SDL_test_sdlcommon_h_
+#ifndef SDL_test_ffcommon_h_
+#define SDL_test_ffcommon_h_
 
 #include "SDL.h"
 
@@ -114,7 +114,7 @@ typedef struct
     int gl_minor_version;
     int gl_debug;
     int gl_profile_mask;
-} SDLTest_sdlcommonState;
+} SDLTest_ffcommonState;
 
 #include "begin_code.h"
 /* Set up for C function definitions, even when using C++ */
@@ -125,90 +125,90 @@ extern "C" {
 /* Function prototypes */
 
 /**
- * \brief Parse command line parameters and create sdlcommon state.
+ * \brief Parse command line parameters and create ffcommon state.
  *
  * \param argv Array of command line parameters
  * \param flags Flags indicating which subsystem to initialize (i.e. SDL_INIT_VIDEO | SDL_INIT_AUDIO)
  *
- * \returns a newly allocated sdlcommon state object.
+ * \returns a newly allocated ffcommon state object.
  */
-SDLTest_sdlcommonState *SDLTest_sdlcommonCreateState(char **argv, Uint32 flags);
+SDLTest_ffcommonState *SDLTest_ffcommonCreateState(char **argv, Uint32 flags);
 
 /**
- * \brief Process one sdlcommon argument.
+ * \brief Process one ffcommon argument.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The ffcommon state describing the test window to create.
  * \param index The index of the argument to process in argv[].
  *
  * \returns the number of arguments processed (i.e. 1 for --fullscreen, 2 for --video [videodriver], or -1 on error.
  */
-int SDLTest_sdlcommonArg(SDLTest_sdlcommonState * state, int index);
+int SDLTest_ffcommonArg(SDLTest_ffcommonState * state, int index);
 
 
 /**
  * \brief Logs command line usage info.
  *
  * This logs the appropriate command line options for the subsystems in use
- *  plus other sdlcommon options, and then any application-specific options.
+ *  plus other ffcommon options, and then any application-specific options.
  *  This uses the SDL_Log() function and splits up output to be friendly to
  *  80-character-wide terminals.
  *
- * \param state The sdlcommon state describing the test window for the app.
+ * \param state The ffcommon state describing the test window for the app.
  * \param argv0 argv[0], as passed to main/SDL_main.
  * \param options an array of strings for application specific options. The last element of the array should be NULL.
  */
-void SDLTest_sdlcommonLogUsage(SDLTest_sdlcommonState * state, const char *argv0, const char **options);
+void SDLTest_ffcommonLogUsage(SDLTest_ffcommonState * state, const char *argv0, const char **options);
 
 /**
- * \brief Returns sdlcommon usage information
+ * \brief Returns ffcommon usage information
  *
- * You should (probably) be using SDLTest_sdlcommonLogUsage() instead, but this
+ * You should (probably) be using SDLTest_ffcommonLogUsage() instead, but this
  *  function remains for binary compatibility. Strings returned from this
- *  function are valid until SDLTest_sdlcommonQuit() is called, in which case
+ *  function are valid until SDLTest_ffcommonQuit() is called, in which case
  *  those strings' memory is freed and can no longer be used.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The ffcommon state describing the test window to create.
  * \returns a string with usage information
  */
-const char *SDLTest_sdlcommonUsage(SDLTest_sdlcommonState * state);
+const char *SDLTest_ffcommonUsage(SDLTest_ffcommonState * state);
 
 /**
  * \brief Open test window.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The ffcommon state describing the test window to create.
  *
  * \returns SDL_TRUE if initialization succeeded, false otherwise
  */
-SDL_bool SDLTest_sdlcommonInit(SDLTest_sdlcommonState * state);
+SDL_bool SDLTest_ffcommonInit(SDLTest_ffcommonState * state);
 
 /**
  * \brief Easy argument handling when test app doesn't need any custom args.
  *
- * \param state The sdlcommon state describing the test window to create.
+ * \param state The ffcommon state describing the test window to create.
  * \param argc argc, as supplied to SDL_main
  * \param argv argv, as supplied to SDL_main
  *
  * \returns SDL_FALSE if app should quit, true otherwise.
  */
-SDL_bool SDLTest_sdlcommonDefaultArgs(SDLTest_sdlcommonState * state, const int argc, char **argv);
+SDL_bool SDLTest_ffcommonDefaultArgs(SDLTest_ffcommonState * state, const int argc, char **argv);
 
 /**
- * \brief sdlcommon event handler for test windows.
+ * \brief ffcommon event handler for test windows.
  *
- * \param state The sdlcommon state used to create test window.
+ * \param state The ffcommon state used to create test window.
  * \param event The event to handle.
  * \param done Flag indicating we are done.
  *
  */
-void SDLTest_sdlcommonEvent(SDLTest_sdlcommonState * state, SDL_Event * event, int *done);
+void SDLTest_ffcommonEvent(SDLTest_ffcommonState * state, SDL_Event * event, int *done);
 
 /**
  * \brief Close test window.
  *
- * \param state The sdlcommon state used to create test window.
+ * \param state The ffcommon state used to create test window.
  *
  */
-void SDLTest_sdlcommonQuit(SDLTest_sdlcommonState * state);
+void SDLTest_ffcommonQuit(SDLTest_ffcommonState * state);
 
 /**
  * \brief Draws various window information (position, size, etc.) to the renderer.
@@ -217,7 +217,7 @@ void SDLTest_sdlcommonQuit(SDLTest_sdlcommonState * state);
  * \param window The window whose information should be displayed.
  *
  */
-void SDLTest_sdlcommonDrawWindowInfo(SDL_Renderer * renderer, SDL_Window * window);
+void SDLTest_ffcommonDrawWindowInfo(SDL_Renderer * renderer, SDL_Window * window);
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus
@@ -225,6 +225,6 @@ void SDLTest_sdlcommonDrawWindowInfo(SDL_Renderer * renderer, SDL_Window * windo
 #endif
 #include "close_code.h"
 
-#endif /* SDL_test_sdlcommon_h_ */
+#endif /* SDL_test_ffcommon_h_ */
 
 /* vi: set ts=4 sw=4 expandtab: */

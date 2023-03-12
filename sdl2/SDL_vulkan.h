@@ -72,7 +72,7 @@ typedef VkSurfaceKHR SDL_vulkanSurface; /* for compatibility with Tizen */
  * creating any Vulkan windows. If no Vulkan loader library is loaded, the
  * default library will be loaded upon creation of the first Vulkan window.
  *
- * It is fairly sdlcommon for Vulkan applications to link with libvulkan instead
+ * It is fairly ffcommon for Vulkan applications to link with libvulkan instead
  * of explicitly loading it at run time. This will work with SDL provided the
  * application links to a dynamic library and both it and SDL use the same
  * search path.
@@ -84,7 +84,7 @@ typedef VkSurfaceKHR SDL_vulkanSurface; /* for compatibility with Tizen */
  *
  * On Apple devices, if `path` is NULL, SDL will attempt to find the
  * `vkGetInstanceProcAddr` address within all the Mach-O images of the current
- * process. This is because it is fairly sdlcommon for Vulkan applications to
+ * process. This is because it is fairly ffcommon for Vulkan applications to
  * link with libvulkan (and historically MoltenVK was provided as a static
  * library). If it is not found, on macOS, SDL will attempt to load
  * `vulkan.framework/vulkan`, `libvulkan.1.dylib`,

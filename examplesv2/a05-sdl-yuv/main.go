@@ -12,12 +12,12 @@ import (
 
 const REFRESH_EVENT = sdl.SDL_USEREVENT + 1 // 请求画面刷新事件
 const QUIT_EVENT = sdl.SDL_USEREVENT + 2    // 退出事件
-//定义分辨率
+// 定义分辨率
 // YUV像素分辨率
 const YUV_WIDTH = 320
 const YUV_HEIGHT = 240
 
-//定义YUV格式
+// 定义YUV格式
 const YUV_FORMAT = sdl.SDL_PIXELFORMAT_IYUV
 
 var s_thread_exit = 0 // 退出标志 = 1则退出

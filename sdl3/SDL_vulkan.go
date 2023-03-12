@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -112,11 +113,11 @@ import (
  * \sa SDL_Vulkan_UnloadLibrary
  */
 // extern DECLSPEC int SDLCALL SDL_Vulkan_LoadLibrary(const char *path);
-func SDL_Vulkan_LoadLibrary(path0 sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_Vulkan_LoadLibrary(path0 ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Vulkan_LoadLibrary").Call(
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(path0))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(path0))),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -139,7 +140,7 @@ func SDL_Vulkan_LoadLibrary(path0 sdlcommon.FConstCharP) (res sdlcommon.FInt) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_Vulkan_GetVkGetInstanceProcAddr(void);
-func SDL_Vulkan_GetVkGetInstanceProcAddr() (res sdlcommon.FVoidP) {
+func SDL_Vulkan_GetVkGetInstanceProcAddr() (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Vulkan_GetVkGetInstanceProcAddr").Call()
 	res = t
 	return
@@ -185,13 +186,13 @@ func SDL_Vulkan_UnloadLibrary() {
  */
 // extern DECLSPEC SDL_bool SDLCALL SDL_Vulkan_GetInstanceExtensions(unsigned int *pCount,
 //                                                                   const char **pNames);
-func SDL_Vulkan_GetInstanceExtensions(pCount *sdlcommon.FUnsignedInt,
-	pNames *sdlcommon.FBuf) (res bool) {
+func SDL_Vulkan_GetInstanceExtensions(pCount *ffcommon.FUnsignedInt,
+	pNames *ffcommon.FBuf) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Vulkan_GetInstanceExtensions").Call(
 		uintptr(unsafe.Pointer(pCount)),
 		uintptr(unsafe.Pointer(pNames)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -222,7 +223,7 @@ func (window *SDL_Window) SDL_Vulkan_CreateSurface(instance uintptr,
 		instance,
 		surface,
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 

@@ -1633,7 +1633,7 @@ extern DECLSPEC int SDLCALL SDL_GL_LoadLibrary(const char *path);
  *   of the function pointers that comes and goes with context lifespan.
  * - On X11, function pointers returned by this function are valid for any
  *   context, and can even be looked up before a context is created at all.
- *   This means that, for at least some sdlcommon OpenGL implementations, if you
+ *   This means that, for at least some ffcommon OpenGL implementations, if you
  *   look up a function that doesn't exist, you'll get a non-NULL result that
  *   is _NOT_ safe to call. You must always make sure the function is actually
  *   available for a given GL context before calling it, by checking for the

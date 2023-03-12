@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -54,8 +55,8 @@ import (
  * \sa SDL_PointInRect
  */
 type SDL_Point struct {
-	X sdlcommon.FInt
-	Y sdlcommon.FInt
+	X ffcommon.FInt
+	Y ffcommon.FInt
 }
 
 /**
@@ -65,8 +66,8 @@ type SDL_Point struct {
  * \sa SDL_PointInRectFloat
  */
 type SDL_FPoint struct {
-	X sdlcommon.FFloat
-	Y sdlcommon.FFloat
+	X ffcommon.FFloat
+	Y ffcommon.FFloat
 }
 
 /**
@@ -81,8 +82,8 @@ type SDL_FPoint struct {
  * \sa SDL_GetRectEnclosingPoints
  */
 type SDL_Rect struct {
-	X, Y sdlcommon.FInt
-	W, H sdlcommon.FInt
+	X, Y ffcommon.FInt
+	W, H ffcommon.FInt
 }
 
 /**
@@ -99,10 +100,10 @@ type SDL_Rect struct {
  * \sa SDL_PointInRectFloat
  */
 type SDL_FRect struct {
-	X sdlcommon.FFloat
-	Y sdlcommon.FFloat
-	W sdlcommon.FFloat
-	H sdlcommon.FFloat
+	X ffcommon.FFloat
+	Y ffcommon.FFloat
+	W ffcommon.FFloat
+	H ffcommon.FFloat
 }
 
 /**
@@ -171,7 +172,7 @@ func SDL_HasRectIntersection(A, B *SDL_Rect) (res bool) {
 		uintptr(unsafe.Pointer(A)),
 		uintptr(unsafe.Pointer(B)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -199,7 +200,7 @@ func SDL_GetRectIntersection(A, B, result *SDL_Rect) (res bool) {
 		uintptr(unsafe.Pointer(B)),
 		uintptr(unsafe.Pointer(result)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -218,13 +219,13 @@ func SDL_GetRectIntersection(A, B, result *SDL_Rect) (res bool) {
 // extern DECLSPEC int SDLCALL SDL_GetRectUnion(const SDL_Rect * A,
 //                                            const SDL_Rect * B,
 //                                            SDL_Rect * result);
-func SDL_GetRectUnion(A, B, result *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_GetRectUnion(A, B, result *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRectUnion").Call(
 		uintptr(unsafe.Pointer(A)),
 		uintptr(unsafe.Pointer(B)),
 		uintptr(unsafe.Pointer(result)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -250,7 +251,7 @@ func SDL_GetRectUnion(A, B, result *SDL_Rect) (res sdlcommon.FInt) {
 //                                                    const SDL_Rect * clip,
 //                                                    SDL_Rect * result);
 func (points *SDL_Point) SDL_GetRectEnclosingPoints(
-	count sdlcommon.FInt,
+	count ffcommon.FInt,
 	clip *SDL_Rect,
 	result *SDL_Rect,
 ) (res bool) {
@@ -260,7 +261,7 @@ func (points *SDL_Point) SDL_GetRectEnclosingPoints(
 		uintptr(unsafe.Pointer(clip)),
 		uintptr(unsafe.Pointer(result)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -287,7 +288,7 @@ func (points *SDL_Point) SDL_GetRectEnclosingPoints(
 //                                                           int *Y1, int *X2,
 //                                                           int *Y2);
 
-func (rect *SDL_Rect) SDL_GetRectAndLineIntersection(X1, Y1, X2, Y2 *sdlcommon.FInt) (res bool) {
+func (rect *SDL_Rect) SDL_GetRectAndLineIntersection(X1, Y1, X2, Y2 *ffcommon.FInt) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRectAndLineIntersection").Call(
 		uintptr(unsafe.Pointer(rect)),
 		uintptr(unsafe.Pointer(X1)),
@@ -295,7 +296,7 @@ func (rect *SDL_Rect) SDL_GetRectAndLineIntersection(X1, Y1, X2, Y2 *sdlcommon.F
 		uintptr(unsafe.Pointer(X2)),
 		uintptr(unsafe.Pointer(Y2)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -345,7 +346,7 @@ func SDL_RectEmptyFloat(r *SDL_FRect) (res bool) {
 //             (SDL_fabsf(a->h - b->h) <= epsilon))))
 //             ? SDL_TRUE : SDL_FALSE;
 // }
-func SDL_RectsEqualEpsilon(a, b *SDL_FRect, epsilon sdlcommon.FFloat) (res bool) {
+func SDL_RectsEqualEpsilon(a, b *SDL_FRect, epsilon ffcommon.FFloat) (res bool) {
 	if a != nil && b != nil && ((a == b) ||
 		((SDL_fabsf(a.X-b.X) <= epsilon) &&
 			(SDL_fabsf(a.Y-b.Y) <= epsilon) &&
@@ -356,7 +357,7 @@ func SDL_RectsEqualEpsilon(a, b *SDL_FRect, epsilon sdlcommon.FFloat) (res bool)
 	return
 }
 
-func SDL_fabsf(a sdlcommon.FFloat) (res sdlcommon.FFloat) {
+func SDL_fabsf(a ffcommon.FFloat) (res ffcommon.FFloat) {
 	if a < 0 {
 		res = -a
 	} else {
@@ -403,7 +404,7 @@ func SDL_HasRectIntersectionFloat(A, B *SDL_Rect) (res bool) {
 		uintptr(unsafe.Pointer(A)),
 		uintptr(unsafe.Pointer(B)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -431,7 +432,7 @@ func SDL_GetRectIntersectionFloat(A, B, result *SDL_Rect) (res bool) {
 		uintptr(unsafe.Pointer(B)),
 		uintptr(unsafe.Pointer(result)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -450,13 +451,13 @@ func SDL_GetRectIntersectionFloat(A, B, result *SDL_Rect) (res bool) {
 // extern DECLSPEC int SDLCALL SDL_GetRectUnionFloat(const SDL_FRect * A,
 //                                             const SDL_FRect * B,
 //                                             SDL_FRect * result);
-func SDL_GetRectUnionFloat(A, B, result *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_GetRectUnionFloat(A, B, result *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRectUnionFloat").Call(
 		uintptr(unsafe.Pointer(A)),
 		uintptr(unsafe.Pointer(B)),
 		uintptr(unsafe.Pointer(result)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -482,14 +483,14 @@ func SDL_GetRectUnionFloat(A, B, result *SDL_Rect) (res sdlcommon.FInt) {
 //                                                     int count,
 //                                                     const SDL_FRect * clip,
 //                                                     SDL_FRect * result);
-func SDL_GetRectEnclosingPointsFloat(points *SDL_FPoint, count sdlcommon.FInt, clip, result *SDL_FRect) (res sdlcommon.FInt) {
+func SDL_GetRectEnclosingPointsFloat(points *SDL_FPoint, count ffcommon.FInt, clip, result *SDL_FRect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRectEnclosingPointsFloat").Call(
 		uintptr(unsafe.Pointer(points)),
 		uintptr(count),
 		uintptr(unsafe.Pointer(clip)),
 		uintptr(unsafe.Pointer(result)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -516,7 +517,7 @@ func SDL_GetRectEnclosingPointsFloat(points *SDL_FPoint, count sdlcommon.FInt, c
 //                                                            rect, float *X1,
 //                                                            float *Y1, float *X2,
 //                                                            float *Y2);
-func (rect *SDL_FRect) SDL_GetRectAndLineIntersectionFloat(X1, Y1, X2, Y2 *sdlcommon.FFloat) (res bool) {
+func (rect *SDL_FRect) SDL_GetRectAndLineIntersectionFloat(X1, Y1, X2, Y2 *ffcommon.FFloat) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRectAndLineIntersectionFloat").Call(
 		uintptr(unsafe.Pointer(rect)),
 		uintptr(unsafe.Pointer(X1)),
@@ -524,7 +525,7 @@ func (rect *SDL_FRect) SDL_GetRectAndLineIntersectionFloat(X1, Y1, X2, Y2 *sdlco
 		uintptr(unsafe.Pointer(X2)),
 		uintptr(unsafe.Pointer(Y2)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 

@@ -676,7 +676,7 @@ typedef struct SDL_HapticRamp
  * This struct is exclusively for the ::SDL_HAPTIC_LEFTRIGHT effect.
  *
  * The Left/Right effect is used to explicitly control the large and small
- * motors, sdlcommonly found in modern game controllers. The small (right) motor
+ * motors, ffcommonly found in modern game controllers. The small (right) motor
  * is high frequency, and the large (left) motor is low frequency.
  *
  * \sa SDL_HAPTIC_LEFTRIGHT
@@ -757,7 +757,7 @@ typedef struct SDL_HapticCustom
  *  If both attack_length and fade_level are 0, the envelope is not used,
  *  otherwise both values are used.
  *
- *  sdlcommon parts:
+ *  ffcommon parts:
  *  \code
  *  // Replay - All effects have this
  *  Uint32 length;        // Duration of effect (ms).
@@ -808,7 +808,7 @@ typedef struct SDL_HapticCustom
  */
 typedef union SDL_HapticEffect
 {
-    /* sdlcommon for all force feedback effects */
+    /* ffcommon for all force feedback effects */
     Uint16 type;                    /**< Effect type. */
     SDL_HapticConstant constant;    /**< Constant effect. */
     SDL_HapticPeriodic periodic;    /**< Periodic effect. */

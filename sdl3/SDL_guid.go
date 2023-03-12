@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -61,7 +62,7 @@ import (
  *   different GUIDs on different operating systems).
  */
 type SDL_GUID struct {
-	Data [16]sdlcommon.FUint8T
+	Data [16]ffcommon.FUint8T
 }
 
 /* Function prototypes */
@@ -82,7 +83,7 @@ type SDL_GUID struct {
  * \sa SDL_GUIDFromString
  */
 // extern DECLSPEC int SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID);
-func SDL_GUIDToString(guid SDL_GUID, cbGUID sdlcommon.FInt) (pszGUID sdlcommon.FCharP, res sdlcommon.FInt) {
+func SDL_GUIDToString(guid SDL_GUID, cbGUID ffcommon.FInt) (pszGUID ffcommon.FCharP, res ffcommon.FInt) {
 	var pszGUIDIn [33]byte
 	ptr := uintptr(unsafe.Pointer(&pszGUIDIn))
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GUIDToString").Call(
@@ -90,8 +91,8 @@ func SDL_GUIDToString(guid SDL_GUID, cbGUID sdlcommon.FInt) (pszGUID sdlcommon.F
 		ptr,
 		uintptr(cbGUID),
 	)
-	pszGUID = sdlcommon.StringFromPtr(ptr)
-	res = sdlcommon.FInt(t)
+	pszGUID = ffcommon.StringFromPtr(ptr)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -110,9 +111,9 @@ func SDL_GUIDToString(guid SDL_GUID, cbGUID sdlcommon.FInt) (pszGUID sdlcommon.F
  * \sa SDL_GUIDToString
  */
 // extern DECLSPEC SDL_GUID SDLCALL SDL_GUIDFromString(const char *pchGUID);
-func SDL_GUIDFromString(pszGUID sdlcommon.FConstCharP) (res SDL_GUID) {
+func SDL_GUIDFromString(pszGUID ffcommon.FConstCharP) (res SDL_GUID) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GUIDFromString").Call(
-		sdlcommon.UintPtrFromString(pszGUID),
+		ffcommon.UintPtrFromString(pszGUID),
 	)
 	res = *(*SDL_GUID)(unsafe.Pointer(t))
 	return

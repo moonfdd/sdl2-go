@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -61,9 +62,9 @@ const (
 
 type SDL_Finger struct {
 	Id       SDL_FingerID
-	X        sdlcommon.FFloat
-	Y        sdlcommon.FFloat
-	Pressure sdlcommon.FFloat
+	X        ffcommon.FFloat
+	Y        ffcommon.FFloat
+	Pressure ffcommon.FFloat
 }
 
 /* Used as the device ID for mouse events simulated with touch input */
@@ -89,9 +90,9 @@ type SDL_Finger struct {
  * \sa SDL_GetTouchDevice
  */
 // extern DECLSPEC int SDLCALL SDL_GetNumTouchDevices(void);
-func SDL_GetNumTouchDevices() (res sdlcommon.FInt) {
+func SDL_GetNumTouchDevices() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumTouchDevices").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -107,7 +108,7 @@ func SDL_GetNumTouchDevices() (res sdlcommon.FInt) {
  * \sa SDL_GetNumTouchDevices
  */
 // extern DECLSPEC SDL_TouchID SDLCALL SDL_GetTouchDevice(int index);
-func SDL_GetTouchDevice(index sdlcommon.FInt) (res SDL_TouchID) {
+func SDL_GetTouchDevice(index ffcommon.FInt) (res SDL_TouchID) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTouchDevice").Call(
 		uintptr(index),
 	)
@@ -122,11 +123,11 @@ func SDL_GetTouchDevice(index sdlcommon.FInt) (res SDL_TouchID) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC const char* SDLCALL SDL_GetTouchName(int index);
-func SDL_GetTouchName(index sdlcommon.FInt) (res sdlcommon.FConstCharP) {
+func SDL_GetTouchName(index ffcommon.FInt) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTouchName").Call(
 		uintptr(index),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -156,11 +157,11 @@ func SDL_GetTouchDeviceType(touchID SDL_TouchID) (res SDL_TouchDeviceType) {
  * \sa SDL_GetTouchFinger
  */
 // extern DECLSPEC int SDLCALL SDL_GetNumTouchFingers(SDL_TouchID touchID);
-func SDL_GetNumTouchFingers(touchID SDL_TouchID) (res sdlcommon.FInt) {
+func SDL_GetNumTouchFingers(touchID SDL_TouchID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumTouchFingers").Call(
 		uintptr(touchID),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -177,7 +178,7 @@ func SDL_GetNumTouchFingers(touchID SDL_TouchID) (res sdlcommon.FInt) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC SDL_Finger * SDLCALL SDL_GetTouchFinger(SDL_TouchID touchID, int index);
-func SDL_GetTouchFinger(touchID SDL_TouchID, index sdlcommon.FInt) (res *SDL_Finger) {
+func SDL_GetTouchFinger(touchID SDL_TouchID, index ffcommon.FInt) (res *SDL_Finger) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTouchFinger").Call(
 		uintptr(touchID),
 		uintptr(index),

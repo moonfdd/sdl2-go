@@ -96,18 +96,18 @@ package sdl2
 
 /* Define the SDL window structure, corresponding to toplevel windows */
 type SDL_Window struct {
-	// magic                      sdlcommon.FConstVoidP
+	// magic                      ffcommon.FConstVoidP
 	// id                         SDL_WindowID
-	// title                      sdlcommon.FCharPStruct
+	// title                      ffcommon.FCharPStruct
 	// icon                       *SDL_Surface
-	// x, y                       sdlcommon.FInt
-	// w, h                       sdlcommon.FInt
-	// min_w, min_h               sdlcommon.FInt
-	// max_w, max_h               sdlcommon.FInt
-	// last_pixel_w, last_pixel_h sdlcommon.FInt
-	// flags                      sdlcommon.FUint32T
-	// fullscreen_exclusive       sdlcommon.SDL_bool /* The window is currently fullscreen exclusive */
-	// last_fullscreen_exclusive  sdlcommon.SDL_bool /* The last fullscreen_exclusive setting */
+	// x, y                       ffcommon.FInt
+	// w, h                       ffcommon.FInt
+	// min_w, min_h               ffcommon.FInt
+	// max_w, max_h               ffcommon.FInt
+	// last_pixel_w, last_pixel_h ffcommon.FInt
+	// flags                      ffcommon.FUint32T
+	// fullscreen_exclusive       ffcommon.SDL_bool /* The window is currently fullscreen exclusive */
+	// last_fullscreen_exclusive  ffcommon.SDL_bool /* The last fullscreen_exclusive setting */
 	// last_displayID             SDL_DisplayID
 
 	// /* Stored position and size for windowed mode */
@@ -115,14 +115,14 @@ type SDL_Window struct {
 
 	// fullscreen_mode SDL_DisplayMode
 
-	// opacity sdlcommon.FFloat
+	// opacity ffcommon.FFloat
 
 	// surface       *SDL_Surface
-	// surface_valid sdlcommon.SDL_bool
+	// surface_valid ffcommon.SDL_bool
 
-	// is_hiding     sdlcommon.SDL_bool
-	// is_destroying sdlcommon.SDL_bool
-	// is_dropping   sdlcommon.SDL_bool /* drag/drop in progress, expecting SDL_SendDropComplete(). */
+	// is_hiding     ffcommon.SDL_bool
+	// is_destroying ffcommon.SDL_bool
+	// is_dropping   ffcommon.SDL_bool /* drag/drop in progress, expecting SDL_SendDropComplete(). */
 
 	// mouse_rect SDL_Rect
 

@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -92,7 +93,7 @@ type SDL_hid_device struct {
  */
 type SDL_hid_device_info struct {
 	/** Platform-specific device path */
-	Path sdlcommon.FCharPStruct
+	Path ffcommon.FCharPStruct
 	/** Device Vendor ID */
 	VendorId sdlcommon.FUnsignedShort
 	/** Device Product ID */
@@ -118,13 +119,13 @@ type SDL_hid_device_info struct {
 	  * Valid on both Linux implementations in all cases.
 	  * Valid on the Windows implementation only if the device
 	    contains more than one interface. */
-	InterfaceNumber sdlcommon.FInt
+	InterfaceNumber ffcommon.FInt
 
 	/** Additional information about the USB interface.
 	  Valid on libusb and Android implementations. */
-	InterfaceClass    sdlcommon.FInt
-	InterfaceSubclass sdlcommon.FInt
-	InterfaceProtocol sdlcommon.FInt
+	InterfaceClass    ffcommon.FInt
+	InterfaceSubclass ffcommon.FInt
+	InterfaceProtocol ffcommon.FInt
 
 	/** Pointer to the next device */
 	Next *SDL_hid_device_info
@@ -148,9 +149,9 @@ type SDL_hid_device_info struct {
  * \sa SDL_hid_exit
  */
 // extern DECLSPEC int SDLCALL SDL_hid_init(void);
-func SDL_hid_init() (res sdlcommon.FInt) {
+func SDL_hid_init() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_init").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -167,9 +168,9 @@ func SDL_hid_init() (res sdlcommon.FInt) {
  * \sa SDL_hid_init
  */
 // extern DECLSPEC int SDLCALL SDL_hid_exit(void);
-func SDL_hid_exit() (res sdlcommon.FInt) {
+func SDL_hid_exit() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_exit").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -193,9 +194,9 @@ func SDL_hid_exit() (res sdlcommon.FInt) {
  * \sa SDL_hid_enumerate
  */
 // extern DECLSPEC Uint32 SDLCALL SDL_hid_device_change_count(void);
-func SDL_hid_device_change_count() (res sdlcommon.FInt) {
+func SDL_hid_device_change_count() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_device_change_count").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -240,7 +241,7 @@ func SDL_hid_enumerate(vendor_id, product_id sdlcommon.FUnsignedShort) (res *SDL
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC void SDLCALL SDL_hid_free_enumeration(SDL_hid_device_info *devs);
-func (devs *SDL_hid_device_info) SDL_hid_free_enumeration() (res sdlcommon.FInt) {
+func (devs *SDL_hid_device_info) SDL_hid_free_enumeration() (res ffcommon.FInt) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_hid_free_enumeration").Call(
 		uintptr(unsafe.Pointer(devs)),
 	)
@@ -268,7 +269,7 @@ func SDL_hid_open(vendor_id, product_id sdlcommon.FUnsignedShort, serial_number 
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_open").Call(
 		uintptr(vendor_id),
 		uintptr(product_id),
-		sdlcommon.UintPtrFromString(serial_number),
+		ffcommon.UintPtrFromString(serial_number),
 	)
 	res = (*SDL_hid_device)(unsafe.Pointer(t))
 	return
@@ -291,7 +292,7 @@ func SDL_hid_open_path(vendor_id, product_id sdlcommon.FUnsignedShort, serial_nu
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_open_path").Call(
 		uintptr(vendor_id),
 		uintptr(product_id),
-		sdlcommon.UintPtrFromString(serial_number),
+		ffcommon.UintPtrFromString(serial_number),
 	)
 	res = (*SDL_hid_device)(unsafe.Pointer(t))
 	return
@@ -322,13 +323,13 @@ func SDL_hid_open_path(vendor_id, product_id sdlcommon.FUnsignedShort, serial_nu
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_write(SDL_hid_device *dev, const unsigned char *data, size_t length);
-func (dev *SDL_hid_device) SDL_hid_write(data sdlcommon.FCharP, length sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_write(data ffcommon.FCharP, length ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_write").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(data),
+		ffcommon.UintPtrFromString(data),
 		uintptr(length),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -352,14 +353,14 @@ func (dev *SDL_hid_device) SDL_hid_write(data sdlcommon.FCharP, length sdlcommon
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_read_timeout(SDL_hid_device *dev, unsigned char *data, size_t length, int milliseconds);
-func (dev *SDL_hid_device) SDL_hid_read_timeout(data sdlcommon.FCharP, length sdlcommon.FSizeT, milliseconds sdlcommon.FInt) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_read_timeout(data ffcommon.FCharP, length ffcommon.FSizeT, milliseconds ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_read_timeout").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(data),
+		ffcommon.UintPtrFromString(data),
 		uintptr(length),
 		uintptr(milliseconds),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -382,13 +383,13 @@ func (dev *SDL_hid_device) SDL_hid_read_timeout(data sdlcommon.FCharP, length sd
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_read(SDL_hid_device *dev, unsigned char *data, size_t length);
-func (dev *SDL_hid_device) SDL_hid_read(data sdlcommon.FCharP, length sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_read(data ffcommon.FCharP, length ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_read").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(data),
+		ffcommon.UintPtrFromString(data),
 		uintptr(length),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -409,12 +410,12 @@ func (dev *SDL_hid_device) SDL_hid_read(data sdlcommon.FCharP, length sdlcommon.
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_set_nonblocking(SDL_hid_device *dev, int nonblock);
-func (dev *SDL_hid_device) SDL_hid_set_nonblocking(nonblock sdlcommon.FInt) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_set_nonblocking(nonblock ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_set_nonblocking").Call(
 		uintptr(unsafe.Pointer(dev)),
 		uintptr(nonblock),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -441,13 +442,13 @@ func (dev *SDL_hid_device) SDL_hid_set_nonblocking(nonblock sdlcommon.FInt) (res
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_send_feature_report(SDL_hid_device *dev, const unsigned char *data, size_t length);
-func (dev *SDL_hid_device) SDL_hid_send_feature_report(data sdlcommon.FCharP, length sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_send_feature_report(data ffcommon.FCharP, length ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_send_feature_report").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(data),
+		ffcommon.UintPtrFromString(data),
 		uintptr(length),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -472,13 +473,13 @@ func (dev *SDL_hid_device) SDL_hid_send_feature_report(data sdlcommon.FCharP, le
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_get_feature_report(SDL_hid_device *dev, unsigned char *data, size_t length);
-func (dev *SDL_hid_device) SDL_hid_get_feature_report(data sdlcommon.FCharP, length sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_get_feature_report(data ffcommon.FCharP, length ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_get_feature_report").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(data),
+		ffcommon.UintPtrFromString(data),
 		uintptr(length),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -492,11 +493,11 @@ func (dev *SDL_hid_device) SDL_hid_get_feature_report(data sdlcommon.FCharP, len
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_close(SDL_hid_device *dev);
-func (dev *SDL_hid_device) SDL_hid_close() (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_close() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_close").Call(
 		uintptr(unsafe.Pointer(dev)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -511,13 +512,13 @@ func (dev *SDL_hid_device) SDL_hid_close() (res sdlcommon.FInt) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_get_manufacturer_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen);
-func (dev *SDL_hid_device) SDL_hid_get_manufacturer_string(str sdlcommon.FCharP, maxlen sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_get_manufacturer_string(str ffcommon.FCharP, maxlen ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_get_manufacturer_string").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(str),
+		ffcommon.UintPtrFromString(str),
 		uintptr(maxlen),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -532,13 +533,13 @@ func (dev *SDL_hid_device) SDL_hid_get_manufacturer_string(str sdlcommon.FCharP,
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_get_product_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen);
-func (dev *SDL_hid_device) SDL_hid_get_product_string(str sdlcommon.FCharP, maxlen sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_get_product_string(str ffcommon.FCharP, maxlen ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_get_product_string").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(str),
+		ffcommon.UintPtrFromString(str),
 		uintptr(maxlen),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -553,13 +554,13 @@ func (dev *SDL_hid_device) SDL_hid_get_product_string(str sdlcommon.FCharP, maxl
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_get_serial_number_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen);
-func (dev *SDL_hid_device) SDL_hid_get_serial_number_string(str sdlcommon.FCharP, maxlen sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_get_serial_number_string(str ffcommon.FCharP, maxlen ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_get_serial_number_string").Call(
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(str),
+		ffcommon.UintPtrFromString(str),
 		uintptr(maxlen),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -575,14 +576,14 @@ func (dev *SDL_hid_device) SDL_hid_get_serial_number_string(str sdlcommon.FCharP
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_hid_get_indexed_string(SDL_hid_device *dev, int string_index, wchar_t *string, size_t maxlen);
-func (dev *SDL_hid_device) SDL_hid_get_indexed_string(string_index sdlcommon.FInt, str sdlcommon.FCharP, maxlen sdlcommon.FSizeT) (res sdlcommon.FInt) {
+func (dev *SDL_hid_device) SDL_hid_get_indexed_string(string_index ffcommon.FInt, str ffcommon.FCharP, maxlen ffcommon.FSizeT) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_hid_get_indexed_string").Call(
 		uintptr(string_index),
 		uintptr(unsafe.Pointer(dev)),
-		sdlcommon.UintPtrFromString(str),
+		ffcommon.UintPtrFromString(str),
 		uintptr(maxlen),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -596,7 +597,7 @@ func (dev *SDL_hid_device) SDL_hid_get_indexed_string(string_index sdlcommon.FIn
 // extern DECLSPEC void SDLCALL SDL_hid_ble_scan(SDL_bool active);
 func SDL_hid_ble_scan(active bool) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_hid_ble_scan").Call(
-		sdlcommon.CBool(active),
+		ffcommon.CBool(active),
 	)
 }
 

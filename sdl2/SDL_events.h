@@ -174,11 +174,11 @@ typedef enum
 /**
  *  \brief Fields shared by every event
  */
-typedef struct SDL_sdlcommonEvent
+typedef struct SDL_ffcommonEvent
 {
     Uint32 type;
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
-} SDL_sdlcommonEvent;
+} SDL_ffcommonEvent;
 
 /**
  *  \brief Display state change event data (event.display.*)
@@ -591,7 +591,7 @@ typedef struct SDL_SysWMEvent
 typedef union SDL_Event
 {
     Uint32 type;                            /**< Event type, shared with all events */
-    SDL_sdlcommonEvent sdlcommon;                 /**< sdlcommon event data */
+    SDL_ffcommonEvent ffcommon;                 /**< ffcommon event data */
     SDL_DisplayEvent display;               /**< Display event data */
     SDL_WindowEvent window;                 /**< Window event data */
     SDL_KeyboardEvent key;                  /**< Keyboard event data */
@@ -805,7 +805,7 @@ extern DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType);
  * be done from the main loop and does not suspend the main loop while waiting
  * on an event to be posted.
  *
- * The sdlcommon practice is to fully process the event queue once every frame,
+ * The ffcommon practice is to fully process the event queue once every frame,
  * usually as a first step before updating the game's state:
  *
  * ```c
@@ -901,7 +901,7 @@ extern DECLSPEC int SDLCALL SDL_WaitEventTimeout(SDL_Event * event,
  * \param event the SDL_Event to be added to the queue
  * \returns 1 on success, 0 if the event was filtered, or a negative error
  *          code on failure; call SDL_GetError() for more information. A
- *          sdlcommon reason for error is the event queue being full.
+ *          ffcommon reason for error is the event queue being full.
  *
  * \sa SDL_PeepEvents
  * \sa SDL_PollEvent

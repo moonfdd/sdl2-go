@@ -1,6 +1,7 @@
 package sdl2
 
 import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -10,12 +11,12 @@ import (
  * \note This should be called before any other SDL functions for complete tracking coverage
  */
 //int SDLTest_TrackAllocations(void);
-func SDLTest_TrackAllocations() (res sdlcommon.FInt) {
+func SDLTest_TrackAllocations() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_TrackAllocations").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

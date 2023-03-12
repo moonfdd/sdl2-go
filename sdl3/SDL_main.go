@@ -1,6 +1,9 @@
 package sdl3
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
 
 /*
   Simple DirectMedia Layer
@@ -157,19 +160,19 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
  *  The prototype for the application's main() function
  */
 // typedef int (*SDL_main_func)(int argc, char *argv[]);
-type SDL_main_func = func(argc sdlcommon.FInt, argv *sdlcommon.FConstCharPStruct) uintptr
+type SDL_main_func = func(argc ffcommon.FInt, argv *ffcommon.FConstCharPStruct) uintptr
 
 // extern SDLMAIN_DECLSPEC int SDL_main(int argc, char *argv[]);
-func SDL_main(argc sdlcommon.FInt, argv []sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_main(argc ffcommon.FInt, argv []ffcommon.FConstCharP) (res ffcommon.FInt) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(argc))
 	for i := 0; i < len(argv); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(argv[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(argv[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_main").Call(
 		uintptrs...,
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -218,16 +221,16 @@ func SDL_SetMainReady() {
  */
 // extern DECLSPEC int SDLCALL SDL_RunApp(int argc, char* argv[], SDL_main_func mainFunction, void * reserved);
 // todo
-func SDL_RunApp(argc sdlcommon.FInt, argv []sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_RunApp(argc ffcommon.FInt, argv []ffcommon.FConstCharP) (res ffcommon.FInt) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(argc))
 	for i := 0; i < len(argv); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(argv[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(argv[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RunApp").Call(
 		uintptrs...,
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -257,13 +260,13 @@ func SDL_RunApp(argc sdlcommon.FInt, argv []sdlcommon.FConstCharP) (res sdlcommo
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst);
-func SDL_RegisterApp(name sdlcommon.FCharP, style sdlcommon.FUint32T, hInst sdlcommon.FVoidP) (res sdlcommon.FInt) {
+func SDL_RegisterApp(name ffcommon.FCharP, style ffcommon.FUint32T, hInst ffcommon.FVoidP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RegisterApp").Call(
-		sdlcommon.UintPtrFromString(name),
+		ffcommon.UintPtrFromString(name),
 		uintptr(style),
 		hInst,
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -148,7 +149,7 @@ func SDL_LogSetAllPriority(priority SDL_LogPriority) {
  */
 //extern DECLSPEC void SDLCALL SDL_LogSetPriority(int category,
 //SDL_LogPriority priority);
-func SDL_LogSetPriority(category sdlcommon.FInt, priority SDL_LogPriority) {
+func SDL_LogSetPriority(category ffcommon.FInt, priority SDL_LogPriority) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogSetPriority").Call(
 		uintptr(category),
 		uintptr(priority),
@@ -214,10 +215,10 @@ func SDL_LogResetPriorities() {
  * \sa SDL_LogWarn
  */
 //extern DECLSPEC void SDLCALL SDL_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1);
-func SDL_Log(fmt0 ...sdlcommon.FConstCharP) {
+func SDL_Log(fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Log").Call(
 		uintptrs...,
@@ -246,11 +247,11 @@ func SDL_Log(fmt0 ...sdlcommon.FConstCharP) {
  * \sa SDL_LogWarn
  */
 //extern DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
-func SDL_LogVerbose(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
+func SDL_LogVerbose(category ffcommon.FInt, fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(category))
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogVerbose").Call(
 		uintptrs...,
@@ -279,11 +280,11 @@ func SDL_LogVerbose(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
  * \sa SDL_LogWarn
  */
 //extern DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
-func SDL_LogDebug(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
+func SDL_LogDebug(category ffcommon.FInt, fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(category))
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogDebug").Call(
 		uintptrs...,
@@ -312,11 +313,11 @@ func SDL_LogDebug(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
  * \sa SDL_LogWarn
  */
 //extern DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
-func SDL_LogInfo(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
+func SDL_LogInfo(category ffcommon.FInt, fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(category))
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogInfo").Call(
 		uintptrs...,
@@ -345,11 +346,11 @@ func SDL_LogInfo(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
  * \sa SDL_LogVerbose
  */
 //extern DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
-func SDL_LogWarn(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
+func SDL_LogWarn(category ffcommon.FInt, fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(category))
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogWarn").Call(
 		uintptrs...,
@@ -378,11 +379,11 @@ func SDL_LogWarn(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
  * \sa SDL_LogWarn
  */
 //extern DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
-func SDL_LogError(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
+func SDL_LogError(category ffcommon.FInt, fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(category))
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogError").Call(
 		uintptrs...,
@@ -411,11 +412,11 @@ func SDL_LogError(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
  * \sa SDL_LogWarn
  */
 //extern DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
-func SDL_LogCritical(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
+func SDL_LogCritical(category ffcommon.FInt, fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(category))
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogCritical").Call(
 		uintptrs...,
@@ -447,12 +448,12 @@ func SDL_LogCritical(category sdlcommon.FInt, fmt0 ...sdlcommon.FConstCharP) {
 //extern DECLSPEC void SDLCALL SDL_LogMessage(int category,
 //SDL_LogPriority priority,
 //SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3);
-func SDL_LogMessage(category sdlcommon.FInt, priority SDL_LogPriority, fmt0 ...sdlcommon.FConstCharP) {
+func SDL_LogMessage(category ffcommon.FInt, priority SDL_LogPriority, fmt0 ...ffcommon.FConstCharP) {
 	uintptrs := make([]uintptr, 0)
 	uintptrs = append(uintptrs, uintptr(category))
 	uintptrs = append(uintptrs, uintptr(priority))
 	for i := 0; i < len(fmt0); i++ {
-		uintptrs = append(uintptrs, sdlcommon.UintPtrFromString(fmt0[i]))
+		uintptrs = append(uintptrs, ffcommon.UintPtrFromString(fmt0[i]))
 	}
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogMessage").Call(
 		uintptrs...,
@@ -485,11 +486,11 @@ func SDL_LogMessage(category sdlcommon.FInt, priority SDL_LogPriority, fmt0 ...s
 //extern DECLSPEC void SDLCALL SDL_LogMessageV(int category,
 //SDL_LogPriority priority,
 //const char *fmt, va_list ap);
-func SDL_LogMessageV(category sdlcommon.FInt, priority SDL_LogPriority, fmt0 sdlcommon.FConstCharP, ap sdlcommon.FVaList) {
+func SDL_LogMessageV(category ffcommon.FInt, priority SDL_LogPriority, fmt0 ffcommon.FConstCharP, ap ffcommon.FVaList) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogMessageV").Call(
 		uintptr(category),
 		uintptr(priority),
-		sdlcommon.UintPtrFromString(fmt0),
+		ffcommon.UintPtrFromString(fmt0),
 		uintptr(unsafe.Pointer(ap)),
 	)
 	if t == 0 {
@@ -509,7 +510,7 @@ func SDL_LogMessageV(category sdlcommon.FInt, priority SDL_LogPriority, fmt0 sdl
  * \param message the message being output
  */
 //typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message);
-type SDL_LogOutputFunction = func(userdata sdlcommon.FVoidP, category sdlcommon.FInt, priority SDL_LogPriority, message sdlcommon.FConstCharPStruct) uintptr
+type SDL_LogOutputFunction = func(userdata ffcommon.FVoidP, category ffcommon.FInt, priority SDL_LogPriority, message ffcommon.FConstCharPStruct) uintptr
 
 /**
  * Get the current log output function.
@@ -522,9 +523,9 @@ type SDL_LogOutputFunction = func(userdata sdlcommon.FVoidP, category sdlcommon.
  * \sa SDL_LogSetOutputFunction
  */
 //extern DECLSPEC void SDLCALL SDL_LogGetOutputFunction(SDL_LogOutputFunction *callback, void **userdata);
-func SDL_LogGetOutputFunction(callback SDL_LogOutputFunction, userdata *sdlcommon.FVoidP) {
+func SDL_LogGetOutputFunction(callback SDL_LogOutputFunction, userdata *ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogGetOutputFunction").Call(
-		sdlcommon.NewCallback(callback),
+		ffcommon.NewCallback(callback),
 		uintptr(unsafe.Pointer(userdata)),
 	)
 	if t == 0 {
@@ -542,9 +543,9 @@ func SDL_LogGetOutputFunction(callback SDL_LogOutputFunction, userdata *sdlcommo
  * \sa SDL_LogGetOutputFunction
  */
 //extern DECLSPEC void SDLCALL SDL_LogSetOutputFunction(SDL_LogOutputFunction callback, void *userdata);
-func SDL_LogSetOutputFunction(callback SDL_LogOutputFunction, userdata sdlcommon.FVoidP) {
+func SDL_LogSetOutputFunction(callback SDL_LogOutputFunction, userdata ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LogSetOutputFunction").Call(
-		sdlcommon.NewCallback(callback),
+		ffcommon.NewCallback(callback),
 		userdata,
 	)
 	if t == 0 {

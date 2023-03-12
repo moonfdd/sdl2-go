@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -148,21 +149,21 @@ const (
  *  \brief Fields shared by every event
  */
 type SDL_CommonEvent struct {
-	Type      sdlcommon.FUint32T
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Type      ffcommon.FUint32T
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
 }
 
 /**
  *  \brief Display state change event data (event.display.*)
  */
 type SDL_DisplayEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_DISPLAYEVENT */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Display   sdlcommon.FUint32T /**< The associated display index */
-	Event     sdlcommon.FUint8T  /**< ::SDL_DisplayEventID */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
-	Padding3  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_DISPLAYEVENT */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Display   ffcommon.FUint32T /**< The associated display index */
+	Event     ffcommon.FUint8T  /**< ::SDL_DisplayEventID */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
+	Padding3  ffcommon.FUint8T
 	Data1     sdlcommon.FSint32 /**< event dependent data */
 }
 
@@ -170,13 +171,13 @@ type SDL_DisplayEvent struct {
  *  \brief Window state change event data (event.window.*)
  */
 type SDL_WindowEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_WINDOWEVENT */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T /**< The associated window */
-	Event     sdlcommon.FUint8T  /**< ::SDL_WindowEventID */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
-	Padding3  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_WINDOWEVENT */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T /**< The associated window */
+	Event     ffcommon.FUint8T  /**< ::SDL_WindowEventID */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
+	Padding3  ffcommon.FUint8T
 	Data1     sdlcommon.FSint32 /**< event dependent data */
 	Data2     sdlcommon.FSint32 /**< event dependent data */
 }
@@ -185,13 +186,13 @@ type SDL_WindowEvent struct {
  *  \brief Keyboard button event structure (event.key.*)
  */
 type SDL_KeyboardEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_KEYDOWN or ::SDL_KEYUP */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T /**< The window with keyboard focus, if any */
-	State     sdlcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
-	Repeat    sdlcommon.FUint8T  /**< Non-zero if this is a key repeat */
-	Padding2  sdlcommon.FUint8T
-	Padding3  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_KEYDOWN or ::SDL_KEYUP */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T /**< The window with keyboard focus, if any */
+	State     ffcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
+	Repeat    ffcommon.FUint8T  /**< Non-zero if this is a key repeat */
+	Padding2  ffcommon.FUint8T
+	Padding3  ffcommon.FUint8T
 	Keysym    SDL_Keysym /**< The key that was pressed or released */
 }
 
@@ -201,9 +202,9 @@ const SDL_TEXTEDITINGEVENT_TEXT_SIZE = (32)
  *  \brief Keyboard text editing event structure (event.edit.*)
  */
 type SDL_TextEditingEvent struct {
-	Type      sdlcommon.FUint32T                   /**< ::SDL_TEXTEDITING */
-	Timestamp sdlcommon.FUint32T                   /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T                   /**< The window with keyboard focus, if any */
+	Type      ffcommon.FUint32T                    /**< ::SDL_TEXTEDITING */
+	Timestamp ffcommon.FUint32T                    /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T                    /**< The window with keyboard focus, if any */
 	Text      [SDL_TEXTEDITINGEVENT_TEXT_SIZE]byte /**< The editing text */
 	Start     sdlcommon.FSint32                    /**< The start cursor of selected editing text */
 	Length    sdlcommon.FSint32                    /**< The length of selected editing text */
@@ -215,9 +216,9 @@ const SDL_TEXTINPUTEVENT_TEXT_SIZE = (32)
  *  \brief Keyboard text input event structure (event.text.*)
  */
 type SDL_TextInputEvent struct {
-	Type      sdlcommon.FUint32T                 /**< ::SDL_TEXTINPUT */
-	Timestamp sdlcommon.FUint32T                 /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T                 /**< The window with keyboard focus, if any */
+	Type      ffcommon.FUint32T                  /**< ::SDL_TEXTINPUT */
+	Timestamp ffcommon.FUint32T                  /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T                  /**< The window with keyboard focus, if any */
 	Text      [SDL_TEXTINPUTEVENT_TEXT_SIZE]byte /**< The input text */
 }
 
@@ -225,29 +226,29 @@ type SDL_TextInputEvent struct {
  *  \brief Mouse motion event structure (event.motion.*)
  */
 type SDL_MouseMotionEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_MOUSEMOTION */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T /**< The window with mouse focus, if any */
-	Which     sdlcommon.FUint32T /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
-	State     sdlcommon.FUint32T /**< The current button state */
-	X         sdlcommon.FSint32  /**< X coordinate, relative to window */
-	Y         sdlcommon.FSint32  /**< Y coordinate, relative to window */
-	Xrel      sdlcommon.FSint32  /**< The relative motion in the X direction */
-	Trel      sdlcommon.FSint32  /**< The relative motion in the Y direction */
+	Type      ffcommon.FUint32T /**< ::SDL_MOUSEMOTION */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T /**< The window with mouse focus, if any */
+	Which     ffcommon.FUint32T /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
+	State     ffcommon.FUint32T /**< The current button state */
+	X         sdlcommon.FSint32 /**< X coordinate, relative to window */
+	Y         sdlcommon.FSint32 /**< Y coordinate, relative to window */
+	Xrel      sdlcommon.FSint32 /**< The relative motion in the X direction */
+	Trel      sdlcommon.FSint32 /**< The relative motion in the Y direction */
 }
 
 /**
  *  \brief Mouse button event structure (event.button.*)
  */
 type SDL_MouseButtonEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_MOUSEBUTTONDOWN or ::SDL_MOUSEBUTTONUP */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T /**< The window with mouse focus, if any */
-	Which     sdlcommon.FUint32T /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
-	Button    sdlcommon.FUint8T  /**< The mouse button index */
-	State     sdlcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
-	Clicks    sdlcommon.FUint8T  /**< 1 for single-click, 2 for double-click, etc. */
-	Padding1  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_MOUSEBUTTONDOWN or ::SDL_MOUSEBUTTONUP */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T /**< The window with mouse focus, if any */
+	Which     ffcommon.FUint32T /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
+	Button    ffcommon.FUint8T  /**< The mouse button index */
+	State     ffcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
+	Clicks    ffcommon.FUint8T  /**< 1 for single-click, 2 for double-click, etc. */
+	Padding1  ffcommon.FUint8T
 	X         sdlcommon.FSint32 /**< X coordinate, relative to window */
 	Y         sdlcommon.FSint32 /**< Y coordinate, relative to window */
 }
@@ -256,41 +257,41 @@ type SDL_MouseButtonEvent struct {
  *  \brief Mouse wheel event structure (event.wheel.*)
  */
 type SDL_MouseWheelEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_MOUSEWHEEL */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T /**< The window with mouse focus, if any */
-	Which     sdlcommon.FUint32T /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
-	X         sdlcommon.FSint32  /**< The amount scrolled horizontally, positive to the right and negative to the left */
-	Y         sdlcommon.FSint32  /**< The amount scrolled vertically, positive away from the user and negative toward the user */
-	Direction sdlcommon.FUint32T /**< Set to one of the SDL_MOUSEWHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
+	Type      ffcommon.FUint32T /**< ::SDL_MOUSEWHEEL */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T /**< The window with mouse focus, if any */
+	Which     ffcommon.FUint32T /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
+	X         sdlcommon.FSint32 /**< The amount scrolled horizontally, positive to the right and negative to the left */
+	Y         sdlcommon.FSint32 /**< The amount scrolled vertically, positive away from the user and negative toward the user */
+	Direction ffcommon.FUint32T /**< Set to one of the SDL_MOUSEWHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
 }
 
 /**
  *  \brief Joystick axis motion event structure (event.jaxis.*)
  */
 type SDL_JoyAxisEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_JOYAXISMOTION */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID     /**< The joystick instance id */
-	Axis      sdlcommon.FUint8T  /**< The joystick axis index */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
-	Padding3  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_JOYAXISMOTION */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID    /**< The joystick instance id */
+	Axis      ffcommon.FUint8T  /**< The joystick axis index */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
+	Padding3  ffcommon.FUint8T
 	Value     sdlcommon.FSint16 /**< The axis value (range: -32768 to 32767) */
-	Padding4  sdlcommon.FUint16T
+	Padding4  ffcommon.FUint16T
 }
 
 /**
  *  \brief Joystick trackball motion event structure (event.jball.*)
  */
 type SDL_JoyBallEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_JOYBALLMOTION */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID     /**< The joystick instance id */
-	Ball      sdlcommon.FUint8T  /**< The joystick trackball index */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
-	Padding3  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_JOYBALLMOTION */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID    /**< The joystick instance id */
+	Ball      ffcommon.FUint8T  /**< The joystick trackball index */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
+	Padding3  ffcommon.FUint8T
 	Xrel      sdlcommon.FSint16 /**< The relative motion in the X direction */
 	Yrel      sdlcommon.FSint16 /**< The relative motion in the Y direction */
 }
@@ -299,161 +300,161 @@ type SDL_JoyBallEvent struct {
  *  \brief Joystick hat position change event structure (event.jhat.*)
  */
 type SDL_JoyHatEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_JOYHATMOTION */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID     /**< The joystick instance id */
-	Hat       sdlcommon.FUint8T  /**< The joystick hat index */
-	Value     sdlcommon.FUint8T  /**< The hat position value.
+	Type      ffcommon.FUint32T /**< ::SDL_JOYHATMOTION */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID    /**< The joystick instance id */
+	Hat       ffcommon.FUint8T  /**< The joystick hat index */
+	Value     ffcommon.FUint8T  /**< The hat position value.
 	*   \sa ::SDL_HAT_LEFTUP ::SDL_HAT_UP ::SDL_HAT_RIGHTUP
 	*   \sa ::SDL_HAT_LEFT ::SDL_HAT_CENTERED ::SDL_HAT_RIGHT
 	*   \sa ::SDL_HAT_LEFTDOWN ::SDL_HAT_DOWN ::SDL_HAT_RIGHTDOWN
 	*
 	*   Note that zero means the POV is centered.
 	 */
-	Padding1 sdlcommon.FUint8T
-	Padding2 sdlcommon.FUint8T
+	Padding1 ffcommon.FUint8T
+	Padding2 ffcommon.FUint8T
 }
 
 /**
  *  \brief Joystick button event structure (event.jbutton.*)
  */
 type SDL_JoyButtonEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_JOYBUTTONDOWN or ::SDL_JOYBUTTONUP */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID     /**< The joystick instance id */
-	Button    sdlcommon.FUint8T  /**< The joystick button index */
-	State     sdlcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_JOYBUTTONDOWN or ::SDL_JOYBUTTONUP */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID    /**< The joystick instance id */
+	Button    ffcommon.FUint8T  /**< The joystick button index */
+	State     ffcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
 }
 
 /**
  *  \brief Joystick device event structure (event.jdevice.*)
  */
 type SDL_JoyDeviceEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_JOYDEVICEADDED or ::SDL_JOYDEVICEREMOVED */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     sdlcommon.FSint32  /**< The joystick device index for the ADDED event, instance id for the REMOVED event */
+	Type      ffcommon.FUint32T /**< ::SDL_JOYDEVICEADDED or ::SDL_JOYDEVICEREMOVED */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     sdlcommon.FSint32 /**< The joystick device index for the ADDED event, instance id for the REMOVED event */
 }
 
 /**
  *  \brief Game controller axis motion event structure (event.caxis.*)
  */
 type SDL_ControllerAxisEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_CONTROLLERAXISMOTION */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID     /**< The joystick instance id */
-	Axis      sdlcommon.FUint8T  /**< The controller axis (SDL_GameControllerAxis) */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
-	Padding3  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_CONTROLLERAXISMOTION */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID    /**< The joystick instance id */
+	Axis      ffcommon.FUint8T  /**< The controller axis (SDL_GameControllerAxis) */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
+	Padding3  ffcommon.FUint8T
 	Value     sdlcommon.FSint16 /**< The axis value (range: -32768 to 32767) */
-	Padding4  sdlcommon.FUint16T
+	Padding4  ffcommon.FUint16T
 }
 
 /**
  *  \brief Game controller button event structure (event.cbutton.*)
  */
 type SDL_ControllerButtonEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_CONTROLLERBUTTONDOWN or ::SDL_CONTROLLERBUTTONUP */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID     /**< The joystick instance id */
-	Button    sdlcommon.FUint8T  /**< The controller button (SDL_GameControllerButton) */
-	State     sdlcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_CONTROLLERBUTTONDOWN or ::SDL_CONTROLLERBUTTONUP */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID    /**< The joystick instance id */
+	Button    ffcommon.FUint8T  /**< The controller button (SDL_GameControllerButton) */
+	State     ffcommon.FUint8T  /**< ::SDL_PRESSED or ::SDL_RELEASED */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
 }
 
 /**
  *  \brief Controller device event structure (event.cdevice.*)
  */
 type SDL_ControllerDeviceEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_CONTROLLERDEVICEADDED, ::SDL_CONTROLLERDEVICEREMOVED, or ::SDL_CONTROLLERDEVICEREMAPPED */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     sdlcommon.FSint32  /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
+	Type      ffcommon.FUint32T /**< ::SDL_CONTROLLERDEVICEADDED, ::SDL_CONTROLLERDEVICEREMOVED, or ::SDL_CONTROLLERDEVICEREMAPPED */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     sdlcommon.FSint32 /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
 }
 
 /**
  *  \brief Game controller touchpad event structure (event.ctouchpad.*)
  */
 type SDL_ControllerTouchpadEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_CONTROLLERTOUCHPADDOWN or ::SDL_CONTROLLERTOUCHPADMOTION or ::SDL_CONTROLLERTOUCHPADUP */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID     /**< The joystick instance id */
-	Touchpad  sdlcommon.FSint32  /**< The index of the touchpad */
-	Finger    sdlcommon.FSint32  /**< The index of the finger on the touchpad */
-	X         sdlcommon.FFloat   /**< Normalized in the range 0...1 with 0 being on the left */
-	Y         sdlcommon.FFloat   /**< Normalized in the range 0...1 with 0 being at the top */
-	Pressure  sdlcommon.FFloat   /**< Normalized in the range 0...1 */
+	Type      ffcommon.FUint32T /**< ::SDL_CONTROLLERTOUCHPADDOWN or ::SDL_CONTROLLERTOUCHPADMOTION or ::SDL_CONTROLLERTOUCHPADUP */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID    /**< The joystick instance id */
+	Touchpad  sdlcommon.FSint32 /**< The index of the touchpad */
+	Finger    sdlcommon.FSint32 /**< The index of the finger on the touchpad */
+	X         ffcommon.FFloat   /**< Normalized in the range 0...1 with 0 being on the left */
+	Y         ffcommon.FFloat   /**< Normalized in the range 0...1 with 0 being at the top */
+	Pressure  ffcommon.FFloat   /**< Normalized in the range 0...1 */
 }
 
 /**
  *  \brief Game controller sensor event structure (event.csensor.*)
  */
 type SDL_ControllerSensorEvent struct {
-	Type      sdlcommon.FUint32T  /**< ::SDL_CONTROLLERSENSORUPDATE */
-	Timestamp sdlcommon.FUint32T  /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     SDL_JoystickID      /**< The joystick instance id */
-	Sensor    sdlcommon.FSint32   /**< The type of the sensor, one of the values of ::SDL_SensorType */
-	Data      [3]sdlcommon.FFloat /**< Up to 3 values from the sensor, as defined in SDL_sensor.h */
+	Type      ffcommon.FUint32T  /**< ::SDL_CONTROLLERSENSORUPDATE */
+	Timestamp ffcommon.FUint32T  /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     SDL_JoystickID     /**< The joystick instance id */
+	Sensor    sdlcommon.FSint32  /**< The type of the sensor, one of the values of ::SDL_SensorType */
+	Data      [3]ffcommon.FFloat /**< Up to 3 values from the sensor, as defined in SDL_sensor.h */
 }
 
 /**
  *  \brief Audio device event structure (event.adevice.*)
  */
 type SDL_AudioDeviceEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_AUDIODEVICEADDED, or ::SDL_AUDIODEVICEREMOVED */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     sdlcommon.FUint32T /**< The audio device index for the ADDED event (valid until next SDL_GetNumAudioDevices() call), SDL_AudioDeviceID for the REMOVED event */
-	Iscapture sdlcommon.FUint8T  /**< zero if an output device, non-zero if a capture device. */
-	Padding1  sdlcommon.FUint8T
-	Padding2  sdlcommon.FUint8T
-	Padding3  sdlcommon.FUint8T
+	Type      ffcommon.FUint32T /**< ::SDL_AUDIODEVICEADDED, or ::SDL_AUDIODEVICEREMOVED */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     ffcommon.FUint32T /**< The audio device index for the ADDED event (valid until next SDL_GetNumAudioDevices() call), SDL_AudioDeviceID for the REMOVED event */
+	Iscapture ffcommon.FUint8T  /**< zero if an output device, non-zero if a capture device. */
+	Padding1  ffcommon.FUint8T
+	Padding2  ffcommon.FUint8T
+	Padding3  ffcommon.FUint8T
 }
 
 /**
  *  \brief Touch finger event structure (event.tfinger.*)
  */
 type SDL_TouchFingerEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_FINGERMOTION or ::SDL_FINGERDOWN or ::SDL_FINGERUP */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	TouchId   SDL_TouchID        /**< The touch device id */
+	Type      ffcommon.FUint32T /**< ::SDL_FINGERMOTION or ::SDL_FINGERDOWN or ::SDL_FINGERUP */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	TouchId   SDL_TouchID       /**< The touch device id */
 	FingerId  SDL_FingerID
-	X         sdlcommon.FFloat   /**< Normalized in the range 0...1 */
-	Y         sdlcommon.FFloat   /**< Normalized in the range 0...1 */
-	Dx        sdlcommon.FFloat   /**< Normalized in the range -1...1 */
-	Dy        sdlcommon.FFloat   /**< Normalized in the range -1...1 */
-	Pressure  sdlcommon.FFloat   /**< Normalized in the range 0...1 */
-	wWndowID  sdlcommon.FUint32T /**< The window underneath the finger, if any */
+	X         ffcommon.FFloat   /**< Normalized in the range 0...1 */
+	Y         ffcommon.FFloat   /**< Normalized in the range 0...1 */
+	Dx        ffcommon.FFloat   /**< Normalized in the range -1...1 */
+	Dy        ffcommon.FFloat   /**< Normalized in the range -1...1 */
+	Pressure  ffcommon.FFloat   /**< Normalized in the range 0...1 */
+	wWndowID  ffcommon.FUint32T /**< The window underneath the finger, if any */
 }
 
 /**
  *  \brief Multiple Finger Gesture Event (event.mgesture.*)
  */
 type SDL_MultiGestureEvent struct {
-	Type       sdlcommon.FUint32T /**< ::SDL_MULTIGESTURE */
-	Timestamp  sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	TouchId    SDL_TouchID        /**< The touch device id */
-	DTheta     sdlcommon.FFloat
-	DDist      sdlcommon.FFloat
-	X          sdlcommon.FFloat
-	Y          sdlcommon.FFloat
-	NumFingers sdlcommon.FUint16T
-	Padding    sdlcommon.FUint16T
+	Type       ffcommon.FUint32T /**< ::SDL_MULTIGESTURE */
+	Timestamp  ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	TouchId    SDL_TouchID       /**< The touch device id */
+	DTheta     ffcommon.FFloat
+	DDist      ffcommon.FFloat
+	X          ffcommon.FFloat
+	Y          ffcommon.FFloat
+	NumFingers ffcommon.FUint16T
+	Padding    ffcommon.FUint16T
 }
 
 /**
  * \brief Dollar Gesture Event (event.dgesture.*)
  */
 type SDL_DollarGestureEvent struct {
-	Type       sdlcommon.FUint32T /**< ::SDL_DOLLARGESTURE or ::SDL_DOLLARRECORD */
-	Timestamp  sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	TouchId    SDL_TouchID        /**< The touch device id */
+	Type       ffcommon.FUint32T /**< ::SDL_DOLLARGESTURE or ::SDL_DOLLARRECORD */
+	Timestamp  ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	TouchId    SDL_TouchID       /**< The touch device id */
 	GestureId  SDL_GestureID
-	NumFingers sdlcommon.FUint32T
-	Error      sdlcommon.FFloat
-	X          sdlcommon.FFloat /**< Normalized center of gesture */
-	Y          sdlcommon.FFloat /**< Normalized center of gesture */
+	NumFingers ffcommon.FUint32T
+	Error      ffcommon.FFloat
+	X          ffcommon.FFloat /**< Normalized center of gesture */
+	Y          ffcommon.FFloat /**< Normalized center of gesture */
 }
 
 /**
@@ -462,48 +463,48 @@ type SDL_DollarGestureEvent struct {
  *  \note If this event is enabled, you must free the filename in the event.
  */
 type SDL_DropEvent struct {
-	Type      sdlcommon.FUint32T     /**< ::SDL_DROPBEGIN or ::SDL_DROPFILE or ::SDL_DROPTEXT or ::SDL_DROPCOMPLETE */
-	Timestamp sdlcommon.FUint32T     /**< In milliseconds, populated using SDL_GetTicks() */
-	File      sdlcommon.FCharPStruct /**< The file name, which should be freed with SDL_free(), is NULL on begin/complete */
-	WindowID  sdlcommon.FUint32T     /**< The window that was dropped on, if any */
+	Type      ffcommon.FUint32T     /**< ::SDL_DROPBEGIN or ::SDL_DROPFILE or ::SDL_DROPTEXT or ::SDL_DROPCOMPLETE */
+	Timestamp ffcommon.FUint32T     /**< In milliseconds, populated using SDL_GetTicks() */
+	File      ffcommon.FCharPStruct /**< The file name, which should be freed with SDL_free(), is NULL on begin/complete */
+	WindowID  ffcommon.FUint32T     /**< The window that was dropped on, if any */
 }
 
 /**
  *  \brief Sensor event structure (event.sensor.*)
  */
 type SDL_SensorEvent struct {
-	Type      sdlcommon.FUint32T  /**< ::SDL_SENSORUPDATE */
-	Timestamp sdlcommon.FUint32T  /**< In milliseconds, populated using SDL_GetTicks() */
-	Which     sdlcommon.FSint32   /**< The instance ID of the sensor */
-	Data      [6]sdlcommon.FFloat /**< Up to 6 values from the sensor - additional values can be queried using SDL_SensorGetData() */
+	Type      ffcommon.FUint32T  /**< ::SDL_SENSORUPDATE */
+	Timestamp ffcommon.FUint32T  /**< In milliseconds, populated using SDL_GetTicks() */
+	Which     sdlcommon.FSint32  /**< The instance ID of the sensor */
+	Data      [6]ffcommon.FFloat /**< Up to 6 values from the sensor - additional values can be queried using SDL_SensorGetData() */
 }
 
 /**
  *  \brief The "quit requested" event
  */
 type SDL_QuitEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_QUIT */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Type      ffcommon.FUint32T /**< ::SDL_QUIT */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
 }
 
 /**
  *  \brief OS Specific event
  */
 type SDL_OSEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_QUIT */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Type      ffcommon.FUint32T /**< ::SDL_QUIT */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
 }
 
 /**
  *  \brief A user-defined event type (event.user.*)
  */
 type SDL_UserEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_USEREVENT through ::SDL_LASTEVENT-1 */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	WindowID  sdlcommon.FUint32T /**< The associated window if any */
-	Code      sdlcommon.FSint32  /**< User defined event code */
-	Data1     sdlcommon.FVoidP   /**< User defined data pointer */
-	Data2     sdlcommon.FVoidP   /**< User defined data pointer */
+	Type      ffcommon.FUint32T /**< ::SDL_USEREVENT through ::SDL_LASTEVENT-1 */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	WindowID  ffcommon.FUint32T /**< The associated window if any */
+	Code      sdlcommon.FSint32 /**< User defined event code */
+	Data1     ffcommon.FVoidP   /**< User defined data pointer */
+	Data2     ffcommon.FVoidP   /**< User defined data pointer */
 }
 
 //struct SDL_SysWMmsg;
@@ -516,18 +517,18 @@ type SDL_UserEvent struct {
  *  \note If you want to use this event, you should include SDL_syswm.h.
  */
 type SDL_SysWMEvent struct {
-	Type      sdlcommon.FUint32T /**< ::SDL_SYSWMEVENT */
-	Timestamp sdlcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
-	Msg       *SDL_SysWMmsg      /**< driver dependent data, defined in SDL_syswm.h */
+	Type      ffcommon.FUint32T /**< ::SDL_SYSWMEVENT */
+	Timestamp ffcommon.FUint32T /**< In milliseconds, populated using SDL_GetTicks() */
+	Msg       *SDL_SysWMmsg     /**< driver dependent data, defined in SDL_syswm.h */
 }
 
 /**
  *  \brief General event structure
  */
 type SDL_Event struct {
-	Type sdlcommon.FUint32T /**< Event type, shared with all events */
+	Type ffcommon.FUint32T /**< Event type, shared with all events */
 	_    [52]byte
-	// sdlcommon SDL_sdlcommonEvent;                 /**< sdlcommon event data */
+	// ffcommon SDL_ffcommonEvent;                 /**< ffcommon event data */
 	// display SDL_DisplayEvent;               /**< Display event data */
 	// window SDL_WindowEvent;                 /**< Window event data */
 	// key SDL_KeyboardEvent;                  /**< Keyboard event data */
@@ -817,10 +818,10 @@ const (
 //SDL_eventaction action,
 //Uint32 minType, Uint32 maxType);
 func (events *SDL_Event) SDL_PeepEvents(
-	numevents sdlcommon.FInt,
+	numevents ffcommon.FInt,
 	action SDL_eventaction,
-	minType sdlcommon.FUint32T,
-	maxType sdlcommon.FUint32T) (res sdlcommon.FInt) {
+	minType ffcommon.FUint32T,
+	maxType ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_PeepEvents").Call(
 		uintptr(unsafe.Pointer(events)),
 		uintptr(numevents),
@@ -831,7 +832,7 @@ func (events *SDL_Event) SDL_PeepEvents(
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -850,14 +851,14 @@ func (events *SDL_Event) SDL_PeepEvents(
  * \sa SDL_HasEvents
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasEvent(Uint32 type);
-func SDL_HasEvent(type0 sdlcommon.FUint32T) (res bool) {
+func SDL_HasEvent(type0 ffcommon.FUint32T) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasEvent").Call(
 		uintptr(type0),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -876,7 +877,7 @@ func SDL_HasEvent(type0 sdlcommon.FUint32T) (res bool) {
  * \sa SDL_HasEvents
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType);
-func SDL_HasEvents(minType, maxType sdlcommon.FUint32T) (res bool) {
+func SDL_HasEvents(minType, maxType ffcommon.FUint32T) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasEvents").Call(
 		uintptr(minType),
 		uintptr(maxType),
@@ -884,7 +885,7 @@ func SDL_HasEvents(minType, maxType sdlcommon.FUint32T) (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -907,7 +908,7 @@ func SDL_HasEvents(minType, maxType sdlcommon.FUint32T) (res bool) {
  * \sa SDL_FlushEvents
  */
 //extern DECLSPEC void SDLCALL SDL_FlushEvent(Uint32 type);
-func SDL_FlushEvent(type0 sdlcommon.FUint32T) {
+func SDL_FlushEvent(type0 ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FlushEvent").Call(
 		uintptr(type0),
 	)
@@ -939,7 +940,7 @@ func SDL_FlushEvent(type0 sdlcommon.FUint32T) {
  * \sa SDL_FlushEvent
  */
 //extern DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType);
-func SDL_FlushEvents(minType, maxType sdlcommon.FUint32T) {
+func SDL_FlushEvents(minType, maxType ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FlushEvents").Call(
 		uintptr(minType),
 		uintptr(maxType),
@@ -968,7 +969,7 @@ func SDL_FlushEvents(minType, maxType sdlcommon.FUint32T) {
  * be done from the main loop and does not suspend the main loop while waiting
  * on an event to be posted.
  *
- * The sdlcommon practice is to fully process the event queue once every frame,
+ * The ffcommon practice is to fully process the event queue once every frame,
  * usually as a first step before updating the game's state:
  *
  * ```c
@@ -994,14 +995,14 @@ func SDL_FlushEvents(minType, maxType sdlcommon.FUint32T) {
  * \sa SDL_WaitEventTimeout
  */
 //extern DECLSPEC int SDLCALL SDL_PollEvent(SDL_Event * event);
-func (event *SDL_Event) SDL_PollEvent() (res sdlcommon.FInt) {
+func (event *SDL_Event) SDL_PollEvent() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_PollEvent").Call(
 		uintptr(unsafe.Pointer(event)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1024,14 +1025,14 @@ func (event *SDL_Event) SDL_PollEvent() (res sdlcommon.FInt) {
  * \sa SDL_WaitEventTimeout
  */
 //extern DECLSPEC int SDLCALL SDL_WaitEvent(SDL_Event * event);
-func (event *SDL_Event) SDL_WaitEvent() (res sdlcommon.FInt) {
+func (event *SDL_Event) SDL_WaitEvent() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WaitEvent").Call(
 		uintptr(unsafe.Pointer(event)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1059,7 +1060,7 @@ func (event *SDL_Event) SDL_WaitEvent() (res sdlcommon.FInt) {
  */
 //extern DECLSPEC int SDLCALL SDL_WaitEventTimeout(SDL_Event * event,
 //int timeout);
-func (event *SDL_Event) SDL_WaitEventTimeout(timeout sdlcommon.FInt) (res sdlcommon.FInt) {
+func (event *SDL_Event) SDL_WaitEventTimeout(timeout ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WaitEventTimeout").Call(
 		uintptr(unsafe.Pointer(event)),
 		uintptr(timeout),
@@ -1067,7 +1068,7 @@ func (event *SDL_Event) SDL_WaitEventTimeout(timeout sdlcommon.FInt) (res sdlcom
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1095,7 +1096,7 @@ func (event *SDL_Event) SDL_WaitEventTimeout(timeout sdlcommon.FInt) (res sdlcom
  * \param event the SDL_Event to be added to the queue
  * \returns 1 on success, 0 if the event was filtered, or a negative error
  *          code on failure; call SDL_GetError() for more information. A
- *          sdlcommon reason for error is the event queue being full.
+ *          ffcommon reason for error is the event queue being full.
  *
  * \sa SDL_PeepEvents
  * \sa SDL_PollEvent
@@ -1103,14 +1104,14 @@ func (event *SDL_Event) SDL_WaitEventTimeout(timeout sdlcommon.FInt) (res sdlcom
  */
 //extern DECLSPEC int SDLCALL SDL_PushEvent(SDL_Event * event);
 
-func (event *SDL_Event) SDL_PushEvent() (res sdlcommon.FInt) {
+func (event *SDL_Event) SDL_PushEvent() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_PushEvent").Call(
 		uintptr(unsafe.Pointer(event)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1127,7 +1128,7 @@ func (event *SDL_Event) SDL_PushEvent() (res sdlcommon.FInt) {
  * \sa SDL_AddEventWatch
  */
 //typedef int (SDLCALL * SDL_EventFilter) (void *userdata, SDL_Event * event);
-type SDL_EventFilter = func(userdata sdlcommon.FVoidP, event *SDL_Event) uintptr
+type SDL_EventFilter = func(userdata ffcommon.FVoidP, event *SDL_Event) uintptr
 
 /**
  * Set up a filter to process all events before they change internal state and
@@ -1171,9 +1172,9 @@ type SDL_EventFilter = func(userdata sdlcommon.FVoidP, event *SDL_Event) uintptr
  */
 //extern DECLSPEC void SDLCALL SDL_SetEventFilter(SDL_EventFilter filter,
 //void *userdata);
-func SDL_SetEventFilter(filter SDL_EventFilter, userdata sdlcommon.FVoidP) {
+func SDL_SetEventFilter(filter SDL_EventFilter, userdata ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetEventFilter").Call(
-		sdlcommon.NewCallback(filter),
+		ffcommon.NewCallback(filter),
 		uintptr(unsafe.Pointer(userdata)),
 	)
 	if t == 0 {
@@ -1197,15 +1198,15 @@ func SDL_SetEventFilter(filter SDL_EventFilter, userdata sdlcommon.FVoidP) {
  */
 //extern DECLSPEC SDL_bool SDLCALL SDL_GetEventFilter(SDL_EventFilter * filter,
 //void **userdata);
-func SDL_GetEventFilter(filter SDL_EventFilter, userdata *sdlcommon.FVoidP) (res bool) {
+func SDL_GetEventFilter(filter SDL_EventFilter, userdata *ffcommon.FVoidP) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetEventFilter").Call(
-		sdlcommon.NewCallback(filter),
+		ffcommon.NewCallback(filter),
 		uintptr(unsafe.Pointer(userdata)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1235,9 +1236,9 @@ func SDL_GetEventFilter(filter SDL_EventFilter, userdata *sdlcommon.FVoidP) (res
  */
 //extern DECLSPEC void SDLCALL SDL_AddEventWatch(SDL_EventFilter filter,
 //void *userdata);
-func SDL_AddEventWatch(filter SDL_EventFilter, userdata sdlcommon.FVoidP) {
+func SDL_AddEventWatch(filter SDL_EventFilter, userdata ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AddEventWatch").Call(
-		sdlcommon.NewCallback(filter),
+		ffcommon.NewCallback(filter),
 		userdata,
 	)
 	if t == 0 {
@@ -1259,9 +1260,9 @@ func SDL_AddEventWatch(filter SDL_EventFilter, userdata sdlcommon.FVoidP) {
  */
 //extern DECLSPEC void SDLCALL SDL_DelEventWatch(SDL_EventFilter filter,
 //void *userdata);
-func SDL_DelEventWatch(filter SDL_EventFilter, userdata sdlcommon.FVoidP) {
+func SDL_DelEventWatch(filter SDL_EventFilter, userdata ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_DelEventWatch").Call(
-		sdlcommon.NewCallback(filter),
+		ffcommon.NewCallback(filter),
 		userdata,
 	)
 	if t == 0 {
@@ -1286,9 +1287,9 @@ func SDL_DelEventWatch(filter SDL_EventFilter, userdata sdlcommon.FVoidP) {
  */
 //extern DECLSPEC void SDLCALL SDL_FilterEvents(SDL_EventFilter filter,
 //void *userdata);
-func SDL_FilterEvents(filter SDL_EventFilter, userdata sdlcommon.FVoidP) {
+func SDL_FilterEvents(filter SDL_EventFilter, userdata ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FilterEvents").Call(
-		sdlcommon.NewCallback(filter),
+		ffcommon.NewCallback(filter),
 		userdata,
 	)
 	if t == 0 {
@@ -1321,7 +1322,7 @@ const SDL_ENABLE = 1
  * \sa SDL_GetEventState
  */
 //extern DECLSPEC Uint8 SDLCALL SDL_EventState(Uint32 type, int state);
-func SDL_EventState(type0 sdlcommon.FUint32T, state sdlcommon.FInt) (res sdlcommon.FUint8T) {
+func SDL_EventState(type0 ffcommon.FUint32T, state ffcommon.FInt) (res ffcommon.FUint8T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_EventState").Call(
 		uintptr(type0),
 		uintptr(state),
@@ -1329,13 +1330,13 @@ func SDL_EventState(type0 sdlcommon.FUint32T, state sdlcommon.FInt) (res sdlcomm
 	if t == 0 {
 
 	}
-	res = sdlcommon.FUint8T(t)
+	res = ffcommon.FUint8T(t)
 	return
 }
 
 /* @} */
 //const SDL_GetEventState(type) SDL_EventState(type, SDL_QUERY)
-func SDL_GetEventState(type0 sdlcommon.FUint32T) (res sdlcommon.FUint8T) {
+func SDL_GetEventState(type0 ffcommon.FUint32T) (res ffcommon.FUint8T) {
 	return SDL_EventState(type0, SDL_QUERY)
 }
 
@@ -1358,11 +1359,11 @@ func SDL_GetEventState(type0 sdlcommon.FUint32T) (res sdlcommon.FUint8T) {
  * \sa SDL_PushEvent
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_RegisterEvents(int numevents);
-func SDL_RegisterEvents(numevents sdlcommon.FInt) (res sdlcommon.FUint32T) {
+func SDL_RegisterEvents(numevents ffcommon.FInt) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RegisterEvents").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }

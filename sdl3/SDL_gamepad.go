@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -154,8 +155,8 @@ const (
  */
 type SDL_GamepadBinding struct {
 	BindType SDL_GamepadBindingType
-	Hat      sdlcommon.FInt
-	HatMask  sdlcommon.FInt
+	Hat      ffcommon.FInt
+	HatMask  ffcommon.FInt
 	// union
 	// {
 	//     int button;
@@ -196,11 +197,11 @@ type SDL_GamepadBinding struct {
  * \sa SDL_GetGamepadMappingForGUID
  */
 // extern DECLSPEC int SDLCALL SDL_AddGamepadMapping(const char *mappingString);
-func SDL_AddGamepadMapping(mappingString sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_AddGamepadMapping(mappingString ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AddGamepadMapping").Call(
-		sdlcommon.UintPtrFromString(mappingString),
+		ffcommon.UintPtrFromString(mappingString),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -233,12 +234,12 @@ func SDL_AddGamepadMapping(mappingString sdlcommon.FConstCharP) (res sdlcommon.F
  * \sa SDL_GetGamepadMappingForGUID
  */
 // extern DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromRW(SDL_RWops *rw, int freerw);
-func (rw *SDL_RWops) SDL_AddGamepadMapping(freerw sdlcommon.FInt) (res sdlcommon.FInt) {
+func (rw *SDL_RWops) SDL_AddGamepadMapping(freerw ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_AddGamepadMapping").Call(
 		uintptr(unsafe.Pointer(rw)),
 		uintptr(freerw),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -257,9 +258,9 @@ func (rw *SDL_RWops) SDL_AddGamepadMapping(freerw sdlcommon.FInt) (res sdlcommon
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetNumGamepadMappings(void);
-func SDL_GetNumGamepadMappings() (res sdlcommon.FInt) {
+func SDL_GetNumGamepadMappings() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumGamepadMappings").Call()
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -272,11 +273,11 @@ func SDL_GetNumGamepadMappings() (res sdlcommon.FInt) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC char * SDLCALL SDL_GetGamepadMappingForIndex(int mapping_index);
-func SDL_GetGamepadMappingForIndex(mapping_index sdlcommon.FInt) (res sdlcommon.FCharP) {
+func SDL_GetGamepadMappingForIndex(mapping_index ffcommon.FInt) (res ffcommon.FCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadMappingForIndex").Call(
 		uintptr(mapping_index),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -295,11 +296,11 @@ func SDL_GetGamepadMappingForIndex(mapping_index sdlcommon.FInt) (res sdlcommon.
  * \sa SDL_GetJoystickGUID
  */
 // extern DECLSPEC char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_JoystickGUID guid);
-func SDL_GetGamepadMappingForGUID(guid SDL_JoystickGUID) (res sdlcommon.FCharP) {
+func SDL_GetGamepadMappingForGUID(guid SDL_JoystickGUID) (res ffcommon.FCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadMappingForGUID").Call(
 		uintptr(unsafe.Pointer(&guid)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -320,11 +321,11 @@ func SDL_GetGamepadMappingForGUID(guid SDL_JoystickGUID) (res sdlcommon.FCharP) 
  * \sa SDL_GetGamepadMappingForGUID
  */
 // extern DECLSPEC char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad);
-func SDL_GetGamepadMapping(gamepad *SDL_Gamepad) (res sdlcommon.FCharP) {
+func SDL_GetGamepadMapping(gamepad *SDL_Gamepad) (res ffcommon.FCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadMapping").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -341,7 +342,7 @@ func SDL_GetGamepadMapping(gamepad *SDL_Gamepad) (res sdlcommon.FCharP) {
  * \sa SDL_OpenGamepad
  */
 // extern DECLSPEC SDL_JoystickID *SDLCALL SDL_GetGamepads(int *count);
-func SDL_GetGamepads(count *sdlcommon.FInt) (res *SDL_JoystickID) {
+func SDL_GetGamepads(count *ffcommon.FInt) (res *SDL_JoystickID) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepads").Call(
 		uintptr(unsafe.Pointer(count)),
 	)
@@ -366,7 +367,7 @@ func SDL_IsGamepad(instance_id SDL_JoystickID) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_IsGamepad").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -385,11 +386,11 @@ func SDL_IsGamepad(instance_id SDL_JoystickID) (res bool) {
  * \sa SDL_OpenGamepad
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetGamepadInstanceName(SDL_JoystickID instance_id);
-func SDL_GetGamepadInstanceName(instance_id SDL_JoystickID) (res sdlcommon.FConstCharP) {
+func SDL_GetGamepadInstanceName(instance_id SDL_JoystickID) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadInstanceName").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -408,11 +409,11 @@ func SDL_GetGamepadInstanceName(instance_id SDL_JoystickID) (res sdlcommon.FCons
  * \sa SDL_OpenGamepad
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetGamepadInstancePath(SDL_JoystickID instance_id);
-func SDL_GetGamepadInstancePath(instance_id SDL_JoystickID) (res sdlcommon.FConstCharP) {
+func SDL_GetGamepadInstancePath(instance_id SDL_JoystickID) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadInstancePath").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -430,11 +431,11 @@ func SDL_GetGamepadInstancePath(instance_id SDL_JoystickID) (res sdlcommon.FCons
  * \sa SDL_OpenGamepad
  */
 // extern DECLSPEC int SDLCALL SDL_GetGamepadInstancePlayerIndex(SDL_JoystickID instance_id);
-func SDL_GetGamepadInstancePlayerIndex(instance_id SDL_JoystickID) (res sdlcommon.FInt) {
+func SDL_GetGamepadInstancePlayerIndex(instance_id SDL_JoystickID) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadInstancePlayerIndex").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -474,11 +475,11 @@ func SDL_GetGamepadInstanceGUID(instance_id SDL_JoystickID) (res SDL_JoystickGUI
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC Uint16 SDLCALL SDL_GetGamepadInstanceVendor(SDL_JoystickID instance_id);
-func SDL_GetGamepadInstanceVendor(instance_id SDL_JoystickID) (res sdlcommon.FUint16T) {
+func SDL_GetGamepadInstanceVendor(instance_id SDL_JoystickID) (res ffcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadInstanceVendor").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.FUint16T(t)
+	res = ffcommon.FUint16T(t)
 	return
 }
 
@@ -495,11 +496,11 @@ func SDL_GetGamepadInstanceVendor(instance_id SDL_JoystickID) (res sdlcommon.FUi
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC Uint16 SDLCALL SDL_GetGamepadInstanceProduct(SDL_JoystickID instance_id);
-func SDL_GetGamepadInstanceProduct(instance_id SDL_JoystickID) (res sdlcommon.FUint16T) {
+func SDL_GetGamepadInstanceProduct(instance_id SDL_JoystickID) (res ffcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadInstanceProduct").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.FUint16T(t)
+	res = ffcommon.FUint16T(t)
 	return
 }
 
@@ -516,11 +517,11 @@ func SDL_GetGamepadInstanceProduct(instance_id SDL_JoystickID) (res sdlcommon.FU
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC Uint16 SDLCALL SDL_GetGamepadInstanceProductVersion(SDL_JoystickID instance_id);
-func SDL_GetGamepadInstanceProductVersion(instance_id SDL_JoystickID) (res sdlcommon.FUint16T) {
+func SDL_GetGamepadInstanceProductVersion(instance_id SDL_JoystickID) (res ffcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadInstanceProductVersion").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.FUint16T(t)
+	res = ffcommon.FUint16T(t)
 	return
 }
 
@@ -555,11 +556,11 @@ func SDL_GetGamepadInstanceType(instance_id SDL_JoystickID) (res SDL_GamepadType
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC char *SDLCALL SDL_GetGamepadInstanceMapping(SDL_JoystickID instance_id);
-func SDL_GetGamepadInstanceMapping(instance_id SDL_JoystickID) (res sdlcommon.FCharP) {
+func SDL_GetGamepadInstanceMapping(instance_id SDL_JoystickID) (res ffcommon.FCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadInstanceMapping").Call(
 		uintptr(instance_id),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -616,7 +617,7 @@ func SDL_GetGamepadFromInstanceID(instance_id SDL_JoystickID) (res *SDL_Gamepad)
  * \sa SDL_SetGamepadPlayerIndex
  */
 // extern DECLSPEC SDL_Gamepad *SDLCALL SDL_GetGamepadFromPlayerIndex(int player_index);
-func SDL_GetGamepadFromPlayerIndex(player_index sdlcommon.FInt) (res *SDL_Gamepad) {
+func SDL_GetGamepadFromPlayerIndex(player_index ffcommon.FInt) (res *SDL_Gamepad) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadFromPlayerIndex").Call(
 		uintptr(player_index),
 	)
@@ -641,11 +642,11 @@ func SDL_GetGamepadFromPlayerIndex(player_index sdlcommon.FInt) (res *SDL_Gamepa
  * \sa SDL_OpenGamepad
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetGamepadName(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadName() (res sdlcommon.FConstCharP) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadName() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadName").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -665,11 +666,11 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadName() (res sdlcommon.FConstCharP) {
  * \sa SDL_GetGamepadInstancePath
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetGamepadPath(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadPath() (res sdlcommon.FConstCharP) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadPath() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadPath").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -704,11 +705,11 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadType() (res SDL_GamepadType) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetGamepadPlayerIndex(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadPlayerIndex() (res sdlcommon.FConstCharP) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadPlayerIndex() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadPlayerIndex").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -724,12 +725,12 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadPlayerIndex() (res sdlcommon.FConstCha
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index);
-func (gamepad *SDL_Gamepad) SDL_SetGamepadPlayerIndex(player_index sdlcommon.FInt) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_SetGamepadPlayerIndex(player_index ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetGamepadPlayerIndex").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(player_index),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -744,11 +745,11 @@ func (gamepad *SDL_Gamepad) SDL_SetGamepadPlayerIndex(player_index sdlcommon.FIn
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC Uint16 SDLCALL SDL_GetGamepadVendor(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadVendor() (res sdlcommon.FUint16T) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadVendor() (res ffcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadVendor").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.FUint16T(t)
+	res = ffcommon.FUint16T(t)
 	return
 }
 
@@ -763,11 +764,11 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadVendor() (res sdlcommon.FUint16T) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC Uint16 SDLCALL SDL_GetGamepadProduct(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadProduct() (res sdlcommon.FUint16T) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadProduct() (res ffcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadProduct").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.FUint16T(t)
+	res = ffcommon.FUint16T(t)
 	return
 }
 
@@ -782,11 +783,11 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadProduct() (res sdlcommon.FUint16T) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC Uint16 SDLCALL SDL_GetGamepadProductVersion(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadProductVersion() (res sdlcommon.FUint16T) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadProductVersion() (res ffcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadProductVersion").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.FUint16T(t)
+	res = ffcommon.FUint16T(t)
 	return
 }
 
@@ -801,11 +802,11 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadProductVersion() (res sdlcommon.FUint1
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC Uint16 SDLCALL SDL_GetGamepadFirmwareVersion(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadFirmwareVersion() (res sdlcommon.FUint16T) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadFirmwareVersion() (res ffcommon.FUint16T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadFirmwareVersion").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.FUint16T(t)
+	res = ffcommon.FUint16T(t)
 	return
 }
 
@@ -820,11 +821,11 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadFirmwareVersion() (res sdlcommon.FUint
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC const char * SDLCALL SDL_GetGamepadSerial(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadSerial() (res sdlcommon.FConstCharP) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadSerial() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadSerial").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -846,7 +847,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadConnected() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GamepadConnected").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -891,7 +892,7 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadJoystick() (res *SDL_Joystick) {
 // extern DECLSPEC void SDLCALL SDL_SetGamepadEventsEnabled(SDL_bool enabled);
 func SDL_GetGamepadJoystick(enabled bool) {
 	sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadJoystick").Call(
-		sdlcommon.CBool(enabled),
+		ffcommon.CBool(enabled),
 	)
 }
 
@@ -911,7 +912,7 @@ func SDL_GetGamepadJoystick(enabled bool) {
 // extern DECLSPEC SDL_bool SDLCALL SDL_GamepadEventsEnabled(void);
 func SDL_GamepadEventsEnabled() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GamepadEventsEnabled").Call()
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -950,9 +951,9 @@ func SDL_UpdateGamepads() {
  * \sa SDL_GetGamepadStringForAxis
  */
 // extern DECLSPEC SDL_GamepadAxis SDLCALL SDL_GetGamepadAxisFromString(const char *str);
-func SDL_GetGamepadAxisFromString(str sdlcommon.FConstCharP) (res SDL_GamepadAxis) {
+func SDL_GetGamepadAxisFromString(str ffcommon.FConstCharP) (res SDL_GamepadAxis) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadAxisFromString").Call(
-		sdlcommon.UintPtrFromString(str),
+		ffcommon.UintPtrFromString(str),
 	)
 	res = SDL_GamepadAxis(t)
 	return
@@ -973,11 +974,11 @@ func SDL_GetGamepadAxisFromString(str sdlcommon.FConstCharP) (res SDL_GamepadAxi
  * \sa SDL_GetGamepadAxisFromString
  */
 // extern DECLSPEC const char* SDLCALL SDL_GetGamepadStringForAxis(SDL_GamepadAxis axis);
-func SDL_GetGamepadStringForAxis(axis SDL_GamepadAxis) (res sdlcommon.FConstCharP) {
+func SDL_GetGamepadStringForAxis(axis SDL_GamepadAxis) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadStringForAxis").Call(
 		uintptr(axis),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -1022,7 +1023,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasAxis(axis SDL_GamepadAxis) (res bool) 
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(axis),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1068,9 +1069,9 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadAxis(axis SDL_GamepadAxis) (res sdlcom
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC SDL_GamepadButton SDLCALL SDL_GetGamepadButtonFromString(const char *str);
-func SDL_GetGamepadButtonFromString(str sdlcommon.FConstCharP) (res SDL_GamepadButton) {
+func SDL_GetGamepadButtonFromString(str ffcommon.FConstCharP) (res SDL_GamepadButton) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadButtonFromString").Call(
-		sdlcommon.UintPtrFromString(str),
+		ffcommon.UintPtrFromString(str),
 	)
 	res = SDL_GamepadButton(t)
 	return
@@ -1091,11 +1092,11 @@ func SDL_GetGamepadButtonFromString(str sdlcommon.FConstCharP) (res SDL_GamepadB
  * \sa SDL_GetGamepadButtonFromString
  */
 // extern DECLSPEC const char* SDLCALL SDL_GetGamepadStringForButton(SDL_GamepadButton button);
-func SDL_GetGamepadStringForButton(button SDL_GamepadButton) (res sdlcommon.FConstCharP) {
+func SDL_GetGamepadStringForButton(button SDL_GamepadButton) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadStringForButton").Call(
 		uintptr(button),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -1140,7 +1141,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasButton(button SDL_GamepadButton) (res 
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(button),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1157,12 +1158,12 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasButton(button SDL_GamepadButton) (res 
  * \sa SDL_GetGamepadAxis
  */
 // extern DECLSPEC Uint8 SDLCALL SDL_GetGamepadButton(SDL_Gamepad *gamepad, SDL_GamepadButton button);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadButton(button SDL_GamepadButton) (res sdlcommon.FUint8T) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadButton(button SDL_GamepadButton) (res ffcommon.FUint8T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadButton").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(button),
 	)
-	res = sdlcommon.FUint8T(t)
+	res = ffcommon.FUint8T(t)
 	return
 }
 
@@ -1172,11 +1173,11 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadButton(button SDL_GamepadButton) (res 
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetNumGamepadTouchpads(SDL_Gamepad *gamepad);
-func (gamepad *SDL_Gamepad) SDL_GetNumGamepadTouchpads() (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_GetNumGamepadTouchpads() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumGamepadTouchpads").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1187,12 +1188,12 @@ func (gamepad *SDL_Gamepad) SDL_GetNumGamepadTouchpads() (res sdlcommon.FInt) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetNumGamepadTouchpadFingers(SDL_Gamepad *gamepad, int touchpad);
-func (gamepad *SDL_Gamepad) SDL_GetNumGamepadTouchpadFingers(touchpad sdlcommon.FInt) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_GetNumGamepadTouchpadFingers(touchpad ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumGamepadTouchpadFingers").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(touchpad),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1202,7 +1203,7 @@ func (gamepad *SDL_Gamepad) SDL_GetNumGamepadTouchpadFingers(touchpad sdlcommon.
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, Uint8 *state, float *x, float *y, float *pressure);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadTouchpadFinger(touchpad, finger sdlcommon.FInt, state *sdlcommon.FUint8T, x, y, pressure *sdlcommon.FFloat) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadTouchpadFinger(touchpad, finger ffcommon.FInt, state *ffcommon.FUint8T, x, y, pressure *ffcommon.FFloat) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadTouchpadFinger").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(touchpad),
@@ -1212,7 +1213,7 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadTouchpadFinger(touchpad, finger sdlcom
 		uintptr(unsafe.Pointer(y)),
 		uintptr(unsafe.Pointer(pressure)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1231,7 +1232,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasSensor(type0 SDL_SensorType) (res bool
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(type0),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1246,13 +1247,13 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasSensor(type0 SDL_SensorType) (res bool
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, SDL_bool enabled);
-func (gamepad *SDL_Gamepad) SDL_SetGamepadSensorEnabled(type0 SDL_SensorType, enabled bool) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_SetGamepadSensorEnabled(type0 SDL_SensorType, enabled bool) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetGamepadSensorEnabled").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(type0),
-		sdlcommon.CBool(enabled),
+		ffcommon.CBool(enabled),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1271,7 +1272,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadSensorEnabled(type0 SDL_SensorType) (res 
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(type0),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1285,12 +1286,12 @@ func (gamepad *SDL_Gamepad) SDL_GamepadSensorEnabled(type0 SDL_SensorType) (res 
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC float SDLCALL SDL_GetGamepadSensorDataRate(SDL_Gamepad *gamepad, SDL_SensorType type);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadSensorDataRate(type0 SDL_SensorType) (res sdlcommon.FFloat) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadSensorDataRate(type0 SDL_SensorType) (res ffcommon.FFloat) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadSensorDataRate").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(type0),
 	)
-	res = *(*sdlcommon.FFloat)(unsafe.Pointer(t))
+	res = *(*ffcommon.FFloat)(unsafe.Pointer(t))
 	return
 }
 
@@ -1309,14 +1310,14 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadSensorDataRate(type0 SDL_SensorType) (
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadSensorData(type0 SDL_SensorType, data *sdlcommon.FFloat, num_values sdlcommon.FInt) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadSensorData(type0 SDL_SensorType, data *ffcommon.FFloat, num_values ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadSensorData").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(type0),
 		uintptr(unsafe.Pointer(data)),
 		uintptr(num_values),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1339,14 +1340,14 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadSensorData(type0 SDL_SensorType, data 
  * \sa SDL_GamepadHasRumble
  */
 // extern DECLSPEC int SDLCALL SDL_RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms);
-func (gamepad *SDL_Gamepad) SDL_RumbleGamepad(low_frequency_rumble, high_frequency_rumble sdlcommon.FUint16T, duration_ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_RumbleGamepad(low_frequency_rumble, high_frequency_rumble ffcommon.FUint16T, duration_ms ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RumbleGamepad").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(low_frequency_rumble),
 		uintptr(high_frequency_rumble),
 		uintptr(duration_ms),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1373,14 +1374,14 @@ func (gamepad *SDL_Gamepad) SDL_RumbleGamepad(low_frequency_rumble, high_frequen
  * \sa SDL_GamepadHasRumbleTriggers
  */
 // extern DECLSPEC int SDLCALL SDL_RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms);
-func (gamepad *SDL_Gamepad) SDL_RumbleGamepadTriggers(left_rumble, right_rumble sdlcommon.FUint16T, duration_ms sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_RumbleGamepadTriggers(left_rumble, right_rumble ffcommon.FUint16T, duration_ms ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RumbleGamepadTriggers").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(left_rumble),
 		uintptr(right_rumble),
 		uintptr(duration_ms),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1398,7 +1399,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasLED() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GamepadHasLED").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1418,7 +1419,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasRumble() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GamepadHasRumble").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1438,7 +1439,7 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasRumbleTriggers() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GamepadHasRumbleTriggers").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 	)
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1454,14 +1455,14 @@ func (gamepad *SDL_Gamepad) SDL_GamepadHasRumbleTriggers() (res bool) {
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue);
-func (gamepad *SDL_Gamepad) SDL_SetGamepadLED(red, green, blue sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_SetGamepadLED(red, green, blue ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetGamepadLED").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(red),
 		uintptr(green),
 		uintptr(blue),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1476,13 +1477,13 @@ func (gamepad *SDL_Gamepad) SDL_SetGamepadLED(red, green, blue sdlcommon.FUint8T
  * \since This function is available since SDL 3.0.0.
  */
 // extern DECLSPEC int SDLCALL SDL_SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size);
-func (gamepad *SDL_Gamepad) SDL_SendGamepadEffect(data sdlcommon.FConstVoidP, size sdlcommon.FInt) (res sdlcommon.FInt) {
+func (gamepad *SDL_Gamepad) SDL_SendGamepadEffect(data ffcommon.FConstVoidP, size ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SendGamepadEffect").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		data,
 		uintptr(size),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1516,12 +1517,12 @@ func (gamepad *SDL_Gamepad) SDL_CloseGamepad() {
  * \sa SDL_GetGamepadAppleSFSymbolsNameForAxis
  */
 // extern DECLSPEC const char* SDLCALL SDL_GetGamepadAppleSFSymbolsNameForButton(SDL_Gamepad *gamepad, SDL_GamepadButton button);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadAppleSFSymbolsNameForButton(button SDL_GamepadButton) (res sdlcommon.FConstCharP) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadAppleSFSymbolsNameForButton(button SDL_GamepadButton) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadAppleSFSymbolsNameForButton").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(button),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -1537,12 +1538,12 @@ func (gamepad *SDL_Gamepad) SDL_GetGamepadAppleSFSymbolsNameForButton(button SDL
  * \sa SDL_GetGamepadAppleSFSymbolsNameForButton
  */
 // extern DECLSPEC const char* SDLCALL SDL_GetGamepadAppleSFSymbolsNameForAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis);
-func (gamepad *SDL_Gamepad) SDL_GetGamepadAppleSFSymbolsNameForAxis(axis SDL_GamepadAxis) (res sdlcommon.FConstCharP) {
+func (gamepad *SDL_Gamepad) SDL_GetGamepadAppleSFSymbolsNameForAxis(axis SDL_GamepadAxis) (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetGamepadAppleSFSymbolsNameForAxis").Call(
 		uintptr(unsafe.Pointer(gamepad)),
 		uintptr(axis),
 	)
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 

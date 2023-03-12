@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -17,11 +18,11 @@ import (
  * Context structure for the random number generator state.
  */
 type SDLTest_RandomContext struct {
-	A  sdlcommon.FUint
-	X  sdlcommon.FUint
-	C  sdlcommon.FUint
-	Ah sdlcommon.FUint
-	Al sdlcommon.FUint
+	A  ffcommon.FUint
+	X  ffcommon.FUint
+	C  ffcommon.FUint
+	Ah ffcommon.FUint
+	Al ffcommon.FUint
 }
 
 /* --- Function prototypes */
@@ -39,7 +40,7 @@ type SDLTest_RandomContext struct {
  */
 //void SDLTest_RandomInit(SDLTest_RandomContext * rndContext, unsigned int xi,
 //unsigned int ci);
-func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi sdlcommon.FInt, ci sdlcommon.FUnsignedInt) {
+func (rndContext *SDLTest_RandomContext) SDLTest_RandomInit(xi ffcommon.FInt, ci ffcommon.FUnsignedInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_RandomInit").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 		uintptr(xi),
@@ -80,13 +81,13 @@ func (rndContext *SDLTest_RandomContext) SDLTest_RandomInitTime() {
  *
  */
 //nsigned int SDLTest_Random(SDLTest_RandomContext *rndContext);
-func (rndContext *SDLTest_RandomContext) SDLTest_Random() (res sdlcommon.FInt) {
+func (rndContext *SDLTest_RandomContext) SDLTest_Random() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_Random").Call(
 		uintptr(unsafe.Pointer(rndContext)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }

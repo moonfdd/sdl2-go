@@ -7,14 +7,15 @@ import (
 	"syscall"
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	sdl "github.com/moonfdd/sdl2-go/sdl3"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 var o sync.Once
 
-//音频设备回调函数
-func fill_audio_pcm(udata sdlcommon.FVoidP, stream *sdlcommon.FUint8T, len1 sdlcommon.FInt) uintptr {
+// 音频设备回调函数
+func fill_audio_pcm(udata ffcommon.FVoidP, stream *ffcommon.FUint8T, len1 ffcommon.FInt) uintptr {
 	info := (*Info)(unsafe.Pointer(udata))
 	if info.isStop {
 		return 0

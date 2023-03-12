@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	sdl "github.com/moonfdd/sdl2-go/sdl2"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
@@ -12,7 +13,7 @@ func main() {
 	sdlcommon.SetSDL2Path("SDL2.dll")
 	sdl.SDL_Init(sdl.SDL_INIT_EVERYTHING)
 	i := 0
-	timerId := sdl.SDL_AddTimer(1000, func(interval sdlcommon.FUint32T, param sdlcommon.FVoidP) uintptr {
+	timerId := sdl.SDL_AddTimer(1000, func(interval ffcommon.FUint32T, param ffcommon.FVoidP) uintptr {
 		i++
 		fmt.Println("定时器", i)
 		return 1000

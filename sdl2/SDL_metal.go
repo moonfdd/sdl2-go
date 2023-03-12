@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -12,7 +13,7 @@ import (
  *  \note This can be cast directly to an NSView or UIView.
  */
 //typedef void *SDL_MetalView;
-type SDL_MetalView = sdlcommon.FVoidP
+type SDL_MetalView = ffcommon.FVoidP
 
 /**
  *  \name Metal support functions
@@ -69,7 +70,7 @@ func SDL_Metal_DestroyView(view SDL_MetalView) {
  * \sa SDL_MetalCreateView
  */
 //extern DECLSPEC void *SDLCALL SDL_Metal_GetLayer(SDL_MetalView view);
-func SDL_Metal_GetLayer(view SDL_MetalView) (res sdlcommon.FVoidP) {
+func SDL_Metal_GetLayer(view SDL_MetalView) (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Metal_GetLayer").Call(
 		view,
 	)
@@ -92,7 +93,7 @@ func SDL_Metal_GetLayer(view SDL_MetalView) (res sdlcommon.FVoidP) {
  */
 //extern DECLSPEC void SDLCALL SDL_Metal_GetDrawableSize(SDL_Window* window, int *w,
 //int *h);
-func (window *SDL_Window) SDL_Metal_GetDrawableSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+func (window *SDL_Window) SDL_Metal_GetDrawableSize(w *ffcommon.FInt, h *ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Metal_GetDrawableSize").Call(
 		uintptr(unsafe.Pointer(w)),
 		uintptr(unsafe.Pointer(h)),

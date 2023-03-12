@@ -1,6 +1,9 @@
 package sdl3
 
-import "github.com/moonfdd/sdl2-go/sdlcommon"
+import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
 
 /*
   Simple DirectMedia Layer
@@ -55,11 +58,11 @@ import "github.com/moonfdd/sdl2-go/sdlcommon"
  * \sa SDL_HasClipboardText
  */
 // extern DECLSPEC int SDLCALL SDL_SetClipboardText(const char *text);
-func SDL_SetClipboardText(text sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_SetClipboardText(text ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetClipboardText").Call(
-		sdlcommon.UintPtrFromString(text),
+		ffcommon.UintPtrFromString(text),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -80,9 +83,9 @@ func SDL_SetClipboardText(text sdlcommon.FConstCharP) (res sdlcommon.FInt) {
  * \sa SDL_SetClipboardText
  */
 // extern DECLSPEC char * SDLCALL SDL_GetClipboardText(void);
-func SDL_GetClipboardText() (res sdlcommon.FConstCharP) {
+func SDL_GetClipboardText() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetClipboardText").Call()
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -99,7 +102,7 @@ func SDL_GetClipboardText() (res sdlcommon.FConstCharP) {
 // extern DECLSPEC SDL_bool SDLCALL SDL_HasClipboardText(void);
 func SDL_HasClipboardText() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasClipboardText").Call()
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -116,11 +119,11 @@ func SDL_HasClipboardText() (res bool) {
  * \sa SDL_HasPrimarySelectionText
  */
 // extern DECLSPEC int SDLCALL SDL_SetPrimarySelectionText(const char *text);
-func SDL_SetPrimarySelectionText(text sdlcommon.FConstCharP) (res sdlcommon.FInt) {
+func SDL_SetPrimarySelectionText(text ffcommon.FConstCharP) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetPrimarySelectionText").Call(
-		sdlcommon.UintPtrFromString(text),
+		ffcommon.UintPtrFromString(text),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -142,9 +145,9 @@ func SDL_SetPrimarySelectionText(text sdlcommon.FConstCharP) (res sdlcommon.FInt
  * \sa SDL_SetPrimarySelectionText
  */
 // extern DECLSPEC char * SDLCALL SDL_GetPrimarySelectionText(void);
-func SDL_GetPrimarySelectionText() (res sdlcommon.FConstCharP) {
+func SDL_GetPrimarySelectionText() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetPrimarySelectionText").Call()
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 
@@ -163,7 +166,7 @@ func SDL_GetPrimarySelectionText() (res sdlcommon.FConstCharP) {
 // extern DECLSPEC SDL_bool SDLCALL SDL_HasPrimarySelectionText(void);
 func SDL_HasPrimarySelectionText() (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_HasPrimarySelectionText").Call()
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 

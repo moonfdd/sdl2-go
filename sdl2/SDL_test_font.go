@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -21,7 +22,7 @@ const FONT_CHARACTER_SIZE = 8
  *  \returns 0 on success, -1 on failure.
  */
 //int SDLTest_DrawCharacter(SDL_Renderer *renderer, int x, int y, char c);
-func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x sdlcommon.FInt, y sdlcommon.FInt, c byte) (res sdlcommon.FInt, err error) {
+func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x ffcommon.FInt, y ffcommon.FInt, c byte) (res ffcommon.FInt, err error) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_DrawCharacter").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(x),
@@ -31,7 +32,7 @@ func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x sdlcommon.FInt, y sdlcommo
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -46,17 +47,17 @@ func (renderer *SDL_Renderer) SDLTest_DrawCharacter(x sdlcommon.FInt, y sdlcommo
  *  \returns 0 on success, -1 on failure.
  */
 //int SDLTest_DrawString(SDL_Renderer *renderer, int x, int y, const char *s);
-func (renderer *SDL_Renderer) SDLTest_DrawString(x sdlcommon.FInt, y sdlcommon.FInt, s sdlcommon.FConstCharP) (res sdlcommon.FInt, err error) {
+func (renderer *SDL_Renderer) SDLTest_DrawString(x ffcommon.FInt, y ffcommon.FInt, s ffcommon.FConstCharP) (res ffcommon.FInt, err error) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDLTest_DrawString").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(x),
 		uintptr(y),
-		uintptr(unsafe.Pointer(sdlcommon.BytePtrFromString(s))),
+		uintptr(unsafe.Pointer(ffcommon.BytePtrFromString(s))),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 

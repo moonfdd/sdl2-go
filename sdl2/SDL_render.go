@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -25,12 +26,12 @@ const (
  * Information on the capabilities of a render driver or context.
  */
 type SDL_RendererInfo struct {
-	Name              sdlcommon.FBuf         /**< The name of the renderer */
-	Flags             sdlcommon.FUint32T     /**< Supported ::SDL_RendererFlags */
-	NumTextureFormats sdlcommon.FUint32T     /**< The number of available texture formats */
-	TextureFormats    [16]sdlcommon.FUint32T /**< The available texture formats */
-	MaxTextureWidth   sdlcommon.FInt         /**< The maximum texture width */
-	MaxTextureHeight  sdlcommon.FInt         /**< The maximum texture height */
+	Name              ffcommon.FBuf         /**< The name of the renderer */
+	Flags             ffcommon.FUint32T     /**< Supported ::SDL_RendererFlags */
+	NumTextureFormats ffcommon.FUint32T     /**< The number of available texture formats */
+	TextureFormats    [16]ffcommon.FUint32T /**< The available texture formats */
+	MaxTextureWidth   ffcommon.FInt         /**< The maximum texture width */
+	MaxTextureHeight  ffcommon.FInt         /**< The maximum texture height */
 }
 
 /**
@@ -109,12 +110,12 @@ type SDL_Texture struct {
  * \sa SDL_GetRenderDriverInfo
  */
 //extern DECLSPEC int SDLCALL SDL_GetNumRenderDrivers(void);
-func SDL_GetNumRenderDrivers() (res sdlcommon.FInt) {
+func SDL_GetNumRenderDrivers() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetNumRenderDrivers").Call()
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -132,7 +133,7 @@ func SDL_GetNumRenderDrivers() (res sdlcommon.FInt) {
  */
 //extern DECLSPEC int SDLCALL SDL_GetRenderDriverInfo(int index,
 //SDL_RendererInfo * info);
-func SDL_GetRenderDriverInfo(index sdlcommon.FInt, info *SDL_RendererInfo) (res sdlcommon.FInt) {
+func SDL_GetRenderDriverInfo(index ffcommon.FInt, info *SDL_RendererInfo) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRenderDriverInfo").Call(
 		uintptr(index),
 		uintptr(unsafe.Pointer(info)),
@@ -140,7 +141,7 @@ func SDL_GetRenderDriverInfo(index sdlcommon.FInt, info *SDL_RendererInfo) (res 
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -162,8 +163,8 @@ func SDL_GetRenderDriverInfo(index sdlcommon.FInt, info *SDL_RendererInfo) (res 
 //extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(
 //int width, int height, Uint32 window_flags,
 //SDL_Window **window, SDL_Renderer **renderer);
-func SDL_CreateWindowAndRenderer(width sdlcommon.FInt, height sdlcommon.FInt, window_flags sdlcommon.FUint32T,
-	window **SDL_Window, renderer **SDL_Renderer) (res sdlcommon.FInt) {
+func SDL_CreateWindowAndRenderer(width ffcommon.FInt, height ffcommon.FInt, window_flags ffcommon.FUint32T,
+	window **SDL_Window, renderer **SDL_Renderer) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateWindowAndRenderer").Call(
 		uintptr(width),
 		uintptr(height),
@@ -174,7 +175,7 @@ func SDL_CreateWindowAndRenderer(width sdlcommon.FInt, height sdlcommon.FInt, wi
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -195,7 +196,7 @@ func SDL_CreateWindowAndRenderer(width sdlcommon.FInt, height sdlcommon.FInt, wi
  */
 //extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window * window,
 //int index, Uint32 flags);
-func (window *SDL_Window) SDL_CreateRenderer(index sdlcommon.FInt, flags sdlcommon.FUint32T) (res *SDL_Renderer) {
+func (window *SDL_Window) SDL_CreateRenderer(index ffcommon.FInt, flags ffcommon.FUint32T) (res *SDL_Renderer) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateRenderer").Call(
 		uintptr(unsafe.Pointer(window)),
 		uintptr(index),
@@ -271,7 +272,7 @@ func (window *SDL_Window) SDL_GetRenderer() (res *SDL_Renderer) {
  */
 //extern DECLSPEC int SDLCALL SDL_GetRendererInfo(SDL_Renderer * renderer,
 //SDL_RendererInfo * info);
-func (renderer *SDL_Renderer) SDL_GetRendererInfo(info *SDL_RendererInfo) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_GetRendererInfo(info *SDL_RendererInfo) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRendererInfo").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(info)),
@@ -279,7 +280,7 @@ func (renderer *SDL_Renderer) SDL_GetRendererInfo(info *SDL_RendererInfo) (res s
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -302,7 +303,7 @@ func (renderer *SDL_Renderer) SDL_GetRendererInfo(info *SDL_RendererInfo) (res s
  */
 //extern DECLSPEC int SDLCALL SDL_GetRendererOutputSize(SDL_Renderer * renderer,
 //int *w, int *h);
-func (renderer *SDL_Renderer) SDL_GetRendererOutputSize(w *sdlcommon.FInt, h *sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_GetRendererOutputSize(w *ffcommon.FInt, h *ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRendererOutputSize").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(w)),
@@ -311,7 +312,7 @@ func (renderer *SDL_Renderer) SDL_GetRendererOutputSize(w *sdlcommon.FInt, h *sd
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -339,8 +340,8 @@ func (renderer *SDL_Renderer) SDL_GetRendererOutputSize(w *sdlcommon.FInt, h *sd
 //Uint32 format,
 //int access, int w,
 //int h);
-func (renderer *SDL_Renderer) SDL_CreateTexture(format sdlcommon.FUint32T,
-	access sdlcommon.FInt, w sdlcommon.FInt, h sdlcommon.FInt) (res *SDL_Texture) {
+func (renderer *SDL_Renderer) SDL_CreateTexture(format ffcommon.FUint32T,
+	access ffcommon.FInt, w ffcommon.FInt, h ffcommon.FInt) (res *SDL_Texture) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateTexture").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(format),
@@ -409,8 +410,8 @@ func (renderer *SDL_Renderer) SDL_CreateTextureFromSurface(surface *SDL_Surface)
 //extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture * texture,
 //Uint32 * format, int *access,
 //int *w, int *h);
-func (texture *SDL_Texture) SDL_QueryTexture(format *sdlcommon.FUint32T,
-	access *sdlcommon.FInt, w *sdlcommon.FInt, h *sdlcommon.FInt) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_QueryTexture(format *ffcommon.FUint32T,
+	access *ffcommon.FInt, w *ffcommon.FInt, h *ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_QueryTexture").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(format)),
@@ -421,7 +422,7 @@ func (texture *SDL_Texture) SDL_QueryTexture(format *sdlcommon.FUint32T,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -449,7 +450,7 @@ func (texture *SDL_Texture) SDL_QueryTexture(format *sdlcommon.FUint32T,
  */
 //extern DECLSPEC int SDLCALL SDL_SetTextureColorMod(SDL_Texture * texture,
 //Uint8 r, Uint8 g, Uint8 b);
-func (texture *SDL_Texture) SDL_SetTextureColorMod(r sdlcommon.FUint8T, g sdlcommon.FUint8T, b sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_SetTextureColorMod(r ffcommon.FUint8T, g ffcommon.FUint8T, b ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetTextureColorMod").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(r),
@@ -459,7 +460,7 @@ func (texture *SDL_Texture) SDL_SetTextureColorMod(r sdlcommon.FUint8T, g sdlcom
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -479,7 +480,7 @@ func (texture *SDL_Texture) SDL_SetTextureColorMod(r sdlcommon.FUint8T, g sdlcom
 //extern DECLSPEC int SDLCALL SDL_GetTextureColorMod(SDL_Texture * texture,
 //Uint8 * r, Uint8 * g,
 //Uint8 * b);
-func (texture *SDL_Texture) SDL_GetTextureColorMod(r *sdlcommon.FUint8T, g *sdlcommon.FUint8T, b *sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_GetTextureColorMod(r *ffcommon.FUint8T, g *ffcommon.FUint8T, b *ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTextureColorMod").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(r)),
@@ -489,7 +490,7 @@ func (texture *SDL_Texture) SDL_GetTextureColorMod(r *sdlcommon.FUint8T, g *sdlc
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -514,7 +515,7 @@ func (texture *SDL_Texture) SDL_GetTextureColorMod(r *sdlcommon.FUint8T, g *sdlc
  */
 //extern DECLSPEC int SDLCALL SDL_SetTextureAlphaMod(SDL_Texture * texture,
 //Uint8 alpha);
-func (texture *SDL_Texture) SDL_SetTextureAlphaMod(alpha sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_SetTextureAlphaMod(alpha ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetTextureAlphaMod").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(alpha),
@@ -522,7 +523,7 @@ func (texture *SDL_Texture) SDL_SetTextureAlphaMod(alpha sdlcommon.FUint8T) (res
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -539,7 +540,7 @@ func (texture *SDL_Texture) SDL_SetTextureAlphaMod(alpha sdlcommon.FUint8T) (res
  */
 //extern DECLSPEC int SDLCALL SDL_GetTextureAlphaMod(SDL_Texture * texture,
 //Uint8 * alpha);
-func (texture *SDL_Texture) SDL_GetTextureAlphaMod(alpha *sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_GetTextureAlphaMod(alpha *ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTextureAlphaMod").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(alpha)),
@@ -547,7 +548,7 @@ func (texture *SDL_Texture) SDL_GetTextureAlphaMod(alpha *sdlcommon.FUint8T) (re
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -567,7 +568,7 @@ func (texture *SDL_Texture) SDL_GetTextureAlphaMod(alpha *sdlcommon.FUint8T) (re
  */
 //extern DECLSPEC int SDLCALL SDL_SetTextureBlendMode(SDL_Texture * texture,
 //SDL_BlendMode blendMode);
-func (texture *SDL_Texture) SDL_SetTextureBlendMode(blendMode SDL_BlendMode) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_SetTextureBlendMode(blendMode SDL_BlendMode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetTextureBlendMode").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(blendMode),
@@ -575,7 +576,7 @@ func (texture *SDL_Texture) SDL_SetTextureBlendMode(blendMode SDL_BlendMode) (re
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -591,7 +592,7 @@ func (texture *SDL_Texture) SDL_SetTextureBlendMode(blendMode SDL_BlendMode) (re
  */
 //extern DECLSPEC int SDLCALL SDL_GetTextureBlendMode(SDL_Texture * texture,
 //SDL_BlendMode *blendMode);
-func (texture *SDL_Texture) SDL_GetTextureBlendMode(blendMode *SDL_BlendMode) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_GetTextureBlendMode(blendMode *SDL_BlendMode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTextureBlendMode").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(blendMode)),
@@ -599,7 +600,7 @@ func (texture *SDL_Texture) SDL_GetTextureBlendMode(blendMode *SDL_BlendMode) (r
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -616,7 +617,7 @@ func (texture *SDL_Texture) SDL_GetTextureBlendMode(blendMode *SDL_BlendMode) (r
  */
 //extern DECLSPEC int SDLCALL SDL_SetTextureScaleMode(SDL_Texture * texture,
 //SDL_ScaleMode scaleMode);
-func (texture *SDL_Texture) SDL_SetTextureScaleMode(scaleMode SDL_ScaleMode) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_SetTextureScaleMode(scaleMode SDL_ScaleMode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetTextureScaleMode").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(scaleMode),
@@ -624,7 +625,7 @@ func (texture *SDL_Texture) SDL_SetTextureScaleMode(scaleMode SDL_ScaleMode) (re
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -639,7 +640,7 @@ func (texture *SDL_Texture) SDL_SetTextureScaleMode(scaleMode SDL_ScaleMode) (re
  */
 //extern DECLSPEC int SDLCALL SDL_GetTextureScaleMode(SDL_Texture * texture,
 //SDL_ScaleMode *scaleMode);
-func (texture *SDL_Texture) SDL_GetTextureScaleMode(scaleMode *SDL_ScaleMode) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_GetTextureScaleMode(scaleMode *SDL_ScaleMode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetTextureScaleMode").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(scaleMode)),
@@ -647,7 +648,7 @@ func (texture *SDL_Texture) SDL_GetTextureScaleMode(scaleMode *SDL_ScaleMode) (r
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -681,7 +682,7 @@ func (texture *SDL_Texture) SDL_GetTextureScaleMode(scaleMode *SDL_ScaleMode) (r
 //extern DECLSPEC int SDLCALL SDL_UpdateTexture(SDL_Texture * texture,
 //const SDL_Rect * rect,
 //const void *pixels, int pitch);
-func (texture *SDL_Texture) SDL_UpdateTexture(rect *SDL_Rect, pixels sdlcommon.FConstVoidP, pitch sdlcommon.FInt) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_UpdateTexture(rect *SDL_Rect, pixels ffcommon.FConstVoidP, pitch ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UpdateTexture").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(rect)),
@@ -691,7 +692,7 @@ func (texture *SDL_Texture) SDL_UpdateTexture(rect *SDL_Rect, pixels sdlcommon.F
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -728,9 +729,9 @@ func (texture *SDL_Texture) SDL_UpdateTexture(rect *SDL_Rect, pixels sdlcommon.F
 //const Uint8 *Uplane, int Upitch,
 //const Uint8 *Vplane, int Vpitch);
 func (texture *SDL_Texture) SDL_UpdateYUVTexture(rect *SDL_Rect,
-	Yplane *sdlcommon.FUint8T, Ypitch sdlcommon.FInt,
-	Uplane *sdlcommon.FUint8T, Upitch sdlcommon.FInt,
-	Vplane *sdlcommon.FUint8T, Vpitch sdlcommon.FInt) (res sdlcommon.FInt) {
+	Yplane *ffcommon.FUint8T, Ypitch ffcommon.FInt,
+	Uplane *ffcommon.FUint8T, Upitch ffcommon.FInt,
+	Vplane *ffcommon.FUint8T, Vpitch ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UpdateYUVTexture").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(rect)),
@@ -745,7 +746,7 @@ func (texture *SDL_Texture) SDL_UpdateYUVTexture(rect *SDL_Rect,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -772,8 +773,8 @@ func (texture *SDL_Texture) SDL_UpdateYUVTexture(rect *SDL_Rect,
 //const Uint8 *Yplane, int Ypitch,
 //const Uint8 *UVplane, int UVpitch);
 func (texture *SDL_Texture) SDL_UpdateNVTexture(rect *SDL_Rect,
-	Yplane *sdlcommon.FUint8T, Ypitch sdlcommon.FInt,
-	UVplane *sdlcommon.FUint8T, UVpitch sdlcommon.FInt) (res sdlcommon.FInt) {
+	Yplane *ffcommon.FUint8T, Ypitch ffcommon.FInt,
+	UVplane *ffcommon.FUint8T, UVpitch ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UpdateNVTexture").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(rect)),
@@ -785,7 +786,7 @@ func (texture *SDL_Texture) SDL_UpdateNVTexture(rect *SDL_Rect,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -818,7 +819,7 @@ func (texture *SDL_Texture) SDL_UpdateNVTexture(rect *SDL_Rect,
 //const SDL_Rect * rect,
 //void **pixels, int *pitch);
 func (texture *SDL_Texture) SDL_LockTexture(rect *SDL_Rect,
-	pixels *sdlcommon.FVoidP, pitch *sdlcommon.FInt) (res sdlcommon.FInt) {
+	pixels *ffcommon.FVoidP, pitch *ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LockTexture").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(rect)),
@@ -828,7 +829,7 @@ func (texture *SDL_Texture) SDL_LockTexture(rect *SDL_Rect,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -865,7 +866,7 @@ func (texture *SDL_Texture) SDL_LockTexture(rect *SDL_Rect,
 //extern DECLSPEC int SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture,
 //const SDL_Rect *rect,
 //SDL_Surface **surface);
-func (texture *SDL_Texture) SDL_LockTextureToSurface(rect *SDL_Rect, surface **SDL_Surface) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_LockTextureToSurface(rect *SDL_Rect, surface **SDL_Surface) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LockTextureToSurface").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(rect)),
@@ -874,7 +875,7 @@ func (texture *SDL_Texture) SDL_LockTextureToSurface(rect *SDL_Rect, surface **S
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -922,7 +923,7 @@ func (renderer *SDL_Renderer) SDL_RenderTargetSupported() (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -950,7 +951,7 @@ func (renderer *SDL_Renderer) SDL_RenderTargetSupported() (res bool) {
  */
 //extern DECLSPEC int SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer,
 //SDL_Texture *texture);
-func (renderer *SDL_Renderer) SDL_SetRenderTarget(texture *SDL_Texture) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_SetRenderTarget(texture *SDL_Texture) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetRenderTarget").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(texture)),
@@ -958,7 +959,7 @@ func (renderer *SDL_Renderer) SDL_SetRenderTarget(texture *SDL_Texture) (res sdl
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1014,7 +1015,7 @@ func (renderer *SDL_Renderer) SDL_GetRenderTarget() (res *SDL_Texture) {
  * \sa SDL_RenderGetLogicalSize
  */
 //extern DECLSPEC int SDLCALL SDL_RenderSetLogicalSize(SDL_Renderer * renderer, int w, int h);
-func (renderer *SDL_Renderer) SDL_RenderSetLogicalSize(w sdlcommon.FInt, h sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderSetLogicalSize(w ffcommon.FInt, h ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderSetLogicalSize").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(w),
@@ -1023,7 +1024,7 @@ func (renderer *SDL_Renderer) SDL_RenderSetLogicalSize(w sdlcommon.FInt, h sdlco
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1043,7 +1044,7 @@ func (renderer *SDL_Renderer) SDL_RenderSetLogicalSize(w sdlcommon.FInt, h sdlco
  * \sa SDL_RenderSetLogicalSize
  */
 //extern DECLSPEC void SDLCALL SDL_RenderGetLogicalSize(SDL_Renderer * renderer, int *w, int *h);
-func (renderer *SDL_Renderer) SDL_RenderGetLogicalSize(w *sdlcommon.FInt, h *sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderGetLogicalSize(w *ffcommon.FInt, h *ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderGetLogicalSize").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(w)),
@@ -1074,15 +1075,15 @@ func (renderer *SDL_Renderer) SDL_RenderGetLogicalSize(w *sdlcommon.FInt, h *sdl
  */
 //extern DECLSPEC int SDLCALL SDL_RenderSetIntegerScale(SDL_Renderer * renderer,
 //SDL_bool enable);
-func (renderer *SDL_Renderer) SDL_RenderSetIntegerScale(enable bool) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderSetIntegerScale(enable bool) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderSetIntegerScale").Call(
 		uintptr(unsafe.Pointer(renderer)),
-		sdlcommon.CBool(enable),
+		ffcommon.CBool(enable),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1101,12 +1102,12 @@ func (renderer *SDL_Renderer) SDL_RenderSetIntegerScale(enable bool) (res sdlcom
 func (renderer *SDL_Renderer) SDL_RenderGetIntegerScale(enable bool) (res bool) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderGetIntegerScale").Call(
 		uintptr(unsafe.Pointer(renderer)),
-		sdlcommon.CBool(enable),
+		ffcommon.CBool(enable),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1126,7 +1127,7 @@ func (renderer *SDL_Renderer) SDL_RenderGetIntegerScale(enable bool) (res bool) 
  */
 //extern DECLSPEC int SDLCALL SDL_RenderSetViewport(SDL_Renderer * renderer,
 //const SDL_Rect * rect);
-func (renderer *SDL_Renderer) SDL_RenderSetViewport(rect *SDL_Rect) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderSetViewport(rect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderSetViewport").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rect)),
@@ -1134,7 +1135,7 @@ func (renderer *SDL_Renderer) SDL_RenderSetViewport(rect *SDL_Rect) (res sdlcomm
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1174,7 +1175,7 @@ func (renderer *SDL_Renderer) SDL_RenderGetViewport(rect *SDL_Rect) {
  */
 //extern DECLSPEC int SDLCALL SDL_RenderSetClipRect(SDL_Renderer * renderer,
 //const SDL_Rect * rect);
-func (renderer *SDL_Renderer) SDL_RenderSetClipRect(rect *SDL_Rect) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderSetClipRect(rect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderSetClipRect").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rect)),
@@ -1182,7 +1183,7 @@ func (renderer *SDL_Renderer) SDL_RenderSetClipRect(rect *SDL_Rect) (res sdlcomm
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1230,7 +1231,7 @@ func (renderer *SDL_Renderer) SDL_RenderIsClipEnabled() (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -1258,7 +1259,7 @@ func (renderer *SDL_Renderer) SDL_RenderIsClipEnabled() (res bool) {
  */
 //extern DECLSPEC int SDLCALL SDL_RenderSetScale(SDL_Renderer * renderer,
 //float scaleX, float scaleY);
-func (renderer *SDL_Renderer) SDL_RenderSetScale(scaleX sdlcommon.FFloat, scaleY sdlcommon.FFloat) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderSetScale(scaleX ffcommon.FFloat, scaleY ffcommon.FFloat) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderSetScale").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(&scaleX)),
@@ -1267,7 +1268,7 @@ func (renderer *SDL_Renderer) SDL_RenderSetScale(scaleX sdlcommon.FFloat, scaleY
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1284,7 +1285,7 @@ func (renderer *SDL_Renderer) SDL_RenderSetScale(scaleX sdlcommon.FFloat, scaleY
  */
 //extern DECLSPEC void SDLCALL SDL_RenderGetScale(SDL_Renderer * renderer,
 //float *scaleX, float *scaleY);
-func (renderer *SDL_Renderer) SDL_RenderGetScale(scaleX *sdlcommon.FFloat, scaleY *sdlcommon.FFloat) {
+func (renderer *SDL_Renderer) SDL_RenderGetScale(scaleX *ffcommon.FFloat, scaleY *ffcommon.FFloat) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderGetScale").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(scaleX)),
@@ -1326,7 +1327,7 @@ func (renderer *SDL_Renderer) SDL_RenderGetScale(scaleX *sdlcommon.FFloat, scale
 //extern DECLSPEC int SDLCALL SDL_SetRenderDrawColor(SDL_Renderer * renderer,
 //Uint8 r, Uint8 g, Uint8 b,
 //Uint8 a);
-func (renderer *SDL_Renderer) SDL_SetRenderDrawColor(r, g, b, a sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_SetRenderDrawColor(r, g, b, a ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetRenderDrawColor").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(r),
@@ -1337,7 +1338,7 @@ func (renderer *SDL_Renderer) SDL_SetRenderDrawColor(r, g, b, a sdlcommon.FUint8
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1361,7 +1362,7 @@ func (renderer *SDL_Renderer) SDL_SetRenderDrawColor(r, g, b, a sdlcommon.FUint8
 //extern DECLSPEC int SDLCALL SDL_GetRenderDrawColor(SDL_Renderer * renderer,
 //Uint8 * r, Uint8 * g, Uint8 * b,
 //Uint8 * a);
-func (renderer *SDL_Renderer) SDL_GetRenderDrawColor(r, g, b, a *sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_GetRenderDrawColor(r, g, b, a *ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRenderDrawColor").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(r)),
@@ -1372,7 +1373,7 @@ func (renderer *SDL_Renderer) SDL_GetRenderDrawColor(r, g, b, a *sdlcommon.FUint
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1398,7 +1399,7 @@ func (renderer *SDL_Renderer) SDL_GetRenderDrawColor(r, g, b, a *sdlcommon.FUint
  */
 //extern DECLSPEC int SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer * renderer,
 //SDL_BlendMode blendMode);
-func (renderer *SDL_Renderer) SDL_SetRenderDrawBlendMode(blendMode SDL_BlendMode) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_SetRenderDrawBlendMode(blendMode SDL_BlendMode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetRenderDrawBlendMode").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(&blendMode)),
@@ -1406,7 +1407,7 @@ func (renderer *SDL_Renderer) SDL_SetRenderDrawBlendMode(blendMode SDL_BlendMode
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1422,7 +1423,7 @@ func (renderer *SDL_Renderer) SDL_SetRenderDrawBlendMode(blendMode SDL_BlendMode
  */
 //extern DECLSPEC int SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer * renderer,
 //SDL_BlendMode *blendMode);
-func (renderer *SDL_Renderer) SDL_GetRenderDrawBlendMode(blendMode *SDL_BlendMode) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_GetRenderDrawBlendMode(blendMode *SDL_BlendMode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRenderDrawBlendMode").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(blendMode)),
@@ -1430,7 +1431,7 @@ func (renderer *SDL_Renderer) SDL_GetRenderDrawBlendMode(blendMode *SDL_BlendMod
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1449,14 +1450,14 @@ func (renderer *SDL_Renderer) SDL_GetRenderDrawBlendMode(blendMode *SDL_BlendMod
  * \sa SDL_SetRenderDrawColor
  */
 //extern DECLSPEC int SDLCALL SDL_RenderClear(SDL_Renderer * renderer);
-func (renderer *SDL_Renderer) SDL_RenderClear() (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderClear() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderClear").Call(
 		uintptr(unsafe.Pointer(renderer)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1485,7 +1486,7 @@ func (renderer *SDL_Renderer) SDL_RenderClear() (res sdlcommon.FInt) {
  */
 //extern DECLSPEC int SDLCALL SDL_RenderDrawPoint(SDL_Renderer * renderer,
 //int x, int y);
-func (renderer *SDL_Renderer) SDL_RenderDrawPoint(x, y sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawPoint(x, y ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawPoint").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(x),
@@ -1494,7 +1495,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPoint(x, y sdlcommon.FInt) (res sdlc
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1522,7 +1523,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPoint(x, y sdlcommon.FInt) (res sdlc
 //extern DECLSPEC int SDLCALL SDL_RenderDrawPoints(SDL_Renderer * renderer,
 //const SDL_Point * points,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderDrawPoints(points *SDL_Point, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawPoints(points *SDL_Point, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawPoints").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(points)),
@@ -1531,7 +1532,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPoints(points *SDL_Point, count sdlc
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1564,7 +1565,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPoints(points *SDL_Point, count sdlc
  */
 //extern DECLSPEC int SDLCALL SDL_RenderDrawLine(SDL_Renderer * renderer,
 //int x1, int y1, int x2, int y2);
-func (renderer *SDL_Renderer) SDL_RenderDrawLine(x1, y1, x2, y2 sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawLine(x1, y1, x2, y2 ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawLine").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(x1),
@@ -1575,7 +1576,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLine(x1, y1, x2, y2 sdlcommon.FInt) 
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1605,7 +1606,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLine(x1, y1, x2, y2 sdlcommon.FInt) 
 //extern DECLSPEC int SDLCALL SDL_RenderDrawLines(SDL_Renderer * renderer,
 //const SDL_Point * points,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderDrawLines(points *SDL_Point, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawLines(points *SDL_Point, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawLines").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(points)),
@@ -1614,7 +1615,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLines(points *SDL_Point, count sdlco
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1640,7 +1641,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLines(points *SDL_Point, count sdlco
  */
 //extern DECLSPEC int SDLCALL SDL_RenderDrawRect(SDL_Renderer * renderer,
 //const SDL_Rect * rect);
-func (renderer *SDL_Renderer) SDL_RenderDrawRect(rect *SDL_Rect) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawRect(rect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawRect").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rect)),
@@ -1648,7 +1649,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRect(rect *SDL_Rect) (res sdlcommon.
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1676,7 +1677,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRect(rect *SDL_Rect) (res sdlcommon.
 //extern DECLSPEC int SDLCALL SDL_RenderDrawRects(SDL_Renderer * renderer,
 //const SDL_Rect * rects,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderDrawRects(rects *SDL_Rect, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawRects(rects *SDL_Rect, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawRects").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rects)),
@@ -1685,7 +1686,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRects(rects *SDL_Rect, count sdlcomm
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1715,7 +1716,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRects(rects *SDL_Rect, count sdlcomm
  */
 //extern DECLSPEC int SDLCALL SDL_RenderFillRect(SDL_Renderer * renderer,
 //const SDL_Rect * rect);
-func (renderer *SDL_Renderer) SDL_RenderFillRect(rect *SDL_Rect) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderFillRect(rect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderFillRect").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rect)),
@@ -1723,7 +1724,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRect(rect *SDL_Rect) (res sdlcommon.
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1750,7 +1751,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRect(rect *SDL_Rect) (res sdlcommon.
 //extern DECLSPEC int SDLCALL SDL_RenderFillRects(SDL_Renderer * renderer,
 //const SDL_Rect * rects,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderFillRects(rects *SDL_Rect, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderFillRects(rects *SDL_Rect, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderFillRects").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rects)),
@@ -1759,7 +1760,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRects(rects *SDL_Rect, count sdlcomm
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1795,7 +1796,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRects(rects *SDL_Rect, count sdlcomm
 //const SDL_Rect * dstrect);
 func (renderer *SDL_Renderer) SDL_RenderCopy(texture *SDL_Texture,
 	srcrect *SDL_Rect,
-	dstrect *SDL_Rect) (res sdlcommon.FInt) {
+	dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderCopy").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(texture)),
@@ -1805,7 +1806,7 @@ func (renderer *SDL_Renderer) SDL_RenderCopy(texture *SDL_Texture,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1856,9 +1857,9 @@ func (renderer *SDL_Renderer) SDL_RenderCopy(texture *SDL_Texture,
 func (renderer *SDL_Renderer) SDL_RenderCopyEx(texture *SDL_Texture,
 	srcrect *SDL_Rect,
 	dstrect *SDL_Rect,
-	angle sdlcommon.FDouble,
+	angle ffcommon.FDouble,
 	center *SDL_Point,
-	flip SDL_RendererFlip) (res sdlcommon.FInt) {
+	flip SDL_RendererFlip) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderCopyEx").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(texture)),
@@ -1872,7 +1873,7 @@ func (renderer *SDL_Renderer) SDL_RenderCopyEx(texture *SDL_Texture,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1886,7 +1887,7 @@ func (renderer *SDL_Renderer) SDL_RenderCopyEx(texture *SDL_Texture,
  */
 //extern DECLSPEC int SDLCALL SDL_RenderDrawPointF(SDL_Renderer * renderer,
 //float x, float y);
-func (renderer *SDL_Renderer) SDL_RenderDrawPointF(x, y sdlcommon.FFloat) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawPointF(x, y ffcommon.FFloat) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawPointF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(&x)),
@@ -1895,7 +1896,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPointF(x, y sdlcommon.FFloat) (res s
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1910,7 +1911,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPointF(x, y sdlcommon.FFloat) (res s
 //extern DECLSPEC int SDLCALL SDL_RenderDrawPointsF(SDL_Renderer * renderer,
 //const SDL_FPoint * points,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderDrawPointsF(points *SDL_FPoint, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawPointsF(points *SDL_FPoint, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawPointsF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(points)),
@@ -1919,7 +1920,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPointsF(points *SDL_FPoint, count sd
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1935,7 +1936,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawPointsF(points *SDL_FPoint, count sd
  */
 //extern DECLSPEC int SDLCALL SDL_RenderDrawLineF(SDL_Renderer * renderer,
 //float x1, float y1, float x2, float y2);
-func (renderer *SDL_Renderer) SDL_RenderDrawLineF(x1, y1, x2, y2 sdlcommon.FFloat) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawLineF(x1, y1, x2, y2 ffcommon.FFloat) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawLineF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(&x1)),
@@ -1946,7 +1947,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLineF(x1, y1, x2, y2 sdlcommon.FFloa
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1962,7 +1963,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLineF(x1, y1, x2, y2 sdlcommon.FFloa
 //extern DECLSPEC int SDLCALL SDL_RenderDrawLinesF(SDL_Renderer * renderer,
 //const SDL_FPoint * points,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderDrawLinesF(points *SDL_FPoint, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawLinesF(points *SDL_FPoint, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawLinesF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(points)),
@@ -1971,7 +1972,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLinesF(points *SDL_FPoint, count sdl
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1985,7 +1986,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawLinesF(points *SDL_FPoint, count sdl
  */
 //extern DECLSPEC int SDLCALL SDL_RenderDrawRectF(SDL_Renderer * renderer,
 //const SDL_FRect * rect);
-func (renderer *SDL_Renderer) SDL_RenderDrawRectF(rect *SDL_FRect) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawRectF(rect *SDL_FRect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawRectF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rect)),
@@ -1993,7 +1994,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRectF(rect *SDL_FRect) (res sdlcommo
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2009,7 +2010,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRectF(rect *SDL_FRect) (res sdlcommo
 //extern DECLSPEC int SDLCALL SDL_RenderDrawRectsF(SDL_Renderer * renderer,
 //const SDL_FRect * rects,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderDrawRectsF(rects *SDL_FRect, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderDrawRectsF(rects *SDL_FRect, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderDrawRectsF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rects)),
@@ -2018,7 +2019,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRectsF(rects *SDL_FRect, count sdlco
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2033,7 +2034,7 @@ func (renderer *SDL_Renderer) SDL_RenderDrawRectsF(rects *SDL_FRect, count sdlco
  */
 //extern DECLSPEC int SDLCALL SDL_RenderFillRectF(SDL_Renderer * renderer,
 //const SDL_FRect * rect);
-func (renderer *SDL_Renderer) SDL_RenderFillRectF(rect *SDL_FRect) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderFillRectF(rect *SDL_FRect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderFillRectF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rect)),
@@ -2041,7 +2042,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRectF(rect *SDL_FRect) (res sdlcommo
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2057,7 +2058,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRectF(rect *SDL_FRect) (res sdlcommo
 //extern DECLSPEC int SDLCALL SDL_RenderFillRectsF(SDL_Renderer * renderer,
 //const SDL_FRect * rects,
 //int count);
-func (renderer *SDL_Renderer) SDL_RenderFillRectsF(rects *SDL_FRect, count sdlcommon.FInt) (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderFillRectsF(rects *SDL_FRect, count ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderFillRectsF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rects)),
@@ -2066,7 +2067,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRectsF(rects *SDL_FRect, count sdlco
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2088,7 +2089,7 @@ func (renderer *SDL_Renderer) SDL_RenderFillRectsF(rects *SDL_FRect, count sdlco
 //const SDL_FRect * dstrect);
 func (renderer *SDL_Renderer) SDL_RenderCopyF(texture *SDL_Texture,
 	srcrect *SDL_Rect,
-	dstrect *SDL_Rect) (res sdlcommon.FInt) {
+	dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderCopyF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(texture)),
@@ -2098,7 +2099,7 @@ func (renderer *SDL_Renderer) SDL_RenderCopyF(texture *SDL_Texture,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2131,9 +2132,9 @@ func (renderer *SDL_Renderer) SDL_RenderCopyF(texture *SDL_Texture,
 func (renderer *SDL_Renderer) SDL_RenderCopyExF(texture *SDL_Texture,
 	srcrect *SDL_Rect,
 	dstrect *SDL_Rect,
-	angle sdlcommon.FDouble,
+	angle ffcommon.FDouble,
 	center *SDL_FPoint,
-	flip SDL_RendererFlip) (res sdlcommon.FInt) {
+	flip SDL_RendererFlip) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderCopyExF").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(texture)),
@@ -2146,7 +2147,7 @@ func (renderer *SDL_Renderer) SDL_RenderCopyExF(texture *SDL_Texture,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2178,8 +2179,8 @@ func (renderer *SDL_Renderer) SDL_RenderCopyExF(texture *SDL_Texture,
 //Uint32 format,
 //void *pixels, int pitch);
 func (renderer *SDL_Renderer) SDL_RenderReadPixels(rect *SDL_Rect,
-	format sdlcommon.FUint32T,
-	pixels sdlcommon.FVoidP, pitch sdlcommon.FInt) (res sdlcommon.FInt) {
+	format ffcommon.FUint32T,
+	pixels ffcommon.FVoidP, pitch ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderReadPixels").Call(
 		uintptr(unsafe.Pointer(renderer)),
 		uintptr(unsafe.Pointer(rect)),
@@ -2190,7 +2191,7 @@ func (renderer *SDL_Renderer) SDL_RenderReadPixels(rect *SDL_Rect,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2308,14 +2309,14 @@ func (renderer *SDL_Renderer) SDL_DestroyRenderer() {
  * \since This function is available since SDL 2.0.10.
  */
 //extern DECLSPEC int SDLCALL SDL_RenderFlush(SDL_Renderer * renderer);
-func (renderer *SDL_Renderer) SDL_RenderFlush() (res sdlcommon.FInt) {
+func (renderer *SDL_Renderer) SDL_RenderFlush() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderFlush").Call(
 		uintptr(unsafe.Pointer(renderer)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2355,7 +2356,7 @@ func (renderer *SDL_Renderer) SDL_RenderFlush() (res sdlcommon.FInt) {
  * \sa SDL_GL_UnbindTexture
  */
 //extern DECLSPEC int SDLCALL SDL_GL_BindTexture(SDL_Texture *texture, float *texw, float *texh);
-func (texture *SDL_Texture) SDL_GL_BindTexture(texw, texh *sdlcommon.FFloat) (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_GL_BindTexture(texw, texh *ffcommon.FFloat) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_BindTexture").Call(
 		uintptr(unsafe.Pointer(texture)),
 		uintptr(unsafe.Pointer(texw)),
@@ -2364,7 +2365,7 @@ func (texture *SDL_Texture) SDL_GL_BindTexture(texw, texh *sdlcommon.FFloat) (re
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2380,14 +2381,14 @@ func (texture *SDL_Texture) SDL_GL_BindTexture(texw, texh *sdlcommon.FFloat) (re
  * \sa SDL_GL_MakeCurrent
  */
 //extern DECLSPEC int SDLCALL SDL_GL_UnbindTexture(SDL_Texture *texture);
-func (texture *SDL_Texture) SDL_GL_UnbindTexture() (res sdlcommon.FInt) {
+func (texture *SDL_Texture) SDL_GL_UnbindTexture() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GL_UnbindTexture").Call(
 		uintptr(unsafe.Pointer(texture)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -2404,7 +2405,7 @@ func (texture *SDL_Texture) SDL_GL_UnbindTexture() (res sdlcommon.FInt) {
  * \sa SDL_RenderGetMetalCommandEncoder
  */
 //extern DECLSPEC void *SDLCALL SDL_RenderGetMetalLayer(SDL_Renderer * renderer);
-func (renderer *SDL_Renderer) SDL_RenderGetMetalLayer() (res sdlcommon.FVoidP) {
+func (renderer *SDL_Renderer) SDL_RenderGetMetalLayer() (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderGetMetalLayer").Call(
 		uintptr(unsafe.Pointer(renderer)),
 	)
@@ -2429,7 +2430,7 @@ func (renderer *SDL_Renderer) SDL_RenderGetMetalLayer() (res sdlcommon.FVoidP) {
  */
 //extern DECLSPEC void *SDLCALL SDL_RenderGetMetalCommandEncoder(SDL_Renderer * renderer);
 
-func (renderer *SDL_Renderer) SDL_RenderGetMetalCommandEncoder() (res sdlcommon.FVoidP) {
+func (renderer *SDL_Renderer) SDL_RenderGetMetalCommandEncoder() (res ffcommon.FVoidP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_RenderGetMetalCommandEncoder").Call(
 		uintptr(unsafe.Pointer(renderer)),
 	)

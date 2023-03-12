@@ -1,6 +1,7 @@
 package sdl2
 
 import (
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -72,11 +73,11 @@ const SDL_INIT_EVERYTHING = SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | S
  * \sa SDL_WasInit
  */
 //extern DECLSPEC int SDLCALL SDL_Init(Uint32 flags);
-func SDL_Init(flags sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func SDL_Init(flags ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_Init").Call(
 		uintptr(flags),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -94,11 +95,11 @@ func SDL_Init(flags sdlcommon.FUint32T) (res sdlcommon.FInt) {
  * \sa SDL_QuitSubSystem
  */
 //extern DECLSPEC int SDLCALL SDL_InitSubSystem(Uint32 flags);
-func SDL_InitSubSystem(flags sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func SDL_InitSubSystem(flags ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_InitSubSystem").Call(
 		uintptr(flags),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -135,11 +136,11 @@ func SDL_InitSubSystem(flags sdlcommon.FUint32T) (res sdlcommon.FInt) {
  * \sa SDL_InitSubSystem
  */
 //extern DECLSPEC Uint32 SDLCALL SDL_WasInit(Uint32 flags);
-func SDL_WasInit(flags sdlcommon.FUint32T) (res sdlcommon.FUint32T) {
+func SDL_WasInit(flags ffcommon.FUint32T) (res ffcommon.FUint32T) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_WasInit").Call(
 		uintptr(flags),
 	)
-	res = sdlcommon.FUint32T(t)
+	res = ffcommon.FUint32T(t)
 	return
 }
 

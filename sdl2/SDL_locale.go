@@ -3,12 +3,13 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
 type SDL_Locale struct {
-	Language sdlcommon.FConstCharPStruct /**< A language name, like "en" for English. */
-	Country  sdlcommon.FConstCharPStruct /**< A country, like "US" for America. Can be NULL. */
+	Language ffcommon.FConstCharPStruct /**< A language name, like "en" for English. */
+	Country  ffcommon.FConstCharPStruct /**< A country, like "US" for America. Can be NULL. */
 }
 
 /**

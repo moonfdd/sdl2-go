@@ -3,6 +3,7 @@ package sdl3
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -57,9 +58,9 @@ import (
  * \sa SDL_GetVersion
  */
 type SDL_version struct {
-	Major sdlcommon.FUint8T /**< major version */
-	Minor sdlcommon.FUint8T /**< minor version */
-	Patch sdlcommon.FUint8T /**< update version */
+	Major ffcommon.FUint8T /**< major version */
+	Minor ffcommon.FUint8T /**< minor version */
+	Patch ffcommon.FUint8T /**< update version */
 }
 
 /* Printable format: "%d.%d.%d", MAJOR, MINOR, PATCHLEVEL
@@ -130,11 +131,11 @@ const SDL_PATCHLEVEL = 0
  * \sa SDL_GetRevision
  */
 // extern DECLSPEC int SDLCALL SDL_GetVersion(SDL_version * ver);
-func (ver *SDL_version) SDL_GetVersion() (res sdlcommon.FInt) {
+func (ver *SDL_version) SDL_GetVersion() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetVersion").Call(
 		uintptr(unsafe.Pointer(ver)),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -166,9 +167,9 @@ func (ver *SDL_version) SDL_GetVersion() (res sdlcommon.FInt) {
  * \sa SDL_GetVersion
  */
 // extern DECLSPEC const char *SDLCALL SDL_GetRevision(void);
-func SDL_GetRevision() (res sdlcommon.FConstCharP) {
+func SDL_GetRevision() (res ffcommon.FConstCharP) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetRevision").Call()
-	res = sdlcommon.StringFromPtr(t)
+	res = ffcommon.StringFromPtr(t)
 	return
 }
 

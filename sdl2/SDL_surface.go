@@ -3,6 +3,7 @@ package sdl2
 import (
 	"unsafe"
 
+	"github.com/moonfdd/ffmpeg-go/ffcommon"
 	"github.com/moonfdd/sdl2-go/sdlcommon"
 )
 
@@ -34,20 +35,20 @@ const SDL_SIMD_ALIGNED = 0x00000008 /**< Surface uses aligned memory */
 *        which, if not NULL, contains the raw pixel data for the surface.
  */
 type SDL_Surface struct {
-	Flags  sdlcommon.FUint32T /**< Read-only */
-	Format *SDL_PixelFormat   /**< Read-only */
-	W, H   sdlcommon.FInt     /**< Read-only */
-	Pitch  sdlcommon.FInt     /**< Read-only */
-	Pixels sdlcommon.FVoidP   /**< Read-write */
+	Flags  ffcommon.FUint32T /**< Read-only */
+	Format *SDL_PixelFormat  /**< Read-only */
+	W, H   ffcommon.FInt     /**< Read-only */
+	Pitch  ffcommon.FInt     /**< Read-only */
+	Pixels ffcommon.FVoidP   /**< Read-write */
 
 	/** Application data associated with the surface */
-	Userdata sdlcommon.FVoidP /**< Read-write */
+	Userdata ffcommon.FVoidP /**< Read-write */
 
 	/** information needed for surfaces requiring locks */
-	Locked sdlcommon.FInt /**< Read-only */
+	Locked ffcommon.FInt /**< Read-only */
 
 	/** list of BlitMap that hold a reference to this surface */
-	ListBlitmap sdlcommon.FVoidP /**< Private */
+	ListBlitmap ffcommon.FVoidP /**< Private */
 
 	/** clipping information */
 	ClipRect SDL_Rect /**< Read-only */
@@ -56,7 +57,7 @@ type SDL_Surface struct {
 	Map *SDL_BlitMap /**< Private */
 
 	/** Reference count -- used when freeing surface */
-	Refcount sdlcommon.FInt /**< Read-mostly */
+	Refcount ffcommon.FInt /**< Read-mostly */
 }
 
 /**
@@ -66,7 +67,7 @@ type SDL_Surface struct {
 //struct SDL_Surface * dst, SDL_Rect * dstrect);
 
 type SDL_blit = func(src *SDL_Surface, srcrect *SDL_Rect,
-	dst *SDL_Surface, dstrect *SDL_Rect) sdlcommon.FInt
+	dst *SDL_Surface, dstrect *SDL_Rect) ffcommon.FInt
 
 /**
 * \brief The formula used for converting between YUV and RGB
@@ -125,8 +126,8 @@ const (
 //extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateRGBSurface
 //(Uint32 flags, int width, int height, int depth,
 //Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask);
-func SDL_CreateRGBSurface(flags sdlcommon.FUint32T, width sdlcommon.FInt, height sdlcommon.FInt, depth sdlcommon.FInt,
-	Rmask sdlcommon.FUint32T, Gmask sdlcommon.FUint32T, Bmask sdlcommon.FUint32T, Amask sdlcommon.FUint32T) (res *SDL_Surface) {
+func SDL_CreateRGBSurface(flags ffcommon.FUint32T, width ffcommon.FInt, height ffcommon.FInt, depth ffcommon.FInt,
+	Rmask ffcommon.FUint32T, Gmask ffcommon.FUint32T, Bmask ffcommon.FUint32T, Amask ffcommon.FUint32T) (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateRGBSurface").Call(
 		uintptr(flags),
 		uintptr(width),
@@ -166,8 +167,8 @@ func SDL_CreateRGBSurface(flags sdlcommon.FUint32T, width sdlcommon.FInt, height
  */
 //extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateRGBSurfaceWithFormat
 //(Uint32 flags, int width, int height, int depth, Uint32 format);
-func SDL_CreateRGBSurfaceWithFormat(flags sdlcommon.FUint32T, width sdlcommon.FInt, height sdlcommon.FInt, depth sdlcommon.FInt,
-	format sdlcommon.FUint32T) (res *SDL_Surface) {
+func SDL_CreateRGBSurfaceWithFormat(flags ffcommon.FUint32T, width ffcommon.FInt, height ffcommon.FInt, depth ffcommon.FInt,
+	format ffcommon.FUint32T) (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateRGBSurfaceWithFormat").Call(
 		uintptr(flags),
 		uintptr(width),
@@ -217,15 +218,15 @@ func SDL_CreateRGBSurfaceWithFormat(flags sdlcommon.FUint32T, width sdlcommon.FI
 //Uint32 Gmask,
 //Uint32 Bmask,
 //Uint32 Amask);
-func SDL_CreateRGBSurfaceFrom(pixels sdlcommon.FVoidP,
-	width sdlcommon.FInt,
-	height sdlcommon.FInt,
-	depth sdlcommon.FInt,
-	pitch sdlcommon.FInt,
-	Rmask sdlcommon.FUint32T,
-	Gmask sdlcommon.FUint32T,
-	Bmask sdlcommon.FUint32T,
-	Amask sdlcommon.FUint32T) (res *SDL_Surface) {
+func SDL_CreateRGBSurfaceFrom(pixels ffcommon.FVoidP,
+	width ffcommon.FInt,
+	height ffcommon.FInt,
+	depth ffcommon.FInt,
+	pitch ffcommon.FInt,
+	Rmask ffcommon.FUint32T,
+	Gmask ffcommon.FUint32T,
+	Bmask ffcommon.FUint32T,
+	Amask ffcommon.FUint32T) (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateRGBSurfaceFrom").Call(
 		uintptr(width),
 		uintptr(height),
@@ -270,12 +271,12 @@ func SDL_CreateRGBSurfaceFrom(pixels sdlcommon.FVoidP,
  */
 //extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateRGBSurfaceWithFormatFrom
 //(void *pixels, int width, int height, int depth, int pitch, Uint32 format);
-func SDL_CreateRGBSurfaceWithFormatFrom(pixels sdlcommon.FVoidP,
-	width sdlcommon.FInt,
-	height sdlcommon.FInt,
-	depth sdlcommon.FInt,
-	pitch sdlcommon.FInt,
-	format sdlcommon.FUint32T,
+func SDL_CreateRGBSurfaceWithFormatFrom(pixels ffcommon.FVoidP,
+	width ffcommon.FInt,
+	height ffcommon.FInt,
+	depth ffcommon.FInt,
+	pitch ffcommon.FInt,
+	format ffcommon.FUint32T,
 ) (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_CreateRGBSurfaceWithFormatFrom").Call(
 		uintptr(width),
@@ -326,7 +327,7 @@ func (surface *SDL_Surface) SDL_FreeSurface() {
  */
 //extern DECLSPEC int SDLCALL SDL_SetSurfacePalette(SDL_Surface * surface,
 //SDL_Palette * palette);
-func (surface *SDL_Surface) SDL_SetSurfacePalette(palette *SDL_Palette) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SetSurfacePalette(palette *SDL_Palette) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetSurfacePalette").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(unsafe.Pointer(palette)),
@@ -334,7 +335,7 @@ func (surface *SDL_Surface) SDL_SetSurfacePalette(palette *SDL_Palette) (res sdl
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -358,14 +359,14 @@ func (surface *SDL_Surface) SDL_SetSurfacePalette(palette *SDL_Palette) (res sdl
 * \sa SDL_UnlockSurface
  */
 //extern DECLSPEC int SDLCALL SDL_LockSurface(SDL_Surface * surface);
-func (surface *SDL_Surface) SDL_LockSurface() (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_LockSurface() (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LockSurface").Call(
 		uintptr(unsafe.Pointer(surface)),
 	)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -403,7 +404,7 @@ func (surface *SDL_Surface) SDL_UnlockSurface() {
  */
 //extern DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP_RW(SDL_RWops * src,
 //int freesrc);
-func SDL_LoadBMP_RW(src *SDL_RWops, freesrc sdlcommon.FInt) (res *SDL_Surface) {
+func SDL_LoadBMP_RW(src *SDL_RWops, freesrc ffcommon.FInt) (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LoadBMP_RW").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(freesrc),
@@ -442,7 +443,7 @@ func SDL_LoadBMP_RW(src *SDL_RWops, freesrc sdlcommon.FInt) (res *SDL_Surface) {
  */
 //extern DECLSPEC int SDLCALL SDL_SaveBMP_RW
 //(SDL_Surface * surface, SDL_RWops * dst, int freedst);
-func (surface *SDL_Surface) SDL_SaveBMP_RW(dst *SDL_RWops, freedst sdlcommon.FInt) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SaveBMP_RW(dst *SDL_RWops, freedst ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SaveBMP_RW").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(unsafe.Pointer(dst)),
@@ -451,7 +452,7 @@ func (surface *SDL_Surface) SDL_SaveBMP_RW(dst *SDL_RWops, freedst sdlcommon.FIn
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -480,12 +481,12 @@ func (surface *SDL_Surface) SDL_SaveBMP_RW(dst *SDL_RWops, freedst sdlcommon.FIn
  */
 //extern DECLSPEC int SDLCALL SDL_SetSurfaceRLE(SDL_Surface * surface,
 //int flag);
-func (surface *SDL_Surface) SDL_SetSurfaceRLE(flag sdlcommon.FInt) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SetSurfaceRLE(flag ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetSurfaceRLE").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(flag),
 	)
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -507,7 +508,7 @@ func (surface *SDL_Surface) SDL_HasSurfaceRLE() (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -535,7 +536,7 @@ func (surface *SDL_Surface) SDL_HasSurfaceRLE() (res bool) {
  */
 //extern DECLSPEC int SDLCALL SDL_SetColorKey(SDL_Surface * surface,
 //int flag, Uint32 key);
-func (surface *SDL_Surface) SDL_SetColorKey(flag sdlcommon.FInt, key sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SetColorKey(flag ffcommon.FInt, key ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetColorKey").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(flag),
@@ -544,7 +545,7 @@ func (surface *SDL_Surface) SDL_SetColorKey(flag sdlcommon.FInt, key sdlcommon.F
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -567,7 +568,7 @@ func (surface *SDL_Surface) SDL_HasColorKey() (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -589,7 +590,7 @@ func (surface *SDL_Surface) SDL_HasColorKey() (res bool) {
  */
 //extern DECLSPEC int SDLCALL SDL_GetColorKey(SDL_Surface * surface,
 //Uint32 * key);
-func (surface *SDL_Surface) SDL_GetColorKey(key sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_GetColorKey(key ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetColorKey").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(key),
@@ -597,7 +598,7 @@ func (surface *SDL_Surface) SDL_GetColorKey(key sdlcommon.FUint32T) (res sdlcomm
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -622,7 +623,7 @@ func (surface *SDL_Surface) SDL_GetColorKey(key sdlcommon.FUint32T) (res sdlcomm
  */
 //extern DECLSPEC int SDLCALL SDL_SetSurfaceColorMod(SDL_Surface * surface,
 //Uint8 r, Uint8 g, Uint8 b);
-func (surface *SDL_Surface) SDL_SetSurfaceColorMod(r sdlcommon.FUint8T, g sdlcommon.FUint8T, b sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SetSurfaceColorMod(r ffcommon.FUint8T, g ffcommon.FUint8T, b ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetSurfaceColorMod").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(r),
@@ -632,7 +633,7 @@ func (surface *SDL_Surface) SDL_SetSurfaceColorMod(r sdlcommon.FUint8T, g sdlcom
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -652,7 +653,7 @@ func (surface *SDL_Surface) SDL_SetSurfaceColorMod(r sdlcommon.FUint8T, g sdlcom
 //extern DECLSPEC int SDLCALL SDL_GetSurfaceColorMod(SDL_Surface * surface,
 //Uint8 * r, Uint8 * g,
 //Uint8 * b);
-func (surface *SDL_Surface) SDL_GetSurfaceColorMod(r *sdlcommon.FUint8T, g *sdlcommon.FUint8T, b *sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_GetSurfaceColorMod(r *ffcommon.FUint8T, g *ffcommon.FUint8T, b *ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSurfaceColorMod").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(unsafe.Pointer(r)),
@@ -662,7 +663,7 @@ func (surface *SDL_Surface) SDL_GetSurfaceColorMod(r *sdlcommon.FUint8T, g *sdlc
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -684,7 +685,7 @@ func (surface *SDL_Surface) SDL_GetSurfaceColorMod(r *sdlcommon.FUint8T, g *sdlc
  */
 //extern DECLSPEC int SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface * surface,
 //Uint8 alpha);
-func (surface *SDL_Surface) SDL_SetSurfaceAlphaMod(alpha sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SetSurfaceAlphaMod(alpha ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetSurfaceAlphaMod").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(alpha),
@@ -692,7 +693,7 @@ func (surface *SDL_Surface) SDL_SetSurfaceAlphaMod(alpha sdlcommon.FUint8T) (res
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -709,7 +710,7 @@ func (surface *SDL_Surface) SDL_SetSurfaceAlphaMod(alpha sdlcommon.FUint8T) (res
  */
 //extern DECLSPEC int SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface * surface,
 //Uint8 * alpha);
-func (surface *SDL_Surface) SDL_GetSurfaceAlphaMod(alpha *sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_GetSurfaceAlphaMod(alpha *ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSurfaceAlphaMod").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(unsafe.Pointer(alpha)),
@@ -717,7 +718,7 @@ func (surface *SDL_Surface) SDL_GetSurfaceAlphaMod(alpha *sdlcommon.FUint8T) (re
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -737,7 +738,7 @@ func (surface *SDL_Surface) SDL_GetSurfaceAlphaMod(alpha *sdlcommon.FUint8T) (re
  */
 //extern DECLSPEC int SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface * surface,
 //SDL_BlendMode blendMode);
-func (surface *SDL_Surface) SDL_SetSurfaceBlendMode(blendMode SDL_BlendMode) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_SetSurfaceBlendMode(blendMode SDL_BlendMode) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SetSurfaceBlendMode").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(unsafe.Pointer(&blendMode)),
@@ -745,7 +746,7 @@ func (surface *SDL_Surface) SDL_SetSurfaceBlendMode(blendMode SDL_BlendMode) (re
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -761,7 +762,7 @@ func (surface *SDL_Surface) SDL_SetSurfaceBlendMode(blendMode SDL_BlendMode) (re
  */
 //extern DECLSPEC int SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface * surface,
 //SDL_BlendMode *blendMode);
-func (surface *SDL_Surface) SDL_GetSurfaceBlendMode(blendMode *sdlcommon.FUint8T) (res sdlcommon.FInt) {
+func (surface *SDL_Surface) SDL_GetSurfaceBlendMode(blendMode *ffcommon.FUint8T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetSurfaceBlendMode").Call(
 		uintptr(unsafe.Pointer(surface)),
 		uintptr(unsafe.Pointer(blendMode)),
@@ -769,7 +770,7 @@ func (surface *SDL_Surface) SDL_GetSurfaceBlendMode(blendMode *sdlcommon.FUint8T
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -801,7 +802,7 @@ func (surface *SDL_Surface) SDL_SetClipRect(rect *SDL_Rect) (res bool) {
 	if t == 0 {
 
 	}
-	res = sdlcommon.GoBool(t)
+	res = ffcommon.GoBool(t)
 	return
 }
 
@@ -875,7 +876,7 @@ func (surface *SDL_Surface) SDL_DuplicateSurface() (res *SDL_Surface) {
  */
 //extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurface
 //(SDL_Surface * src, const SDL_PixelFormat * fmt, Uint32 flags);
-func (src *SDL_Surface) SDL_ConvertSurface(fmt0 *SDL_PixelFormat, flags sdlcommon.FUint32T) (res *SDL_Surface) {
+func (src *SDL_Surface) SDL_ConvertSurface(fmt0 *SDL_PixelFormat, flags ffcommon.FUint32T) (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ConvertSurface").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(fmt0)),
@@ -910,7 +911,7 @@ func (src *SDL_Surface) SDL_ConvertSurface(fmt0 *SDL_PixelFormat, flags sdlcommo
  */
 //extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormat
 //(SDL_Surface * src, Uint32 pixel_format, Uint32 flags);
-func (src *SDL_Surface) SDL_ConvertSurfaceFormat(pixel_format sdlcommon.FUint32T, flags sdlcommon.FUint32T) (res *SDL_Surface) {
+func (src *SDL_Surface) SDL_ConvertSurfaceFormat(pixel_format ffcommon.FUint32T, flags ffcommon.FUint32T) (res *SDL_Surface) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ConvertSurfaceFormat").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(pixel_format),
@@ -942,11 +943,11 @@ func (src *SDL_Surface) SDL_ConvertSurfaceFormat(pixel_format sdlcommon.FUint32T
 //const void * src, int src_pitch,
 //Uint32 dst_format,
 //void * dst, int dst_pitch);
-func SDL_ConvertPixels(width sdlcommon.FInt, height sdlcommon.FInt,
-	src_format sdlcommon.FUint32T,
-	src sdlcommon.FConstVoidP, src_pitch sdlcommon.FInt,
-	dst_format sdlcommon.FUint32T,
-	dst sdlcommon.FVoidP, dst_pitch sdlcommon.FInt) (res sdlcommon.FInt) {
+func SDL_ConvertPixels(width ffcommon.FInt, height ffcommon.FInt,
+	src_format ffcommon.FUint32T,
+	src ffcommon.FConstVoidP, src_pitch ffcommon.FInt,
+	dst_format ffcommon.FUint32T,
+	dst ffcommon.FVoidP, dst_pitch ffcommon.FInt) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_ConvertPixels").Call(
 		uintptr(width),
 		uintptr(height),
@@ -960,7 +961,7 @@ func SDL_ConvertPixels(width sdlcommon.FInt, height sdlcommon.FInt,
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -987,7 +988,7 @@ func SDL_ConvertPixels(width sdlcommon.FInt, height sdlcommon.FInt,
  */
 //extern DECLSPEC int SDLCALL SDL_FillRect
 //(SDL_Surface * dst, const SDL_Rect * rect, Uint32 color);
-func SDL_FillRect(dst *SDL_Surface, rect *SDL_Surface, color sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func SDL_FillRect(dst *SDL_Surface, rect *SDL_Surface, color ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FillRect").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(unsafe.Pointer(rect)),
@@ -996,7 +997,7 @@ func SDL_FillRect(dst *SDL_Surface, rect *SDL_Surface, color sdlcommon.FUint32T)
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1023,7 +1024,7 @@ func SDL_FillRect(dst *SDL_Surface, rect *SDL_Surface, color sdlcommon.FUint32T)
  */
 //extern DECLSPEC int SDLCALL SDL_FillRects
 //(SDL_Surface * dst, const SDL_Rect * rects, int count, Uint32 color);
-func SDL_FillRects(dst *SDL_Surface, rects *SDL_Surface, count sdlcommon.FInt, color sdlcommon.FUint32T) (res sdlcommon.FInt) {
+func SDL_FillRects(dst *SDL_Surface, rects *SDL_Surface, count ffcommon.FInt, color ffcommon.FUint32T) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_FillRects").Call(
 		uintptr(unsafe.Pointer(dst)),
 		uintptr(unsafe.Pointer(rects)),
@@ -1033,7 +1034,7 @@ func SDL_FillRects(dst *SDL_Surface, rects *SDL_Surface, count sdlcommon.FInt, c
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1108,7 +1109,7 @@ func SDL_FillRects(dst *SDL_Surface, rects *SDL_Surface, count sdlcommon.FInt, c
 //extern DECLSPEC int SDLCALL SDL_UpperBlit
 //(SDL_Surface * src, const SDL_Rect * srcrect,
 //SDL_Surface * dst, SDL_Rect * dstrect);
-func SDL_UpperBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_UpperBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UpperBlit").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(srcrect)),
@@ -1118,7 +1119,7 @@ func SDL_UpperBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrec
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1145,7 +1146,7 @@ func SDL_UpperBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrec
 //extern DECLSPEC int SDLCALL SDL_LowerBlit
 //(SDL_Surface * src, SDL_Rect * srcrect,
 //SDL_Surface * dst, SDL_Rect * dstrect);
-func SDL_LowerBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_LowerBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LowerBlit").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(srcrect)),
@@ -1155,7 +1156,7 @@ func SDL_LowerBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrec
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1169,7 +1170,7 @@ func SDL_LowerBlit(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrec
 //const SDL_Rect * srcrect,
 //SDL_Surface * dst,
 //const SDL_Rect * dstrect);
-func SDL_SoftStretch(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_SoftStretch(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SoftStretch").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(srcrect)),
@@ -1179,7 +1180,7 @@ func SDL_SoftStretch(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstr
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1190,7 +1191,7 @@ func SDL_SoftStretch(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstr
 //const SDL_Rect * srcrect,
 //SDL_Surface * dst,
 //const SDL_Rect * dstrect);
-func SDL_SoftStretchLinear(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_SoftStretchLinear(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_SoftStretchLinear").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(srcrect)),
@@ -1200,7 +1201,7 @@ func SDL_SoftStretchLinear(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1217,7 +1218,7 @@ func SDL_SoftStretchLinear(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface
 //extern DECLSPEC int SDLCALL SDL_UpperBlitScaled
 //(SDL_Surface * src, const SDL_Rect * srcrect,
 //SDL_Surface * dst, SDL_Rect * dstrect);
-func SDL_UpperBlitScaled(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_UpperBlitScaled(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_UpperBlitScaled").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(srcrect)),
@@ -1227,7 +1228,7 @@ func SDL_UpperBlitScaled(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, 
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1251,7 +1252,7 @@ func SDL_UpperBlitScaled(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, 
 //extern DECLSPEC int SDLCALL SDL_LowerBlitScaled
 //(SDL_Surface * src, SDL_Rect * srcrect,
 //SDL_Surface * dst, SDL_Rect * dstrect);
-func SDL_LowerBlitScaled(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res sdlcommon.FInt) {
+func SDL_LowerBlitScaled(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, dstrect *SDL_Rect) (res ffcommon.FInt) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_LowerBlitScaled").Call(
 		uintptr(unsafe.Pointer(src)),
 		uintptr(unsafe.Pointer(srcrect)),
@@ -1261,7 +1262,7 @@ func SDL_LowerBlitScaled(src *SDL_Surface, srcrect *SDL_Rect, dst *SDL_Surface, 
 	if t == 0 {
 
 	}
-	res = sdlcommon.FInt(t)
+	res = ffcommon.FInt(t)
 	return
 }
 
@@ -1297,7 +1298,7 @@ func SDL_GetYUVConversionMode() (res SDL_YUV_CONVERSION_MODE) {
 * when the current conversion mode is SDL_YUV_CONVERSION_AUTOMATIC
  */
 //extern DECLSPEC SDL_YUV_CONVERSION_MODE SDLCALL SDL_GetYUVConversionModeForResolution(int width, int height);
-func SDL_GetYUVConversionModeForResolution(width sdlcommon.FInt, height sdlcommon.FInt) (res SDL_YUV_CONVERSION_MODE) {
+func SDL_GetYUVConversionModeForResolution(width ffcommon.FInt, height ffcommon.FInt) (res SDL_YUV_CONVERSION_MODE) {
 	t, _, _ := sdlcommon.GetSDL2Dll().NewProc("SDL_GetYUVConversionModeForResolution").Call(
 		uintptr(width),
 		uintptr(height),
