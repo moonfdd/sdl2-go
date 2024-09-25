@@ -135,7 +135,7 @@ type SDL_Window struct {
 
 	// Driverdata uintptr //*SDL_WindowData
 
-	// Prev *SDL_Window
+	// Prev *SDL_Window//
 	// Next *SDL_Window
 }
 
