@@ -1,5 +1,9 @@
 package sdl2
 
+import (
+	"github.com/moonfdd/sdl2-go/sdlcommon"
+)
+
 /*
   Simple DirectMedia Layer
   Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
@@ -96,47 +100,47 @@ package sdl2
 
 /* Define the SDL window structure, corresponding to toplevel windows */
 type SDL_Window struct {
-	// magic                      ffcommon.FConstVoidP
-	// id                         SDL_WindowID
-	// title                      ffcommon.FCharPStruct
-	// icon                       *SDL_Surface
-	// x, y                       ffcommon.FInt
-	// w, h                       ffcommon.FInt
-	// min_w, min_h               ffcommon.FInt
-	// max_w, max_h               ffcommon.FInt
-	// last_pixel_w, last_pixel_h ffcommon.FInt
-	// flags                      ffcommon.FUint32T
-	// fullscreen_exclusive       ffcommon.SDL_bool /* The window is currently fullscreen exclusive */
-	// last_fullscreen_exclusive  ffcommon.SDL_bool /* The last fullscreen_exclusive setting */
-	// last_displayID             SDL_DisplayID
+	Magic                   sdlcommon.FConstVoidP
+	Id                      sdlcommon.FUint32T // SDL_WindowID
+	Title                   sdlcommon.FCharPStruct
+	Icon                    *SDL_Surface
+	X, Y                    sdlcommon.FInt
+	W, H                    sdlcommon.FInt
+	MinW, MinH              sdlcommon.FInt
+	MaxW, MaxH              sdlcommon.FInt
+	LastPixelW, LastPixelH  sdlcommon.FInt
+	Flags                   sdlcommon.FUint32T
+	FullscreenExclusive     sdlcommon.SDL_bool /* The window is currently fullscreen exclusive */
+	LastFullscreenExclusive sdlcommon.SDL_bool /* The last fullscreen_exclusive setting */
+	LastDisplayID           sdlcommon.FUint32T //SDL_DisplayID
 
-	// /* Stored position and size for windowed mode */
-	// windowed SDL_Rect
+	/* Stored position and size for windowed mode */
+	Windowed SDL_Rect
 
-	// fullscreen_mode SDL_DisplayMode
+	FullscreenMode SDL_DisplayMode
 
-	// opacity ffcommon.FFloat
+	Opacity sdlcommon.FFloat
 
-	// surface       *SDL_Surface
-	// surface_valid ffcommon.SDL_bool
+	Surface      *SDL_Surface
+	SurfaceValid sdlcommon.SDL_bool
 
-	// is_hiding     ffcommon.SDL_bool
-	// is_destroying ffcommon.SDL_bool
-	// is_dropping   ffcommon.SDL_bool /* drag/drop in progress, expecting SDL_SendDropComplete(). */
+	IsHiding     sdlcommon.SDL_bool
+	IsDestroying sdlcommon.SDL_bool
+	IsDropping   sdlcommon.SDL_bool /* drag/drop in progress, expecting SDL_SendDropComplete(). */
 
-	// mouse_rect SDL_Rect
+	MouseRect SDL_Rect
 
-	// shaper *SDL_WindowShaper
+	Shaper uintptr //*SDL_WindowShaper
 
-	// hit_test *SDL_HitTest
-	// void     *hit_test_data
+	HitTest     *SDL_HitTest
+	HitTestData sdlcommon.FVoidP
 
-	// data *SDL_WindowUserData
+	Data uintptr //*SDL_WindowUserData
 
-	// driverdata *SDL_WindowData
+	Driverdata uintptr //*SDL_WindowData
 
-	// prev *SDL_Window
-	// next *SDL_Window
+	Prev *SDL_Window
+	Next *SDL_Window
 }
 
 // #define SDL_WINDOW_FULLSCREEN_VISIBLE(W)        \
